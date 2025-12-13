@@ -1,1 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OfferView | Tu Ventana a las Mejores Ofertas</title>
 
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0f172a;
+      color: #ffffff;
+    }
+
+    header {
+      background: #020617;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #38bdf8;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #38bdf8;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: 1px solid #38bdf8;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .lang-btn:hover {
+      background: #38bdf8;
+      color: #020617;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(to bottom, #020617, #0f172a);
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      max-width: 650px;
+      margin: auto;
+      color: #cbd5f5;
+    }
+
+    .hero button {
+      margin-top: 25px;
+      background: #38bdf8;
+      border: none;
+      padding: 14px 30px;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    section h2 {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .card {
+      background: #020617;
+      padding: 20px;
+      border-radius: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      background: #020617;
+      border: 1px solid #38bdf8;
+    }
+
+    footer {
+      background: #020617;
+      padding: 25px;
+      text-align: center;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">OfferView</div>
+
+  <nav>
+    <a href="#inicio" id="menu-home">Inicio</a>
+    <a href="#tiendas" id="menu-stores">Tiendas</a>
+    <a href="#rd" id="menu-rd">República Dominicana</a>
+    <a href="#viajes" id="menu-travel">Vuelos & Hoteles</a>
+    <a href="#ofertas" id="menu-deals">Ofertas</a>
+
+    <button class="lang-btn" onclick="toggleLang()">
+      🌐 <span id="lang-label">ES</span>
+    </button>
+  </nav>
+</header>
+
+<section class="hero" id="inicio">
+  <h1 id="hero-title">Las mejores ofertas en un solo lugar</h1>
+  <p id="hero-text">
+    Compara, descubre y ahorra con ofertas actualizadas de tiendas oficiales, supermercados,
+    viajes, tecnología y más.
+  </p>
+  <button id="hero-btn">Ver Ofertas</button>
+</section>
+
+<section id="tiendas">
+  <h2 id="stores-title">Tiendas Internacionales</h2>
+  <div class="grid">
+    <div class="card">Amazon</div>
+    <div class="card">AliExpress</div>
+    <div class="card">Temu</div>
+    <div class="card">Shein</div>
+    <div class="card">eBay</div>
+    <div class="card">IKEA</div>
+    <div class="card">Xbox Store</div>
+    <div class="card">PlayStation Store</div>
+    <div class="card">Nintendo eShop</div>
+    <div class="card">Epic Games Store</div>
+  </div>
+</section>
+
+<section id="rd">
+  <h2 id="rd-title">Tiendas en República Dominicana</h2>
+  <div class="grid">
+    <div class="card">Jumbo</div>
+    <div class="card">Plaza Lama</div>
+    <div class="card">Supermercados Nacional</div>
+    <div class="card">La Sirena</div>
+    <div class="card">El Bravo</div>
+    <div class="card">Distribuidora Corripio</div>
+  </div>
+</section>
+
+<section id="viajes">
+  <h2 id="travel-title">Vuelos & Hoteles</h2>
+  <div class="grid">
+    <div class="card">Vuelos Baratos</div>
+    <div class="card">Hoteles & Resorts</div>
+    <div class="card">Ofertas Todo Incluido</div>
+    <div class="card">Viajes Internacionales</div>
+  </div>
+</section>
+
+<footer>
+  © 2025 OfferView — <span id="slogan">Tu Ventana a las Mejores Ofertas</span>
+</footer>
+
+<script>
+  let lang = localStorage.getItem("offerview_lang") || "es";
+
+  function applyLanguage() {
+    if (lang === "en") {
+      document.documentElement.lang = "en";
+      menu-home.innerText = "Home";
+      menu-stores.innerText = "Stores";
+      menu-rd.innerText = "Dominican Republic";
+      menu-travel.innerText = "Flights & Hotels";
+      menu-deals.innerText = "Deals";
+      hero-title.innerText = "The best deals in one place";
+      hero-text.innerText = "Compare, discover and save with updated offers from official stores, travel and more.";
+      hero-btn.innerText = "View Deals";
+      stores-title.innerText = "International Stores";
+      rd-title.innerText = "Stores in Dominican Republic";
+      travel-title.innerText = "Flights & Hotels";
+      slogan.innerText = "Your Window to the Best Deals";
+      lang-label.innerText = "EN";
+    } else {
+      document.documentElement.lang = "es";
+      menu-home.innerText = "Inicio";
+      menu-stores.innerText = "Tiendas";
+      menu-rd.innerText = "República Dominicana";
+      menu-travel.innerText = "Vuelos & Hoteles";
+      menu-deals.innerText = "Ofertas";
+      hero-title.innerText = "Las mejores ofertas en un solo lugar";
+      hero-text.innerText = "Compara, descubre y ahorra con ofertas actualizadas de tiendas oficiales, supermercados, viajes y más.";
+      hero-btn.innerText = "Ver Ofertas";
+      stores-title.innerText = "Tiendas Internacionales";
+      rd-title.innerText = "Tiendas en República Dominicana";
+      travel-title.innerText = "Vuelos & Hoteles";
+      slogan.innerText = "Tu Ventana a las Mejores Ofertas";
+      lang-label.innerText = "ES";
+    }
+  }
+
+  function toggleLang() {
+    lang = lang === "es" ? "en" : "es";
+    localStorage.setItem("offerview_lang", lang);
+    applyLanguage();
+  }
+
+  document.addEventListener("DOMContentLoaded", applyLanguage);
+</script>
+
+</body>
+  </html>
