@@ -1,105 +1,189 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OfferView</title>
-  <meta name="description" content="OfferView te guía directamente a las tiendas con descuentos. Ofertas por país en tecnología, moda, gaming y más." />
-  <meta name="keywords" content="ofertas, descuentos, tiendas, cashback, cupones, Honey, RetailMeNot" />
-  <style>
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#0b1220;color:#fff}
-    header{padding:20px;text-align:center;background:#0f1b33}
-    h1{color:#ffb347;margin:0}
-    nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:10px}
-    nav button{background:#1c2b4a;color:#fff;border:none;padding:10px 15px;border-radius:8px;cursor:pointer}
-    section{padding:30px}
-    .hero{text-align:center}
-    .visitors{margin-top:15px;font-size:18px}
-    .live{color:#2bff88}
-    .stores{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;margin-top:25px}
-    .store{background:#111c36;padding:15px;border-radius:12px;text-align:center}
-    .store a{color:#ffb347;text-decoration:none;font-weight:bold}
-    footer{text-align:center;padding:20px;background:#0f1b33;font-size:14px}
-  </style>
-</head>
-<body><header>
-  <h1>OfferView</h1>
-  <nav>
-    <button onclick="setLang('es')">ES</button>
-    <button onclick="setLang('en')">EN</button>
-    <button onclick="setLang('pt')">PT</button>
-  </nav>
-</header><section class="hero">
-  <h2>Te guiamos directamente a las tiendas con descuentos</h2>
-  <div class="visitors">
-    👥 Visitante Nº <span id="visitor">---</span><br>
-    🔥 <span class="live" id="live">25 personas viendo ofertas ahora</span>
-  </div>
-</section><section>
-  <h2 id="countryTitle">Tiendas Internacionales</h2>
-  <div class="stores" id="stores"></div>
-</section><footer>
-  © 2025 OfferView – Plataforma de guía de ofertas
-</footer><script>
-// Visitantes
-let count = localStorage.getItem('visitorCount') || 510;
-count++;
-localStorage.setItem('visitorCount', count);
-document.getElementById('visitor').innerText = count;
+<meta charset="UTF-8">
+<title>OfferView | Te guiamos a las tiendas con descuentos</title>
+<meta name="description" content="OfferView te guía directamente a tiendas oficiales con descuentos por país. Tecnología, gamers, moda, supermercados y más.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-// Idiomas
-const texts = {
-  es:{title:"Tiendas Internacionales"},
-  en:{title:"International Stores"},
-  pt:{title:"Lojas Internacionais"}
-};
-function setLang(l){document.getElementById('countryTitle').innerText = texts[l].title;}
-
-// Detección de país
-fetch('https://ipapi.co/json')
-.then(r=>r.json())
-.then(data=>loadStores(data.country_code))
-.catch(()=>loadStores('GLOBAL'));
-
-// Tiendas por país (modelo tipo Honey/RetailMeNot)
-const STORES = {
-  GLOBAL:[
-    {name:'Amazon',url:'https://www.amazon.com'},
-    {name:'Walmart',url:'https://www.walmart.com'},
-    {name:'IKEA',url:'https://www.ikea.com'},
-    {name:'AliExpress',url:'https://www.aliexpress.com'},
-    {name:'Best Buy',url:'https://www.bestbuy.com'}
-  ],
-  JP:[
-    {name:'Rakuten',url:'https://global.rakuten.com'},
-    {name:'Play-Asia',url:'https://www.play-asia.com'},
-    {name:'Uniqlo',url:'https://www.uniqlo.com'},
-    {name:'Sony Store',url:'https://www.sony.com'},
-    {name:'AmiAmi',url:'https://www.amiami.com'}
-  ],
-  US:[
-    {name:'Amazon USA',url:'https://www.amazon.com'},
-    {name:'Nike',url:'https://www.nike.com'},
-    {name:'Adidas',url:'https://www.adidas.com'},
-    {name:'Newegg',url:'https://www.newegg.com'},
-    {name:'GameStop',url:'https://www.gamestop.com'}
-  ],
-  DO:[
-    {name:'Plaza Lama',url:'https://plazalama.com.do'},
-    {name:'Jumbo',url:'https://www.jumbo.com.do'},
-    {name:'La Sirena',url:'https://www.lasirena.com.do'}
-  ]
-};
-
-function loadStores(country){
-  const list = STORES[country] || STORES.GLOBAL;
-  const c = document.getElementById('stores');
-  c.innerHTML='';
-  list.forEach(s=>{
-    const d=document.createElement('div');
-    d.className='store';
-    d.innerHTML=`<a href="${s.url}" target="_blank">${s.name}</a><p>Ver ofertas</p>`;
-    c.appendChild(d);
-  });
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg,#050b1c,#0b1635);
+  color:#fff;
+  text-align:center;
 }
-</script></body>
-    </html>
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 20px;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  font-size:22px;
+  font-weight:bold;
+  color:#ffb347;
+}
+.logo span{margin-left:8px;}
+nav a{
+  color:#ccc;
+  margin:0 8px;
+  text-decoration:none;
+}
+.hero{
+  padding:40px 15px;
+}
+.hero h1{
+  font-size:28px;
+  margin-bottom:15px;
+}
+.visitor{
+  color:#4fc3f7;
+  margin:10px 0;
+}
+.live{
+  color:#00e676;
+  margin-top:5px;
+}
+.section{
+  margin:40px 10px;
+}
+.section h2{
+  margin-bottom:15px;
+}
+.buttons{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.buttons a{
+  background:#101b3c;
+  color:#fff;
+  text-decoration:none;
+  padding:12px 18px;
+  border-radius:10px;
+  margin:6px;
+  min-width:120px;
+}
+.buttons a:hover{
+  background:#1b2c6d;
+}
+footer{
+  margin:40px 0 20px;
+  color:#aaa;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🔥 <span>OFFERVIEW</span></div>
+  <nav>
+    <a href="#tiendas">Tiendas</a>
+    <a href="#tech">Tecnología</a>
+    <a href="#gamers">Gamers</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Te guiamos directamente a las tiendas con descuentos</h1>
+  <div class="visitor">👥 Visitante N° <span id="visitor">...</span></div>
+  <div class="live">🔥 <span id="live">25</span> personas viendo ofertas ahora</div>
+</section>
+
+<section class="section" id="tiendas">
+  <h2>Tiendas Internacionales</h2>
+  <div class="buttons" id="stores"></div>
+</section>
+
+<section class="section" id="tech">
+  <h2>Tiendas de Tecnología</h2>
+  <div class="buttons">
+    <a href="https://www.bestbuy.com" target="_blank">Best Buy</a>
+    <a href="https://www.apple.com" target="_blank">Apple Store</a>
+    <a href="https://www.samsung.com" target="_blank">Samsung</a>
+    <a href="https://www.lenovo.com" target="_blank">Lenovo</a>
+    <a href="https://www.hp.com" target="_blank">HP</a>
+  </div>
+</section>
+
+<section class="section" id="gamers">
+  <h2>Gamers</h2>
+  <div class="buttons">
+    <a href="https://store.steampowered.com" target="_blank">Steam</a>
+    <a href="https://www.playstation.com" target="_blank">PlayStation Store</a>
+    <a href="https://www.xbox.com" target="_blank">Xbox Store</a>
+    <a href="https://www.epicgames.com" target="_blank">Epic Games</a>
+  </div>
+</section>
+
+<footer>
+  OfferView no vende productos. Te dirigimos a tiendas oficiales con ofertas activas.
+</footer>
+
+<script>
+// VISITANTE
+let v = localStorage.getItem("visitor");
+if(!v){ v = Math.floor(Math.random()*1000)+500; }
+v++;
+localStorage.setItem("visitor",v);
+document.getElementById("visitor").innerText = v;
+
+// PERSONAS EN VIVO
+setInterval(()=>{
+  document.getElementById("live").innerText =
+    Math.floor(Math.random()*20)+10;
+},3000);
+
+// IA POR PAÍS
+fetch("https://ipapi.co/json/")
+.then(r=>r.json())
+.then(data=>{
+  let c = data.country_code;
+  let stores = document.getElementById("stores");
+  let list = [];
+
+  if(c==="DO"){
+    list = [
+      ["La Sirena","https://www.lasirena.com.do"],
+      ["Jumbo","https://www.jumbo.com.do"],
+      ["Pricesmart","https://www.pricesmart.com"]
+    ];
+  }else if(c==="MX"){
+    list = [
+      ["Walmart México","https://www.walmart.com.mx"],
+      ["Liverpool","https://www.liverpool.com.mx"],
+      ["Coppel","https://www.coppel.com"]
+    ];
+  }else{
+    list = [
+      ["Amazon","https://www.amazon.com"],
+      ["Walmart","https://www.walmart.com"],
+      ["AliExpress","https://www.aliexpress.com"],
+      ["Alibaba","https://www.alibaba.com"],
+      ["Temu","https://www.temu.com"],
+      ["eBay","https://www.ebay.com"],
+      ["IKEA","https://www.ikea.com"],
+      ["Shein","https://www.shein.com"],
+      ["Nike","https://www.nike.com"],
+      ["Adidas","https://www.adidas.com"]
+    ];
+  }
+
+  list.forEach(s=>{
+    let a=document.createElement("a");
+    a.href=s[1];
+    a.target="_blank";
+    a.innerText=s[0];
+    stores.appendChild(a);
+  });
+});
+</script>
+
+</body>
+  </html>
