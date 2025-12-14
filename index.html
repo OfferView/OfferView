@@ -1,250 +1,218 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OfferView | Tu Ventana a las Mejores Ofertas</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OfferView | Tu Ventana a Las Mejores Ofertas</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0f172a;
-      color: #ffffff;
-    }
-
-    header {
-      background: #020617;
-      padding: 15px 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .logo {
-      font-size: 26px;
-      font-weight: bold;
-      color: #38bdf8;
-    }
-
-    nav {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      color: #38bdf8;
-    }
-
-    .lang-btn {
-      background: transparent;
-      border: 1px solid #38bdf8;
-      color: white;
-      padding: 6px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .lang-btn:hover {
-      background: #38bdf8;
-      color: #020617;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 80px 20px;
-      background: linear-gradient(to bottom, #020617, #0f172a);
-    }
-
-    .hero h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      font-size: 16px;
-      max-width: 650px;
-      margin: auto;
-      color: #cbd5f5;
-    }
-
-    .hero button {
-      margin-top: 25px;
-      background: #38bdf8;
-      border: none;
-      padding: 14px 30px;
-      font-size: 16px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    section h2 {
-      font-size: 28px;
-      margin-bottom: 30px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .card {
-      background: #020617;
-      padding: 20px;
-      border-radius: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .card:hover {
-      background: #020617;
-      border: 1px solid #38bdf8;
-    }
-
-    footer {
-      background: #020617;
-      padding: 25px;
-      text-align: center;
-      font-size: 13px;
-      color: #94a3b8;
-    }
-  </style>
+<style>
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(180deg,#050b1e,#0b1633);
+  color:#fff;
+}
+header{
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#0b1228;
+}
+nav a{
+  margin:0 8px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:bold;
+}
+button, select{
+  background:#1ec9ff;
+  border:none;
+  padding:8px 14px;
+  border-radius:20px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.hero{
+  text-align:center;
+  padding:60px 20px;
+}
+.section{
+  padding:30px 20px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
+.card{
+  background:#0f1d3d;
+  padding:18px;
+  border-radius:18px;
+  text-align:center;
+  text-decoration:none;
+  color:#fff;
+}
+.card:hover{
+  background:#1ec9ff;
+  color:#000;
+}
+.hidden{display:none}
+.badge{
+  color:#1ec9ff;
+  font-size:13px;
+}
+.price del{color:#888}
+footer{
+  text-align:center;
+  padding:20px;
+  opacity:.6;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">OfferView</div>
-
+  <strong>OfferView</strong>
   <nav>
-    <a href="#inicio" id="menu-home">Inicio</a>
-    <a href="#tiendas" id="menu-stores">Tiendas</a>
-    <a href="#rd" id="menu-rd">República Dominicana</a>
-    <a href="#viajes" id="menu-travel">Vuelos & Hoteles</a>
-    <a href="#ofertas" id="menu-deals">Ofertas</a>
-
-    <button class="lang-btn" onclick="toggleLang()">
-      🌐 <span id="lang-label">ES</span>
-    </button>
+    <a href="#inicio" data-es="Inicio" data-en="Home">Inicio</a>
+    <a href="#tiendas" data-es="Tiendas" data-en="Stores">Tiendas</a>
+    <a href="#ofertas" data-es="Ofertas" data-en="Deals">Ofertas</a>
   </nav>
+  <div>
+    <select id="selectorPais">
+      <option value="US">🇺🇸 USA</option>
+      <option value="DO">🇩🇴 RD</option>
+      <option value="MX">🇲🇽 MX</option>
+      <option value="ES">🇪🇸 ES</option>
+    </select>
+    <button id="btnIdioma" onclick="cambiarIdioma()">ES</button>
+  </div>
 </header>
 
 <section class="hero" id="inicio">
-  <h1 id="hero-title">Las mejores ofertas en un solo lugar</h1>
-  <p id="hero-text">
-    Compara, descubre y ahorra con ofertas actualizadas de tiendas oficiales, supermercados,
-    viajes, tecnología y más.
-  </p>
-  <button id="hero-btn">Ver Ofertas</button>
+  <h1 data-es="Tu Ventana a Las Mejores Ofertas"
+      data-en="Your Window to the Best Deals"></h1>
+  <p data-es="Ofertas inteligentes según tu país"
+     data-en="Smart offers based on your country"></p>
 </section>
 
-<section id="tiendas">
-  <h2 id="stores-title">Tiendas Internacionales</h2>
-  <div class="grid">
-    <div class="card">Amazon</div>
-    <div class="card">AliExpress</div>
-    <div class="card">Temu</div>
-    <div class="card">Shein</div>
-    <div class="card">eBay</div>
-    <div class="card">IKEA</div>
-    <div class="card">Xbox Store</div>
-    <div class="card">PlayStation Store</div>
-    <div class="card">Nintendo eShop</div>
-    <div class="card">Epic Games Store</div>
-  </div>
+<!-- TIENDAS INTERNACIONALES -->
+<section class="section" id="tiendas">
+<h2 data-es="Tiendas Internacionales" data-en="International Stores"></h2>
+
+<div id="pais-US" class="grid pais">
+  <a class="card" href="https://amazon.com" target="_blank">Amazon</a>
+  <a class="card" href="https://aliexpress.com" target="_blank">AliExpress</a>
+  <a class="card" href="https://alibaba.com" target="_blank">Alibaba</a>
+  <a class="card" href="https://ebay.com" target="_blank">eBay</a>
+  <a class="card" href="https://walmart.com" target="_blank">Walmart</a>
+  <a class="card" href="https://target.com" target="_blank">Target</a>
+  <a class="card" href="https://temu.com" target="_blank">Temu</a>
+  <a class="card" href="https://shein.com" target="_blank">Shein</a>
+  <a class="card" href="https://nike.com" target="_blank">Nike</a>
+  <a class="card" href="https://adidas.com" target="_blank">Adidas</a>
+  <a class="card" href="https://zara.com" target="_blank">Zara</a>
+  <a class="card" href="https://store.steampowered.com" target="_blank">Steam</a>
+  <a class="card" href="https://store.epicgames.com" target="_blank">Epic Games</a>
+  <a class="card" href="https://store.playstation.com" target="_blank">PlayStation Store</a>
+  <a class="card" href="https://xbox.com/store" target="_blank">Xbox Store</a>
+</div>
 </section>
 
-<section id="rd">
-  <h2 id="rd-title">Tiendas en República Dominicana</h2>
-  <div class="grid">
-    <div class="card">Jumbo</div>
-    <div class="card">Plaza Lama</div>
-    <div class="card">Supermercados Nacional</div>
-    <div class="card">La Sirena</div>
-    <div class="card">El Bravo</div>
-    <div class="card">Distribuidora Corripio</div>
-  </div>
-</section>
-
-<section id="viajes">
-  <h2 id="travel-title">Vuelos & Hoteles</h2>
-  <div class="grid">
-    <div class="card">Vuelos Baratos</div>
-    <div class="card">Hoteles & Resorts</div>
-    <div class="card">Ofertas Todo Incluido</div>
-    <div class="card">Viajes Internacionales</div>
-  </div>
+<!-- SISTEMA TIPO HONEY -->
+<section class="section" id="ofertas">
+<h2 data-es="🔥 Ofertas Inteligentes" data-en="🔥 Smart Deals"></h2>
+<div class="grid" id="ofertasIA"></div>
 </section>
 
 <footer>
-  © 2025 OfferView — <span id="slogan">Tu Ventana a las Mejores Ofertas</span>
+© 2025 OfferView · Tu Ventana a Las Mejores Ofertas
 </footer>
 
 <script>
-  let lang = localStorage.getItem("offerview_lang") || "es";
+// ================= IDIOMA =================
+let idioma = localStorage.getItem("idioma") || "es";
+function cambiarIdioma(){
+  idioma = idioma === "es" ? "en" : "es";
+  localStorage.setItem("idioma",idioma);
+  aplicarIdioma();
+}
+function aplicarIdioma(){
+  document.querySelectorAll("[data-es]").forEach(el=>{
+    el.innerText = el.dataset[idioma];
+  });
+  document.getElementById("btnIdioma").innerText = idioma.toUpperCase();
+}
+aplicarIdioma();
 
-  function applyLanguage() {
-    if (lang === "en") {
-      document.documentElement.lang = "en";
-      menu-home.innerText = "Home";
-      menu-stores.innerText = "Stores";
-      menu-rd.innerText = "Dominican Republic";
-      menu-travel.innerText = "Flights & Hotels";
-      menu-deals.innerText = "Deals";
-      hero-title.innerText = "The best deals in one place";
-      hero-text.innerText = "Compare, discover and save with updated offers from official stores, travel and more.";
-      hero-btn.innerText = "View Deals";
-      stores-title.innerText = "International Stores";
-      rd-title.innerText = "Stores in Dominican Republic";
-      travel-title.innerText = "Flights & Hotels";
-      slogan.innerText = "Your Window to the Best Deals";
-      lang-label.innerText = "EN";
-    } else {
-      document.documentElement.lang = "es";
-      menu-home.innerText = "Inicio";
-      menu-stores.innerText = "Tiendas";
-      menu-rd.innerText = "República Dominicana";
-      menu-travel.innerText = "Vuelos & Hoteles";
-      menu-deals.innerText = "Ofertas";
-      hero-title.innerText = "Las mejores ofertas en un solo lugar";
-      hero-text.innerText = "Compara, descubre y ahorra con ofertas actualizadas de tiendas oficiales, supermercados, viajes y más.";
-      hero-btn.innerText = "Ver Ofertas";
-      stores-title.innerText = "Tiendas Internacionales";
-      rd-title.innerText = "Tiendas en República Dominicana";
-      travel-title.innerText = "Vuelos & Hoteles";
-      slogan.innerText = "Tu Ventana a las Mejores Ofertas";
-      lang-label.innerText = "ES";
-    }
-  }
+// ================= PAÍS =================
+let pais = localStorage.getItem("pais");
+async function detectarPais(){
+  if(pais){mostrarPais(pais);return;}
+  try{
+    const r = await fetch("https://ipapi.co/json/");
+    const d = await r.json();
+    pais = d.country_code || "US";
+  }catch{ pais="US"; }
+  localStorage.setItem("pais",pais);
+  mostrarPais(pais);
+}
+function mostrarPais(p){
+  document.querySelectorAll(".pais").forEach(s=>s.classList.add("hidden"));
+  const el = document.getElementById("pais-"+p);
+  if(el) el.classList.remove("hidden");
+  document.getElementById("selectorPais").value=p;
+  generarOfertas(p);
+}
+document.getElementById("selectorPais").onchange=e=>{
+  localStorage.setItem("pais",e.target.value);
+  mostrarPais(e.target.value);
+};
 
-  function toggleLang() {
-    lang = lang === "es" ? "en" : "es";
-    localStorage.setItem("offerview_lang", lang);
-    applyLanguage();
-  }
+// ================= IA TIPO HONEY =================
+const ofertasPorPais = {
+  US:[
+    {store:"Amazon",old:120,new:79,link:"https://amazon.com"},
+    {store:"Nike",old:180,new:119,link:"https://nike.com"},
+    {store:"Steam",old:60,new:29,link:"https://store.steampowered.com"}
+  ],
+  MX:[
+    {store:"Amazon MX",old:2500,new:1799,link:"https://amazon.com.mx"},
+    {store:"Adidas",old:3200,new:2299,link:"https://adidas.com"},
+  ],
+  DO:[
+    {store:"Jumbo",old:3500,new:2999,link:"https://supermercadosjumbo.com"},
+  ],
+  ES:[
+    {store:"Amazon ES",old:110,new:79,link:"https://amazon.es"},
+    {store:"Zara",old:59,new:39,link:"https://zara.com"}
+  ]
+};
 
-  document.addEventListener("DOMContentLoaded", applyLanguage);
+function generarOfertas(p){
+  const cont = document.getElementById("ofertasIA");
+  cont.innerHTML="";
+  (ofertasPorPais[p]||[]).forEach(o=>{
+    const d = Math.round((o.old-o.new)/o.old*100);
+    const card=document.createElement("a");
+    card.className="card";
+    card.href=o.link;
+    card.target="_blank";
+    card.innerHTML=`
+      <strong>${o.store}</strong><br><br>
+      <div class="price">
+        <del>$${o.old}</del><br>
+        <span>$${o.new}</span>
+      </div>
+      <div class="badge">${d>=30?"🔥 Oferta destacada":"Oferta"}</div>
+    `;
+    cont.appendChild(card);
+  });
+}
+
+detectarPais();
 </script>
 
 </body>
