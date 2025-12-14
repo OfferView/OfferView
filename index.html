@@ -1,174 +1,139 @@
-<!DOCTYPE html>
-<html lang="es">
+
+<!DOCTYPE html><html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OfferView | Tu Ventana a Las Mejores Ofertas</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- SEO básico -->  <title>OfferView | Tu Ventana a las Mejores Ofertas</title>
+  <meta name="description" content="OfferView te guía a las mejores ofertas online. Encuentra descuentos en Amazon, AliExpress, Shein, Nike, supermercados y más, todo en un solo lugar.">
+  <meta name="keywords" content="ofertas, descuentos, Amazon, AliExpress, Shein, Nike, vuelos baratos, ofertas online">
+  <meta name="robots" content="index, follow">  <!-- Open Graph (redes sociales) -->  <meta property="og:title" content="OfferView | Tu Ventana a las Mejores Ofertas">
+  <meta property="og:description" content="Descubre y accede a las mejores ofertas online desde un solo lugar.">
+  <meta property="og:type" content="website">  <style>
+    body {font-family: Arial, sans-serif; margin:0; background:#f5f7fa; color:#222;}
+    header {background:#0b1c2d; color:#fff; padding:20px; text-align:center;}
+    nav {background:#142c44; padding:10px; display:flex; justify-content:center; gap:15px; flex-wrap:wrap;}
+    nav a {color:#fff; text-decoration:none; font-weight:bold;}
+    section {padding:30px; max-width:1100px; margin:auto;}
+    h1, h2 {color:#0b1c2d;}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;}
+    .card {background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); text-align:center;}
+    .card a {display:inline-block; margin-top:10px; padding:10px 15px; background:#0b1c2d; color:#fff; text-decoration:none; border-radius:5px;}
+    footer {background:#0b1c2d; color:#fff; text-align:center; padding:20px; margin-top:40px;}
+    .lang-select {float:right;}
+  </style><script>
+// Idiomas
+const translations = {
+  es: {
+    slogan: "Tu Ventana a las Mejores Ofertas",
+    intro: "OfferView es una plataforma que te guía directamente a las páginas oficiales donde están las mejores ofertas del día."
+  },
+  en: {
+    slogan: "Your Window to the Best Deals",
+    intro: "OfferView is a platform that guides you directly to official pages where the best deals of the day are."
+  }
+};
 
-<style>
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:linear-gradient(180deg,#050b1e,#0b1633);
-  color:#fff;
+function setLanguage(lang){
+  localStorage.setItem('lang', lang);
+  document.getElementById('slogan').innerText = translations[lang].slogan;
+  document.getElementById('intro-text').innerText = translations[lang].intro;
 }
-header{
-  padding:15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:#0b1228;
-}
-nav a{
-  margin:0 10px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:bold;
-}
-button, select{
-  background:#1ec9ff;
-  border:none;
-  padding:8px 14px;
-  border-radius:20px;
-  font-weight:bold;
-  cursor:pointer;
-}
-.hero{
-  text-align:center;
-  padding:60px 20px;
-}
-.section{
-  padding:35px 20px;
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:16px;
-}
-.card{
-  background:#0f1d3d;
-  padding:20px;
-  border-radius:18px;
-  text-align:center;
-  text-decoration:none;
-  color:#fff;
-  font-weight:bold;
-}
-.card:hover{
-  background:#1ec9ff;
-  color:#000;
-}
-.hidden{display:none}
-footer{
-  text-align:center;
-  padding:20px;
-  opacity:.6;
-}
-</style>
-</head>
 
-<body>
+// País automático (simple por idioma del navegador)
+function detectCountry(){
+  const lang = navigator.language || 'es';
+  if(lang.startsWith('es')) return 'RD';
+  return 'INT';
+}
 
-<header>
-  <strong>OfferView</strong>
-  <nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#tiendas">Tiendas</a>
-    <a href="#tecnologia">Tecnología</a>
-    <a href="#electricos">Equipos Eléctricos</a>
-  </nav>
+// Contador de visitantes
+let visits = localStorage.getItem('visits') || 0;
+visits++;
+localStorage.setItem('visits', visits);
+
+// Personas viendo ahora (simulado)
+function randomViewers(){
+  return Math.floor(Math.random()*20)+1;
+}
+</script></head>
+<body><header>
+  <h1 style="color:#FFB347;">OfferView</h1>
+  <p id="slogan"><strong>Tu Ventana a las Mejores Ofertas</strong></p>
   <div>
-    <select id="selectorPais">
-      <option value="US">🇺🇸 USA</option>
-      <option value="DO">🇩🇴 RD</option>
-      <option value="MX">🇲🇽 MX</option>
-      <option value="ES">🇪🇸 ES</option>
-    </select>
-    <button id="btnIdioma" onclick="cambiarIdioma()">ES</button>
+    <button onclick="setLanguage('es')">ES</button>
+    <button onclick="setLanguage('en')">EN</button>
   </div>
-</header>
-
-<section class="hero" id="inicio">
-  <h1>Tu Ventana a Las Mejores Ofertas</h1>
-  <p>Te guiamos directamente a las tiendas con descuentos</p>
-
-  <div style="margin-top:18px;font-size:18px;font-weight:bold;color:#1ec9ff;">
-    👥 Visitante Nº <span id="visitas">...</span>
+</header><nav>
+  <a href="#tiendas">Tiendas</a>
+  <a href="#categorias">Categorías</a>
+  <a href="#paises">Por País</a>
+  <a href="#vuelos">Vuelos & Hoteles</a>
+</nav><section id="intro">
+  <h2>¿Qué es OfferView?</h2>
+  <p id="intro-text">OfferView es una plataforma que te guía directamente a las páginas oficiales donde están las mejores ofertas del día.</p>
+  <p><strong>Visitantes totales:</strong> <span id="visitCount"></span></p>
+  <p><strong>Personas viendo ofertas ahora:</strong> <span id="liveViewers"></span></p>
+</section><section id="tiendas">
+  <h2>Tiendas Internacionales Destacadas</h2>
+  <div class="grid">
+    <div class="card"><h3>Amazon</h3><a href="https://www.amazon.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Walmart</h3><a href="https://www.walmart.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>eBay</h3><a href="https://www.ebay.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>AliExpress</h3><a href="https://www.aliexpress.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Alibaba</h3><a href="https://www.alibaba.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Temu</h3><a href="https://www.temu.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Mercado Libre</h3><a href="https://www.mercadolibre.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>IKEA</h3><a href="https://www.ikea.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Home Depot</h3><a href="https://www.homedepot.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Best Buy</h3><a href="https://www.bestbuy.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Apple Store</h3><a href="https://www.apple.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Samsung Store</h3><a href="https://www.samsung.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Nike</h3><a href="https://www.nike.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Adidas</h3><a href="https://www.adidas.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Shein</h3><a href="https://www.shein.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Zara</h3><a href="https://www.zara.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>H&M</h3><a href="https://www.hm.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>PlayStation Store</h3><a href="https://store.playstation.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Xbox Store</h3><a href="https://www.xbox.com/store" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Steam</h3><a href="https://store.steampowered.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Epic Games</h3><a href="https://store.epicgames.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Booking</h3><a href="https://www.booking.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Expedia</h3><a href="https://www.expedia.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Skyscanner</h3><a href="https://www.skyscanner.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Airbnb</h3><a href="https://www.airbnb.com" target="_blank">Ver ofertas</a></div>
   </div>
-
-  <div style="margin-top:8px;font-size:16px;color:#00ffae;">
-    🔥 <span id="viendoAhora">0</span> personas viendo ofertas ahora
+</section><section id="categorias">
+  <h2>Categorías Populares</h2>
+  <div class="grid">
+    <div class="card"><h3>Tecnología</h3></div>
+    <div class="card"><h3>Equipos Eléctricos</h3></div>
+    <div class="card"><h3>Moda</h3></div>
+    <div class="card"><h3>Gamer</h3></div>
+    <div class="card"><h3>Supermercados</h3></div>
   </div>
-</section>
+</section><section id="paises">
+  <h2>Tiendas en República Dominicana</h2>
+  <div class="grid">
+    <div class="card"><h3>Jumbo</h3><a href="https://jumbo.com.do" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Plaza Lama</h3><a href="https://plazalama.com.do" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Supermercado Nacional</h3><a href="https://supermercadonacional.com" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>La Sirena</h3><a href="https://www.lasirena.com.do" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>El Bravo</h3><a href="https://elbravo.com.do" target="_blank">Ver ofertas</a></div>
+    <div class="card"><h3>Corripio</h3><a href="https://corripio.com" target="_blank">Ver ofertas</a></div>
+  </div>
+</section><section id="vuelos">
+  <h2>Ofertas en Vuelos & Hoteles</h2>
+  <div class="grid">
+    <div class="card"><h3>Skyscanner</h3><a href="https://www.skyscanner.com" target="_blank">Buscar ofertas</a></div>
+    <div class="card"><h3>Kayak</h3><a href="https://www.kayak.com" target="_blank">Buscar ofertas</a></div>
+    <div class="card"><h3>Booking</h3><a href="https://www.booking.com" target="_blank">Ver ofertas</a></div>
+  </div>
+</section><footer>
+  <p>© 2025 OfferView · Tu Ventana a las Mejores Ofertas</p>
+</footer><script>
+  document.getElementById('visitCount').innerText = localStorage.getItem('visits');
+  document.getElementById('liveViewers').innerText = randomViewers();
 
-<!-- TIENDAS GENERALES -->
-<section class="section" id="tiendas">
-<h2>Tiendas Online Más Buscadas</h2>
-<div class="grid">
-  <a class="card" href="https://amazon.com" target="_blank">Amazon</a>
-  <a class="card" href="https://aliexpress.com" target="_blank">AliExpress</a>
-  <a class="card" href="https://alibaba.com" target="_blank">Alibaba</a>
-  <a class="card" href="https://ebay.com" target="_blank">eBay</a>
-  <a class="card" href="https://temu.com" target="_blank">Temu</a>
-  <a class="card" href="https://shein.com" target="_blank">Shein</a>
-</div>
-</section>
-
-<!-- TECNOLOGÍA -->
-<section class="section" id="tecnologia">
-<h2>Tiendas Internacionales de Tecnología</h2>
-<div class="grid">
-  <a class="card" href="https://www.newegg.com" target="_blank">Newegg</a>
-  <a class="card" href="https://www.bestbuy.com" target="_blank">Best Buy</a>
-  <a class="card" href="https://www.bhphotovideo.com" target="_blank">B&H Photo</a>
-  <a class="card" href="https://www.apple.com/store" target="_blank">Apple Store</a>
-  <a class="card" href="https://www.samsung.com" target="_blank">Samsung</a>
-  <a class="card" href="https://www.dell.com" target="_blank">Dell</a>
-  <a class="card" href="https://www.hp.com" target="_blank">HP</a>
-  <a class="card" href="https://www.lenovo.com" target="_blank">Lenovo</a>
-  <a class="card" href="https://www.microsoft.com/store" target="_blank">Microsoft Store</a>
-  <a class="card" href="https://www.asus.com/store" target="_blank">ASUS</a>
-  <a class="card" href="https://www.razer.com" target="_blank">Razer</a>
-  <a class="card" href="https://www.msi.com" target="_blank">MSI</a>
-</div>
-</section>
-
-<!-- EQUIPOS ELÉCTRICOS -->
-<section class="section" id="electricos">
-<h2>Equipos Eléctricos & Herramientas</h2>
-<div class="grid">
-  <a class="card" href="https://www.homedepot.com" target="_blank">Home Depot</a>
-  <a class="card" href="https://www.lowes.com" target="_blank">Lowe's</a>
-  <a class="card" href="https://www.grainger.com" target="_blank">Grainger</a>
-  <a class="card" href="https://www.acehardware.com" target="_blank">Ace Hardware</a>
-  <a class="card" href="https://www.harborfreight.com" target="_blank">Harbor Freight</a>
-</div>
-</section>
-
-<footer>
-© 2025 OfferView · Tu Ventana a Las Mejores Ofertas
-</footer>
-
-<script>
-// CONTADOR VISITAS
-fetch('https://api.countapi.xyz/hit/offerview/visitas')
-.then(r=>r.json())
-.then(d=>{document.getElementById("visitas").innerText=d.value});
-
-// PERSONAS VIENDO AHORA
-function personasAhora(){
-  document.getElementById("viendoAhora").innerText =
-    Math.floor(Math.random()*25)+5;
-}
-personasAhora();
-setInterval(personasAhora,15000);
-
-// IDIOMA (simple)
-function cambiarIdioma(){
-  const b=document.getElementById("btnIdioma");
-  b.innerText=b.innerText==="ES"?"EN":"ES";
-}
-</script>
-
-</body>
-                                      </html>
+  const savedLang = localStorage.getItem('lang');
+  if(savedLang){ setLanguage(savedLang); }
+</script></body>
+    </html>
