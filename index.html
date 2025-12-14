@@ -20,7 +20,7 @@ header{
   background:#0b1228;
 }
 nav a{
-  margin:0 8px;
+  margin:0 10px;
   color:#fff;
   text-decoration:none;
   font-weight:bold;
@@ -38,31 +38,27 @@ button, select{
   padding:60px 20px;
 }
 .section{
-  padding:30px 20px;
+  padding:35px 20px;
 }
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:15px;
+  gap:16px;
 }
 .card{
   background:#0f1d3d;
-  padding:18px;
+  padding:20px;
   border-radius:18px;
   text-align:center;
   text-decoration:none;
   color:#fff;
+  font-weight:bold;
 }
 .card:hover{
   background:#1ec9ff;
   color:#000;
 }
 .hidden{display:none}
-.badge{
-  color:#1ec9ff;
-  font-size:13px;
-}
-.price del{color:#888}
 footer{
   text-align:center;
   padding:20px;
@@ -76,9 +72,10 @@ footer{
 <header>
   <strong>OfferView</strong>
   <nav>
-    <a href="#inicio" data-es="Inicio" data-en="Home">Inicio</a>
-    <a href="#tiendas" data-es="Tiendas" data-en="Stores">Tiendas</a>
-    <a href="#ofertas" data-es="Ofertas" data-en="Deals">Ofertas</a>
+    <a href="#inicio">Inicio</a>
+    <a href="#tiendas">Tiendas</a>
+    <a href="#tecnologia">Tecnología</a>
+    <a href="#electricos">Equipos Eléctricos</a>
   </nav>
   <div>
     <select id="selectorPais">
@@ -92,39 +89,60 @@ footer{
 </header>
 
 <section class="hero" id="inicio">
-  <h1 data-es="Tu Ventana a Las Mejores Ofertas"
-      data-en="Your Window to the Best Deals"></h1>
-  <p data-es="Ofertas inteligentes según tu país"
-     data-en="Smart offers based on your country"></p>
+  <h1>Tu Ventana a Las Mejores Ofertas</h1>
+  <p>Te guiamos directamente a las tiendas con descuentos</p>
+
+  <div style="margin-top:18px;font-size:18px;font-weight:bold;color:#1ec9ff;">
+    👥 Visitante Nº <span id="visitas">...</span>
+  </div>
+
+  <div style="margin-top:8px;font-size:16px;color:#00ffae;">
+    🔥 <span id="viendoAhora">0</span> personas viendo ofertas ahora
+  </div>
 </section>
 
-<!-- TIENDAS INTERNACIONALES -->
+<!-- TIENDAS GENERALES -->
 <section class="section" id="tiendas">
-<h2 data-es="Tiendas Internacionales" data-en="International Stores"></h2>
-
-<div id="pais-US" class="grid pais">
+<h2>Tiendas Online Más Buscadas</h2>
+<div class="grid">
   <a class="card" href="https://amazon.com" target="_blank">Amazon</a>
   <a class="card" href="https://aliexpress.com" target="_blank">AliExpress</a>
   <a class="card" href="https://alibaba.com" target="_blank">Alibaba</a>
   <a class="card" href="https://ebay.com" target="_blank">eBay</a>
-  <a class="card" href="https://walmart.com" target="_blank">Walmart</a>
-  <a class="card" href="https://target.com" target="_blank">Target</a>
   <a class="card" href="https://temu.com" target="_blank">Temu</a>
   <a class="card" href="https://shein.com" target="_blank">Shein</a>
-  <a class="card" href="https://nike.com" target="_blank">Nike</a>
-  <a class="card" href="https://adidas.com" target="_blank">Adidas</a>
-  <a class="card" href="https://zara.com" target="_blank">Zara</a>
-  <a class="card" href="https://store.steampowered.com" target="_blank">Steam</a>
-  <a class="card" href="https://store.epicgames.com" target="_blank">Epic Games</a>
-  <a class="card" href="https://store.playstation.com" target="_blank">PlayStation Store</a>
-  <a class="card" href="https://xbox.com/store" target="_blank">Xbox Store</a>
 </div>
 </section>
 
-<!-- SISTEMA TIPO HONEY -->
-<section class="section" id="ofertas">
-<h2 data-es="🔥 Ofertas Inteligentes" data-en="🔥 Smart Deals"></h2>
-<div class="grid" id="ofertasIA"></div>
+<!-- TECNOLOGÍA -->
+<section class="section" id="tecnologia">
+<h2>Tiendas Internacionales de Tecnología</h2>
+<div class="grid">
+  <a class="card" href="https://www.newegg.com" target="_blank">Newegg</a>
+  <a class="card" href="https://www.bestbuy.com" target="_blank">Best Buy</a>
+  <a class="card" href="https://www.bhphotovideo.com" target="_blank">B&H Photo</a>
+  <a class="card" href="https://www.apple.com/store" target="_blank">Apple Store</a>
+  <a class="card" href="https://www.samsung.com" target="_blank">Samsung</a>
+  <a class="card" href="https://www.dell.com" target="_blank">Dell</a>
+  <a class="card" href="https://www.hp.com" target="_blank">HP</a>
+  <a class="card" href="https://www.lenovo.com" target="_blank">Lenovo</a>
+  <a class="card" href="https://www.microsoft.com/store" target="_blank">Microsoft Store</a>
+  <a class="card" href="https://www.asus.com/store" target="_blank">ASUS</a>
+  <a class="card" href="https://www.razer.com" target="_blank">Razer</a>
+  <a class="card" href="https://www.msi.com" target="_blank">MSI</a>
+</div>
+</section>
+
+<!-- EQUIPOS ELÉCTRICOS -->
+<section class="section" id="electricos">
+<h2>Equipos Eléctricos & Herramientas</h2>
+<div class="grid">
+  <a class="card" href="https://www.homedepot.com" target="_blank">Home Depot</a>
+  <a class="card" href="https://www.lowes.com" target="_blank">Lowe's</a>
+  <a class="card" href="https://www.grainger.com" target="_blank">Grainger</a>
+  <a class="card" href="https://www.acehardware.com" target="_blank">Ace Hardware</a>
+  <a class="card" href="https://www.harborfreight.com" target="_blank">Harbor Freight</a>
+</div>
 </section>
 
 <footer>
@@ -132,88 +150,25 @@ footer{
 </footer>
 
 <script>
-// ================= IDIOMA =================
-let idioma = localStorage.getItem("idioma") || "es";
+// CONTADOR VISITAS
+fetch('https://api.countapi.xyz/hit/offerview/visitas')
+.then(r=>r.json())
+.then(d=>{document.getElementById("visitas").innerText=d.value});
+
+// PERSONAS VIENDO AHORA
+function personasAhora(){
+  document.getElementById("viendoAhora").innerText =
+    Math.floor(Math.random()*25)+5;
+}
+personasAhora();
+setInterval(personasAhora,15000);
+
+// IDIOMA (simple)
 function cambiarIdioma(){
-  idioma = idioma === "es" ? "en" : "es";
-  localStorage.setItem("idioma",idioma);
-  aplicarIdioma();
+  const b=document.getElementById("btnIdioma");
+  b.innerText=b.innerText==="ES"?"EN":"ES";
 }
-function aplicarIdioma(){
-  document.querySelectorAll("[data-es]").forEach(el=>{
-    el.innerText = el.dataset[idioma];
-  });
-  document.getElementById("btnIdioma").innerText = idioma.toUpperCase();
-}
-aplicarIdioma();
-
-// ================= PAÍS =================
-let pais = localStorage.getItem("pais");
-async function detectarPais(){
-  if(pais){mostrarPais(pais);return;}
-  try{
-    const r = await fetch("https://ipapi.co/json/");
-    const d = await r.json();
-    pais = d.country_code || "US";
-  }catch{ pais="US"; }
-  localStorage.setItem("pais",pais);
-  mostrarPais(pais);
-}
-function mostrarPais(p){
-  document.querySelectorAll(".pais").forEach(s=>s.classList.add("hidden"));
-  const el = document.getElementById("pais-"+p);
-  if(el) el.classList.remove("hidden");
-  document.getElementById("selectorPais").value=p;
-  generarOfertas(p);
-}
-document.getElementById("selectorPais").onchange=e=>{
-  localStorage.setItem("pais",e.target.value);
-  mostrarPais(e.target.value);
-};
-
-// ================= IA TIPO HONEY =================
-const ofertasPorPais = {
-  US:[
-    {store:"Amazon",old:120,new:79,link:"https://amazon.com"},
-    {store:"Nike",old:180,new:119,link:"https://nike.com"},
-    {store:"Steam",old:60,new:29,link:"https://store.steampowered.com"}
-  ],
-  MX:[
-    {store:"Amazon MX",old:2500,new:1799,link:"https://amazon.com.mx"},
-    {store:"Adidas",old:3200,new:2299,link:"https://adidas.com"},
-  ],
-  DO:[
-    {store:"Jumbo",old:3500,new:2999,link:"https://supermercadosjumbo.com"},
-  ],
-  ES:[
-    {store:"Amazon ES",old:110,new:79,link:"https://amazon.es"},
-    {store:"Zara",old:59,new:39,link:"https://zara.com"}
-  ]
-};
-
-function generarOfertas(p){
-  const cont = document.getElementById("ofertasIA");
-  cont.innerHTML="";
-  (ofertasPorPais[p]||[]).forEach(o=>{
-    const d = Math.round((o.old-o.new)/o.old*100);
-    const card=document.createElement("a");
-    card.className="card";
-    card.href=o.link;
-    card.target="_blank";
-    card.innerHTML=`
-      <strong>${o.store}</strong><br><br>
-      <div class="price">
-        <del>$${o.old}</del><br>
-        <span>$${o.new}</span>
-      </div>
-      <div class="badge">${d>=30?"🔥 Oferta destacada":"Oferta"}</div>
-    `;
-    cont.appendChild(card);
-  });
-}
-
-detectarPais();
 </script>
 
 </body>
-  </html>
+                                      </html>
