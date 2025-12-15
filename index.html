@@ -2,79 +2,85 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>OfferView | Te guiamos a las tiendas con descuentos</title>
-<meta name="description" content="OfferView te guía directamente a tiendas oficiales con descuentos por país. Tecnología, gamers, moda, supermercados y más.">
+<title>OfferView | Top Stores & Ofertas Globales</title>
+<meta name="description" content="OfferView te guía a las mejores tiendas online del mundo. Todas las ofertas, un solo lugar.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
-  margin:0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(180deg,#050b1c,#0b1635);
-  color:#fff;
-  text-align:center;
+    margin:0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg,#f4f7fb,#eef2f7);
+    color:#222;
 }
 header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 20px;
+    padding:25px;
+    text-align:center;
+    background:#0f172a;
 }
-.logo{
-  display:flex;
-  align-items:center;
-  font-size:22px;
-  font-weight:bold;
-  color:#ffb347;
+header h1{
+    margin:0;
+    font-size:3rem;
+    color:#ffb703; /* mamey */
 }
-.logo span{margin-left:8px;}
-nav a{
-  color:#ccc;
-  margin:0 8px;
-  text-decoration:none;
+header p{
+    color:#cbd5e1;
 }
-.hero{
-  padding:40px 15px;
+
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    margin:20px 0;
+    font-weight:bold;
 }
-.hero h1{
-  font-size:28px;
-  margin-bottom:15px;
-}
-.visitor{
-  color:#4fc3f7;
-  margin:10px 0;
-}
-.live{
-  color:#00e676;
-  margin-top:5px;
-}
+
 .section{
-  margin:40px 10px;
+    padding:40px 20px;
+    max-width:1300px;
+    margin:auto;
 }
+
 .section h2{
-  margin-bottom:15px;
+    text-align:center;
+    margin-bottom:10px;
+    font-size:2.2rem;
 }
-.buttons{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
+.section p{
+    text-align:center;
+    color:#555;
+    margin-bottom:30px;
 }
-.buttons a{
-  background:#101b3c;
-  color:#fff;
-  text-decoration:none;
-  padding:12px 18px;
-  border-radius:10px;
-  margin:6px;
-  min-width:120px;
+
+.store-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+    gap:15px;
 }
-.buttons a:hover{
-  background:#1b2c6d;
+
+.store-card{
+    background:white;
+    padding:18px;
+    border-radius:14px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    transition:transform .2s, box-shadow .2s;
 }
+.store-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 12px 25px rgba(0,0,0,0.12);
+}
+.store-card a{
+    text-decoration:none;
+    font-weight:600;
+    color:#0f172a;
+}
+
 footer{
-  margin:40px 0 20px;
-  color:#aaa;
-  font-size:13px;
+    background:#0f172a;
+    color:#cbd5e1;
+    padding:20px;
+    text-align:center;
 }
 </style>
 </head>
@@ -82,106 +88,101 @@ footer{
 <body>
 
 <header>
-  <div class="logo">🔥 <span>OFFERVIEW</span></div>
-  <nav>
-    <a href="#tiendas">Tiendas</a>
-    <a href="#tech">Tecnología</a>
-    <a href="#gamers">Gamers</a>
-  </nav>
+    <h1>OFFERVIEW</h1>
+    <p>Un solo lugar. Todas las tiendas. Todas las ofertas.</p>
+
+    <div class="stats">
+        <div>👁️ Visitantes: <span id="visitors">0</span></div>
+        <div>🔥 Viendo ofertas ahora: <span id="liveUsers">0</span></div>
+    </div>
 </header>
 
-<section class="hero">
-  <h1>Te guiamos directamente a las tiendas con descuentos</h1>
-  <div class="visitor">👥 Visitante N° <span id="visitor">...</span></div>
-  <div class="live">🔥 <span id="live">25</span> personas viendo ofertas ahora</div>
+<section class="section">
+    <h2>¿Qué es OfferView?</h2>
+    <p>
+        OfferView no vende productos.  
+        Te guía directamente a las mejores tiendas online del mundo, 
+        mostrando dónde están las ofertas reales según tu país.
+    </p>
 </section>
 
-<section class="section" id="tiendas">
-  <h2>Tiendas Internacionales</h2>
-  <div class="buttons" id="stores"></div>
-</section>
+<section class="section">
+    <h2>Top Stores</h2>
+    <p>Las tiendas online más grandes del mundo, en un solo lugar</p>
 
-<section class="section" id="tech">
-  <h2>Tiendas de Tecnología</h2>
-  <div class="buttons">
-    <a href="https://www.bestbuy.com" target="_blank">Best Buy</a>
-    <a href="https://www.apple.com" target="_blank">Apple Store</a>
-    <a href="https://www.samsung.com" target="_blank">Samsung</a>
-    <a href="https://www.lenovo.com" target="_blank">Lenovo</a>
-    <a href="https://www.hp.com" target="_blank">HP</a>
-  </div>
-</section>
+    <div class="store-grid">
 
-<section class="section" id="gamers">
-  <h2>Gamers</h2>
-  <div class="buttons">
-    <a href="https://store.steampowered.com" target="_blank">Steam</a>
-    <a href="https://www.playstation.com" target="_blank">PlayStation Store</a>
-    <a href="https://www.xbox.com" target="_blank">Xbox Store</a>
-    <a href="https://www.epicgames.com" target="_blank">Epic Games</a>
-  </div>
+        <!-- Marketplaces -->
+        <div class="store-card"><a href="https://www.amazon.com/deals" target="_blank">Amazon</a></div>
+        <div class="store-card"><a href="https://www.temu.com/flash-sale.html" target="_blank">Temu</a></div>
+        <div class="store-card"><a href="https://www.aliexpress.com" target="_blank">AliExpress</a></div>
+        <div class="store-card"><a href="https://www.alibaba.com" target="_blank">Alibaba</a></div>
+        <div class="store-card"><a href="https://www.ebay.com/deals" target="_blank">eBay</a></div>
+        <div class="store-card"><a href="https://www.mercadolibre.com" target="_blank">Mercado Libre</a></div>
+        <div class="store-card"><a href="https://shopee.com" target="_blank">Shopee</a></div>
+        <div class="store-card"><a href="https://www.rakuten.com" target="_blank">Rakuten</a></div>
+
+        <!-- Retail -->
+        <div class="store-card"><a href="https://www.walmart.com/deals" target="_blank">Walmart</a></div>
+        <div class="store-card"><a href="https://www.target.com/c/deals" target="_blank">Target</a></div>
+        <div class="store-card"><a href="https://www.costco.com" target="_blank">Costco</a></div>
+        <div class="store-card"><a href="https://www.bestbuy.com" target="_blank">Best Buy</a></div>
+
+        <!-- Moda -->
+        <div class="store-card"><a href="https://www.nike.com/w/sale" target="_blank">Nike</a></div>
+        <div class="store-card"><a href="https://www.adidas.com/us/sale" target="_blank">Adidas</a></div>
+        <div class="store-card"><a href="https://us.puma.com" target="_blank">Puma</a></div>
+        <div class="store-card"><a href="https://www.shein.com" target="_blank">Shein</a></div>
+        <div class="store-card"><a href="https://www.zara.com" target="_blank">Zara</a></div>
+        <div class="store-card"><a href="https://www.hm.com" target="_blank">H&amp;M</a></div>
+
+        <!-- Hogar -->
+        <div class="store-card"><a href="https://www.ikea.com" target="_blank">IKEA</a></div>
+        <div class="store-card"><a href="https://www.homedepot.com" target="_blank">Home Depot</a></div>
+        <div class="store-card"><a href="https://www.wayfair.com" target="_blank">Wayfair</a></div>
+
+        <!-- Tecnología -->
+        <div class="store-card"><a href="https://www.apple.com/store" target="_blank">Apple</a></div>
+        <div class="store-card"><a href="https://www.samsung.com" target="_blank">Samsung</a></div>
+        <div class="store-card"><a href="https://www.microsoft.com/store" target="_blank">Microsoft</a></div>
+
+        <!-- Gaming -->
+        <div class="store-card"><a href="https://store.steampowered.com" target="_blank">Steam</a></div>
+        <div class="store-card"><a href="https://store.epicgames.com" target="_blank">Epic Games</a></div>
+        <div class="store-card"><a href="https://www.playstation.com" target="_blank">PlayStation</a></div>
+        <div class="store-card"><a href="https://www.xbox.com" target="_blank">Xbox</a></div>
+
+    </div>
 </section>
 
 <footer>
-  OfferView no vende productos. Te dirigimos a tiendas oficiales con ofertas activas.
+    © 2025 OfferView · Todas las marcas pertenecen a sus respectivos dueños
 </footer>
 
 <script>
-// VISITANTE
-let v = localStorage.getItem("visitor");
-if(!v){ v = Math.floor(Math.random()*1000)+500; }
-v++;
-localStorage.setItem("visitor",v);
-document.getElementById("visitor").innerText = v;
+/* CONTADOR DE VISITANTES */
+let visitors = localStorage.getItem("offerViewVisitors");
+if(!visitors){
+    visitors = 500 + Math.floor(Math.random()*50);
+}
+visitors++;
+localStorage.setItem("offerViewVisitors", visitors);
+document.getElementById("visitors").innerText = visitors;
 
-// PERSONAS EN VIVO
-setInterval(()=>{
-  document.getElementById("live").innerText =
-    Math.floor(Math.random()*20)+10;
-},3000);
+/* USUARIOS VIENDO AHORA */
+function updateLiveUsers(){
+    document.getElementById("liveUsers").innerText =
+        Math.floor(Math.random()*40)+10;
+}
+updateLiveUsers();
+setInterval(updateLiveUsers,5000);
 
-// IA POR PAÍS
+/* IA POR PAÍS (BASE) */
 fetch("https://ipapi.co/json/")
-.then(r=>r.json())
-.then(data=>{
-  let c = data.country_code;
-  let stores = document.getElementById("stores");
-  let list = [];
-
-  if(c==="DO"){
-    list = [
-      ["La Sirena","https://www.lasirena.com.do"],
-      ["Jumbo","https://www.jumbo.com.do"],
-      ["Pricesmart","https://www.pricesmart.com"]
-    ];
-  }else if(c==="MX"){
-    list = [
-      ["Walmart México","https://www.walmart.com.mx"],
-      ["Liverpool","https://www.liverpool.com.mx"],
-      ["Coppel","https://www.coppel.com"]
-    ];
-  }else{
-    list = [
-      ["Amazon","https://www.amazon.com"],
-      ["Walmart","https://www.walmart.com"],
-      ["AliExpress","https://www.aliexpress.com"],
-      ["Alibaba","https://www.alibaba.com"],
-      ["Temu","https://www.temu.com"],
-      ["eBay","https://www.ebay.com"],
-      ["IKEA","https://www.ikea.com"],
-      ["Shein","https://www.shein.com"],
-      ["Nike","https://www.nike.com"],
-      ["Adidas","https://www.adidas.com"]
-    ];
-  }
-
-  list.forEach(s=>{
-    let a=document.createElement("a");
-    a.href=s[1];
-    a.target="_blank";
-    a.innerText=s[0];
-    stores.appendChild(a);
-  });
+.then(res => res.json())
+.then(data => {
+    console.log("País detectado:", data.country_name);
+    // Aquí luego se conecta IA real para ofertas por país
 });
 </script>
 
