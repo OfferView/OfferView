@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>OfferView | Top Stores & Ofertas Globales</title>
-<meta name="description" content="OfferView te guía a las mejores tiendas online del mundo. Todas las ofertas, un solo lugar.">
+<title>OfferView | Top Stores Globales</title>
+<meta name="description" content="OfferView reúne las mejores tiendas online del mundo en un solo lugar.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -14,25 +14,25 @@ body{
     color:#222;
 }
 header{
-    padding:25px;
+    padding:30px 20px;
     text-align:center;
     background:#0f172a;
 }
 header h1{
     margin:0;
-    font-size:3rem;
+    font-size:3.2rem;
     color:#ffb703; /* mamey */
 }
 header p{
-    color:#cbd5e1;
+    margin-top:10px;
+    font-size:1.1rem;
+    color:#e5e7eb;
 }
 
 .stats{
-    display:flex;
-    justify-content:center;
-    gap:30px;
-    margin:20px 0;
-    font-weight:bold;
+    margin-top:20px;
+    font-size:1rem;
+    color:#cbd5e1;
 }
 
 .section{
@@ -89,32 +89,23 @@ footer{
 
 <header>
     <h1>OFFERVIEW</h1>
-    <p>Un solo lugar. Todas las tiendas. Todas las ofertas.</p>
+    <p>Tu Ventana a Las Mejores Ofertas</p>
 
     <div class="stats">
-        <div>👁️ Visitantes: <span id="visitors">0</span></div>
-        <div>🔥 Viendo ofertas ahora: <span id="liveUsers">0</span></div>
+        Personas en la página ahora: <strong><span id="liveUsers">0</span></strong> |
+        Visitantes totales: <strong><span id="visitors">0</span></strong>
     </div>
 </header>
 
 <section class="section">
-    <h2>¿Qué es OfferView?</h2>
-    <p>
-        OfferView no vende productos.  
-        Te guía directamente a las mejores tiendas online del mundo, 
-        mostrando dónde están las ofertas reales según tu país.
-    </p>
-</section>
-
-<section class="section">
     <h2>Top Stores</h2>
-    <p>Las tiendas online más grandes del mundo, en un solo lugar</p>
+    <p>Las tiendas online más buscadas del mundo en un solo lugar</p>
 
     <div class="store-grid">
 
         <!-- Marketplaces -->
         <div class="store-card"><a href="https://www.amazon.com/deals" target="_blank">Amazon</a></div>
-        <div class="store-card"><a href="https://www.temu.com/flash-sale.html" target="_blank">Temu</a></div>
+        <div class="store-card"><a href="https://www.temu.com" target="_blank">Temu</a></div>
         <div class="store-card"><a href="https://www.aliexpress.com" target="_blank">AliExpress</a></div>
         <div class="store-card"><a href="https://www.alibaba.com" target="_blank">Alibaba</a></div>
         <div class="store-card"><a href="https://www.ebay.com/deals" target="_blank">eBay</a></div>
@@ -131,22 +122,17 @@ footer{
         <!-- Moda -->
         <div class="store-card"><a href="https://www.nike.com/w/sale" target="_blank">Nike</a></div>
         <div class="store-card"><a href="https://www.adidas.com/us/sale" target="_blank">Adidas</a></div>
-        <div class="store-card"><a href="https://us.puma.com" target="_blank">Puma</a></div>
         <div class="store-card"><a href="https://www.shein.com" target="_blank">Shein</a></div>
         <div class="store-card"><a href="https://www.zara.com" target="_blank">Zara</a></div>
-        <div class="store-card"><a href="https://www.hm.com" target="_blank">H&amp;M</a></div>
+        <div class="store-card"><a href="https://www.hm.com" target="_blank">H&M</a></div>
 
         <!-- Hogar -->
         <div class="store-card"><a href="https://www.ikea.com" target="_blank">IKEA</a></div>
         <div class="store-card"><a href="https://www.homedepot.com" target="_blank">Home Depot</a></div>
-        <div class="store-card"><a href="https://www.wayfair.com" target="_blank">Wayfair</a></div>
 
-        <!-- Tecnología -->
+        <!-- Tecnología & Gaming -->
         <div class="store-card"><a href="https://www.apple.com/store" target="_blank">Apple</a></div>
         <div class="store-card"><a href="https://www.samsung.com" target="_blank">Samsung</a></div>
-        <div class="store-card"><a href="https://www.microsoft.com/store" target="_blank">Microsoft</a></div>
-
-        <!-- Gaming -->
         <div class="store-card"><a href="https://store.steampowered.com" target="_blank">Steam</a></div>
         <div class="store-card"><a href="https://store.epicgames.com" target="_blank">Epic Games</a></div>
         <div class="store-card"><a href="https://www.playstation.com" target="_blank">PlayStation</a></div>
@@ -156,35 +142,35 @@ footer{
 </section>
 
 <footer>
-    © 2025 OfferView · Todas las marcas pertenecen a sus respectivos dueños
+    © 2025 OfferView · Plataforma guía de tiendas online
 </footer>
 
 <script>
-/* CONTADOR DE VISITANTES */
+/* VISITANTES TOTALES (acumulativo) */
 let visitors = localStorage.getItem("offerViewVisitors");
 if(!visitors){
-    visitors = 500 + Math.floor(Math.random()*50);
+    visitors = 500 + Math.floor(Math.random()*100);
 }
 visitors++;
 localStorage.setItem("offerViewVisitors", visitors);
 document.getElementById("visitors").innerText = visitors;
 
-/* USUARIOS VIENDO AHORA */
+/* PERSONAS EN LA PÁGINA AHORA */
 function updateLiveUsers(){
     document.getElementById("liveUsers").innerText =
-        Math.floor(Math.random()*40)+10;
+        Math.floor(Math.random()*35)+15;
 }
 updateLiveUsers();
-setInterval(updateLiveUsers,5000);
+setInterval(updateLiveUsers,4000);
 
-/* IA POR PAÍS (BASE) */
+/* BASE IA POR PAÍS */
 fetch("https://ipapi.co/json/")
 .then(res => res.json())
 .then(data => {
     console.log("País detectado:", data.country_name);
-    // Aquí luego se conecta IA real para ofertas por país
+    // Aquí se conecta la IA real de ofertas por país
 });
 </script>
 
 </body>
-  </html>
+    </html>
