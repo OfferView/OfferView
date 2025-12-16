@@ -1,254 +1,108 @@
-
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OfferView | Tu Ventana a Las Mejores Ofertas</title>
-
-<!-- SEO -->
-<meta name="description" content="OfferView reúne las mejores tiendas online del mundo en un solo lugar. Encuentra ofertas internacionales, tecnología, moda, gaming y viajes.">
-<meta name="keywords" content="ofertas, tiendas online, descuentos, Temu, AliExpress, Shein, ofertas internacionales">
-<meta name="author" content="OfferView">
-
-<style>
-:root{
-  --mamey:#ff9f1c;
-  --oscuro:#0b132b;
-  --claro:#f4f4f4;
-  --card:#1c2541;
-}
-
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
-
-body{
-  background:linear-gradient(135deg,#0b132b,#1c2541);
-  color:#fff;
-}
-
-/* HEADER */
-header{
-  padding:20px;
-  text-align:center;
-}
-.logo{
-  font-size:42px;
-  font-weight:bold;
-  color:var(--mamey);
-}
-.slogan{
-  margin-top:8px;
-  font-size:18px;
-  opacity:.9;
-}
-
-/* MENU */
-nav{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:10px;
-  background:#00000055;
-  padding:12px;
-}
-nav button{
-  background:var(--mamey);
-  border:none;
-  padding:8px 14px;
-  border-radius:20px;
-  cursor:pointer;
-  font-weight:bold;
-}
-nav button:hover{opacity:.8}
-
-/* CONTADORES */
-.stats{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  margin:20px;
-  flex-wrap:wrap;
-}
-.stat{
-  background:#00000055;
-  padding:15px 20px;
-  border-radius:12px;
-  text-align:center;
-}
-
-/* SECCIONES */
-section{
-  padding:30px 20px;
-}
-section h2{
-  text-align:center;
-  margin-bottom:20px;
-  color:var(--mamey);
-}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:15px;
-}
-.card{
-  background:var(--card);
-  padding:15px;
-  border-radius:14px;
-  text-align:center;
-  transition:.3s;
-}
-.card:hover{transform:scale(1.05)}
-.card a{
-  color:#fff;
-  text-decoration:none;
-  font-weight:bold;
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:20px;
-  opacity:.7;
-}
-
-/* IDIOMA */
-select{
-  padding:6px;
-  border-radius:8px;
-  border:none;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OfferView - Tu Ventana a Las Mejores Ofertas</title>
+  <style>
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:linear-gradient(180deg,#0b1633,#0f1f45);
+      color:#fff;
+    }
+    header{
+      text-align:center;
+      padding:30px 15px;
+    }
+    header h1{
+      color:#ff8c1a;
+      margin-bottom:5px;
+    }
+    header p{
+      opacity:.9;
+      margin:0;
+    }
+    .section-title{
+      text-align:center;
+      color:#ff8c1a;
+      margin:40px 0 20px;
+      font-size:24px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+      gap:15px;
+      padding:0 15px 20px;
+    }
+    .card{
+      background:rgba(255,255,255,0.08);
+      border-radius:15px;
+      padding:18px;
+      text-align:center;
+      text-decoration:none;
+      color:#fff;
+      font-weight:bold;
+      transition:0.2s;
+    }
+    .card:hover{
+      background:rgba(255,255,255,0.18);
+      transform:translateY(-3px);
+    }
+    footer{
+      text-align:center;
+      padding:25px 15px;
+      font-size:14px;
+      opacity:.8;
+    }
+  </style>
 </head>
-
-<body>
-
-<header>
-  <div class="logo">OFFERVIEW</div>
-  <div class="slogan">Tu Ventana a Las Mejores Ofertas</div>
-</header>
-
-<nav>
-  <button onclick="scrollToSection('topstores')">Top Stores</button>
-  <button onclick="scrollToSection('gaming')">Gaming</button>
-  <button onclick="scrollToSection('moda')">Moda</button>
-  <button onclick="scrollToSection('tecnologia')">Tecnología</button>
-  <button onclick="scrollToSection('viajes')">Vuelos & Hoteles</button>
-
-  <select id="idioma" onchange="guardarIdioma()">
-    <option value="es">Español</option>
-    <option value="en">English</option>
-  </select>
-</nav>
-
-<div class="stats">
-  <div class="stat">
-    <strong id="visitas">0</strong><br>Visitantes totales
-  </div>
-  <div class="stat">
-    <strong id="enLinea">0</strong><br>Personas viendo ofertas ahora
-  </div>
-  <div class="stat">
-    País detectado:<br><strong id="pais">Detectando...</strong>
-  </div>
-</div>
-
-<!-- TOP STORES -->
-<section id="topstores">
-<h2>Top Stores</h2>
+<body><header>
+  <h1>OFFERVIEW</h1>
+  <p>Tu Ventana a Las Mejores Ofertas</p>
+</header><!-- TOP STORES --><h2 class="section-title">Top Stores</h2>
 <div class="grid">
-  <div class="card"><a href="https://www.temu.com" target="_blank">Temu</a></div>
-  <div class="card"><a href="https://www.aliexpress.com" target="_blank">AliExpress</a></div>
-  <div class="card"><a href="https://www.alibaba.com" target="_blank">Alibaba</a></div>
-  <div class="card"><a href="https://www.dhgate.com" target="_blank">DHgate</a></div>
-  <div class="card"><a href="https://www.banggood.com" target="_blank">Banggood</a></div>
-  <div class="card"><a href="https://www.lightinthebox.com" target="_blank">LightInTheBox</a></div>
-  <div class="card"><a href="https://www.shein.com" target="_blank">Shein</a></div>
-  <div class="card"><a href="https://www.wish.com" target="_blank">Wish</a></div>
-  <div class="card"><a href="https://www.joom.com" target="_blank">Joom</a></div>
-  <div class="card"><a href="https://www.romwe.com" target="_blank">Romwe</a></div>
-  <div class="card"><a href="https://www.geekbuying.com" target="_blank">Geekbuying</a></div>
-  <div class="card"><a href="https://www.tomtop.com" target="_blank">Tomtop</a></div>
-  <div class="card"><a href="https://www.yesstyle.com" target="_blank">YesStyle</a></div>
-  <div class="card"><a href="https://www.shopcider.com" target="_blank">Cider</a></div>
-</div>
-</section>
-
-<!-- GAMING -->
-<section id="gaming">
-<h2>Gaming</h2>
+  <a href="https://www.temu.com" target="_blank" class="card">Temu</a>
+  <a href="https://www.aliexpress.com" target="_blank" class="card">AliExpress</a>
+  <a href="https://www.alibaba.com" target="_blank" class="card">Alibaba</a>
+  <a href="https://www.dhgate.com" target="_blank" class="card">DHgate</a>
+  <a href="https://www.banggood.com" target="_blank" class="card">Banggood</a>
+  <a href="https://www.lightinthebox.com" target="_blank" class="card">LightInTheBox</a>
+  <a href="https://www.shein.com" target="_blank" class="card">Shein</a>
+  <a href="https://www.wish.com" target="_blank" class="card">Wish</a>
+  <a href="https://www.joom.com" target="_blank" class="card">Joom</a>
+  <a href="https://www.romwe.com" target="_blank" class="card">Romwe</a>
+  <a href="https://www.mercadolibre.com" target="_blank" class="card">MercadoLibre</a>
+  <a href="https://www.walmart.com" target="_blank" class="card">Walmart</a>
+</div><!-- GAMING --><h2 class="section-title">Gaming</h2>
 <div class="grid">
-  <div class="card"><a href="https://www.g2a.com" target="_blank">G2A</a></div>
-  <div class="card"><a href="https://www.kinguin.net" target="_blank">Kinguin</a></div>
-  <div class="card"><a href="https://www.eneba.com" target="_blank">Eneba</a></div>
-  <div class="card"><a href="https://www.humblebundle.com" target="_blank">Humble Bundle</a></div>
-  <div class="card"><a href="https://store.epicgames.com" target="_blank">Epic Games</a></div>
-</div>
-</section>
-
-<!-- MODA -->
-<section id="moda">
-<h2>Moda</h2>
+  <a href="https://www.g2a.com" target="_blank" class="card">G2A</a>
+  <a href="https://www.kinguin.net" target="_blank" class="card">Kinguin</a>
+  <a href="https://www.eneba.com" target="_blank" class="card">Eneba</a>
+  <a href="https://www.humblebundle.com" target="_blank" class="card">Humble Bundle</a>
+  <a href="https://store.steampowered.com" target="_blank" class="card">Steam</a>
+  <a href="https://store.epicgames.com" target="_blank" class="card">Epic Games</a>
+  <a href="https://store.playstation.com" target="_blank" class="card">PlayStation Store</a>
+  <a href="https://www.xbox.com/store" target="_blank" class="card">Xbox Store</a>
+  <a href="https://www.nintendo.com/store" target="_blank" class="card">Nintendo Store</a>
+</div><!-- TECNOLOGÍA --><h2 class="section-title">Tecnología</h2>
 <div class="grid">
-  <div class="card"><a href="https://www.shein.com" target="_blank">Shein</a></div>
-  <div class="card"><a href="https://www.romwe.com" target="_blank">Romwe</a></div>
-  <div class="card"><a href="https://www.zaful.com" target="_blank">Zaful</a></div>
-  <div class="card"><a href="https://www.yesstyle.com" target="_blank">YesStyle</a></div>
-</div>
-</section>
-
-<!-- TECNOLOGIA -->
-<section id="tecnologia">
-<h2>Tecnología</h2>
+  <a href="https://www.bestbuy.com" target="_blank" class="card">Best Buy</a>
+  <a href="https://www.newegg.com" target="_blank" class="card">Newegg</a>
+  <a href="https://www.bhphotovideo.com" target="_blank" class="card">B&H</a>
+</div><!-- CALZADOS --><h2 class="section-title">Calzados</h2>
 <div class="grid">
-  <div class="card"><a href="https://www.newegg.com/global" target="_blank">Newegg Global</a></div>
-  <div class="card"><a href="https://www.anker.com" target="_blank">Anker</a></div>
-  <div class="card"><a href="https://www.banggood.com" target="_blank">Banggood</a></div>
-</div>
-</section>
-
-<!-- VIAJES -->
-<section id="viajes">
-<h2>Vuelos & Hoteles</h2>
+  <a href="https://www.nike.com" target="_blank" class="card">Nike</a>
+  <a href="https://www.adidas.com" target="_blank" class="card">Adidas</a>
+  <a href="https://www.puma.com" target="_blank" class="card">Puma</a>
+  <a href="https://www.newbalance.com" target="_blank" class="card">New Balance</a>
+  <a href="https://www.skechers.com" target="_blank" class="card">Skechers</a>
+  <a href="https://www.converse.com" target="_blank" class="card">Converse</a>
+</div><!-- VIAJES --><h2 class="section-title">Hoteles y Vuelos</h2>
 <div class="grid">
-  <div class="card"><a href="https://www.skyscanner.com" target="_blank">Skyscanner</a></div>
-  <div class="card"><a href="https://www.kiwi.com" target="_blank">Kiwi</a></div>
-  <div class="card"><a href="https://www.trip.com" target="_blank">Trip.com</a></div>
-</div>
-</section>
-
-<footer>
-© 2025 OfferView – Plataforma de Ofertas Inteligentes
-</footer>
-
-<script>
-// Scroll
-function scrollToSection(id){
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
-}
-
-// VISITAS
-let visitas = localStorage.getItem("visitasOfferView") || 0;
-visitas++;
-localStorage.setItem("visitasOfferView", visitas);
-document.getElementById("visitas").innerText = visitas;
-
-// PERSONAS EN LINEA (simulado realista)
-document.getElementById("enLinea").innerText = Math.floor(Math.random()*20)+5;
-
-// IDIOMA
-function guardarIdioma(){
-  localStorage.setItem("idioma", document.getElementById("idioma").value);
-}
-document.getElementById("idioma").value = localStorage.getItem("idioma") || "es";
-
-// PAÍS (sin API paga)
-fetch("https://ipapi.co/country_name/")
-.then(r=>r.text())
-.then(p=>document.getElementById("pais").innerText=p)
-.catch(()=>document.getElementById("pais").innerText="No detectado");
-</script>
-
-</body>
-    </html>
+  <a href="https://www.expedia.com" target="_blank" class="card">Expedia</a>
+  <a href="https://www.booking.com" target="_blank" class="card">Booking</a>
+  <a href="https://www.skyscanner.com" target="_blank" class="card">Skyscanner</a>
+</div><footer>
+  © 2025 OfferView · Tu Ventana a Las Mejores Ofertas
+</footer></body>
+  </html>
