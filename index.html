@@ -32,6 +32,13 @@ header h1{
   color:var(--primary);
   font-size:36px;
   margin-bottom:6px;
+  letter-spacing:1px;
+}
+
+header p{
+  margin:0;
+  font-size:16px;
+  opacity:.95;
 }
 
 .section-title{
@@ -40,13 +47,6 @@ header h1{
   margin:45px 0 20px;
   font-size:26px;
   font-weight:700;
-}
-
-.views-box{
-  text-align:center;
-  margin:20px 0;
-  font-weight:700;
-  color:#2563EB;
 }
 
 .grid{
@@ -72,6 +72,7 @@ header h1{
   background:var(--primary);
   color:#fff;
   transform:translateY(-4px);
+  box-shadow:0 14px 30px rgba(0,0,0,0.12);
 }
 
 footer{
@@ -79,6 +80,7 @@ footer{
   padding:35px 15px;
   font-size:14px;
   background:#eef2f7;
+  color:#374151;
 }
 </style>
 </head>
@@ -89,11 +91,6 @@ footer{
   <h1>OFFERVIEW</h1>
   <p>Tu Ventana a Las Mejores Ofertas</p>
 </header>
-
-<div class="views-box">
-  👥 <span id="liveViews">0</span> Live Views ·
-  👥 <span id="totalViews">0</span> Total Views
-</div>
 
 <!-- TOP STORES -->
 <h2 class="section-title">Top Stores</h2>
@@ -112,18 +109,19 @@ footer{
   <a href="https://www.walmart.com" target="_blank" class="card">Walmart</a>
 </div>
 
-<!-- GAMING -->
-<h2 class="section-title">Gaming</h2>
+<!-- GAMING STORES -->
+<h2 class="section-title">Gaming Stores</h2>
 <div class="grid">
+  <a href="https://store.steampowered.com" target="_blank" class="card">Steam</a>
+  <a href="https://store.epicgames.com" target="_blank" class="card">Epic Games</a>
   <a href="https://www.g2a.com" target="_blank" class="card">G2A</a>
   <a href="https://www.kinguin.net" target="_blank" class="card">Kinguin</a>
   <a href="https://www.eneba.com" target="_blank" class="card">Eneba</a>
   <a href="https://www.humblebundle.com" target="_blank" class="card">Humble Bundle</a>
-  <a href="https://store.steampowered.com" target="_blank" class="card">Steam</a>
-  <a href="https://store.epicgames.com" target="_blank" class="card">Epic Games</a>
-  <a href="https://store.playstation.com" target="_blank" class="card">PlayStation</a>
-  <a href="https://www.xbox.com/store" target="_blank" class="card">Xbox</a>
-  <a href="https://www.nintendo.com/store" target="_blank" class="card">Nintendo</a>
+  <a href="https://store.playstation.com" target="_blank" class="card">PlayStation Store</a>
+  <a href="https://www.xbox.com/store" target="_blank" class="card">Xbox Store</a>
+  <a href="https://www.nintendo.com/store" target="_blank" class="card">Nintendo eShop</a>
+  <a href="https://shop.battle.net" target="_blank" class="card">Battle.net</a>
 </div>
 
 <!-- TECNOLOGÍA -->
@@ -156,7 +154,7 @@ footer{
 </div>
 
 <!-- LENCERÍA & MODA -->
-<h2 class="section-title">Lencería & Moda</h2>
+<h2 class="section-title">Lencería & Moda Stores</h2>
 <div class="grid">
   <a href="https://www.victoriassecret.com" target="_blank" class="card">Victoria’s Secret</a>
   <a href="https://www.savagex.com" target="_blank" class="card">Savage X Fenty</a>
@@ -167,52 +165,8 @@ footer{
 </div>
 
 <footer>
-© 2025 <strong>OfferView</strong> · Tu Ventana a Las Mejores Ofertas
+  © 2025 <strong>OfferView</strong> · Tu Ventana a Las Mejores Ofertas
 </footer>
-
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-
-<script>
-const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "offerview.firebaseapp.com",
-  projectId: "offerview",
-  storageBucket: "offerview.appspot.com",
-  messagingSenderId: "XXXX",
-  appId: "XXXX"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-const statsRef = db.collection("stats").doc("global");
-
-statsRef.get().then(doc=>{
-  if(!doc.exists){
-    statsRef.set({ live:1, total:1 });
-  }else{
-    statsRef.update({
-      live: firebase.firestore.FieldValue.increment(1),
-      total: firebase.firestore.FieldValue.increment(1)
-    });
-  }
-});
-
-window.addEventListener("beforeunload", ()=>{
-  statsRef.update({
-    live: firebase.firestore.FieldValue.increment(-1)
-  });
-});
-
-statsRef.onSnapshot(doc=>{
-  if(doc.exists){
-    document.getElementById("liveViews").innerText = doc.data().live;
-    document.getElementById("totalViews").innerText = doc.data().total;
-  }
-});
-</script>
 
 </body>
   </html>
