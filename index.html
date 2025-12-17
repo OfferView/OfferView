@@ -10,6 +10,7 @@
   --primary:#F59E0B;
   --secondary:#2563EB;
   --bg:#F9FAFB;
+  --text:#111827;
   --card:#ffffff;
 }
 
@@ -17,7 +18,7 @@ body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
   background:var(--bg);
-  color:#111827;
+  color:var(--text);
 }
 
 header{
@@ -33,42 +34,19 @@ header h1{
   margin-bottom:6px;
 }
 
-header p{
-  margin:0;
-  font-size:16px;
-}
-
-/* LIVE VIEWS */
-.views-box{
-  display:flex;
-  justify-content:center;
-  gap:14px;
-  margin-top:15px;
-}
-
-.view-item{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  background:#eaf1ff;
-  border-radius:20px;
-  padding:6px 14px;
-  font-size:14px;
-  font-weight:600;
-  color:#1e40af;
-}
-
-.view-item img{
-  width:18px;
-}
-
-/* SECCIONES */
 .section-title{
   text-align:center;
   color:var(--primary);
   margin:45px 0 20px;
   font-size:26px;
   font-weight:700;
+}
+
+.views-box{
+  text-align:center;
+  margin:20px 0;
+  font-weight:700;
+  color:#2563EB;
 }
 
 .grid{
@@ -101,7 +79,6 @@ footer{
   padding:35px 15px;
   font-size:14px;
   background:#eef2f7;
-  color:#374151;
 }
 </style>
 </head>
@@ -111,20 +88,12 @@ footer{
 <header>
   <h1>OFFERVIEW</h1>
   <p>Tu Ventana a Las Mejores Ofertas</p>
-
-  <!-- LIVE & TOTAL VIEWS -->
-  <div class="views-box">
-    <div class="view-item">
-      <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png">
-      <span><strong id="liveViews">0</strong> Live Views</span>
-    </div>
-
-    <div class="view-item">
-      <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png">
-      <span><strong id="totalViews">0</strong> Total Views</span>
-    </div>
-  </div>
 </header>
+
+<div class="views-box">
+  👥 <span id="liveViews">0</span> Live Views ·
+  👥 <span id="totalViews">0</span> Total Views
+</div>
 
 <!-- TOP STORES -->
 <h2 class="section-title">Top Stores</h2>
@@ -134,7 +103,11 @@ footer{
   <a href="https://www.alibaba.com" target="_blank" class="card">Alibaba</a>
   <a href="https://www.dhgate.com" target="_blank" class="card">DHgate</a>
   <a href="https://www.banggood.com" target="_blank" class="card">Banggood</a>
+  <a href="https://www.lightinthebox.com" target="_blank" class="card">LightInTheBox</a>
   <a href="https://www.shein.com" target="_blank" class="card">Shein</a>
+  <a href="https://www.wish.com" target="_blank" class="card">Wish</a>
+  <a href="https://www.joom.com" target="_blank" class="card">Joom</a>
+  <a href="https://www.romwe.com" target="_blank" class="card">Romwe</a>
   <a href="https://www.mercadolibre.com" target="_blank" class="card">MercadoLibre</a>
   <a href="https://www.walmart.com" target="_blank" class="card">Walmart</a>
 </div>
@@ -142,17 +115,35 @@ footer{
 <!-- GAMING -->
 <h2 class="section-title">Gaming</h2>
 <div class="grid">
+  <a href="https://www.g2a.com" target="_blank" class="card">G2A</a>
+  <a href="https://www.kinguin.net" target="_blank" class="card">Kinguin</a>
+  <a href="https://www.eneba.com" target="_blank" class="card">Eneba</a>
+  <a href="https://www.humblebundle.com" target="_blank" class="card">Humble Bundle</a>
   <a href="https://store.steampowered.com" target="_blank" class="card">Steam</a>
   <a href="https://store.epicgames.com" target="_blank" class="card">Epic Games</a>
-  <a href="https://store.ubisoft.com" target="_blank" class="card">Ubisoft</a>
+  <a href="https://store.playstation.com" target="_blank" class="card">PlayStation</a>
+  <a href="https://www.xbox.com/store" target="_blank" class="card">Xbox</a>
+  <a href="https://www.nintendo.com/store" target="_blank" class="card">Nintendo</a>
 </div>
 
 <!-- TECNOLOGÍA -->
 <h2 class="section-title">Tecnología</h2>
 <div class="grid">
-  <a href="https://www.apple.com" target="_blank" class="card">Apple</a>
   <a href="https://www.bestbuy.com" target="_blank" class="card">Best Buy</a>
   <a href="https://www.newegg.com" target="_blank" class="card">Newegg</a>
+  <a href="https://www.bhphotovideo.com" target="_blank" class="card">B&H Photo</a>
+  <a href="https://www.apple.com" target="_blank" class="card">Apple Store</a>
+</div>
+
+<!-- CALZADOS -->
+<h2 class="section-title">Calzados</h2>
+<div class="grid">
+  <a href="https://www.nike.com" target="_blank" class="card">Nike</a>
+  <a href="https://www.adidas.com" target="_blank" class="card">Adidas</a>
+  <a href="https://www.puma.com" target="_blank" class="card">Puma</a>
+  <a href="https://www.newbalance.com" target="_blank" class="card">New Balance</a>
+  <a href="https://www.skechers.com" target="_blank" class="card">Skechers</a>
+  <a href="https://www.converse.com" target="_blank" class="card">Converse</a>
 </div>
 
 <!-- VIAJES -->
@@ -160,43 +151,67 @@ footer{
 <div class="grid">
   <a href="https://www.expedia.com" target="_blank" class="card">Expedia</a>
   <a href="https://www.booking.com" target="_blank" class="card">Booking</a>
+  <a href="https://www.skyscanner.com" target="_blank" class="card">Skyscanner</a>
   <a href="https://www.airbnb.com" target="_blank" class="card">Airbnb</a>
 </div>
 
+<!-- LENCERÍA & MODA -->
+<h2 class="section-title">Lencería & Moda</h2>
+<div class="grid">
+  <a href="https://www.victoriassecret.com" target="_blank" class="card">Victoria’s Secret</a>
+  <a href="https://www.savagex.com" target="_blank" class="card">Savage X Fenty</a>
+  <a href="https://www.adoreme.com" target="_blank" class="card">Adore Me</a>
+  <a href="https://www.thirdlove.com" target="_blank" class="card">ThirdLove</a>
+  <a href="https://www.zaful.com" target="_blank" class="card">Zaful</a>
+  <a href="https://www.yesstyle.com" target="_blank" class="card">YesStyle</a>
+</div>
+
 <footer>
-  © 2025 <strong>OfferView</strong>
+© 2025 <strong>OfferView</strong> · Tu Ventana a Las Mejores Ofertas
 </footer>
 
-<!-- 🔥 FIREBASE LIVE COUNTER -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
+<script>
 const firebaseConfig = {
   apiKey: "TU_API_KEY",
-  authDomain: "TU_PROYECTO.firebaseapp.com",
-  databaseURL: "https://TU_PROYECTO-default-rtdb.firebaseio.com",
-  projectId: "TU_PROYECTO",
-  storageBucket: "TU_PROYECTO.appspot.com",
-  messagingSenderId: "TU_ID",
-  appId: "TU_APP_ID"
+  authDomain: "offerview.firebaseapp.com",
+  projectId: "offerview",
+  storageBucket: "offerview.appspot.com",
+  messagingSenderId: "XXXX",
+  appId: "XXXX"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-const liveRef = ref(db, "liveUsers");
-const totalRef = ref(db, "totalViews");
+const statsRef = db.collection("stats").doc("global");
 
-runTransaction(totalRef, v => (v || 0) + 1);
-runTransaction(liveRef, v => (v || 0) + 1);
-
-window.addEventListener("beforeunload", () => {
-  runTransaction(liveRef, v => v > 0 ? v - 1 : 0);
+statsRef.get().then(doc=>{
+  if(!doc.exists){
+    statsRef.set({ live:1, total:1 });
+  }else{
+    statsRef.update({
+      live: firebase.firestore.FieldValue.increment(1),
+      total: firebase.firestore.FieldValue.increment(1)
+    });
+  }
 });
 
-onValue(liveRef, s => document.getElementById("liveViews").innerText = s.val() || 0);
-onValue(totalRef, s => document.getElementById("totalViews").innerText = s.val() || 0);
+window.addEventListener("beforeunload", ()=>{
+  statsRef.update({
+    live: firebase.firestore.FieldValue.increment(-1)
+  });
+});
+
+statsRef.onSnapshot(doc=>{
+  if(doc.exists){
+    document.getElementById("liveViews").innerText = doc.data().live;
+    document.getElementById("totalViews").innerText = doc.data().total;
+  }
+});
 </script>
 
 </body>
