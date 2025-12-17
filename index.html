@@ -1,65 +1,100 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OfferView - Tu Ventana a Las Mejores Ofertas</title>
-  <style>
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      background:linear-gradient(180deg,#0b1633,#0f1f45);
-      color:#fff;
-    }
-    header{
-      text-align:center;
-      padding:30px 15px;
-    }
-    header h1{
-      color:#ff8c1a;
-      margin-bottom:5px;
-    }
-    header p{
-      opacity:.9;
-      margin:0;
-    }
-    .section-title{
-      text-align:center;
-      color:#ff8c1a;
-      margin:40px 0 20px;
-      font-size:24px;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-      gap:15px;
-      padding:0 15px 20px;
-    }
-    .card{
-      background:rgba(255,255,255,0.08);
-      border-radius:15px;
-      padding:18px;
-      text-align:center;
-      text-decoration:none;
-      color:#fff;
-      font-weight:bold;
-      transition:0.2s;
-    }
-    .card:hover{
-      background:rgba(255,255,255,0.18);
-      transform:translateY(-3px);
-    }
-    footer{
-      text-align:center;
-      padding:25px 15px;
-      font-size:14px;
-      opacity:.8;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OfferView - Tu Ventana a Las Mejores Ofertas</title>
+
+<style>
+:root{
+  --primary:#F59E0B;   /* mamey marca */
+  --secondary:#2563EB; /* azul confianza */
+  --success:#22C55E;   /* verde ahorro */
+  --bg:#F9FAFB;
+  --text:#111827;
+  --card:#ffffff;
+}
+
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+header{
+  text-align:center;
+  padding:40px 15px;
+  background:linear-gradient(180deg,#0b1633,#0f1f45);
+  color:#fff;
+}
+
+header h1{
+  color:var(--primary);
+  font-size:36px;
+  margin-bottom:6px;
+  letter-spacing:1px;
+}
+
+header p{
+  margin:0;
+  font-size:16px;
+  opacity:.95;
+}
+
+.section-title{
+  text-align:center;
+  color:var(--primary);
+  margin:45px 0 20px;
+  font-size:26px;
+  font-weight:700;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:16px;
+  padding:0 18px 35px;
+}
+
+.card{
+  background:var(--card);
+  border-radius:16px;
+  padding:18px;
+  text-align:center;
+  text-decoration:none;
+  color:var(--secondary);
+  font-weight:700;
+  box-shadow:0 8px 22px rgba(0,0,0,0.06);
+  transition:.25s;
+}
+
+.card:hover{
+  background:var(--primary);
+  color:#fff;
+  transform:translateY(-4px);
+  box-shadow:0 14px 30px rgba(0,0,0,0.12);
+}
+
+footer{
+  text-align:center;
+  padding:35px 15px;
+  font-size:14px;
+  background:#eef2f7;
+  color:#374151;
+}
+</style>
 </head>
-<body><header>
+
+<body>
+
+<header>
   <h1>OFFERVIEW</h1>
   <p>Tu Ventana a Las Mejores Ofertas</p>
-</header><!-- TOP STORES --><h2 class="section-title">Top Stores</h2>
+</header>
+
+<!-- TOP STORES -->
+<h2 class="section-title">Top Stores</h2>
 <div class="grid">
   <a href="https://www.temu.com" target="_blank" class="card">Temu</a>
   <a href="https://www.aliexpress.com" target="_blank" class="card">AliExpress</a>
@@ -73,7 +108,10 @@
   <a href="https://www.romwe.com" target="_blank" class="card">Romwe</a>
   <a href="https://www.mercadolibre.com" target="_blank" class="card">MercadoLibre</a>
   <a href="https://www.walmart.com" target="_blank" class="card">Walmart</a>
-</div><!-- GAMING --><h2 class="section-title">Gaming</h2>
+</div>
+
+<!-- GAMING -->
+<h2 class="section-title">Gaming</h2>
 <div class="grid">
   <a href="https://www.g2a.com" target="_blank" class="card">G2A</a>
   <a href="https://www.kinguin.net" target="_blank" class="card">Kinguin</a>
@@ -81,15 +119,21 @@
   <a href="https://www.humblebundle.com" target="_blank" class="card">Humble Bundle</a>
   <a href="https://store.steampowered.com" target="_blank" class="card">Steam</a>
   <a href="https://store.epicgames.com" target="_blank" class="card">Epic Games</a>
-  <a href="https://store.playstation.com" target="_blank" class="card">PlayStation Store</a>
-  <a href="https://www.xbox.com/store" target="_blank" class="card">Xbox Store</a>
-  <a href="https://www.nintendo.com/store" target="_blank" class="card">Nintendo Store</a>
-</div><!-- TECNOLOGÍA --><h2 class="section-title">Tecnología</h2>
+  <a href="https://store.playstation.com" target="_blank" class="card">PlayStation</a>
+  <a href="https://www.xbox.com/store" target="_blank" class="card">Xbox</a>
+  <a href="https://www.nintendo.com/store" target="_blank" class="card">Nintendo</a>
+</div>
+
+<!-- TECNOLOGÍA -->
+<h2 class="section-title">Tecnología</h2>
 <div class="grid">
   <a href="https://www.bestbuy.com" target="_blank" class="card">Best Buy</a>
   <a href="https://www.newegg.com" target="_blank" class="card">Newegg</a>
-  <a href="https://www.bhphotovideo.com" target="_blank" class="card">B&H</a>
-</div><!-- CALZADOS --><h2 class="section-title">Calzados</h2>
+  <a href="https://www.bhphotovideo.com" target="_blank" class="card">B&H Photo</a>
+</div>
+
+<!-- CALZADOS -->
+<h2 class="section-title">Calzados</h2>
 <div class="grid">
   <a href="https://www.nike.com" target="_blank" class="card">Nike</a>
   <a href="https://www.adidas.com" target="_blank" class="card">Adidas</a>
@@ -97,49 +141,30 @@
   <a href="https://www.newbalance.com" target="_blank" class="card">New Balance</a>
   <a href="https://www.skechers.com" target="_blank" class="card">Skechers</a>
   <a href="https://www.converse.com" target="_blank" class="card">Converse</a>
-</div><!-- VIAJES --><h2 class="section-title">Hoteles y Vuelos</h2>
+</div>
+
+<!-- VIAJES -->
+<h2 class="section-title">Hoteles y Vuelos</h2>
 <div class="grid">
   <a href="https://www.expedia.com" target="_blank" class="card">Expedia</a>
   <a href="https://www.booking.com" target="_blank" class="card">Booking</a>
   <a href="https://www.skyscanner.com" target="_blank" class="card">Skyscanner</a>
-</div><footer>
-  <!-- LENCERÍA & MODA -->
+</div>
+
+<!-- LENCERÍA & MODA -->
 <h2 class="section-title">Lencería & Moda Stores</h2>
 <div class="grid">
-
-  <a href="https://www.victoriassecret.com" target="_blank" class="card">
-    Victoria’s Secret
-  </a>
-
-  <a href="https://www.savagex.com" target="_blank" class="card">
-    Savage X Fenty
-  </a>
-
-  <a href="https://www.adoreme.com" target="_blank" class="card">
-    Adore Me
-  </a>
-
-  <a href="https://www.thirdlove.com" target="_blank" class="card">
-    ThirdLove
-  </a>
-
-  <a href="https://www.shein.com" target="_blank" class="card">
-    Shein
-  </a>
-
-  <a href="https://www.romwe.com" target="_blank" class="card">
-    Romwe
-  </a>
-
-  <a href="https://www.zaful.com" target="_blank" class="card">
-    Zaful
-  </a>
-
-  <a href="https://www.yesstyle.com" target="_blank" class="card">
-    YesStyle
-  </a>
-
+  <a href="https://www.victoriassecret.com" target="_blank" class="card">Victoria’s Secret</a>
+  <a href="https://www.savagex.com" target="_blank" class="card">Savage X Fenty</a>
+  <a href="https://www.adoreme.com" target="_blank" class="card">Adore Me</a>
+  <a href="https://www.thirdlove.com" target="_blank" class="card">ThirdLove</a>
+  <a href="https://www.zaful.com" target="_blank" class="card">Zaful</a>
+  <a href="https://www.yesstyle.com" target="_blank" class="card">YesStyle</a>
 </div>
-  © 2025 OfferView · Tu Ventana a Las Mejores Ofertas
-</footer></body>
+
+<footer>
+  © 2025 <strong>OfferView</strong> · Tu Ventana a Las Mejores Ofertas
+</footer>
+
+</body>
   </html>
