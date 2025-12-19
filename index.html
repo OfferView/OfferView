@@ -75,6 +75,18 @@ header p{
   box-shadow:0 14px 30px rgba(0,0,0,0.12);
 }
 
+.offer-card{
+  border:2px solid var(--primary);
+}
+
+.offer-card span{
+  display:block;
+  font-size:14px;
+  font-weight:normal;
+  margin-top:6px;
+  color:#374151;
+}
+
 footer{
   text-align:center;
   padding:35px 15px;
@@ -92,6 +104,29 @@ footer{
   <p>Tu Ventana a Las Mejores Ofertas</p>
 </header>
 
+<!-- 🔥 OFERTAS DESTACADAS -->
+<h2 class="section-title">🔥 Ofertas Destacadas</h2>
+<div class="grid" id="ofertas"></div>
+
+<script>
+const ofertas = [
+  { nombre:"Audífonos Inalámbricos", precio:"$29.99", tienda:"Temu", link:"https://www.temu.com" },
+  { nombre:"Teclado Gamer Mecánico", precio:"$49.99", tienda:"AliExpress", link:"https://www.aliexpress.com" },
+  { nombre:"Zapatos Deportivos", precio:"$39.99", tienda:"Shein", link:"https://www.shein.com" }
+];
+
+const contenedor = document.getElementById("ofertas");
+ofertas.forEach(o=>{
+  const a=document.createElement("a");
+  a.href=o.link;
+  a.target="_blank";
+  a.className="card offer-card";
+  a.innerHTML=`${o.nombre}<span>${o.precio} · ${o.tienda}</span>`;
+  contenedor.appendChild(a);
+});
+</script>
+
+<!-- TOP STORES -->
 <h2 class="section-title">Top Stores</h2>
 <div class="grid">
   <a href="https://www.temu.com" target="_blank" class="card">Temu</a>
@@ -106,12 +141,9 @@ footer{
   <a href="https://www.romwe.com" target="_blank" class="card">Romwe</a>
   <a href="https://www.mercadolibre.com" target="_blank" class="card">MercadoLibre</a>
   <a href="https://www.walmart.com" target="_blank" class="card">Walmart</a>
-  <a href="https://www.miniso.com" target="_blank" class="card">MINISO</a>
-  <a href="https://www.dollartree.com" target="_blank" class="card">Dollar Tree</a>
-  <a href="https://www.marshalls.com" target="_blank" class="card">Marshalls</a>
-  <a href="https://www.burlington.com" target="_blank" class="card">Burlington</a>
 </div>
 
+<!-- GAMING -->
 <h2 class="section-title">Gaming Stores</h2>
 <div class="grid">
   <a href="https://store.steampowered.com" target="_blank" class="card">Steam</a>
@@ -126,7 +158,8 @@ footer{
   <a href="https://shop.battle.net" target="_blank" class="card">Battle.net</a>
 </div>
 
-<h2 class="section-title">Tecnología</h2>
+<!-- TECNOLOGÍA -->
+<h2 class="section-title">Tecnología Stores</h2>
 <div class="grid">
   <a href="https://www.bestbuy.com" target="_blank" class="card">Best Buy</a>
   <a href="https://www.newegg.com" target="_blank" class="card">Newegg</a>
@@ -134,6 +167,7 @@ footer{
   <a href="https://www.apple.com" target="_blank" class="card">Apple Store</a>
 </div>
 
+<!-- CALZADOS -->
 <h2 class="section-title">Calzados</h2>
 <div class="grid">
   <a href="https://www.nike.com" target="_blank" class="card">Nike</a>
@@ -144,6 +178,7 @@ footer{
   <a href="https://www.converse.com" target="_blank" class="card">Converse</a>
 </div>
 
+<!-- HOTELES -->
 <h2 class="section-title">Hoteles y Vuelos</h2>
 <div class="grid">
   <a href="https://www.expedia.com" target="_blank" class="card">Expedia</a>
@@ -152,6 +187,7 @@ footer{
   <a href="https://www.airbnb.com" target="_blank" class="card">Airbnb</a>
 </div>
 
+<!-- LENCERÍA -->
 <h2 class="section-title">Lencería & Moda Stores</h2>
 <div class="grid">
   <a href="https://www.victoriassecret.com" target="_blank" class="card">Victoria’s Secret</a>
