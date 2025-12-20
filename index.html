@@ -49,6 +49,7 @@ header p{
   font-weight:700;
 }
 
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
@@ -87,17 +88,7 @@ header p{
   margin-top:6px;
 }
 
-/* ANIMACIONES */
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-.live{
-  animation:fadeUp .6s ease forwards;
-}
-
-/* BADGE */
+/* BADGES */
 .badge{
   position:absolute;
   top:10px;
@@ -124,6 +115,34 @@ header p{
   opacity:1;
 }
 
+/* ANIMACIONES */
+.reveal{
+  opacity:0;
+  transform:translateY(25px);
+  transition:all .6s ease;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* SLIDER */
+.slider{
+  overflow:hidden;
+  padding:0 18px 35px;
+}
+
+.slider-track{
+  display:flex;
+  gap:16px;
+  transition:transform .6s ease;
+}
+
+.slider-track .card{
+  min-width:230px;
+}
+
 footer{
   text-align:center;
   padding:35px 15px;
@@ -142,49 +161,13 @@ footer{
 
 <!-- 🔥 OFERTAS DESTACADAS -->
 <h2 class="section-title">🔥 Ofertas Destacadas</h2>
-<div class="grid" id="ofertas"></div>
-
-<script>
-const ofertas = [
-  { nombre:"Audífonos Inalámbricos", precio:"$29.99", tienda:"Temu", link:"https://www.temu.com", badge:"HOT" },
-  { nombre:"Teclado Gamer Mecánico", precio:"$49.99", tienda:"AliExpress", link:"https://www.aliexpress.com", badge:"GAMER" },
-  { nombre:"Zapatos Deportivos", precio:"$39.99", tienda:"Shein", link:"https://www.shein.com", badge:"OFERTA" }
-];
-
-let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-const contenedor = document.getElementById("ofertas");
-
-ofertas.forEach((o,i)=>{
-  const a=document.createElement("a");
-  a.href=o.link;
-  a.target="_blank";
-  a.className="card offer-card live";
-  a.style.animationDelay=`${i*0.1}s`;
-
-  a.innerHTML=`
-    <div class="badge">${o.badge}</div>
-    ${o.nombre}
-    <span>${o.precio} · ${o.tienda}</span>
-    <div class="favorite ${favoritos.includes(o.nombre) ? 'active' : ''}">❤</div>
-  `;
-
-  a.querySelector(".favorite").onclick=e=>{
-    e.preventDefault();
-    e.stopPropagation();
-    favoritos.includes(o.nombre)
-      ? favoritos=favoritos.filter(f=>f!==o.nombre)
-      : favoritos.push(o.nombre);
-    localStorage.setItem("favoritos",JSON.stringify(favoritos));
-    e.target.classList.toggle("active");
-  };
-
-  contenedor.appendChild(a);
-});
-</script>
+<div class="slider">
+  <div class="slider-track" id="ofertas"></div>
+</div>
 
 <!-- TOP STORES -->
 <h2 class="section-title">Top Stores</h2>
-<div class="grid">
+<div class="grid reveal">
   <a href="https://www.temu.com" class="card">Temu</a>
   <a href="https://www.aliexpress.com" class="card">AliExpress</a>
   <a href="https://www.alibaba.com" class="card">Alibaba</a>
@@ -201,7 +184,7 @@ ofertas.forEach((o,i)=>{
 
 <!-- GAMING -->
 <h2 class="section-title">Gaming Stores</h2>
-<div class="grid">
+<div class="grid reveal">
   <a href="https://store.steampowered.com" class="card">Steam</a>
   <a href="https://store.epicgames.com" class="card">Epic Games</a>
   <a href="https://www.g2a.com" class="card">G2A</a>
@@ -216,7 +199,7 @@ ofertas.forEach((o,i)=>{
 
 <!-- TECNOLOGÍA -->
 <h2 class="section-title">Tecnología Stores</h2>
-<div class="grid">
+<div class="grid reveal">
   <a href="https://www.bestbuy.com" class="card">Best Buy</a>
   <a href="https://www.newegg.com" class="card">Newegg</a>
   <a href="https://www.bhphotovideo.com" class="card">B&H Photo</a>
@@ -225,7 +208,7 @@ ofertas.forEach((o,i)=>{
 
 <!-- CALZADOS -->
 <h2 class="section-title">Calzados</h2>
-<div class="grid">
+<div class="grid reveal">
   <a href="https://www.nike.com" class="card">Nike</a>
   <a href="https://www.adidas.com" class="card">Adidas</a>
   <a href="https://www.puma.com" class="card">Puma</a>
@@ -236,7 +219,7 @@ ofertas.forEach((o,i)=>{
 
 <!-- HOTELES -->
 <h2 class="section-title">Hoteles y Vuelos</h2>
-<div class="grid">
+<div class="grid reveal">
   <a href="https://www.expedia.com" class="card">Expedia</a>
   <a href="https://www.booking.com" class="card">Booking</a>
   <a href="https://www.skyscanner.com" class="card">Skyscanner</a>
@@ -245,7 +228,7 @@ ofertas.forEach((o,i)=>{
 
 <!-- LENCERÍA -->
 <h2 class="section-title">Lencería & Moda Stores</h2>
-<div class="grid">
+<div class="grid reveal">
   <a href="https://www.victoriassecret.com" class="card">Victoria’s Secret</a>
   <a href="https://www.savagex.com" class="card">Savage X Fenty</a>
   <a href="https://www.adoreme.com" class="card">Adore Me</a>
@@ -257,6 +240,56 @@ ofertas.forEach((o,i)=>{
 <footer>
 © 2025 <strong>OfferView</strong> · Tu Ventana a Las Mejores Ofertas
 </footer>
+
+<script>
+const ofertas=[
+ {nombre:"Audífonos Inalámbricos",precio:"$29.99",tienda:"Temu",link:"https://www.temu.com",badge:"HOT",categoria:"tecnologia"},
+ {nombre:"Teclado Gamer Mecánico",precio:"$49.99",tienda:"AliExpress",link:"https://www.aliexpress.com",badge:"GAMER",categoria:"gaming"},
+ {nombre:"Zapatos Deportivos",precio:"$39.99",tienda:"Shein",link:"https://www.shein.com",badge:"OFERTA",categoria:"calzado"}
+];
+
+let favoritos=JSON.parse(localStorage.getItem("favoritos"))||[];
+let preferencias=JSON.parse(localStorage.getItem("preferencias"))||{};
+const cont=document.getElementById("ofertas");
+
+ofertas.forEach((o,i)=>{
+ const a=document.createElement("a");
+ a.href=o.link;
+ a.target="_blank";
+ a.className="card offer-card reveal";
+ a.innerHTML=`
+  <div class="badge">${o.badge}</div>
+  ${o.nombre}
+  <span>${o.precio} · ${o.tienda}</span>
+  <div class="favorite ${favoritos.includes(o.nombre)?"active":""}">❤</div>`;
+ a.querySelector(".favorite").onclick=e=>{
+  e.preventDefault();e.stopPropagation();
+  favoritos.includes(o.nombre)?favoritos=favoritos.filter(f=>f!==o.nombre):favoritos.push(o.nombre);
+  preferencias[o.categoria]=(preferencias[o.categoria]||0)+1;
+  localStorage.setItem("favoritos",JSON.stringify(favoritos));
+  localStorage.setItem("preferencias",JSON.stringify(preferencias));
+  e.target.classList.toggle("active");
+ };
+ cont.appendChild(a);
+});
+
+/* SLIDER */
+let idx=0;
+setInterval(()=>{
+ const card=document.querySelector(".offer-card");
+ if(!card)return;
+ const w=card.offsetWidth+16;
+ idx=(idx+1)%ofertas.length;
+ cont.style.transform=`translateX(-${idx*w}px)`;
+},4000);
+
+/* REVEAL */
+const reveal=()=>document.querySelectorAll(".reveal").forEach(e=>{
+ if(e.getBoundingClientRect().top<window.innerHeight-80)e.classList.add("active");
+});
+window.addEventListener("scroll",reveal);
+reveal();
+</script>
 
 </body>
 </html>
