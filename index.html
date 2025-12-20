@@ -12,144 +12,109 @@
   --bg:#F9FAFB;
   --text:#111827;
   --card:#ffffff;
-  --highlight:#FDE68A;
+  --shadow:rgba(0,0,0,0.12);
+  --hover-shadow:rgba(0,0,0,0.2);
 }
 
 /* BASE */
 body{
   margin:0;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background:var(--bg);
   color:var(--text);
 }
 
 header{
   text-align:center;
-  padding:40px 15px;
+  padding:50px 15px;
   background:linear-gradient(180deg,#0b1633,#0f1f45);
   color:#fff;
 }
 
 header h1{
   color:var(--primary);
-  font-size:36px;
-  margin-bottom:6px;
+  font-size:40px;
+  margin-bottom:10px;
 }
 
 header p{
   margin:0;
-  font-size:16px;
-  opacity:.95;
+  font-size:18px;
+  opacity:.9;
 }
 
 .section-title{
   text-align:center;
   color:var(--primary);
-  margin:45px 0 20px;
-  font-size:26px;
+  margin:50px 0 25px;
+  font-size:28px;
   font-weight:700;
 }
 
 /* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:16px;
-  padding:0 18px 35px;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+  padding:0 20px 50px;
 }
 
 .card{
   background:var(--card);
-  border-radius:16px;
-  padding:18px;
+  border-radius:20px;
+  padding:20px;
   text-align:center;
   text-decoration:none;
   color:var(--secondary);
   font-weight:700;
-  box-shadow:0 8px 22px rgba(0,0,0,0.06);
-  transition:.3s all;
+  box-shadow:0 8px 25px var(--shadow);
+  transition:.3s all ease;
   position:relative;
-  cursor:pointer;
+  overflow:hidden;
 }
 
-/* HOVER + REBOTE SUAVE */
 .card:hover{
-  transform:translateY(-6px) scale(1.05);
-  background:var(--primary);
-  color:#fff;
-  box-shadow:0 18px 36px rgba(0,0,0,0.18);
-}
-
-.popular{
-  animation:rebote 2s infinite;
-}
-
-/* OFERTAS */
-.offer-card{
-  border:2px solid var(--primary);
-}
-
-.offer-card span{
-  display:block;
-  font-size:14px;
-  font-weight:normal;
-  margin-top:6px;
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:0 15px 35px var(--hover-shadow);
+  background:linear-gradient(145deg,#fff3e0,#fff8f1);
+  color:var(--primary);
 }
 
 /* BADGES */
 .badge{
   position:absolute;
-  top:10px;
-  right:12px;
+  top:12px;
+  right:14px;
   background:#ef4444;
   color:#fff;
-  font-size:11px;
-  padding:4px 8px;
+  font-size:12px;
+  font-weight:600;
+  padding:5px 10px;
   border-radius:999px;
-  opacity:0;
-  transform:scale(0);
-  animation:badgeIn 0.4s forwards;
+  text-transform:uppercase;
 }
 
 /* FAVORITOS */
 .favorite{
   position:absolute;
-  bottom:10px;
-  right:12px;
-  font-size:16px;
+  bottom:12px;
+  right:14px;
+  font-size:18px;
   cursor:pointer;
-  opacity:.6;
-  transition:all .3s;
+  opacity:.7;
+  transition:.3s;
 }
-
 .favorite.active{
   color:#ef4444;
   opacity:1;
 }
 
-/* ANIMACIONES */
-@keyframes popIn{
-  0%{opacity:0; transform:translateY(20px) scale(0.9);}
-  100%{opacity:1; transform:translateY(0) scale(1);}
-}
-
-@keyframes badgeIn{
-  0%{opacity:0; transform:scale(0);}
-  100%{opacity:1; transform:scale(1);}
-}
-
-@keyframes rebote{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-8px);}
-}
-
 /* REVEAL */
 .reveal{
   opacity:0;
-  transform:translateY(25px);
+  transform:translateY(30px);
   transition:all .6s ease;
 }
-
 .reveal.active{
   opacity:1;
   transform:translateY(0);
@@ -158,28 +123,47 @@ header p{
 /* SLIDER */
 .slider{
   overflow:hidden;
-  padding:0 18px 35px;
+  padding:0 20px 40px;
 }
-
 .slider-track{
   display:flex;
-  gap:16px;
-  transition:transform .6s ease;
+  gap:20px;
+  transition:transform .5s ease;
 }
-
 .slider-track .card{
-  min-width:230px;
+  min-width:250px;
 }
 
+/* FILTROS */
+.filters{
+  text-align:center;
+  margin-bottom:30px;
+}
+.filters button{
+  background:#fff;
+  border:1px solid var(--primary);
+  color:var(--primary);
+  font-weight:700;
+  padding:8px 18px;
+  border-radius:999px;
+  cursor:pointer;
+  margin:0 6px 6px 0;
+  transition:.3s;
+}
+.filters button:hover{
+  background:var(--primary);
+  color:#fff;
+}
+
+/* FOOTER */
 footer{
   text-align:center;
-  padding:35px 15px;
+  padding:40px 15px;
   background:#eef2f7;
-  font-size:14px;
+  font-size:15px;
 }
 </style>
 </head>
-
 <body>
 
 <header>
@@ -187,179 +171,174 @@ footer{
   <p>Tu Ventana a Las Mejores Ofertas</p>
 </header>
 
-<!-- 🔥 OFERTAS DESTACADAS -->
+<!-- FILTROS -->
+<div class="filters">
+  <button data-cat="all">Todo</button>
+  <button data-cat="top">Top Stores</button>
+  <button data-cat="gaming">Gaming</button>
+  <button data-cat="tecnologia">Tecnología</button>
+  <button data-cat="calzado">Calzados</button>
+  <button data-cat="hoteles">Hoteles & Vuelos</button>
+  <button data-cat="moda">Lencería & Moda</button>
+</div>
+
+<!-- OFERTAS DESTACADAS SLIDER -->
 <h2 class="section-title">🔥 Ofertas Destacadas</h2>
 <div class="slider">
   <div class="slider-track" id="ofertas"></div>
 </div>
 
-<!-- SECCIONES -->
-<h2 class="section-title">Top Stores</h2>
-<div class="grid reveal" id="top-stores"></div>
-
-<h2 class="section-title">Gaming Stores</h2>
-<div class="grid reveal" id="gaming-stores"></div>
-
-<h2 class="section-title">Tecnología Stores</h2>
-<div class="grid reveal" id="tech-stores"></div>
-
-<h2 class="section-title">Calzados</h2>
-<div class="grid reveal" id="calzados-stores"></div>
-
-<h2 class="section-title">Hoteles y Vuelos</h2>
-<div class="grid reveal" id="hoteles-stores"></div>
-
-<h2 class="section-title">Lencería & Moda Stores</h2>
-<div class="grid reveal" id="lenceria-stores"></div>
+<!-- SECCIONES DE TIENDAS -->
+<div id="tiendas"></div>
 
 <footer>
 © 2025 <strong>OfferView</strong> · Tu Ventana a Las Mejores Ofertas
 </footer>
 
 <script>
-let favoritos=JSON.parse(localStorage.getItem("favoritos"))||[];
-let preferencias=JSON.parse(localStorage.getItem("preferencias"))||{};
+// Favoritos y preferencias
+let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+let preferencias = JSON.parse(localStorage.getItem("preferencias")) || {};
 
-/* Crear card */
-function crearCard(oferta){
-  const a=document.createElement("a");
-  a.href=oferta.link;
-  a.target="_blank";
-  a.className="card offer-card reveal";
-  
-  // Si la oferta es popular según preferencias, se le da animación rebote
-  if(preferencias[oferta.categoria]>=2){
-    a.classList.add("popular");
+// Ofertas iniciales
+const ofertas = [
+  { nombre:"Audífonos Inalámbricos", precio:"$29.99", tienda:"Temu", link:"https://www.temu.com", badge:"HOT", categoria:"tecnologia" },
+  { nombre:"Teclado Gamer Mecánico", precio:"$49.99", tienda:"AliExpress", link:"https://www.aliexpress.com", badge:"GAMER", categoria:"gaming" },
+  { nombre:"Zapatos Deportivos", precio:"$39.99", tienda:"Shein", link:"https://www.shein.com", badge:"OFERTA", categoria:"calzado" }
+];
+
+// Secciones con tiendas
+const secciones = {
+  top:[
+    {nombre:"Temu",link:"https://www.temu.com"},
+    {nombre:"AliExpress",link:"https://www.aliexpress.com"},
+    {nombre:"Alibaba",link:"https://www.alibaba.com"},
+    {nombre:"DHgate",link:"https://www.dhgate.com"},
+    {nombre:"Banggood",link:"https://www.banggood.com"},
+    {nombre:"LightInTheBox",link:"https://www.lightinthebox.com"},
+    {nombre:"Shein",link:"https://www.shein.com"},
+    {nombre:"Wish",link:"https://www.wish.com"},
+    {nombre:"Joom",link:"https://www.joom.com"},
+    {nombre:"Romwe",link:"https://www.romwe.com"},
+    {nombre:"MercadoLibre",link:"https://www.mercadolibre.com"},
+    {nombre:"Walmart",link:"https://www.walmart.com"}
+  ],
+  gaming:[
+    {nombre:"Steam",link:"https://store.steampowered.com"},
+    {nombre:"Epic Games",link:"https://store.epicgames.com"},
+    {nombre:"G2A",link:"https://www.g2a.com"},
+    {nombre:"Kinguin",link:"https://www.kinguin.net"},
+    {nombre:"Eneba",link:"https://www.eneba.com"},
+    {nombre:"Humble Bundle",link:"https://www.humblebundle.com"},
+    {nombre:"PlayStation Store",link:"https://store.playstation.com"},
+    {nombre:"Xbox Store",link:"https://www.xbox.com/store"},
+    {nombre:"Nintendo eShop",link:"https://www.nintendo.com/store"},
+    {nombre:"Battle.net",link:"https://shop.battle.net"}
+  ],
+  tecnologia:[
+    {nombre:"Best Buy",link:"https://www.bestbuy.com"},
+    {nombre:"Newegg",link:"https://www.newegg.com"},
+    {nombre:"B&H Photo",link:"https://www.bhphotovideo.com"},
+    {nombre:"Apple Store",link:"https://www.apple.com"}
+  ],
+  calzado:[
+    {nombre:"Nike",link:"https://www.nike.com"},
+    {nombre:"Adidas",link:"https://www.adidas.com"},
+    {nombre:"Puma",link:"https://www.puma.com"},
+    {nombre:"New Balance",link:"https://www.newbalance.com"},
+    {nombre:"Skechers",link:"https://www.skechers.com"},
+    {nombre:"Converse",link:"https://www.converse.com"}
+  ],
+  hoteles:[
+    {nombre:"Expedia",link:"https://www.expedia.com"},
+    {nombre:"Booking",link:"https://www.booking.com"},
+    {nombre:"Skyscanner",link:"https://www.skyscanner.com"},
+    {nombre:"Airbnb",link:"https://www.airbnb.com"}
+  ],
+  moda:[
+    {nombre:"Victoria’s Secret",link:"https://www.victoriassecret.com"},
+    {nombre:"Savage X Fenty",link:"https://www.savagex.com"},
+    {nombre:"Adore Me",link:"https://www.adoreme.com"},
+    {nombre:"ThirdLove",link:"https://www.thirdlove.com"},
+    {nombre:"Zaful",link:"https://www.zaful.com"},
+    {nombre:"YesStyle",link:"https://www.yesstyle.com"}
+  ]
+};
+
+// Función para renderizar tiendas
+function renderTiendas(categoria){
+  const container = document.getElementById("tiendas");
+  container.innerHTML = "";
+  for(const cat in secciones){
+    if(categoria !== "all" && categoria !== cat) continue;
+    container.innerHTML += `<h2 class="section-title">${cat.charAt(0).toUpperCase()+cat.slice(1)}</h2>`;
+    const grid = document.createElement("div");
+    grid.className="grid reveal";
+    secciones[cat].forEach(t=>{
+      const a=document.createElement("a");
+      a.href=t.link;
+      a.target="_blank";
+      a.className="card";
+      a.textContent=t.nombre;
+      grid.appendChild(a);
+    });
+    container.appendChild(grid);
   }
-
-  a.innerHTML=`
-    <div class="badge">${oferta.badge||''}</div>
-    ${oferta.nombre}
-    <span>${oferta.precio} · ${oferta.tienda}</span>
-    <div class="favorite ${favoritos.includes(oferta.nombre)?"active":""}">❤</div>
-  `;
-
-  a.querySelector(".favorite").onclick=e=>{
-    e.preventDefault();e.stopPropagation();
-    favoritos.includes(oferta.nombre)?
-      favoritos=favoritos.filter(f=>f!==oferta.nombre):
-      favoritos.push(oferta.nombre);
-    preferencias[oferta.categoria]=(preferencias[oferta.categoria]||0)+1;
-    localStorage.setItem("favoritos",JSON.stringify(favoritos));
-    localStorage.setItem("preferencias",JSON.stringify(preferencias));
-    e.target.classList.toggle("active");
-  };
-  return a;
 }
 
-/* IA: cargar ofertas desde backend */
+// Filtros
+document.querySelectorAll(".filters button").forEach(btn=>{
+  btn.addEventListener("click",()=> renderTiendas(btn.dataset.cat));
+});
+
+// Cargar ofertas IA y slider
+async function obtenerOfertasIA(){
+  return [
+    { nombre:"Auriculares Bluetooth 5.2", precio:"$24.99", tienda:"AliExpress", link:"https://www.aliexpress.com/item/123", badge:"HOT", categoria:"tecnologia" },
+    { nombre:"Silla Gamer Ergonomica", precio:"$89.99", tienda:"Steam", link:"https://store.steampowered.com/item/456", badge:"GAMER", categoria:"gaming" },
+    { nombre:"Zapatillas Running", precio:"$45.99", tienda:"Nike", link:"https://www.nike.com/item/789", badge:"OFERTA", categoria:"calzado" }
+  ];
+}
+
+const cont = document.getElementById("ofertas");
 async function cargarOfertas(){
-  try{
-    const res=await fetch("http://localhost:3000/api/ofertas-destacadas");
-    const data=await res.json();
-    const cont=document.getElementById("ofertas");
-    cont.innerHTML='';
-    data.forEach(o=>cont.appendChild(crearCard(o)));
-  }catch(e){
-    console.error("No se pudo cargar la IA:", e);
-  }
-}
-
-/* Cargar stores */
-function cargarStores(id, lista){
-  const cont=document.getElementById(id);
-  lista.forEach(s=>{
-    const a=document.createElement("a");
-    a.href=s.link;
+  const iaOfertas = await obtenerOfertasIA();
+  const todasOfertas = [...ofertas,...iaOfertas];
+  todasOfertas.forEach(o=>{
+    const a = document.createElement("a");
+    a.href = o.link;
     a.target="_blank";
-    a.className="card reveal";
-    a.textContent=s.nombre;
+    a.className = "card offer-card reveal";
+    a.innerHTML = `<div class="badge">${o.badge}</div>${o.nombre}<span>${o.precio} · ${o.tienda}</span><div class="favorite ${favoritos.includes(o.nombre)?"active":""}">❤</div>`;
+    a.querySelector(".favorite").onclick = e=>{
+      e.preventDefault(); e.stopPropagation();
+      favoritos.includes(o.nombre)?favoritos=favoritos.filter(f=>f!==o.nombre):favoritos.push(o.nombre);
+      preferencias[o.categoria]=(preferencias[o.categoria]||0)+1;
+      localStorage.setItem("favoritos",JSON.stringify(favoritos));
+      localStorage.setItem("preferencias",JSON.stringify(preferencias));
+      e.target.classList.toggle("active");
+    };
     cont.appendChild(a);
   });
 }
 
-/* Inicialización */
-document.addEventListener("DOMContentLoaded",()=>{
-  cargarOfertas();
-
-  cargarStores("top-stores",[
-    {nombre:"Temu", link:"https://www.temu.com"},
-    {nombre:"AliExpress", link:"https://www.aliexpress.com"},
-    {nombre:"Alibaba", link:"https://www.alibaba.com"},
-    {nombre:"DHgate", link:"https://www.dhgate.com"},
-    {nombre:"Banggood", link:"https://www.banggood.com"},
-    {nombre:"LightInTheBox", link:"https://www.lightinthebox.com"},
-    {nombre:"Shein", link:"https://www.shein.com"},
-    {nombre:"Wish", link:"https://www.wish.com"},
-    {nombre:"Joom", link:"https://www.joom.com"},
-    {nombre:"Romwe", link:"https://www.romwe.com"},
-    {nombre:"MercadoLibre", link:"https://www.mercadolibre.com"},
-    {nombre:"Walmart", link:"https://www.walmart.com"}
-  ]);
-
-  cargarStores("gaming-stores",[
-    {nombre:"Steam", link:"https://store.steampowered.com"},
-    {nombre:"Epic Games", link:"https://store.epicgames.com"},
-    {nombre:"G2A", link:"https://www.g2a.com"},
-    {nombre:"Kinguin", link:"https://www.kinguin.net"},
-    {nombre:"Eneba", link:"https://www.eneba.com"},
-    {nombre:"Humble Bundle", link:"https://www.humblebundle.com"},
-    {nombre:"PlayStation Store", link:"https://store.playstation.com"},
-    {nombre:"Xbox Store", link:"https://www.xbox.com/store"},
-    {nombre:"Nintendo eShop", link:"https://www.nintendo.com/store"},
-    {nombre:"Battle.net", link:"https://shop.battle.net"}
-  ]);
-
-  cargarStores("tech-stores",[
-    {nombre:"Best Buy", link:"https://www.bestbuy.com"},
-    {nombre:"Newegg", link:"https://www.newegg.com"},
-    {nombre:"B&H Photo", link:"https://www.bhphotovideo.com"},
-    {nombre:"Apple Store", link:"https://www.apple.com"}
-  ]);
-
-  cargarStores("calzados-stores",[
-    {nombre:"Nike", link:"https://www.nike.com"},
-    {nombre:"Adidas", link:"https://www.adidas.com"},
-    {nombre:"Puma", link:"https://www.puma.com"},
-    {nombre:"New Balance", link:"https://www.newbalance.com"},
-    {nombre:"Skechers", link:"https://www.skechers.com"},
-    {nombre:"Converse", link:"https://www.converse.com"}
-  ]);
-
-  cargarStores("hoteles-stores",[
-    {nombre:"Expedia", link:"https://www.expedia.com"},
-    {nombre:"Booking", link:"https://www.booking.com"},
-    {nombre:"Skyscanner", link:"https://www.skyscanner.com"},
-    {nombre:"Airbnb", link:"https://www.airbnb.com"}
-  ]);
-
-  cargarStores("lenceria-stores",[
-    {nombre:"Victoria’s Secret", link:"https://www.victoriassecret.com"},
-    {nombre:"Savage X Fenty", link:"https://www.savagex.com"},
-    {nombre:"Adore Me", link:"https://www.adoreme.com"},
-    {nombre:"ThirdLove", link:"https://www.thirdlove.com"},
-    {nombre:"Zaful", link:"https://www.zaful.com"},
-    {nombre:"YesStyle", link:"https://www.yesstyle.com"}
-  ]);
-});
-
-/* Slider dinámico */
+// Slider automático
 let idx=0;
 setInterval(()=>{
-  const cont=document.querySelector(".slider-track");
   const card=document.querySelector(".offer-card");
-  if(!cont||!card) return;
-  const w=card.offsetWidth+16;
-  idx=(idx+1)%document.querySelectorAll(".offer-card").length;
+  if(!card) return;
+  const w=card.offsetWidth+20;
+  idx=(idx+1)%cont.children.length;
   cont.style.transform=`translateX(-${idx*w}px)`;
 },4000);
 
-/* Reveal scroll */
+// Reveal scroll
 const reveal=()=>document.querySelectorAll(".reveal").forEach(e=>{
   if(e.getBoundingClientRect().top<window.innerHeight-80)e.classList.add("active");
 });
 window.addEventListener("scroll",reveal);
-reveal();
+window.addEventListener("load",()=>{ reveal(); cargarOfertas(); renderTiendas("all"); });
 </script>
+
 </body>
 </html>
