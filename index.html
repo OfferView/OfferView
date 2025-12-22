@@ -12,9 +12,6 @@
   --bg:#F9FAFB;
   --text:#111827;
   --card:#ffffff;
-  --hot:#ef4444;
-  --gamer:#10b981;
-  --oferta:#3b82f6;
 }
 
 /* BASE */
@@ -69,21 +66,19 @@ header p{
   color:var(--secondary);
   font-weight:700;
   box-shadow:0 8px 22px rgba(0,0,0,0.06);
-  transition:.3s;
+  transition:.25s;
   position:relative;
 }
 
 .card:hover{
   background:var(--primary);
   color:#fff;
-  transform:translateY(-6px);
-  box-shadow:0 14px 30px rgba(0,0,0,0.12);
+  transform:translateY(-4px);
 }
 
 /* OFERTAS */
 .offer-card{
   border:2px solid var(--primary);
-  min-width:200px;
 }
 
 .offer-card span{
@@ -98,15 +93,12 @@ header p{
   position:absolute;
   top:10px;
   right:12px;
+  background:#ef4444;
   color:#fff;
   font-size:11px;
   padding:4px 8px;
   border-radius:999px;
 }
-
-.badge.HOT{ background:var(--hot);}
-.badge.GAMER{ background:var(--gamer);}
-.badge.OFERTA{ background:var(--oferta);}
 
 /* FAVORITOS */
 .favorite{
@@ -175,34 +167,99 @@ footer{
 
 <!-- TOP STORES -->
 <h2 class="section-title">Top Stores</h2>
-<div class="grid reveal" id="top-stores"></div>
+<div class="grid reveal">
+  <a href="https://www.amazon.com" class="card">Amazon</a>
+  <a href="https://www.temu.com" class="card">Temu</a>
+  <a href="https://www.aliexpress.com" class="card">AliExpress</a>
+  <a href="https://www.alibaba.com" class="card">Alibaba</a>
+  <a href="https://www.ebay.com" class="card">eBay</a>
+  <a href="https://www.costco.com" class="card">Costco</a>
+  <a href="https://www.banggood.com" class="card">Banggood</a>
+  <a href="https://www.lightinthebox.com" class="card">LightInTheBox</a>
+  <a href="https://www.shein.com" class="card">Shein</a>
+  <a href="https://www.wish.com" class="card">Wish</a>
+  <a href="https://www.joom.com" class="card">Joom</a>
+  <a href="https://www.romwe.com" class="card">Romwe</a>
+  <a href="https://www.mercadolibre.com" class="card">MercadoLibre</a>
+  <a href="https://www.walmart.com" class="card">Walmart</a>
+  <a href="https://www.miniso.com" class="card">Miniso</a>
+  <a href="https://www.jd.com" class="card">JD.com</a>
+  <a href="https://www.taobao.com" class="card">Taobao</a>
+  <a href="https://www.tmall.com" class="card">Tmall</a>
+  <a href="https://www.rakuten.co.jp" class="card">Rakuten</a>
+  <a href="https://www.yahoo.co.jp" class="card">Yahoo Japan</a>
+  <a href="https://www.mercari.com/jp" class="card">Mercari</a>
+  <a href="https://zozo.jp" class="card">ZOZOTOWN</a>
+  <a href="https://www.biccamera.com" class="card">Bic Camera</a>
+  <a href="https://www.yodobashi.com" class="card">Yodobashi</a>
+  <a href="https://www.nitori-net.jp" class="card">Nitori</a>
+  <a href="https://www.vip.com" class="card">VIP.com</a>
+  <a href="https://www.ikea.com" class="card">IKEA</a>
+  <a href="https://www.marshalls.com" class="card">Marshall</a>
+  <a href="https://www.burlington.com" class="card">Burlington</a>
+</div>
 
 <!-- GAMING -->
 <h2 class="section-title">Gaming Stores</h2>
-<div class="grid reveal" id="gaming-stores"></div>
+<div class="grid reveal">
+  <a href="https://store.steampowered.com" class="card">Steam</a>
+  <a href="https://store.epicgames.com" class="card">Epic Games</a>
+  <a href="https://www.g2a.com" class="card">G2A</a>
+  <a href="https://www.kinguin.net" class="card">Kinguin</a>
+  <a href="https://www.eneba.com" class="card">Eneba</a>
+  <a href="https://www.humblebundle.com" class="card">Humble Bundle</a>
+  <a href="https://store.playstation.com" class="card">PlayStation Store</a>
+  <a href="https://www.xbox.com/store" class="card">Xbox Store</a>
+  <a href="https://www.nintendo.com/store" class="card">Nintendo eShop</a>
+  <a href="https://shop.battle.net" class="card">Battle.net</a>
+</div>
 
 <!-- TECNOLOGÍA -->
 <h2 class="section-title">Tecnología Stores</h2>
-<div class="grid reveal" id="tech-stores"></div>
+<div class="grid reveal">
+  <a href="https://www.bestbuy.com" class="card">Best Buy</a>
+  <a href="https://www.newegg.com" class="card">Newegg</a>
+  <a href="https://www.bhphotovideo.com" class="card">B&H Photo</a>
+  <a href="https://www.apple.com" class="card">Apple Store</a>
+</div>
 
 <!-- CALZADOS -->
 <h2 class="section-title">Calzados</h2>
-<div class="grid reveal" id="shoe-stores"></div>
+<div class="grid reveal">
+  <a href="https://www.nike.com" class="card">Nike</a>
+  <a href="https://www.adidas.com" class="card">Adidas</a>
+  <a href="https://www.puma.com" class="card">Puma</a>
+  <a href="https://www.newbalance.com" class="card">New Balance</a>
+  <a href="https://www.skechers.com" class="card">Skechers</a>
+  <a href="https://www.converse.com" class="card">Converse</a>
+</div>
 
 <!-- HOTELES -->
 <h2 class="section-title">Hoteles y Vuelos</h2>
-<div class="grid reveal" id="hotel-stores"></div>
+<div class="grid reveal">
+  <a href="https://www.expedia.com" class="card">Expedia</a>
+  <a href="https://www.booking.com" class="card">Booking</a>
+  <a href="https://www.skyscanner.com" class="card">Skyscanner</a>
+  <a href="https://www.airbnb.com" class="card">Airbnb</a>
+</div>
 
 <!-- LENCERÍA -->
 <h2 class="section-title">Lencería & Moda Stores</h2>
-<div class="grid reveal" id="fashion-stores"></div>
+<div class="grid reveal">
+  <a href="https://www.victoriassecret.com" class="card">Victoria’s Secret</a>
+  <a href="https://www.savagex.com" class="card">Savage X Fenty</a>
+  <a href="https://www.adoreme.com" class="card">Adore Me</a>
+  <a href="https://www.thirdlove.com" class="card">ThirdLove</a>
+  <a href="https://www.zaful.com" class="card">Zaful</a>
+  <a href="https://www.yesstyle.com" class="card">YesStyle</a>
+</div>
 
 <footer>
 © 2025 <strong>OfferView</strong> · Tu Ventana a Las Mejores Ofertas
 </footer>
 
 <script>
-// === OFERTAS DESTACADAS (IA REAL SIMPLIFICADA) ===
+// OFERTAS DESTACADAS
 const ofertas=[
  {nombre:"Audífonos Inalámbricos",precio:"$29.99",tienda:"Temu",link:"https://www.temu.com",badge:"HOT",categoria:"tecnologia"},
  {nombre:"Teclado Gamer Mecánico",precio:"$49.99",tienda:"AliExpress",link:"https://www.aliexpress.com",badge:"GAMER",categoria:"gaming"},
@@ -219,7 +276,7 @@ ofertas.forEach((o,i)=>{
  a.target="_blank";
  a.className="card offer-card reveal";
  a.innerHTML=`
-  <div class="badge ${o.badge}">${o.badge}</div>
+  <div class="badge">${o.badge}</div>
   ${o.nombre}
   <span>${o.precio} · ${o.tienda}</span>
   <div class="favorite ${favoritos.includes(o.nombre)?"active":""}">❤</div>`;
@@ -234,7 +291,7 @@ ofertas.forEach((o,i)=>{
  cont.appendChild(a);
 });
 
-// === SLIDER AUTOMÁTICO ===
+// SLIDER
 let idx=0;
 setInterval(()=>{
  const card=document.querySelector(".offer-card");
@@ -244,58 +301,12 @@ setInterval(()=>{
  cont.style.transform=`translateX(-${idx*w}px)`;
 },4000);
 
-// === REVEAL ===
+// REVEAL
 const reveal=()=>document.querySelectorAll(".reveal").forEach(e=>{
  if(e.getBoundingClientRect().top<window.innerHeight-80)e.classList.add("active");
 });
 window.addEventListener("scroll",reveal);
 reveal();
-
-// === TIENDAS POR SECCIÓN ===
-const topStores=[
- "Temu","AliExpress","Alibaba","DHgate","Banggood","LightInTheBox","Shein","Wish","Joom","Romwe","MercadoLibre","Walmart","Miniso","Dollar Tree","Marshalls","Burlington"
-];
-
-const gamingStores=[
- "Steam","Epic Games","G2A","Kinguin","Eneba","Humble Bundle","PlayStation Store","Xbox Store","Nintendo eShop","Battle.net"
-];
-
-const techStores=[
- "Best Buy","Newegg","B&H Photo","Apple Store"
-];
-
-const shoeStores=[
- "Nike","Adidas","Puma","New Balance","Skechers","Converse"
-];
-
-const hotelStores=[
- "Expedia","Booking","Skyscanner","Airbnb"
-];
-
-const fashionStores=[
- "Victoria’s Secret","Savage X Fenty","Adore Me","ThirdLove","Zaful","YesStyle"
-];
-
-const secciones=[
- {id:"top-stores",data:topStores},
- {id:"gaming-stores",data:gamingStores},
- {id:"tech-stores",data:techStores},
- {id:"shoe-stores",data:shoeStores},
- {id:"hotel-stores",data:hotelStores},
- {id:"fashion-stores",data:fashionStores}
-];
-
-secciones.forEach(sec=>{
- const cont=document.getElementById(sec.id);
- sec.data.forEach(t=>{
-   const a=document.createElement("a");
-   a.href="#"; // Puedes agregar links reales aquí
-   a.target="_blank";
-   a.className="card reveal";
-   a.textContent=t;
-   cont.appendChild(a);
- });
-});
 </script>
 
 </body>
