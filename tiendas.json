@@ -1,0 +1,71 @@
+{
+  "topStores": [
+    { "nombre": "Amazon", "link": "https://www.amazon.com", "pais": "Global", "tipo": "marketplace" },
+    { "nombre": "eBay", "link": "https://www.ebay.com", "pais": "Global", "tipo": "marketplace" },
+    { "nombre": "Alibaba", "link": "https://www.alibaba.com", "pais": "China", "tipo": "b2b" },
+    { "nombre": "AliExpress", "link": "https://www.aliexpress.com", "pais": "China", "tipo": "marketplace" },
+    { "nombre": "Temu", "link": "https://www.temu.com", "pais": "China", "tipo": "marketplace" },
+    { "nombre": "JD.com", "link": "https://www.jd.com", "pais": "China", "tipo": "marketplace" },
+    { "nombre": "Taobao", "link": "https://www.taobao.com", "pais": "China", "tipo": "marketplace" },
+    { "nombre": "Tmall", "link": "https://www.tmall.com", "pais": "China", "tipo": "marketplace" },
+    { "nombre": "Rakuten", "link": "https://www.rakuten.co.jp", "pais": "Japón", "tipo": "marketplace" },
+    { "nombre": "Yahoo Shopping JP", "link": "https://shopping.yahoo.co.jp", "pais": "Japón", "tipo": "marketplace" },
+    { "nombre": "MercadoLibre", "link": "https://www.mercadolibre.com", "pais": "LatAm", "tipo": "marketplace" },
+    { "nombre": "Walmart", "link": "https://www.walmart.com", "pais": "USA", "tipo": "retail" },
+    { "nombre": "Costco", "link": "https://www.costco.com", "pais": "USA", "tipo": "retail" },
+    { "nombre": "IKEA", "link": "https://www.ikea.com", "pais": "Suecia", "tipo": "retail" },
+    { "nombre": "Marshall's", "link": "https://www.marshalls.com", "pais": "USA", "tipo": "retail" },
+    { "nombre": "Burlington", "link": "https://www.burlington.com", "pais": "USA", "tipo": "retail" },
+    { "nombre": "Miniso", "link": "https://www.miniso.com", "pais": "Japón", "tipo": "retail" }
+  ],
+
+  "gaming": [
+    { "nombre": "Steam", "link": "https://store.steampowered.com" },
+    { "nombre": "Epic Games", "link": "https://store.epicgames.com" },
+    { "nombre": "G2A", "link": "https://www.g2a.com" },
+    { "nombre": "Kinguin", "link": "https://www.kinguin.net" },
+    { "nombre": "Eneba", "link": "https://www.eneba.com" },
+    { "nombre": "Humble Bundle", "link": "https://www.humblebundle.com" },
+    { "nombre": "PlayStation Store", "link": "https://store.playstation.com" },
+    { "nombre": "Xbox Store", "link": "https://www.xbox.com/store" },
+    { "nombre": "Nintendo eShop", "link": "https://www.nintendo.com/store" },
+    { "nombre": "Battle.net", "link": "https://shop.battle.net" }
+  ],
+
+  "technology": [
+    { "nombre": "Best Buy", "link": "https://www.bestbuy.com" },
+    { "nombre": "Newegg", "link": "https://www.newegg.com" },
+    { "nombre": "B&H Photo", "link": "https://www.bhphotovideo.com" },
+    { "nombre": "Apple Store", "link": "https://www.apple.com" },
+    { "nombre": "Samsung", "link": "https://www.samsung.com" },
+    { "nombre": "Xiaomi", "link": "https://www.mi.com" },
+    { "nombre": "Sony", "link": "https://www.sony.com" }
+  ],
+
+  "calzado": [
+    { "nombre": "Nike", "link": "https://www.nike.com" },
+    { "nombre": "Adidas", "link": "https://www.adidas.com" },
+    { "nombre": "Puma", "link": "https://www.puma.com" },
+    { "nombre": "New Balance", "link": "https://www.newbalance.com" },
+    { "nombre": "Skechers", "link": "https://www.skechers.com" },
+    { "nombre": "Converse", "link": "https://www.converse.com" }
+  ],
+
+  "moda": [
+    { "nombre": "Shein", "link": "https://www.shein.com" },
+    { "nombre": "Zara", "link": "https://www.zara.com" },
+    { "nombre": "H&M", "link": "https://www.hm.com" },
+    { "nombre": "Uniqlo", "link": "https://www.uniqlo.com" },
+    { "nombre": "Victoria’s Secret", "link": "https://www.victoriassecret.com" },
+    { "nombre": "Savage X Fenty", "link": "https://www.savagex.com" },
+    { "nombre": "YesStyle", "link": "https://www.yesstyle.com" }
+  ],
+
+  "hotelesVuelos": [
+    { "nombre": "Booking", "link": "https://www.booking.com" },
+    { "nombre": "Expedia", "link": "https://www.expedia.com" },
+    { "nombre": "Skyscanner", "link": "https://www.skyscanner.com" },
+    { "nombre": "Airbnb", "link": "https://www.airbnb.com" },
+    { "nombre": "Agoda", "link": "https://www.agoda.com" }
+  ]
+}
