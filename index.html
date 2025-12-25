@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OfferView – Directorio Global de Tiendas y Ofertas</title>
 
 <!-- SEO BÁSICO -->
-<title>OfferView | Directorio Global de Tiendas y Ofertas Online</title>
-<meta name="description" content="OfferView es un directorio global que reúne las tiendas online más visitadas del mundo: tecnología, moda, gaming, viajes y más.">
-<meta name="keywords" content="ofertas, tiendas online, ecommerce, directorio de tiendas, compras online, descuentos">
+<meta name="description" content="OfferView es un directorio global donde encuentras Amazon, Temu, AliExpress, tiendas chinas, japonesas, gaming, tecnología, moda, hoteles y vuelos en un solo lugar.">
+<meta name="keywords" content="ofertas, tiendas online, Amazon, Temu, AliExpress, tiendas chinas, tiendas japonesas, gaming, vuelos, hoteles">
 <meta name="author" content="OfferView">
-<link rel="canonical" href="https://www.offerview.com">
+<meta name="robots" content="index, follow">
 
 <style>
 :root{
@@ -19,31 +19,37 @@
   --text:#111827;
   --card:#ffffff;
 }
+
 body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
   background:var(--bg);
   color:var(--text);
 }
+
 header{
   text-align:center;
   padding:40px 15px;
   background:linear-gradient(180deg,#0b1633,#0f1f45);
   color:#fff;
 }
+
 header h1{
   color:var(--primary);
   font-size:36px;
   margin-bottom:6px;
 }
+
 header p{
   margin:0;
   font-size:16px;
   opacity:.95;
 }
+
 .lang-switch{
   margin-top:15px;
 }
+
 .lang-switch button{
   background:#1f2937;
   color:#fff;
@@ -53,6 +59,7 @@ header p{
   border-radius:8px;
   cursor:pointer;
 }
+
 .section-title{
   text-align:center;
   color:var(--primary);
@@ -60,12 +67,14 @@ header p{
   font-size:26px;
   font-weight:700;
 }
+
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
   gap:16px;
   padding:0 18px 35px;
 }
+
 .card{
   background:var(--card);
   border-radius:16px;
@@ -76,12 +85,15 @@ header p{
   font-weight:700;
   box-shadow:0 8px 22px rgba(0,0,0,0.06);
   transition:.25s;
+  cursor:pointer;
 }
+
 .card:hover{
   background:var(--primary);
   color:#fff;
   transform:translateY(-4px);
 }
+
 footer{
   text-align:center;
   padding:35px 15px;
@@ -95,7 +107,7 @@ footer{
 
 <header>
   <h1>OFFERVIEW</h1>
-  <p id="slogan">Tu Ventana a las Mejores Tiendas Online</p>
+  <p id="slogan">Tu Ventana a Las Mejores Ofertas</p>
   <div class="lang-switch">
     <button onclick="setLang('es')">ES</button>
     <button onclick="setLang('en')">EN</button>
@@ -108,7 +120,7 @@ footer{
 <h2 class="section-title" data-i18n="gaming">Gaming Stores</h2>
 <div class="grid" id="gaming"></div>
 
-<h2 class="section-title" data-i18n="tech">Tecnología</h2>
+<h2 class="section-title" data-i18n="tech">Tecnología Stores</h2>
 <div class="grid" id="tech"></div>
 
 <h2 class="section-title" data-i18n="shoes">Calzados</h2>
@@ -117,44 +129,49 @@ footer{
 <h2 class="section-title" data-i18n="travel">Hoteles y Vuelos</h2>
 <div class="grid" id="travel"></div>
 
-<h2 class="section-title" data-i18n="fashion">Moda y Lencería</h2>
+<h2 class="section-title" data-i18n="fashion">Lencería & Moda</h2>
 <div class="grid" id="fashion"></div>
 
 <footer>
-© 2025 <strong>OfferView</strong> · Directorio Global de Ecommerce
+© 2025 <strong>OfferView</strong> · Directorio Global de Tiendas
 </footer>
 
 <script>
-/* ================= IA REAL (aprendizaje por comportamiento) ================= */
-function track(category, store){
-  let data = JSON.parse(localStorage.getItem("offerview_ai")) || {};
-  data[category] = (data[category] || 0) + 1;
-  localStorage.setItem("offerview_ai", JSON.stringify(data));
-}
+/* ==========================
+   IA REAL (aprende del usuario)
+========================== */
+const IA = {
+  track(category, store){
+    let data = JSON.parse(localStorage.getItem("ia_data")) || {};
+    data[category] = (data[category] || 0) + 1;
+    localStorage.setItem("ia_data", JSON.stringify(data));
+  }
+};
 
-/* ================= DIRECTORIO GLOBAL COMPLETO ================= */
+/* ==========================
+   TIENDAS (AMPLIADAS)
+========================== */
 const STORES = {
   top:[
     ["Amazon","https://www.amazon.com"],
-    ["Walmart","https://www.walmart.com"],
-    ["eBay","https://www.ebay.com"],
-    ["Costco","https://www.costco.com"],
-    ["Target","https://www.target.com"],
-    ["IKEA","https://www.ikea.com"],
-    ["MercadoLibre","https://www.mercadolibre.com"],
+    ["Temu","https://www.temu.com"],
     ["AliExpress","https://www.aliexpress.com"],
     ["Alibaba","https://www.alibaba.com"],
-    ["Temu","https://www.temu.com"],
+    ["eBay","https://www.ebay.com"],
+    ["Costco","https://www.costco.com"],
+    ["Walmart","https://www.walmart.com"],
+    ["IKEA","https://www.ikea.com"],
+    ["Marshalls","https://www.marshalls.com"],
+    ["Burlington","https://www.burlington.com"],
     ["JD.com","https://www.jd.com"],
     ["Taobao","https://www.taobao.com"],
     ["Tmall","https://www.tmall.com"],
     ["Miniso","https://www.miniso.com"],
     ["Rakuten","https://www.rakuten.co.jp"],
     ["Mercari","https://www.mercari.com/jp"],
-    ["Shopee","https://shopee.com"],
-    ["Lazada","https://www.lazada.com"],
-    ["Marshalls","https://www.marshalls.com"],
-    ["Burlington","https://www.burlington.com"]
+    ["Banggood","https://www.banggood.com"],
+    ["Shein","https://www.shein.com"],
+    ["LightInTheBox","https://www.lightinthebox.com"]
   ],
   gaming:[
     ["Steam","https://store.steampowered.com"],
@@ -163,66 +180,55 @@ const STORES = {
     ["Xbox Store","https://www.xbox.com/store"],
     ["Nintendo eShop","https://www.nintendo.com/store"],
     ["G2A","https://www.g2a.com"],
-    ["Kinguin","https://www.kinguin.net"],
-    ["Eneba","https://www.eneba.com"],
-    ["Battle.net","https://shop.battle.net"]
+    ["Eneba","https://www.eneba.com"]
   ],
   tech:[
-    ["Apple","https://www.apple.com"],
-    ["Samsung","https://www.samsung.com"],
-    ["Xiaomi","https://www.mi.com"],
-    ["Sony","https://www.sony.com"],
-    ["Dell","https://www.dell.com"],
-    ["HP","https://www.hp.com"],
-    ["Lenovo","https://www.lenovo.com"],
+    ["Best Buy","https://www.bestbuy.com"],
     ["Newegg","https://www.newegg.com"],
+    ["Apple","https://www.apple.com"],
     ["B&H Photo","https://www.bhphotovideo.com"],
-    ["Best Buy","https://www.bestbuy.com"]
+    ["Xiaomi","https://www.mi.com"]
   ],
   shoes:[
     ["Nike","https://www.nike.com"],
     ["Adidas","https://www.adidas.com"],
     ["Puma","https://www.puma.com"],
     ["New Balance","https://www.newbalance.com"],
-    ["Skechers","https://www.skechers.com"],
-    ["Converse","https://www.converse.com"],
-    ["Vans","https://www.vans.com"],
-    ["Reebok","https://www.reebok.com"]
+    ["Skechers","https://www.skechers.com"]
   ],
   travel:[
     ["Booking","https://www.booking.com"],
     ["Expedia","https://www.expedia.com"],
-    ["Airbnb","https://www.airbnb.com"],
     ["Skyscanner","https://www.skyscanner.com"],
-    ["Kayak","https://www.kayak.com"],
-    ["Agoda","https://www.agoda.com"],
-    ["Trip.com","https://www.trip.com"]
+    ["Airbnb","https://www.airbnb.com"],
+    ["Kayak","https://www.kayak.com"]
   ],
   fashion:[
-    ["Shein","https://www.shein.com"],
-    ["Zara","https://www.zara.com"],
-    ["H&M","https://www.hm.com"],
-    ["Uniqlo","https://www.uniqlo.com"],
     ["Victoria’s Secret","https://www.victoriassecret.com"],
     ["Savage X Fenty","https://www.savagex.com"],
     ["YesStyle","https://www.yesstyle.com"],
-    ["ASOS","https://www.asos.com"]
+    ["Zaful","https://www.zaful.com"],
+    ["Romwe","https://www.romwe.com"]
   ]
 };
 
-/* ================= RENDER ================= */
-function render(id,list,cat){
-  const box=document.getElementById(id);
+/* ==========================
+   RENDER (FIX ANDROID)
+========================== */
+function render(id, list, category){
+  const box = document.getElementById(id);
   list.forEach(s=>{
-    const a=document.createElement("a");
-    a.href=s[1];
-    a.target="_blank";
-    a.className="card";
-    a.textContent=s[0];
-    a.onclick=()=>track(cat,s[0]);
+    const a = document.createElement("div");
+    a.className = "card";
+    a.textContent = s[0];
+    a.onclick = ()=>{
+      IA.track(category, s[0]);
+      window.location.assign(s[1]); // FIX DEFINITIVO ANDROID
+    };
     box.appendChild(a);
   });
 }
+
 render("topStores",STORES.top,"top");
 render("gaming",STORES.gaming,"gaming");
 render("tech",STORES.tech,"tech");
@@ -230,27 +236,39 @@ render("shoes",STORES.shoes,"shoes");
 render("travel",STORES.travel,"travel");
 render("fashion",STORES.fashion,"fashion");
 
-/* ================= MULTIIDIOMA ================= */
+/* ==========================
+   MULTIIDIOMA
+========================== */
 const LANG={
- es:{
-  slogan:"Tu Ventana a las Mejores Tiendas Online",
-  top:"Top Stores",gaming:"Gaming Stores",tech:"Tecnología",
-  shoes:"Calzados",travel:"Hoteles y Vuelos",fashion:"Moda y Lencería"
- },
- en:{
-  slogan:"Your Window to the Best Online Stores",
-  top:"Top Stores",gaming:"Gaming Stores",tech:"Technology",
-  shoes:"Shoes",travel:"Hotels & Flights",fashion:"Fashion & Lingerie"
- }
+  es:{
+    slogan:"Tu Ventana a Las Mejores Ofertas",
+    top:"Top Stores",
+    gaming:"Gaming Stores",
+    tech:"Tecnología Stores",
+    shoes:"Calzados",
+    travel:"Hoteles y Vuelos",
+    fashion:"Lencería & Moda"
+  },
+  en:{
+    slogan:"Your Window to the Best Deals",
+    top:"Top Stores",
+    gaming:"Gaming Stores",
+    tech:"Tech Stores",
+    shoes:"Shoes",
+    travel:"Hotels & Flights",
+    fashion:"Fashion & Lingerie"
+  }
 };
+
 function setLang(l){
- document.getElementById("slogan").textContent=LANG[l].slogan;
- document.querySelectorAll("[data-i18n]").forEach(e=>{
-  e.textContent=LANG[l][e.dataset.i18n];
- });
- localStorage.setItem("lang",l);
+  document.getElementById("slogan").textContent = LANG[l].slogan;
+  document.querySelectorAll("[data-i18n]").forEach(e=>{
+    e.textContent = LANG[l][e.dataset.i18n];
+  });
+  localStorage.setItem("lang", l);
 }
-setLang(localStorage.getItem("lang")||"es");
+
+setLang(localStorage.getItem("lang") || "es");
 </script>
 
 </body>
