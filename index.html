@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OfferView – Directorio Global de Tiendas y Ofertas</title>
 
-<!-- SEO BÁSICO -->
-<meta name="description" content="OfferView es un directorio global donde encuentras Amazon, Temu, AliExpress, tiendas chinas, japonesas, gaming, tecnología, moda, hoteles y vuelos en un solo lugar.">
-<meta name="keywords" content="ofertas, tiendas online, Amazon, Temu, AliExpress, tiendas chinas, tiendas japonesas, gaming, vuelos, hoteles">
+<title>OfferView | Directorio Global de Tiendas y Ofertas</title>
+
+<meta name="description" content="OfferView es un directorio global de tiendas online. Encuentra marketplaces, moda, tecnología, gaming, viajes y más en un solo lugar.">
+<meta name="keywords" content="ofertas, tiendas online, marketplaces, AliExpress, Amazon, Temu, Shein, compras online">
 <meta name="author" content="OfferView">
-<meta name="robots" content="index, follow">
 
 <style>
 :root{
@@ -46,20 +45,6 @@ header p{
   opacity:.95;
 }
 
-.lang-switch{
-  margin-top:15px;
-}
-
-.lang-switch button{
-  background:#1f2937;
-  color:#fff;
-  border:none;
-  padding:6px 12px;
-  margin:0 4px;
-  border-radius:8px;
-  cursor:pointer;
-}
-
 .section-title{
   text-align:center;
   color:var(--primary);
@@ -85,7 +70,6 @@ header p{
   font-weight:700;
   box-shadow:0 8px 22px rgba(0,0,0,0.06);
   transition:.25s;
-  cursor:pointer;
 }
 
 .card:hover{
@@ -107,169 +91,89 @@ footer{
 
 <header>
   <h1>OFFERVIEW</h1>
-  <p id="slogan">Tu Ventana a Las Mejores Ofertas</p>
-  <div class="lang-switch">
-    <button onclick="setLang('es')">ES</button>
-    <button onclick="setLang('en')">EN</button>
-  </div>
+  <p>Tu Ventana a Las Mejores Tiendas del Mundo</p>
 </header>
 
-<h2 class="section-title" data-i18n="top">Top Stores</h2>
-<div class="grid" id="topStores"></div>
+<!-- TOP MARKETPLACES -->
+<h2 class="section-title">🌍 Top Marketplaces Internacionales</h2>
+<div class="grid">
+  <a href="https://www.amazon.com" target="_blank" class="card">Amazon</a>
+  <a href="https://www.temu.com" target="_blank" class="card">Temu</a>
+  <a href="https://www.aliexpress.com" target="_blank" class="card">AliExpress</a>
+  <a href="https://www.alibaba.com" target="_blank" class="card">Alibaba</a>
+  <a href="https://www.ebay.com" target="_blank" class="card">eBay</a>
+  <a href="https://www.costco.com" target="_blank" class="card">Costco</a>
+  <a href="https://www.walmart.com" target="_blank" class="card">Walmart</a>
+  <a href="https://www.ikea.com" target="_blank" class="card">IKEA</a>
+  <a href="https://www.marshalls.com" target="_blank" class="card">Marshalls</a>
+  <a href="https://www.rossstores.com" target="_blank" class="card">Ross</a>
+  <a href="https://www.burlington.com" target="_blank" class="card">Burlington</a>
 
-<h2 class="section-title" data-i18n="gaming">Gaming Stores</h2>
-<div class="grid" id="gaming"></div>
+  <!-- CHINAS / ASIÁTICAS -->
+  <a href="https://www.jd.com" target="_blank" class="card">JD.com</a>
+  <a href="https://www.taobao.com" target="_blank" class="card">Taobao</a>
+  <a href="https://www.tmall.com" target="_blank" class="card">Tmall</a>
+  <a href="https://www.dhgate.com" target="_blank" class="card">DHgate</a>
+  <a href="https://www.vip.com" target="_blank" class="card">VIP.com</a>
+  <a href="https://www.miniso.com" target="_blank" class="card">Miniso</a>
+  <a href="https://www.rakuten.co.jp" target="_blank" class="card">Rakuten</a>
+</div>
 
-<h2 class="section-title" data-i18n="tech">Tecnología Stores</h2>
-<div class="grid" id="tech"></div>
+<!-- GAMING -->
+<h2 class="section-title">🎮 Gaming Stores</h2>
+<div class="grid">
+  <a href="https://store.steampowered.com" target="_blank" class="card">Steam</a>
+  <a href="https://store.epicgames.com" target="_blank" class="card">Epic Games</a>
+  <a href="https://store.playstation.com" target="_blank" class="card">PlayStation Store</a>
+  <a href="https://www.xbox.com/store" target="_blank" class="card">Xbox Store</a>
+  <a href="https://www.nintendo.com/store" target="_blank" class="card">Nintendo eShop</a>
+  <a href="https://www.g2a.com" target="_blank" class="card">G2A</a>
+  <a href="https://www.eneba.com" target="_blank" class="card">Eneba</a>
+</div>
 
-<h2 class="section-title" data-i18n="shoes">Calzados</h2>
-<div class="grid" id="shoes"></div>
+<!-- TECNOLOGÍA -->
+<h2 class="section-title">💻 Tecnología Stores</h2>
+<div class="grid">
+  <a href="https://www.bestbuy.com" target="_blank" class="card">Best Buy</a>
+  <a href="https://www.newegg.com" target="_blank" class="card">Newegg</a>
+  <a href="https://www.apple.com" target="_blank" class="card">Apple Store</a>
+  <a href="https://www.bhphotovideo.com" target="_blank" class="card">B&H Photo</a>
+  <a href="https://www.geekbuying.com" target="_blank" class="card">Geekbuying</a>
+</div>
 
-<h2 class="section-title" data-i18n="travel">Hoteles y Vuelos</h2>
-<div class="grid" id="travel"></div>
+<!-- CALZADOS -->
+<h2 class="section-title">👟 Calzados</h2>
+<div class="grid">
+  <a href="https://www.nike.com" target="_blank" class="card">Nike</a>
+  <a href="https://www.adidas.com" target="_blank" class="card">Adidas</a>
+  <a href="https://www.puma.com" target="_blank" class="card">Puma</a>
+  <a href="https://www.newbalance.com" target="_blank" class="card">New Balance</a>
+  <a href="https://www.skechers.com" target="_blank" class="card">Skechers</a>
+</div>
 
-<h2 class="section-title" data-i18n="fashion">Lencería & Moda</h2>
-<div class="grid" id="fashion"></div>
+<!-- HOTELES -->
+<h2 class="section-title">✈️ Hoteles y Vuelos</h2>
+<div class="grid">
+  <a href="https://www.booking.com" target="_blank" class="card">Booking</a>
+  <a href="https://www.expedia.com" target="_blank" class="card">Expedia</a>
+  <a href="https://www.skyscanner.com" target="_blank" class="card">Skyscanner</a>
+  <a href="https://www.airbnb.com" target="_blank" class="card">Airbnb</a>
+  <a href="https://www.trip.com" target="_blank" class="card">Trip.com</a>
+</div>
+
+<!-- MODA -->
+<h2 class="section-title">👗 Lencería & Moda</h2>
+<div class="grid">
+  <a href="https://www.victoriassecret.com" target="_blank" class="card">Victoria’s Secret</a>
+  <a href="https://www.savagex.com" target="_blank" class="card">Savage X Fenty</a>
+  <a href="https://www.shein.com" target="_blank" class="card">Shein</a>
+  <a href="https://www.yesstyle.com" target="_blank" class="card">YesStyle</a>
+  <a href="https://www.zaful.com" target="_blank" class="card">Zaful</a>
+</div>
 
 <footer>
 © 2025 <strong>OfferView</strong> · Directorio Global de Tiendas
 </footer>
-
-<script>
-/* ==========================
-   IA REAL (aprende del usuario)
-========================== */
-const IA = {
-  track(category, store){
-    let data = JSON.parse(localStorage.getItem("ia_data")) || {};
-    data[category] = (data[category] || 0) + 1;
-    localStorage.setItem("ia_data", JSON.stringify(data));
-  }
-};
-
-/* ==========================
-   TIENDAS (AMPLIADAS)
-========================== */
-const STORES = {
-  top:[
-    ["Amazon","https://www.amazon.com"],
-    ["Temu","https://www.temu.com"],
-    ["AliExpress","https://www.aliexpress.com"],
-    ["Alibaba","https://www.alibaba.com"],
-    ["eBay","https://www.ebay.com"],
-    ["Costco","https://www.costco.com"],
-    ["Walmart","https://www.walmart.com"],
-    ["IKEA","https://www.ikea.com"],
-    ["Marshalls","https://www.marshalls.com"],
-    ["Burlington","https://www.burlington.com"],
-    ["JD.com","https://www.jd.com"],
-    ["Taobao","https://www.taobao.com"],
-    ["Tmall","https://www.tmall.com"],
-    ["Miniso","https://www.miniso.com"],
-    ["Rakuten","https://www.rakuten.co.jp"],
-    ["Mercari","https://www.mercari.com/jp"],
-    ["Banggood","https://www.banggood.com"],
-    ["Shein","https://www.shein.com"],
-    ["LightInTheBox","https://www.lightinthebox.com"]
-  ],
-  gaming:[
-    ["Steam","https://store.steampowered.com"],
-    ["Epic Games","https://store.epicgames.com"],
-    ["PlayStation Store","https://store.playstation.com"],
-    ["Xbox Store","https://www.xbox.com/store"],
-    ["Nintendo eShop","https://www.nintendo.com/store"],
-    ["G2A","https://www.g2a.com"],
-    ["Eneba","https://www.eneba.com"]
-  ],
-  tech:[
-    ["Best Buy","https://www.bestbuy.com"],
-    ["Newegg","https://www.newegg.com"],
-    ["Apple","https://www.apple.com"],
-    ["B&H Photo","https://www.bhphotovideo.com"],
-    ["Xiaomi","https://www.mi.com"]
-  ],
-  shoes:[
-    ["Nike","https://www.nike.com"],
-    ["Adidas","https://www.adidas.com"],
-    ["Puma","https://www.puma.com"],
-    ["New Balance","https://www.newbalance.com"],
-    ["Skechers","https://www.skechers.com"]
-  ],
-  travel:[
-    ["Booking","https://www.booking.com"],
-    ["Expedia","https://www.expedia.com"],
-    ["Skyscanner","https://www.skyscanner.com"],
-    ["Airbnb","https://www.airbnb.com"],
-    ["Kayak","https://www.kayak.com"]
-  ],
-  fashion:[
-    ["Victoria’s Secret","https://www.victoriassecret.com"],
-    ["Savage X Fenty","https://www.savagex.com"],
-    ["YesStyle","https://www.yesstyle.com"],
-    ["Zaful","https://www.zaful.com"],
-    ["Romwe","https://www.romwe.com"]
-  ]
-};
-
-/* ==========================
-   RENDER (FIX ANDROID)
-========================== */
-function render(id, list, category){
-  const box = document.getElementById(id);
-  list.forEach(s=>{
-    const a = document.createElement("div");
-    a.className = "card";
-    a.textContent = s[0];
-    a.onclick = ()=>{
-      IA.track(category, s[0]);
-      window.location.assign(s[1]); // FIX DEFINITIVO ANDROID
-    };
-    box.appendChild(a);
-  });
-}
-
-render("topStores",STORES.top,"top");
-render("gaming",STORES.gaming,"gaming");
-render("tech",STORES.tech,"tech");
-render("shoes",STORES.shoes,"shoes");
-render("travel",STORES.travel,"travel");
-render("fashion",STORES.fashion,"fashion");
-
-/* ==========================
-   MULTIIDIOMA
-========================== */
-const LANG={
-  es:{
-    slogan:"Tu Ventana a Las Mejores Ofertas",
-    top:"Top Stores",
-    gaming:"Gaming Stores",
-    tech:"Tecnología Stores",
-    shoes:"Calzados",
-    travel:"Hoteles y Vuelos",
-    fashion:"Lencería & Moda"
-  },
-  en:{
-    slogan:"Your Window to the Best Deals",
-    top:"Top Stores",
-    gaming:"Gaming Stores",
-    tech:"Tech Stores",
-    shoes:"Shoes",
-    travel:"Hotels & Flights",
-    fashion:"Fashion & Lingerie"
-  }
-};
-
-function setLang(l){
-  document.getElementById("slogan").textContent = LANG[l].slogan;
-  document.querySelectorAll("[data-i18n]").forEach(e=>{
-    e.textContent = LANG[l][e.dataset.i18n];
-  });
-  localStorage.setItem("lang", l);
-}
-
-setLang(localStorage.getItem("lang") || "es");
-</script>
 
 </body>
 </html>
