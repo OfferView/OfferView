@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OfferView – Directorio Global de Tiendas</title>
+
 <meta name="description" content="OfferView es un directorio global que reúne las tiendas más visitadas del mundo en un solo lugar.">
 <meta name="keywords" content="ofertas, tiendas online, compras, ecommerce, directorio de tiendas">
 <meta name="author" content="OfferView">
@@ -16,12 +17,15 @@
   --text:#111827;
   --card:#ffffff;
 }
+
 body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
-  background:var(--bg);
+  background:linear-gradient(135deg,#f0f4f8,#d9e2ec);
   color:var(--text);
+  transition:background 0.5s;
 }
+
 header{
   text-align:center;
   padding:40px 15px;
@@ -49,6 +53,7 @@ header p{
   border-radius:8px;
   cursor:pointer;
 }
+
 .section-title{
   text-align:center;
   color:var(--primary);
@@ -56,12 +61,14 @@ header p{
   font-size:26px;
   font-weight:700;
 }
+
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
   gap:16px;
   padding:0 18px 35px;
 }
+
 .card{
   background:var(--card);
   border-radius:16px;
@@ -78,14 +85,24 @@ header p{
   color:#fff;
   transform:translateY(-4px);
 }
+
 footer{
   text-align:center;
   padding:35px 15px;
   background:#eef2f7;
   font-size:14px;
 }
+
+/* ICONOS OPCIONALES */
+.card::before{
+  content:'🛒';
+  display:block;
+  font-size:24px;
+  margin-bottom:8px;
+}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -120,93 +137,93 @@ footer{
 </footer>
 
 <script>
-/* ================ TIENDAS ================ */
+/* ================= STORES COMPLETAS ================= */
 const STORES = {
-  top:[
-    ["Amazon","https://www.amazon.com"],
-    ["Alibaba","https://www.alibaba.com"],
-    ["AliExpress","https://www.aliexpress.com"],
-    ["Temu","https://www.temu.com"],
-    ["eBay","https://www.ebay.com"],
-    ["Walmart","https://www.walmart.com"],
-    ["Costco","https://www.costco.com"],
-    ["IKEA","https://www.ikea.com"],
-    ["Burlington","https://www.burlington.com"],
-    ["Marshalls","https://www.marshalls.com"],
-    ["Ross","https://www.rossstores.com"],
-    ["JD.com","https://www.jd.com"],
-    ["Taobao","https://www.taobao.com"],
-    ["Tmall","https://www.tmall.com"],
-    ["Miniso","https://www.miniso.com"],
-    ["Rakuten","https://www.rakuten.co.jp"],
-    ["Mercado Libre","https://www.mercadolibre.com"],
-    ["Target","https://www.target.com"],
-    ["Best Buy","https://www.bestbuy.com"],
-    ["Flipkart","https://www.flipkart.com"]
-  ],
-  gaming:[
-    ["Steam","https://store.steampowered.com"],
-    ["Epic Games","https://store.epicgames.com"],
-    ["PlayStation","https://store.playstation.com"],
-    ["Xbox","https://www.xbox.com/store"],
-    ["Nintendo","https://www.nintendo.com/store"],
-    ["G2A","https://www.g2a.com"],
-    ["Humble Bundle","https://www.humblebundle.com"],
-    ["Green Man Gaming","https://www.greenmangaming.com"],
-    ["Ubisoft Store","https://store.ubisoft.com"],
-    ["EA Store","https://www.ea.com"]
-  ],
-  tech:[
-    ["Best Buy","https://www.bestbuy.com"],
-    ["Apple","https://www.apple.com"],
-    ["Newegg","https://www.newegg.com"],
-    ["B&H","https://www.bhphotovideo.com"],
-    ["Lenovo","https://www.lenovo.com"],
-    ["Samsung","https://www.samsung.com"],
-    ["Xiaomi","https://www.mi.com"],
-    ["Huawei","https://www.huawei.com"],
-    ["Microsoft","https://www.microsoft.com"],
-    ["Asus","https://www.asus.com"]
-  ],
-  shoes:[
-    ["Nike","https://www.nike.com"],
-    ["Adidas","https://www.adidas.com"],
-    ["Puma","https://www.puma.com"],
-    ["New Balance","https://www.newbalance.com"],
-    ["Reebok","https://www.reebok.com"],
-    ["Skechers","https://www.skechers.com"],
-    ["Converse","https://www.converse.com"],
-    ["Vans","https://www.vans.com"],
-    ["Anta","https://www.anta.com"],
-    ["Li-Ning","https://www.lining.com"]
-  ],
-  fashion:[
-    ["Victoria’s Secret","https://www.victoriassecret.com"],
-    ["Savage X Fenty","https://www.savagex.com"],
-    ["YesStyle","https://www.yesstyle.com"],
-    ["Zara","https://www.zara.com"],
-    ["H&M","https://www.hm.com"],
-    ["Uniqlo","https://www.uniqlo.com"],
-    ["Calvin Klein","https://www.calvinklein.us"],
-    ["Fashion Nova","https://www.fashionnova.com"],
-    ["Aerie","https://www.ae.com"],
-    ["Shein","https://www.shein.com"]
-  ],
-  travel:[
-    ["Booking","https://www.booking.com"],
-    ["Expedia","https://www.expedia.com"],
-    ["Airbnb","https://www.airbnb.com"],
-    ["Skyscanner","https://www.skyscanner.com"],
-    ["Kayak","https://www.kayak.com"],
-    ["Agoda","https://www.agoda.com"],
-    ["Trip.com","https://www.trip.com"],
-    ["Hotels.com","https://www.hotels.com"],
-    ["Google Flights","https://www.google.com/flights"],
-    ["Priceline","https://www.priceline.com"]
-  ]
+top:[
+["Amazon","https://www.amazon.com"],
+["Alibaba","https://www.alibaba.com"],
+["AliExpress","https://www.aliexpress.com"],
+["Temu","https://www.temu.com"],
+["eBay","https://www.ebay.com"],
+["Walmart","https://www.walmart.com"],
+["Costco","https://www.costco.com"],
+["IKEA","https://www.ikea.com"],
+["Burlington","https://www.burlington.com"],
+["Marshalls","https://www.marshalls.com"],
+["Ross","https://www.rossstores.com"],
+["JD.com","https://www.jd.com"],
+["Taobao","https://www.taobao.com"],
+["Tmall","https://www.tmall.com"],
+["Miniso","https://www.miniso.com"],
+["Rakuten","https://www.rakuten.co.jp"],
+["Mercado Libre","https://www.mercadolibre.com"],
+["Target","https://www.target.com"],
+["Best Buy","https://www.bestbuy.com"],
+["Flipkart","https://www.flipkart.com"]
+],
+gaming:[
+["Steam","https://store.steampowered.com"],
+["Epic Games","https://store.epicgames.com"],
+["PlayStation","https://store.playstation.com"],
+["Xbox","https://www.xbox.com/store"],
+["Nintendo","https://www.nintendo.com/store"],
+["G2A","https://www.g2a.com"],
+["Humble Bundle","https://www.humblebundle.com"],
+["Green Man Gaming","https://www.greenmangaming.com"],
+["Ubisoft Store","https://store.ubisoft.com"],
+["EA Store","https://www.ea.com"]
+],
+tech:[
+["Best Buy","https://www.bestbuy.com"],
+["Apple","https://www.apple.com"],
+["Newegg","https://www.newegg.com"],
+["B&H","https://www.bhphotovideo.com"],
+["Lenovo","https://www.lenovo.com"],
+["Samsung","https://www.samsung.com"],
+["Xiaomi","https://www.mi.com"],
+["Huawei","https://www.huawei.com"],
+["Microsoft","https://www.microsoft.com"],
+["Asus","https://www.asus.com"]
+],
+shoes:[
+["Nike","https://www.nike.com"],
+["Adidas","https://www.adidas.com"],
+["Puma","https://www.puma.com"],
+["New Balance","https://www.newbalance.com"],
+["Reebok","https://www.reebok.com"],
+["Skechers","https://www.skechers.com"],
+["Converse","https://www.converse.com"],
+["Vans","https://www.vans.com"],
+["Anta","https://www.anta.com"],
+["Li-Ning","https://www.lining.com"]
+],
+fashion:[
+["Victoria’s Secret","https://www.victoriassecret.com"],
+["Savage X Fenty","https://www.savagex.com"],
+["YesStyle","https://www.yesstyle.com"],
+["Zara","https://www.zara.com"],
+["H&M","https://www.hm.com"],
+["Uniqlo","https://www.uniqlo.com"],
+["Calvin Klein","https://www.calvinklein.us"],
+["Fashion Nova","https://www.fashionnova.com"],
+["Aerie","https://www.ae.com"],
+["Shein","https://www.shein.com"]
+],
+travel:[
+["Booking","https://www.booking.com"],
+["Expedia","https://www.expedia.com"],
+["Airbnb","https://www.airbnb.com"],
+["Skyscanner","https://www.skyscanner.com"],
+["Kayak","https://www.kayak.com"],
+["Agoda","https://www.agoda.com"],
+["Trip.com","https://www.trip.com"],
+["Hotels.com","https://www.hotels.com"],
+["Google Flights","https://www.google.com/flights"],
+["Priceline","https://www.priceline.com"]
+]
 };
 
-/* ================ RENDER DINÁMICO ================ */
+/* ================ RENDER ================= */
 function render(section,data){
   const box=document.getElementById(section);
   data.forEach(s=>{
@@ -226,7 +243,7 @@ render("shoes",STORES.shoes);
 render("fashion",STORES.fashion);
 render("travel",STORES.travel);
 
-/* ================ MULTI-IDIOMA ================ */
+/* ================ LANG ================= */
 const LANG={
 es:{
 slogan:"Tu Ventana a Las Mejores Ofertas",
@@ -248,13 +265,21 @@ travel:"Hotels & Flights"
 }
 };
 function setLang(l){
-  document.getElementById("slogan").textContent=LANG[l].slogan;
-  document.querySelectorAll("[data-i18n]").forEach(e=>{
-    e.textContent=LANG[l][e.dataset.i18n];
-  });
-  localStorage.setItem("lang",l);
+document.getElementById("slogan").textContent=LANG[l].slogan;
+document.querySelectorAll("[data-i18n]").forEach(e=>{
+e.textContent=LANG[l][e.dataset.i18n];
+});
+localStorage.setItem("lang",l);
 }
 setLang(localStorage.getItem("lang")||"es");
+
+/* ================ FONDO DINÁMICO ================= */
+let colors=["#f0f4f8","#d9e2ec","#e0f7fa","#fff3e0","#f3e5f5"];
+let i=0;
+setInterval(()=>{
+document.body.style.background="linear-gradient(135deg,"+colors[i]+","+colors[(i+1)%colors.length]+")";
+i=(i+1)%colors.length;
+},8000);
 </script>
 
 </body>
