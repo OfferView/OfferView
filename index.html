@@ -3,22 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OfferView – Directorio Global de Tiendas</title>
 
-<title>OfferView – Directorio Global de Tiendas y Ofertas</title>
-<meta name="description" content="OfferView es un directorio global de tiendas online. Encuentra Amazon, tiendas chinas, moda, tecnología, gaming, hoteles y más en un solo lugar.">
-<meta name="keywords" content="ofertas, tiendas online, directorio de tiendas, compras online, amazon, tiendas chinas, moda, tecnologia, vuelos">
+<meta name="description" content="OfferView es un directorio global que reúne las tiendas más visitadas del mundo en un solo lugar.">
+<meta name="keywords" content="ofertas, tiendas online, compras, ecommerce, directorio de tiendas">
 <meta name="author" content="OfferView">
-
-<!-- Google Analytics (PEGA TU ID AQUÍ) -->
-<!--
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-XXXXXXXXXX');
-</script>
--->
 
 <style>
 :root{
@@ -28,37 +17,30 @@ gtag('config', 'G-XXXXXXXXXX');
   --text:#111827;
   --card:#ffffff;
 }
-
 body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
   background:var(--bg);
   color:var(--text);
 }
-
 header{
   text-align:center;
   padding:40px 15px;
   background:linear-gradient(180deg,#0b1633,#0f1f45);
   color:#fff;
 }
-
 header h1{
   color:var(--primary);
   font-size:36px;
   margin-bottom:6px;
 }
-
 header p{
   margin:0;
   font-size:16px;
-  opacity:.95;
 }
-
 .lang-switch{
   margin-top:15px;
 }
-
 .lang-switch button{
   background:#1f2937;
   color:#fff;
@@ -68,7 +50,6 @@ header p{
   border-radius:8px;
   cursor:pointer;
 }
-
 .section-title{
   text-align:center;
   color:var(--primary);
@@ -76,14 +57,12 @@ header p{
   font-size:26px;
   font-weight:700;
 }
-
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
   gap:16px;
   padding:0 18px 35px;
 }
-
 .card{
   background:var(--card);
   border-radius:16px;
@@ -95,13 +74,11 @@ header p{
   box-shadow:0 8px 22px rgba(0,0,0,0.06);
   transition:.25s;
 }
-
 .card:hover{
   background:var(--primary);
   color:#fff;
   transform:translateY(-4px);
 }
-
 footer{
   text-align:center;
   padding:35px 15px;
@@ -123,150 +100,162 @@ footer{
 </header>
 
 <h2 class="section-title" data-i18n="top">Top Stores</h2>
-<div class="grid" id="topStores"></div>
+<div class="grid" id="top"></div>
 
 <h2 class="section-title" data-i18n="gaming">Gaming Stores</h2>
 <div class="grid" id="gaming"></div>
 
-<h2 class="section-title" data-i18n="tech">Tecnología Stores</h2>
+<h2 class="section-title" data-i18n="tech">Tecnología</h2>
 <div class="grid" id="tech"></div>
 
 <h2 class="section-title" data-i18n="shoes">Calzados</h2>
 <div class="grid" id="shoes"></div>
 
-<h2 class="section-title" data-i18n="travel">Hoteles y Vuelos</h2>
-<div class="grid" id="travel"></div>
-
 <h2 class="section-title" data-i18n="fashion">Moda & Lencería</h2>
 <div class="grid" id="fashion"></div>
+
+<h2 class="section-title" data-i18n="travel">Hoteles y Vuelos</h2>
+<div class="grid" id="travel"></div>
 
 <footer>
 © 2025 <strong>OfferView</strong> · Directorio Global de Tiendas
 </footer>
 
 <script>
-/* ===================== IA REAL (CLIENTE) ===================== */
-const IA = {
-  track(category){
-    const data = JSON.parse(localStorage.getItem("ia_data")) || {};
-    data[category] = (data[category] || 0) + 1;
-    localStorage.setItem("ia_data", JSON.stringify(data));
-  }
-};
-
-/* ===================== TIENDAS ===================== */
+/* ================= STORES ================= */
 const STORES = {
-  top:[
-    ["Amazon","https://www.amazon.com"],
-    ["Mercado Libre","https://www.mercadolibre.com"],
-    ["eBay","https://www.ebay.com"],
-    ["Walmart","https://www.walmart.com"],
-    ["Costco","https://www.costco.com"],
-    ["IKEA","https://www.ikea.com"],
-    ["Ross","https://www.rossstores.com"],
-    ["Marshalls","https://www.marshalls.com"],
-    ["Burlington","https://www.burlington.com"],
-    ["Alibaba","https://www.alibaba.com"],
-    ["AliExpress","https://www.aliexpress.com"],
-    ["Temu","https://www.temu.com"],
-    ["JD.com","https://www.jd.com"],
-    ["Taobao","https://www.taobao.com"],
-    ["Tmall","https://www.tmall.com"],
-    ["Miniso","https://www.miniso.com"],
-    ["Rakuten","https://www.rakuten.co.jp"]
-  ],
-  gaming:[
-    ["Steam","https://store.steampowered.com"],
-    ["Epic Games","https://store.epicgames.com"],
-    ["PlayStation","https://store.playstation.com"],
-    ["Xbox","https://www.xbox.com/store"],
-    ["Nintendo","https://www.nintendo.com/store"],
-    ["G2A","https://www.g2a.com"],
-    ["Eneba","https://www.eneba.com"]
-  ],
-  tech:[
-    ["Best Buy","https://www.bestbuy.com"],
-    ["Newegg","https://www.newegg.com"],
-    ["Apple","https://www.apple.com"],
-    ["B&H","https://www.bhphotovideo.com"],
-    ["Xiaomi","https://www.mi.com"]
-  ],
-  shoes:[
-    ["Nike","https://www.nike.com"],
-    ["Adidas","https://www.adidas.com"],
-    ["Puma","https://www.puma.com"],
-    ["New Balance","https://www.newbalance.com"],
-    ["Skechers","https://www.skechers.com"],
-    ["Anta","https://www.anta.com"] /* china */
-  ],
-  travel:[
-    ["Booking","https://www.booking.com"],
-    ["Expedia","https://www.expedia.com"],
-    ["Skyscanner","https://www.skyscanner.com"],
-    ["Airbnb","https://www.airbnb.com"],
-    ["Trip.com","https://www.trip.com"] /* china */
-  ],
-  fashion:[
-    ["Victoria’s Secret","https://www.victoriassecret.com"],
-    ["Savage X Fenty","https://www.savagex.com"],
-    ["Shein","https://www.shein.com"],
-    ["YesStyle","https://www.yesstyle.com"],
-    ["Zaful","https://www.zaful.com"] /* china */
-  ]
+top:[
+["Amazon","https://www.amazon.com"],
+["Alibaba","https://www.alibaba.com"],
+["AliExpress","https://www.aliexpress.com"],
+["Temu","https://www.temu.com"],
+["eBay","https://www.ebay.com"],
+["Walmart","https://www.walmart.com"],
+["Costco","https://www.costco.com"],
+["IKEA","https://www.ikea.com"],
+["Burlington","https://www.burlington.com"],
+["Marshalls","https://www.marshalls.com"],
+["Ross","https://www.rossstores.com"],
+["JD.com","https://www.jd.com"],
+["Taobao","https://www.taobao.com"],
+["Tmall","https://www.tmall.com"],
+["Miniso","https://www.miniso.com"],
+["Rakuten","https://www.rakuten.co.jp"],
+["Mercado Libre","https://www.mercadolibre.com"],
+["Target","https://www.target.com"],
+["Best Buy","https://www.bestbuy.com"],
+["Flipkart","https://www.flipkart.com"]
+],
+gaming:[
+["Steam","https://store.steampowered.com"],
+["Epic Games","https://store.epicgames.com"],
+["PlayStation","https://store.playstation.com"],
+["Xbox","https://www.xbox.com/store"],
+["Nintendo","https://www.nintendo.com/store"],
+["G2A","https://www.g2a.com"],
+["Humble Bundle","https://www.humblebundle.com"],
+["Green Man Gaming","https://www.greenmangaming.com"],
+["Ubisoft Store","https://store.ubisoft.com"],
+["EA Store","https://www.ea.com"]
+],
+tech:[
+["Best Buy","https://www.bestbuy.com"],
+["Apple","https://www.apple.com"],
+["Newegg","https://www.newegg.com"],
+["B&H","https://www.bhphotovideo.com"],
+["Lenovo","https://www.lenovo.com"],
+["Samsung","https://www.samsung.com"],
+["Xiaomi","https://www.mi.com"],
+["Huawei","https://www.huawei.com"],
+["Microsoft","https://www.microsoft.com"],
+["Asus","https://www.asus.com"]
+],
+shoes:[
+["Nike","https://www.nike.com"],
+["Adidas","https://www.adidas.com"],
+["Puma","https://www.puma.com"],
+["New Balance","https://www.newbalance.com"],
+["Reebok","https://www.reebok.com"],
+["Skechers","https://www.skechers.com"],
+["Converse","https://www.converse.com"],
+["Vans","https://www.vans.com"],
+["Anta","https://www.anta.com"],
+["Li-Ning","https://www.lining.com"]
+],
+fashion:[
+["Victoria’s Secret","https://www.victoriassecret.com"],
+["Savage X Fenty","https://www.savagex.com"],
+["YesStyle","https://www.yesstyle.com"],
+["Zara","https://www.zara.com"],
+["H&M","https://www.hm.com"],
+["Uniqlo","https://www.uniqlo.com"],
+["Calvin Klein","https://www.calvinklein.us"],
+["Fashion Nova","https://www.fashionnova.com"],
+["Aerie","https://www.ae.com"],
+["Shein","https://www.shein.com"]
+],
+travel:[
+["Booking","https://www.booking.com"],
+["Expedia","https://www.expedia.com"],
+["Airbnb","https://www.airbnb.com"],
+["Skyscanner","https://www.skyscanner.com"],
+["Kayak","https://www.kayak.com"],
+["Agoda","https://www.agoda.com"],
+["Trip.com","https://www.trip.com"],
+["Hotels.com","https://www.hotels.com"],
+["Google Flights","https://www.google.com/flights"],
+["Priceline","https://www.priceline.com"]
+]
 };
 
-/* ===================== RENDER ===================== */
-function render(id,list,cat){
-  const box=document.getElementById(id);
-  list.forEach(s=>{
+/* ================ RENDER ================= */
+function render(section,data){
+  const box=document.getElementById(section);
+  data.forEach(s=>{
     const a=document.createElement("a");
     a.href=s[1];
     a.target="_blank";
     a.rel="noopener noreferrer";
     a.className="card";
     a.textContent=s[0];
-    a.onclick=()=>IA.track(cat);
     box.appendChild(a);
   });
 }
+render("top",STORES.top);
+render("gaming",STORES.gaming);
+render("tech",STORES.tech);
+render("shoes",STORES.shoes);
+render("fashion",STORES.fashion);
+render("travel",STORES.travel);
 
-render("topStores",STORES.top,"top");
-render("gaming",STORES.gaming,"gaming");
-render("tech",STORES.tech,"tech");
-render("shoes",STORES.shoes,"shoes");
-render("travel",STORES.travel,"travel");
-render("fashion",STORES.fashion,"fashion");
-
-/* ===================== IDIOMAS ===================== */
+/* ================ LANG ================= */
 const LANG={
-  es:{
-    slogan:"Tu Ventana a Las Mejores Ofertas",
-    top:"Top Stores",
-    gaming:"Gaming Stores",
-    tech:"Tecnología Stores",
-    shoes:"Calzados",
-    travel:"Hoteles y Vuelos",
-    fashion:"Moda & Lencería"
-  },
-  en:{
-    slogan:"Your Window to the Best Deals",
-    top:"Top Stores",
-    gaming:"Gaming Stores",
-    tech:"Tech Stores",
-    shoes:"Shoes",
-    travel:"Hotels & Flights",
-    fashion:"Fashion & Lingerie"
-  }
-};
-
-function setLang(l){
-  document.getElementById("slogan").textContent=LANG[l].slogan;
-  document.querySelectorAll("[data-i18n]").forEach(e=>{
-    e.textContent=LANG[l][e.dataset.i18n];
-  });
-  localStorage.setItem("lang",l);
+es:{
+slogan:"Tu Ventana a Las Mejores Ofertas",
+top:"Top Stores",
+gaming:"Gaming Stores",
+tech:"Tecnología",
+shoes:"Calzados",
+fashion:"Moda & Lencería",
+travel:"Hoteles y Vuelos"
+},
+en:{
+slogan:"Your Window to the Best Deals",
+top:"Top Stores",
+gaming:"Gaming Stores",
+tech:"Technology",
+shoes:"Shoes",
+fashion:"Fashion & Lingerie",
+travel:"Hotels & Flights"
 }
-
+};
+function setLang(l){
+document.getElementById("slogan").textContent=LANG[l].slogan;
+document.querySelectorAll("[data-i18n]").forEach(e=>{
+e.textContent=LANG[l][e.dataset.i18n];
+});
+localStorage.setItem("lang",l);
+}
 setLang(localStorage.getItem("lang")||"es");
 </script>
 
