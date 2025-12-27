@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OfferView – Directorio Global de Tiendas</title>
-
-<meta name="description" content="OfferView es un directorio global que reúne las tiendas más visitadas del mundo en un solo lugar.">
+<title>OfferView – Directorio Global</title>
 
 <!-- GOOGLE ANALYTICS -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PDM9GCV149"></script>
@@ -18,188 +16,175 @@ gtag('config', 'G-PDM9GCV149');
 
 <style>
 :root{
---primary:#F59E0B;
---secondary:#2563EB;
+  --mamey:#f4a261;
+  --blue1:#0b2a5b;
+  --blue2:#0f4c8a;
 }
+
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+
 body{
-margin:0;
-font-family:Arial,Helvetica,sans-serif;
-background:linear-gradient(135deg,#0b1633,#123b8c);
-color:#fff;
+  background:linear-gradient(135deg,var(--blue1),var(--blue2));
+  color:#fff;
 }
 
-/* NAVBAR */
-.navbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px 40px;
-}
-.navbar a{
-color:#e5e7eb;
-text-decoration:none;
-margin:0 12px;
-font-weight:600;
-}
-.navbar a:hover{color:#fff}
-.logo{font-size:22px;font-weight:800}
-
-/* HERO */
-.hero{text-align:center;margin:30px 0 50px}
-.search-bar{
-width:70%;
-max-width:720px;
-padding:16px 24px;
-border-radius:999px;
-border:none;
-font-size:16px;
-outline:none;
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
 }
 
-/* SECCIONES */
-.section-title{
-margin:40px 30px 20px;
-font-size:24px;
-font-weight:700;
+.logo{
+  font-size:26px;
+  font-weight:800;
+  color:var(--mamey);
 }
+
+nav a{
+  margin:0 12px;
+  color:#fff;
+  text-decoration:none;
+  font-size:15px;
+}
+
+.auth a{
+  margin-left:15px;
+  color:#fff;
+  text-decoration:none;
+}
+
+/* SEARCH */
+.search{
+  max-width:900px;
+  margin:30px auto 40px;
+  padding:0 20px;
+}
+.search input{
+  width:100%;
+  padding:16px 22px;
+  border-radius:40px;
+  border:none;
+  font-size:16px;
+}
+
+/* SECTION */
+.section{
+  padding:30px 40px;
+}
+.section h2{
+  margin-bottom:20px;
+  font-size:24px;
+}
+
+/* GRID */
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:18px;
-padding:0 30px 40px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:22px;
 }
 
-/* CARDS */
+/* CARD */
 .card{
-height:130px;
-border-radius:18px;
-display:flex;
-align-items:flex-end;
-padding:18px;
-font-size:18px;
-font-weight:700;
-color:#fff;
-text-decoration:none;
-background:linear-gradient(135deg,#1e3a8a,#2563eb);
-box-shadow:0 12px 30px rgba(0,0,0,.35);
-transition:.3s;
+  background:#fff;
+  color:#000;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  transition:.25s;
 }
-.card:hover{transform:translateY(-6px)}
+.card:hover{transform:translateY(-5px)}
 
+.card img{
+  width:100%;
+  height:140px;
+  object-fit:cover;
+}
+
+.card .content{
+  padding:16px;
+}
+
+.card h3{font-size:18px}
+.card p{font-size:14px;opacity:.7;margin:6px 0 12px}
+
+.card button{
+  width:100%;
+  padding:10px;
+  background:var(--mamey);
+  border:none;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* FOOTER */
 footer{
-text-align:center;
-padding:30px;
-background:#020617;
+  text-align:center;
+  padding:30px;
+  opacity:.75;
+  font-size:14px;
 }
 </style>
 </head>
 
 <body>
 
-<nav class="navbar">
-  <div class="logo">📍 OfferView</div>
-  <div>
-    <a href="#">Categorías</a>
+<header>
+  <div class="logo">OfferView</div>
+  <nav>
+    <a href="#">Categorias</a>
     <a href="#">Ofertas</a>
     <a href="#">Favoritos</a>
     <a href="#">Blog</a>
-  </div>
-  <div>
+  </nav>
+  <div class="auth">
     <a href="#">Acceder</a>
     <a href="#">Registro</a>
   </div>
-</nav>
+</header>
 
-<section class="hero">
-<input class="search-bar" placeholder="Buscar tiendas, productos o marcas…">
+<div class="search">
+  <input type="text" placeholder="Buscar tiendas, productos o marcas…">
+</div>
+
+<!-- RECOMENDADAS -->
+<section class="section">
+<h2>Tiendas Recomendadas para Ti</h2>
+<div class="grid">
+  <div class="card"><img src="https://logos-world.net/wp-content/uploads/2020/04/Amazon-Logo.png"><div class="content"><h3>Amazon</h3><p>Compras globales</p><button>Ver Ofertas</button></div></div>
+  <div class="card"><img src="https://logos-world.net/wp-content/uploads/2020/04/Nike-Logo.png"><div class="content"><h3>Nike</h3><p>Moda deportiva</p><button>Ver Ahora</button></div></div>
+  <div class="card"><img src="https://logos-world.net/wp-content/uploads/2020/04/Best-Buy-Logo.png"><div class="content"><h3>Best Buy</h3><p>Electrónica</p><button>Explorar</button></div></div>
+  <div class="card"><img src="https://logos-world.net/wp-content/uploads/2020/05/Zara-Logo.png"><div class="content"><h3>Zara</h3><p>Moda</p><button>Descubrir</button></div></div>
+</div>
 </section>
 
-<h2 class="section-title">Top Stores</h2>
-<div class="grid" id="top"></div>
+<!-- POPULARES -->
+<section class="section">
+<h2>Populares Ahora</h2>
+<div class="grid">
+  <div class="card"><img src="https://logos-world.net/wp-content/uploads/2020/04/AliExpress-Logo.png"><div class="content"><h3>AliExpress</h3><p>Tendencia</p><button>Ver Más</button></div></div>
+  <div class="card"><img src="https://logos-world.net/wp-content/uploads/2020/04/SHEIN-Logo.png"><div class="content"><h3>SHEIN</h3><p>Moda rápida</p><button>Comprar</button></div></div>
+  <div class="card"><img src="https://logos-world.net/wp-content/uploads/2020/04/Booking-Logo.png"><div class="content"><h3>Booking</h3><p>Viajes</p><button>Reservar</button></div></div>
+  <div class="card"><img src="https://logos-world.net/wp-content/uploads/2020/04/Samsung-Logo.png"><div class="content"><h3>Samsung</h3><p>Tecnología</p><button>Ver Ofertas</button></div></div>
+</div>
+</section>
 
-<h2 class="section-title">Gaming Stores</h2>
-<div class="grid" id="gaming"></div>
+<!-- DESCUBIERTAS -->
+<section class="section">
+<h2>Descubiertas Hoy</h2>
+<div class="grid">
+  <div class="card"><img src="https://logos-world.net/wp-content/uploads/2020/11/Etsy-Logo.png"><div class="content"><h3>Etsy</h3><p>Artesanías</p><button>Explorar</button></div></div>
+  <div class="card"><img src="https://logos-world.net/wp-content/uploads/2020/04/Adidas-Logo.png"><div class="content"><h3>Adidas</h3><p>Deportes</p><button>Ver Ahora</button></div></div>
+  <div class="card"><img src="https://logos-world.net/wp-content/uploads/2020/11/Sephora-Logo.png"><div class="content"><h3>Sephora</h3><p>Belleza</p><button>Comprar</button></div></div>
+  <div class="card"><img src="https://logos-world.net/wp-content/uploads/2020/04/Expedia-Logo.png"><div class="content"><h3>Expedia</h3><p>Viajes</p><button>Descubrir</button></div></div>
+</div>
+</section>
 
-<h2 class="section-title">Technology Stores</h2>
-<div class="grid" id="tech"></div>
-
-<h2 class="section-title">Shoes Stores</h2>
-<div class="grid" id="shoes"></div>
-
-<h2 class="section-title">Fashion & Lingerie Stores</h2>
-<div class="grid" id="fashion"></div>
-
-<h2 class="section-title">Travel Stores</h2>
-<div class="grid" id="travel"></div>
-
-<h2 class="section-title">Health & Beauty Stores</h2>
-<div class="grid" id="health"></div>
-
-<footer>© 2025 OfferView</footer>
-
-<script>
-const STORES={
-top:[
-["Amazon","https://amazon.com"],["Alibaba","https://alibaba.com"],["AliExpress","https://aliexpress.com"],
-["Temu","https://temu.com"],["eBay","https://ebay.com"],["Walmart","https://walmart.com"],
-["Costco","https://costco.com"],["IKEA","https://ikea.com"],["Burlington","https://burlington.com"],
-["Marshalls","https://marshalls.com"],["Ross","https://rossstores.com"],["JD","https://jd.com"],
-["Taobao","https://taobao.com"],["Tmall","https://tmall.com"],["Miniso","https://miniso.com"],
-["Rakuten","https://rakuten.co.jp"],["Mercado Libre","https://mercadolibre.com"],
-["Target","https://target.com"],["Best Buy","https://bestbuy.com"],["Flipkart","https://flipkart.com"]
-],
-gaming:[
-["Steam","https://store.steampowered.com"],["Epic Games","https://epicgames.com"],
-["PlayStation","https://store.playstation.com"],["Xbox","https://xbox.com/store"],
-["Nintendo","https://nintendo.com/store"],["G2A","https://g2a.com"],
-["Humble Bundle","https://humblebundle.com"],["Green Man Gaming","https://greenmangaming.com"],
-["Ubisoft Store","https://store.ubisoft.com"],["EA Store","https://ea.com"]
-],
-tech:[
-["Apple","https://apple.com"],["Samsung","https://samsung.com"],["Microsoft","https://microsoft.com"],
-["Xiaomi","https://mi.com"],["Huawei","https://huawei.com"],["Asus","https://asus.com"],
-["Lenovo","https://lenovo.com"],["Sony","https://sony.com"],["HP","https://hp.com"],["Dell","https://dell.com"]
-],
-shoes:[
-["Nike","https://nike.com"],["Adidas","https://adidas.com"],["Puma","https://puma.com"],
-["New Balance","https://newbalance.com"],["Reebok","https://reebok.com"],
-["Skechers","https://skechers.com"],["Converse","https://converse.com"],
-["Vans","https://vans.com"],["Anta","https://anta.com"],["Li-Ning","https://lining.com"]
-],
-fashion:[
-["Zara","https://zara.com"],["H&M","https://hm.com"],["Uniqlo","https://uniqlo.com"],
-["Calvin Klein","https://calvinklein.com"],["Victoria’s Secret","https://victoriassecret.com"],
-["Fashion Nova","https://fashionnova.com"],["Aerie","https://ae.com"],
-["Savage X Fenty","https://savagex.com"],["YesStyle","https://yesstyle.com"],["Shein","https://shein.com"]
-],
-travel:[
-["Booking","https://booking.com"],["Expedia","https://expedia.com"],["Airbnb","https://airbnb.com"],
-["Skyscanner","https://skyscanner.com"],["Kayak","https://kayak.com"],
-["Agoda","https://agoda.com"],["Trip.com","https://trip.com"],
-["Hotels.com","https://hotels.com"],["Google Flights","https://google.com/flights"],
-["Priceline","https://priceline.com"],["Travelocity","https://travelocity.com"]
-],
-health:[
-["Sephora","https://sephora.com"],["Ulta Beauty","https://ulta.com"],["Watsons","https://watsons.com"],
-["Douglas","https://douglas.de"],["CVS","https://cvs.com"],["Walgreens","https://walgreens.com"],
-["The Body Shop","https://thebodyshop.com"],["Lush","https://lush.com"],
-["Kiehl’s","https://kiehls.com"],["NYX","https://nyxcosmetics.com"]
-]
-};
-
-function render(section){
-const box=document.getElementById(section);
-STORES[section].forEach(s=>{
-const a=document.createElement("a");
-a.href=s[1];
-a.target="_blank";
-a.className="card";
-a.textContent=s[0];
-box.appendChild(a);
-});
-}
-Object.keys(STORES).forEach(render);
-</script>
+<footer>
+© 2025 <strong>OfferView</strong> · Directorio Global de Tiendas
+</footer>
 
 </body>
 </html>
