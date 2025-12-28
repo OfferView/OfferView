@@ -3,19 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>OfferView – Tu ventana a las mejores ofertas</title>
-
-<meta name="description" content="OfferView reúne las mejores tiendas online del mundo en un solo lugar.">
-
-<!-- GOOGLE ANALYTICS -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDM9GCV149"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-PDM9GCV149');
-</script>
 
 <style>
 :root{
@@ -35,37 +23,32 @@ nav{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:18px 30px;
+  padding:18px 24px;
 }
 
 .logo{
-  font-size:28px;
+  font-size:26px;
   font-weight:900;
   color:var(--mamey);
 }
 
 .menu a{
   color:#fff;
-  margin:0 10px;
+  margin:0 8px;
   text-decoration:none;
-  font-size:14px;
-}
-
-.auth span{
-  margin-left:15px;
   font-size:14px;
 }
 
 .search{
   display:flex;
   justify-content:center;
-  margin:30px 20px;
+  margin:25px 16px;
 }
 
 .search input{
   width:100%;
   max-width:600px;
-  padding:14px 20px;
+  padding:14px 18px;
   border-radius:30px;
   border:none;
 }
@@ -79,52 +62,50 @@ nav{
   background:#1f2f5a;
   color:#fff;
   border:none;
-  padding:6px 12px;
+  padding:6px 14px;
   margin:0 5px;
-  border-radius:8px;
-  cursor:pointer;
+  border-radius:10px;
 }
 
 .section{
-  padding:20px 30px 40px;
+  padding:20px 20px 35px;
 }
 
 .section h2{
-  font-size:24px;
-  margin-bottom:18px;
+  font-size:22px;
+  margin-bottom:16px;
 }
 
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:18px;
+  gap:16px;
 }
 
 .card{
-  position:relative;
   height:140px;
-  border-radius:14px;
+  border-radius:16px;
   overflow:hidden;
+  position:relative;
   cursor:pointer;
-  transition:.3s;
+  transition:.25s;
 }
 
 .card:hover{transform:translateY(-4px)}
 
-.card img{
+.card svg{
   width:100%;
   height:100%;
-  object-fit:cover;
 }
 
 .overlay{
   position:absolute;
   inset:0;
-  background:linear-gradient(90deg,rgba(0,0,0,.7),rgba(0,0,0,.2));
-  padding:14px;
+  background:linear-gradient(90deg,rgba(0,0,0,.65),rgba(0,0,0,.25));
   display:flex;
   flex-direction:column;
   justify-content:flex-end;
+  padding:14px;
 }
 
 .overlay h3{margin:0 0 6px}
@@ -135,12 +116,11 @@ nav{
   padding:6px 14px;
   border-radius:20px;
   font-size:13px;
-  cursor:pointer;
 }
 
 footer{
   text-align:center;
-  padding:30px;
+  padding:28px;
   background:#0a1630;
   font-size:14px;
 }
@@ -152,14 +132,10 @@ footer{
 <nav>
   <div class="logo">OfferView</div>
   <div class="menu">
-    <a href="#">Categorías</a>
-    <a href="#">Ofertas</a>
-    <a href="#">Favoritos</a>
-    <a href="#">Blog</a>
-  </div>
-  <div class="auth">
-    <span>Acceder</span>
-    <span>Registro</span>
+    <a>Categorías</a>
+    <a>Ofertas</a>
+    <a>Favoritos</a>
+    <a>Blog</a>
   </div>
 </nav>
 
@@ -168,32 +144,48 @@ footer{
 </div>
 
 <div class="lang">
-  <button onclick="setLang('es')">ES</button>
-  <button onclick="setLang('en')">EN</button>
+  <button>ES</button>
+  <button>EN</button>
 </div>
 
 <!-- SECCIONES -->
-<div class="section"><h2 id="t1">Top Stores</h2><div class="grid" id="top"></div></div>
-<div class="section"><h2 id="t2">Gaming Stores</h2><div class="grid" id="gaming"></div></div>
-<div class="section"><h2 id="t3">Technology Stores</h2><div class="grid" id="tech"></div></div>
-<div class="section"><h2 id="t4">Shoes Stores</h2><div class="grid" id="shoes"></div></div>
-<div class="section"><h2 id="t5">Fashion & Lingerie Stores</h2><div class="grid" id="fashion"></div></div>
-<div class="section"><h2 id="t6">Travel Stores</h2><div class="grid" id="travel"></div></div>
-<div class="section"><h2 id="t7">Health & Beauty Stores</h2><div class="grid" id="health"></div></div>
+<div class="section"><h2>Top Stores</h2><div class="grid" id="top"></div></div>
+<div class="section"><h2>Gaming Stores</h2><div class="grid" id="gaming"></div></div>
+<div class="section"><h2>Technology Stores</h2><div class="grid" id="tech"></div></div>
+<div class="section"><h2>Shoes Stores</h2><div class="grid" id="shoes"></div></div>
+<div class="section"><h2>Fashion & Lingerie Stores</h2><div class="grid" id="fashion"></div></div>
+<div class="section"><h2>Travel Stores</h2><div class="grid" id="travel"></div></div>
 
-<footer>© 2025 OfferView · Directorio Global de Tiendas</footer>
+<footer>© 2025 OfferView · Comparador Global de Tiendas</footer>
 
 <script>
-const IMG="https://i.imgur.com/9YpZP0F.jpg";
+function cardSVG(name){
+return `
+<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+<stop offset="0%" stop-color="#2563eb"/>
+<stop offset="100%" stop-color="#0f172a"/>
+</linearGradient>
+</defs>
+<rect width="400" height="200" fill="url(#g)"/>
+<text x="20" y="110" font-size="36" fill="white" font-weight="700">${name}</text>
+</svg>`;
+}
 
 const STORES={
-top:["Amazon","Alibaba","AliExpress","Temu","eBay","Walmart","Target","IKEA","Costco","JD","Rakuten","Mercado Libre","Flipkart","Samsung","Apple","Nike","Adidas","Zara","Shein","Best Buy"],
-gaming:["Steam","Epic Games","PlayStation","Xbox","Nintendo","G2A","Humble Bundle","EA","Ubisoft","Green Man Gaming"],
-tech:["Apple","Samsung","Microsoft","Asus","Lenovo","Huawei","Xiaomi","Dell","HP","Newegg"],
+top:["Amazon","Alibaba","AliExpress","eBay","Walmart","Temu","Mercado Libre","Rakuten","JD","Target",
+     "IKEA","Costco","Flipkart","Best Buy","Newegg","Shopify","Etsy","Shopee","Lazada","Carrefour"],
+
+gaming:["Steam","Epic Games","PlayStation","Xbox","Nintendo","Ubisoft","EA","G2A","Humble Bundle","Riot Games"],
+
+tech:["Apple","Samsung","Microsoft","Dell","HP","Asus","Lenovo","Xiaomi","Huawei","Sony"],
+
 shoes:["Nike","Adidas","Puma","Reebok","New Balance","Skechers","Converse","Vans","Anta","Li-Ning"],
-fashion:["Zara","H&M","Uniqlo","Shein","Victoria’s Secret","Calvin Klein","Fashion Nova","Aerie","YesStyle","Savage X Fenty"],
-travel:["Booking","Expedia","Airbnb","Skyscanner","Kayak","Agoda","Trip.com","Hotels.com","Priceline","Travelocity"],
-health:["Sephora","Ulta","Watsons","CVS","Walgreens","Lush","The Body Shop","Kiehl’s","NYX","Douglas"]
+
+fashion:["Zara","H&M","Uniqlo","Shein","Victoria’s Secret","Calvin Klein","Fashion Nova","Aerie","Savage X Fenty","YesStyle"],
+
+travel:["Booking","Expedia","Airbnb","Skyscanner","Agoda","Kayak","Trip.com","Hotels.com","Priceline","Travelocity"]
 };
 
 function render(id,list){
@@ -203,24 +195,12 @@ function render(id,list){
     a.href="https://www.google.com/search?q="+name;
     a.target="_blank";
     a.className="card";
-    a.innerHTML=`<img src="${IMG}"><div class="overlay"><h3>${name}</h3><button>Ver ahora</button></div>`;
+    a.innerHTML=cardSVG(name)+`<div class="overlay"><h3>${name}</h3><button>Ver ahora</button></div>`;
     box.appendChild(a);
   });
 }
 
 Object.keys(STORES).forEach(k=>render(k,STORES[k]));
-
-function setLang(l){
-  if(l==="en"){
-    t1.textContent="Top Stores";
-    t2.textContent="Gaming Stores";
-    t3.textContent="Technology Stores";
-    t4.textContent="Shoes Stores";
-    t5.textContent="Fashion & Lingerie Stores";
-    t6.textContent="Travel Stores";
-    t7.textContent="Health & Beauty Stores";
-  }
-}
 </script>
 
 </body>
