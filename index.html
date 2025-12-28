@@ -3,14 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OfferView – Tu ventana a las mejores ofertas</title>
+<title>OfferView – Directorio Global de Tiendas</title>
+
+<!-- SEO -->
+<meta name="description" content="OfferView reúne las tiendas más importantes del mundo en un solo lugar.">
+<meta name="keywords" content="ofertas, tiendas, ecommerce, marketplace">
+<meta name="author" content="OfferView">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDM9GCV149"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PDM9GCV149');
+</script>
 
 <style>
 :root{
   --mamey:#F59E0B;
-  --blue1:#0b1f44;
-  --blue2:#123a8c;
+  --blue1:#0b1f4d;
+  --blue2:#0f3a7a;
+  --card:#ffffff;
 }
+
+*{box-sizing:border-box}
 
 body{
   margin:0;
@@ -19,109 +36,121 @@ body{
   color:#fff;
 }
 
-nav{
+/* HEADER */
+header{
+  padding:18px 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:18px 24px;
 }
 
 .logo{
   font-size:26px;
-  font-weight:900;
+  font-weight:800;
   color:var(--mamey);
 }
 
-.menu a{
+nav a{
   color:#fff;
-  margin:0 8px;
   text-decoration:none;
-  font-size:14px;
+  margin:0 10px;
+  font-size:15px;
 }
 
-.search{
+.search-box{
+  max-width:700px;
+  margin:20px auto;
   display:flex;
-  justify-content:center;
-  margin:25px 16px;
 }
 
-.search input{
+.search-box input{
   width:100%;
-  max-width:600px;
   padding:14px 18px;
   border-radius:30px;
   border:none;
+  font-size:15px;
 }
 
 .lang{
   text-align:center;
-  margin-bottom:20px;
+  margin-bottom:10px;
 }
 
 .lang button{
-  background:#1f2f5a;
+  background:#1e3a8a;
   color:#fff;
   border:none;
   padding:6px 14px;
-  margin:0 5px;
-  border-radius:10px;
+  border-radius:20px;
+  margin:0 4px;
+  cursor:pointer;
 }
 
 .section{
-  padding:20px 20px 35px;
+  max-width:1200px;
+  margin:40px auto;
+  padding:0 15px;
 }
 
 .section h2{
-  font-size:22px;
-  margin-bottom:16px;
+  margin-bottom:15px;
+  font-size:24px;
 }
 
+/* CARDS */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:16px;
 }
 
 .card{
-  height:140px;
+  background:var(--card);
   border-radius:16px;
   overflow:hidden;
-  position:relative;
-  cursor:pointer;
+  text-decoration:none;
+  color:#000;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
   transition:.25s;
 }
 
-.card:hover{transform:translateY(-4px)}
+.card:hover{
+  transform:translateY(-6px);
+}
 
-.card svg{
+.card img{
   width:100%;
-  height:100%;
+  height:140px;
+  object-fit:contain;
+  background:#f8fafc;
+  padding:18px;
 }
 
-.overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(90deg,rgba(0,0,0,.65),rgba(0,0,0,.25));
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  padding:14px;
+.card .info{
+  padding:12px;
+  text-align:center;
 }
 
-.overlay h3{margin:0 0 6px}
+.card .info h3{
+  margin:6px 0;
+  font-size:16px;
+}
 
-.overlay button{
-  background:#fff;
-  border:none;
+.card .info span{
+  display:inline-block;
+  margin-top:6px;
   padding:6px 14px;
+  background:var(--mamey);
+  color:#000;
   border-radius:20px;
   font-size:13px;
+  font-weight:700;
 }
 
 footer{
   text-align:center;
-  padding:28px;
-  background:#0a1630;
+  padding:25px;
+  background:#020617;
   font-size:14px;
 }
 </style>
@@ -129,18 +158,20 @@ footer{
 
 <body>
 
-<nav>
+<header>
   <div class="logo">OfferView</div>
-  <div class="menu">
-    <a>Categorías</a>
-    <a>Ofertas</a>
-    <a>Favoritos</a>
-    <a>Blog</a>
-  </div>
-</nav>
+  <nav>
+    <a href="#">Categorías</a>
+    <a href="#">Ofertas</a>
+    <a href="#">Favoritos</a>
+    <a href="#">Blog</a>
+    <a href="#">Acceder</a>
+    <a href="#">Registro</a>
+  </nav>
+</header>
 
-<div class="search">
-  <input placeholder="Buscar tiendas, productos o marcas…">
+<div class="search-box">
+  <input type="text" placeholder="Buscar tiendas, productos o marcas...">
 </div>
 
 <div class="lang">
@@ -149,58 +180,70 @@ footer{
 </div>
 
 <!-- SECCIONES -->
-<div class="section"><h2>Top Stores</h2><div class="grid" id="top"></div></div>
-<div class="section"><h2>Gaming Stores</h2><div class="grid" id="gaming"></div></div>
-<div class="section"><h2>Technology Stores</h2><div class="grid" id="tech"></div></div>
-<div class="section"><h2>Shoes Stores</h2><div class="grid" id="shoes"></div></div>
-<div class="section"><h2>Fashion & Lingerie Stores</h2><div class="grid" id="fashion"></div></div>
-<div class="section"><h2>Travel Stores</h2><div class="grid" id="travel"></div></div>
+<div id="content"></div>
 
-<footer>© 2025 OfferView · Comparador Global de Tiendas</footer>
+<footer>
+© 2025 <strong>OfferView</strong> · Directorio Global de Tiendas
+</footer>
 
 <script>
-function cardSVG(name){
-return `
-<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-<stop offset="0%" stop-color="#2563eb"/>
-<stop offset="100%" stop-color="#0f172a"/>
-</linearGradient>
-</defs>
-<rect width="400" height="200" fill="url(#g)"/>
-<text x="20" y="110" font-size="36" fill="white" font-weight="700">${name}</text>
-</svg>`;
-}
-
-const STORES={
-top:["Amazon","Alibaba","AliExpress","eBay","Walmart","Temu","Mercado Libre","Rakuten","JD","Target",
-     "IKEA","Costco","Flipkart","Best Buy","Newegg","Shopify","Etsy","Shopee","Lazada","Carrefour"],
-
-gaming:["Steam","Epic Games","PlayStation","Xbox","Nintendo","Ubisoft","EA","G2A","Humble Bundle","Riot Games"],
-
-tech:["Apple","Samsung","Microsoft","Dell","HP","Asus","Lenovo","Xiaomi","Huawei","Sony"],
-
-shoes:["Nike","Adidas","Puma","Reebok","New Balance","Skechers","Converse","Vans","Anta","Li-Ning"],
-
-fashion:["Zara","H&M","Uniqlo","Shein","Victoria’s Secret","Calvin Klein","Fashion Nova","Aerie","Savage X Fenty","YesStyle"],
-
-travel:["Booking","Expedia","Airbnb","Skyscanner","Agoda","Kayak","Trip.com","Hotels.com","Priceline","Travelocity"]
+const sections = {
+  "Top Stores":[
+    "amazon.com","alibaba.com","aliexpress.com","ebay.com","walmart.com",
+    "temu.com","mercadolibre.com","target.com","costco.com","etsy.com",
+    "bestbuy.com","ikea.com","burlington.com","marshalls.com","rossstores.com",
+    "miniso.com","made-in-china.com","dollartree.com","homedepot.com","lowes.com"
+  ],
+  "Gaming Stores":[
+    "store.steampowered.com","epicgames.com","playstation.com","xbox.com",
+    "nintendo.com","g2a.com","humblebundle.com","greenmangaming.com",
+    "ea.com","ubisoft.com"
+  ],
+  "Technology Stores":[
+    "apple.com","samsung.com","lenovo.com","hp.com","dell.com",
+    "asus.com","acer.com","xiaomi.com","huawei.com","microsoft.com"
+  ],
+  "Shoes Stores":[
+    "nike.com","adidas.com","puma.com","newbalance.com","reebok.com",
+    "skechers.com","converse.com","vans.com","anta.com","lining.com"
+  ],
+  "Fashion & Lingerie":[
+    "shein.com","zara.com","hm.com","uniqlo.com","calvinklein.us",
+    "victoriassecret.com","savagex.com","fashionnova.com","ae.com","yesstyle.com"
+  ],
+  "Travel Stores":[
+    "booking.com","expedia.com","airbnb.com","skyscanner.com","kayak.com",
+    "agoda.com","trip.com","hotels.com","priceline.com","travelocity.com"
+  ],
+  "Health & Beauty":[
+    "sephora.com","ulta.com","watsons.com","douglas.de","cvs.com",
+    "walgreens.com","thebodyshop.com","lush.com","kiehls.com","nyxcosmetics.com"
+  ]
 };
 
-function render(id,list){
-  const box=document.getElementById(id);
-  list.forEach(name=>{
-    const a=document.createElement("a");
-    a.href="https://www.google.com/search?q="+name;
-    a.target="_blank";
-    a.className="card";
-    a.innerHTML=cardSVG(name)+`<div class="overlay"><h3>${name}</h3><button>Ver ahora</button></div>`;
-    box.appendChild(a);
-  });
-}
+const container = document.getElementById("content");
 
-Object.keys(STORES).forEach(k=>render(k,STORES[k]));
+for(const section in sections){
+  const div = document.createElement("div");
+  div.className = "section";
+  div.innerHTML = `<h2>${section}</h2><div class="grid"></div>`;
+  const grid = div.querySelector(".grid");
+
+  sections[section].forEach(domain=>{
+    const name = domain.replace("www.","").split(".")[0];
+    grid.innerHTML += `
+      <a class="card" href="https://${domain}" target="_blank">
+        <img src="https://logo.clearbit.com/${domain}" alt="${name}">
+        <div class="info">
+          <h3>${name.charAt(0).toUpperCase()+name.slice(1)}</h3>
+          <span>Ver ahora</span>
+        </div>
+      </a>
+    `;
+  });
+
+  container.appendChild(div);
+}
 </script>
 
 </body>
