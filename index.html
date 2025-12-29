@@ -4,247 +4,260 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OfferView – Directorio Global de Tiendas</title>
-
-<!-- SEO -->
-<meta name="description" content="OfferView reúne las tiendas más importantes del mundo en un solo lugar.">
-<meta name="keywords" content="ofertas, tiendas, ecommerce, marketplace">
+<meta name="description" content="OfferView es un directorio global que reúne las tiendas más visitadas del mundo en un solo lugar.">
+<meta name="keywords" content="ofertas, tiendas online, compras, ecommerce, directorio de tiendas">
 <meta name="author" content="OfferView">
-
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDM9GCV149"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-PDM9GCV149');
-</script>
-
 <style>
 :root{
-  --mamey:#F59E0B;
-  --blue1:#0b1f4d;
-  --blue2:#0f3a7a;
-  --card:#ffffff;
+  --primary:#FF7F50; /* mamey */
+  --secondary:#2563EB;
+  --bg:#0b1633;
+  --text:#ffffff;
+  --card:#1f2937;
 }
-
-*{box-sizing:border-box}
-
 body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
-  background:linear-gradient(135deg,var(--blue1),var(--blue2));
-  color:#fff;
+  background:var(--bg);
+  color:var(--text);
 }
-
-/* HEADER */
 header{
-  padding:18px 20px;
   display:flex;
+  flex-wrap:wrap;
   justify-content:space-between;
   align-items:center;
+  padding:15px 20px;
 }
-
-.logo{
-  font-size:26px;
-  font-weight:800;
-  color:var(--mamey);
+header h1{
+  color:var(--primary);
+  font-size:28px;
+  margin:0;
 }
-
-nav a{
-  color:#fff;
-  text-decoration:none;
-  margin:0 10px;
-  font-size:15px;
-}
-
-.search-box{
-  max-width:700px;
-  margin:20px auto;
-  display:flex;
-}
-
-.search-box input{
-  width:100%;
-  padding:14px 18px;
-  border-radius:30px;
-  border:none;
-  font-size:15px;
-}
-
-.lang{
-  text-align:center;
-  margin-bottom:10px;
-}
-
-.lang button{
-  background:#1e3a8a;
+.lang-switch button{
+  background:var(--card);
   color:#fff;
   border:none;
-  padding:6px 14px;
-  border-radius:20px;
-  margin:0 4px;
+  padding:6px 12px;
+  margin-left:5px;
+  border-radius:8px;
   cursor:pointer;
 }
-
-.section{
-  max-width:1200px;
-  margin:40px auto;
-  padding:0 15px;
+input[type=text]{
+  width:90%;
+  margin:10px auto;
+  display:block;
+  padding:10px;
+  border-radius:8px;
+  border:none;
 }
-
-.section h2{
-  margin-bottom:15px;
+section{
+  padding:20px;
+}
+.section-title{
   font-size:24px;
+  margin-bottom:15px;
+  color:var(--primary);
 }
-
-/* CARDS */
 .grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:16px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:15px;
 }
-
 .card{
   background:var(--card);
-  border-radius:16px;
-  overflow:hidden;
-  text-decoration:none;
-  color:#000;
-  box-shadow:0 10px 25px rgba(0,0,0,.25);
-  transition:.25s;
-}
-
-.card:hover{
-  transform:translateY(-6px);
-}
-
-.card img{
-  width:100%;
-  height:140px;
-  object-fit:contain;
-  background:#f8fafc;
-  padding:18px;
-}
-
-.card .info{
-  padding:12px;
+  border-radius:12px;
+  padding:15px;
   text-align:center;
+  width:200px;
+  transition:0.3s;
 }
-
-.card .info h3{
-  margin:6px 0;
-  font-size:16px;
+.card:hover{
+  transform:translateY(-5px);
 }
-
-.card .info span{
-  display:inline-block;
-  margin-top:6px;
-  padding:6px 14px;
-  background:var(--mamey);
-  color:#000;
-  border-radius:20px;
-  font-size:13px;
-  font-weight:700;
+.card img{
+  width:80px;
+  height:80px;
+  object-fit:contain;
+  margin-bottom:10px;
 }
-
+.card button{
+  background:var(--primary);
+  border:none;
+  color:#fff;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:5px;
+}
 footer{
   text-align:center;
-  padding:25px;
-  background:#020617;
-  font-size:14px;
+  padding:20px;
+  font-size:12px;
+  color:#ccc;
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <div class="logo">OfferView</div>
-  <nav>
-    <a href="#">Categorías</a>
-    <a href="#">Ofertas</a>
-    <a href="#">Favoritos</a>
-    <a href="#">Blog</a>
-    <a href="#">Acceder</a>
-    <a href="#">Registro</a>
-  </nav>
+  <h1>OfferView</h1>
+  <div>
+    <button onclick="setLang('es')">ES</button>
+    <button onclick="setLang('en')">EN</button>
+  </div>
 </header>
 
-<div class="search-box">
-  <input type="text" placeholder="Buscar tiendas, productos o marcas...">
-</div>
+<input type="text" placeholder="Buscar tiendas, productos o marcas...">
 
-<div class="lang">
-  <button>ES</button>
-  <button>EN</button>
-</div>
+<!-- Secciones -->
+<section>
+  <h2 class="section-title">Top Stores</h2>
+  <div class="grid" id="top"></div>
+</section>
 
-<!-- SECCIONES -->
-<div id="content"></div>
+<section>
+  <h2 class="section-title">Gaming Stores</h2>
+  <div class="grid" id="gaming"></div>
+</section>
+
+<section>
+  <h2 class="section-title">Technology Stores</h2>
+  <div class="grid" id="tech"></div>
+</section>
+
+<section>
+  <h2 class="section-title">Shoes Stores</h2>
+  <div class="grid" id="shoes"></div>
+</section>
+
+<section>
+  <h2 class="section-title">Fashion & Lingerie Stores</h2>
+  <div class="grid" id="fashion"></div>
+</section>
+
+<section>
+  <h2 class="section-title">Travel Stores</h2>
+  <div class="grid" id="travel"></div>
+</section>
+
+<section>
+  <h2 class="section-title">Health & Beauty Stores</h2>
+  <div class="grid" id="health"></div>
+</section>
 
 <footer>
-© 2025 <strong>OfferView</strong> · Directorio Global de Tiendas
+  © 2025 OfferView · Directorio Global de Tiendas <br>
+  OfferView no está afiliado ni respaldado por las marcas mostradas. Todos los logos son propiedad de sus respectivos dueños.
 </footer>
 
 <script>
-const sections = {
-  "Top Stores":[
-    "amazon.com","alibaba.com","aliexpress.com","ebay.com","walmart.com",
-    "temu.com","mercadolibre.com","target.com","costco.com","etsy.com",
-    "bestbuy.com","ikea.com","burlington.com","marshalls.com","rossstores.com",
-    "miniso.com","made-in-china.com","dollartree.com","homedepot.com","lowes.com"
+const STORES = {
+  top:[
+    ["Amazon","https://www.amazon.com","https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"],
+    ["Alibaba","https://www.alibaba.com","https://upload.wikimedia.org/wikipedia/commons/2/2e/Alibaba.com_logo.svg"],
+    ["AliExpress","https://www.aliexpress.com","https://upload.wikimedia.org/wikipedia/commons/2/27/AliExpress_logo.svg"],
+    ["Temu","https://www.temu.com","https://upload.wikimedia.org/wikipedia/commons/0/0c/Temu_logo.png"],
+    ["eBay","https://www.ebay.com","https://upload.wikimedia.org/wikipedia/commons/1/1b/EBay_logo.svg"],
+    ["Burlington","https://www.burlington.com","https://upload.wikimedia.org/wikipedia/commons/8/80/Burlington_logo.svg"],
+    ["Marshalls","https://www.marshalls.com","https://upload.wikimedia.org/wikipedia/commons/6/6b/Marshalls_logo.svg"],
+    ["Ross","https://www.rossstores.com","https://upload.wikimedia.org/wikipedia/commons/4/4b/Ross_Stores_logo.svg"],
+    ["Miniso","https://www.miniso.com","https://upload.wikimedia.org/wikipedia/commons/5/56/Miniso_logo.svg"],
+    ["Dollar Tree","https://www.dollartree.com","https://upload.wikimedia.org/wikipedia/commons/0/05/Dollar_Tree_logo.svg"]
   ],
-  "Gaming Stores":[
-    "store.steampowered.com","epicgames.com","playstation.com","xbox.com",
-    "nintendo.com","g2a.com","humblebundle.com","greenmangaming.com",
-    "ea.com","ubisoft.com"
+  gaming:[
+    ["Steam","https://store.steampowered.com","https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg"],
+    ["Epic Games","https://store.epicgames.com","https://upload.wikimedia.org/wikipedia/commons/3/31/Epic_Games_logo.svg"],
+    ["PlayStation","https://store.playstation.com","https://upload.wikimedia.org/wikipedia/commons/1/12/PlayStation_logo.svg"],
+    ["Xbox","https://www.xbox.com/store","https://upload.wikimedia.org/wikipedia/commons/4/43/Xbox_logo_%282019%29.svg"],
+    ["Nintendo","https://www.nintendo.com/store","https://upload.wikimedia.org/wikipedia/commons/0/0d/Nintendo_logo.svg"],
+    ["G2A","https://www.g2a.com","https://upload.wikimedia.org/wikipedia/commons/e/e5/G2A_logo.svg"],
+    ["Humble Bundle","https://www.humblebundle.com","https://upload.wikimedia.org/wikipedia/commons/e/ef/Humble_Bundle_logo.svg"],
+    ["Green Man Gaming","https://www.greenmangaming.com","https://upload.wikimedia.org/wikipedia/commons/3/37/Green_Man_Gaming_logo.svg"],
+    ["Ubisoft Store","https://store.ubi.com","https://upload.wikimedia.org/wikipedia/commons/3/3b/Ubisoft_logo.svg"],
+    ["EA Store","https://www.ea.com","https://upload.wikimedia.org/wikipedia/commons/2/23/EA_Logo.svg"]
   ],
-  "Technology Stores":[
-    "apple.com","samsung.com","lenovo.com","hp.com","dell.com",
-    "asus.com","acer.com","xiaomi.com","huawei.com","microsoft.com"
+  tech:[
+    ["Best Buy","https://www.bestbuy.com","https://upload.wikimedia.org/wikipedia/commons/1/1f/Best_Buy_Logo.svg"],
+    ["Apple","https://www.apple.com","https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"],
+    ["Newegg","https://www.newegg.com","https://upload.wikimedia.org/wikipedia/commons/3/32/Newegg_logo.svg"],
+    ["B&H","https://www.bhphotovideo.com","https://upload.wikimedia.org/wikipedia/commons/f/f3/B%26H_Photo_Video_Logo.svg"],
+    ["Lenovo","https://www.lenovo.com","https://upload.wikimedia.org/wikipedia/commons/0/00/Lenovo_logo_2015.svg"],
+    ["Samsung","https://www.samsung.com","https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg"],
+    ["Huawei","https://www.huawei.com","https://upload.wikimedia.org/wikipedia/commons/5/53/Huawei_logo.svg"],
+    ["Microsoft","https://www.microsoft.com","https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"],
+    ["Asus","https://www.asus.com","https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg"],
+    ["Xiaomi","https://www.mi.com","https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg"]
   ],
-  "Shoes Stores":[
-    "nike.com","adidas.com","puma.com","newbalance.com","reebok.com",
-    "skechers.com","converse.com","vans.com","anta.com","lining.com"
+  shoes:[
+    ["Nike","https://www.nike.com","https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg"],
+    ["Adidas","https://www.adidas.com","https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg"],
+    ["Puma","https://us.puma.com","https://upload.wikimedia.org/wikipedia/commons/f/fd/Puma_logo.svg"],
+    ["Reebok","https://www.reebok.com","https://upload.wikimedia.org/wikipedia/commons/7/77/Reebok_Logo.svg"],
+    ["New Balance","https://www.newbalance.com","https://upload.wikimedia.org/wikipedia/commons/f/f7/New_Balance_logo.svg"],
+    ["Skechers","https://www.skechers.com","https://upload.wikimedia.org/wikipedia/commons/3/3c/Skechers_logo.svg"],
+    ["Vans","https://www.vans.com","https://upload.wikimedia.org/wikipedia/commons/e/e3/Vans_logo.svg"],
+    ["Converse","https://www.converse.com","https://upload.wikimedia.org/wikipedia/commons/3/32/Converse_logo.svg"],
+    ["Under Armour","https://www.underarmour.com","https://upload.wikimedia.org/wikipedia/commons/7/7f/Under_armour_logo.svg"],
+    ["Fila","https://www.fila.com","https://upload.wikimedia.org/wikipedia/commons/2/2e/Fila_logo.svg"]
   ],
-  "Fashion & Lingerie":[
-    "shein.com","zara.com","hm.com","uniqlo.com","calvinklein.us",
-    "victoriassecret.com","savagex.com","fashionnova.com","ae.com","yesstyle.com"
+  fashion:[
+    ["Zara","https://www.zara.com","https://upload.wikimedia.org/wikipedia/commons/f/f2/Zara_Logo.svg"],
+    ["H&M","https://www.hm.com","https://upload.wikimedia.org/wikipedia/commons/5/5c/H%26M-Logo.svg"],
+    ["Forever 21","https://www.forever21.com","https://upload.wikimedia.org/wikipedia/commons/6/66/Forever_21_logo.svg"],
+    ["Shein","https://www.shein.com","https://upload.wikimedia.org/wikipedia/commons/7/7f/Shein_logo.svg"],
+    ["Uniqlo","https://www.uniqlo.com","https://upload.wikimedia.org/wikipedia/commons/9/9a/Uniqlo_logo.svg"],
+    ["Mango","https://shop.mango.com","https://upload.wikimedia.org/wikipedia/commons/7/70/Mango_logo.svg"],
+    ["Bershka","https://www.bershka.com","https://upload.wikimedia.org/wikipedia/commons/7/7e/Bershka_logo.svg"],
+    ["Pull & Bear","https://www.pullandbear.com","https://upload.wikimedia.org/wikipedia/commons/5/55/Pull_%26_Bear_logo.svg"],
+    ["Stradivarius","https://www.stradivarius.com","https://upload.wikimedia.org/wikipedia/commons/f/f7/Stradivarius_logo.svg"],
+    ["Massimo Dutti","https://www.massimodutti.com","https://upload.wikimedia.org/wikipedia/commons/5/51/Massimo_Dutti_logo.svg"]
   ],
-  "Travel Stores":[
-    "booking.com","expedia.com","airbnb.com","skyscanner.com","kayak.com",
-    "agoda.com","trip.com","hotels.com","priceline.com","travelocity.com"
+  travel:[
+    ["Booking.com","https://www.booking.com","https://upload.wikimedia.org/wikipedia/commons/1/18/Booking.com_logo.svg"],
+    ["Expedia","https://www.expedia.com","https://upload.wikimedia.org/wikipedia/commons/6/66/Expedia_logo.svg"],
+    ["Airbnb","https://www.airbnb.com","https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg"],
+    ["Agoda","https://www.agoda.com","https://upload.wikimedia.org/wikipedia/commons/2/28/Agoda_logo.svg"],
+    ["Tripadvisor","https://www.tripadvisor.com","https://upload.wikimedia.org/wikipedia/commons/f/f2/Tripadvisor_logo.svg"],
+    ["Hotels.com","https://www.hotels.com","https://upload.wikimedia.org/wikipedia/commons/f/f0/Hotels.com_logo.svg"],
+    ["Kayak","https://www.kayak.com","https://upload.wikimedia.org/wikipedia/commons/c/cd/Kayak_logo.svg"],
+    ["Skyscanner","https://www.skyscanner.com","https://upload.wikimedia.org/wikipedia/commons/e/ee/Skyscanner_logo.svg"],
+    ["Travelocity","https://www.travelocity.com","https://upload.wikimedia.org/wikipedia/commons/7/7d/Travelocity_logo.svg"],
+    ["Orbitz","https://www.orbitz.com","https://upload.wikimedia.org/wikipedia/commons/c/c2/Orbitz_logo.svg"]
   ],
-  "Health & Beauty":[
-    "sephora.com","ulta.com","watsons.com","douglas.de","cvs.com",
-    "walgreens.com","thebodyshop.com","lush.com","kiehls.com","nyxcosmetics.com"
+  health:[
+    ["Sephora","https://www.sephora.com","https://upload.wikimedia.org/wikipedia/commons/3/30/Sephora_logo.svg"],
+    ["Ulta Beauty","https://www.ulta.com","https://upload.wikimedia.org/wikipedia/commons/1/1b/Ulta_Beauty_logo.svg"],
+    ["Walgreens","https://www.walgreens.com","https://upload.wikimedia.org/wikipedia/commons/1/16/Walgreens_logo.svg"],
+    ["CVS","https://www.cvs.com","https://upload.wikimedia.org/wikipedia/commons/8/86/CVS_logo.svg"],
+    ["Boots","https://www.boots.com","https://upload.wikimedia.org/wikipedia/commons/2/26/Boots_logo.svg"],
+    ["GNC","https://www.gnc.com","https://upload.wikimedia.org/wikipedia/commons/8/88/GNC_logo.svg"],
+    ["Rite Aid","https://www.riteaid.com","https://upload.wikimedia.org/wikipedia/commons/2/2f/Rite_Aid_logo.svg"],
+    ["The Body Shop","https://www.thebodyshop.com","https://upload.wikimedia.org/wikipedia/commons/5/5e/The_Body_Shop_logo.svg"],
+    ["Lush","https://www.lush.com","https://upload.wikimedia.org/wikipedia/commons/0/08/Lush_logo.svg"],
+    ["Dr. Martens","https://www.drmartens.com","https://upload.wikimedia.org/wikipedia/commons/e/e7/Dr._Martens_logo.svg"]
   ]
 };
 
-const container = document.getElementById("content");
-
-for(const section in sections){
-  const div = document.createElement("div");
-  div.className = "section";
-  div.innerHTML = `<h2>${section}</h2><div class="grid"></div>`;
-  const grid = div.querySelector(".grid");
-
-  sections[section].forEach(domain=>{
-    const name = domain.replace("www.","").split(".")[0];
-    grid.innerHTML += `
-      <a class="card" href="https://${domain}" target="_blank">
-        <img src="https://logo.clearbit.com/${domain}" alt="${name}">
-        <div class="info">
-          <h3>${name.charAt(0).toUpperCase()+name.slice(1)}</h3>
-          <span>Ver ahora</span>
-        </div>
-      </a>
+// Render
+function render(section, data){
+  const box=document.getElementById(section);
+  data.forEach(s=>{
+    const div=document.createElement("div");
+    div.className="card";
+    div.innerHTML=`
+      <img src="${s[2]}" alt="${s[0]}">
+      <h3>${s[0]}</h3>
+      <button onclick="window.open('${s[1]}','_blank')">Ver ahora</button>
     `;
+    box.appendChild(div);
   });
-
-  container.appendChild(div);
 }
-</script>
 
+Object.keys(STORES).forEach(s=>render(s,STORES[s]));
+
+// Idiomas
+function setLang(l){localStorage.setItem("lang",l);}
+setLang(localStorage.getItem("lang")||"es");
+</script>
 </body>
 </html>
