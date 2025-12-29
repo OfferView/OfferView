@@ -100,6 +100,9 @@ header p{
   height:80px;
   object-fit:contain;
   margin-bottom:12px;
+  background:#f3f4f6;
+  border-radius:12px;
+  padding:10px;
 }
 
 footer{
@@ -129,6 +132,15 @@ footer{
 </footer>
 
 <script>
+/* Logo genérico profesional (fallback seguro) */
+const FALLBACK_LOGO =
+'data:image/svg+xml;utf8,\
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80">\
+<rect width="100%" height="100%" rx="16" fill="%23F3F4F6"/>\
+<text x="50%" y="55%" font-size="28" text-anchor="middle" fill="%239CA3AF" font-family="Arial">OV</text>\
+</svg>';
+
+/* SECCIONES Y TIENDAS */
 const SECTIONS = {
 "Top Stores":[
 ["Amazon","amazon.com"],["Alibaba","alibaba.com"],["AliExpress","aliexpress.com"],
@@ -220,7 +232,8 @@ for(const section in SECTIONS){
     a.href="https://"+s[1];
     a.target="_blank";
     a.innerHTML=`
-      <img src="https://logo.clearbit.com/${s[1]}" alt="${s[0]}">
+      <img src="https://logo.clearbit.com/${s[1]}" alt="${s[0]}"
+      onerror="this.onerror=null;this.src=FALLBACK_LOGO;">
       <div>${s[0]}</div>`;
     grid.appendChild(a);
   });
