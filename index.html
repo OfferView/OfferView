@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OfferView – Directorio Global de Tiendas</title>
+
+<title>OfferView – Tu Guía a Las Mejores Ofertas</title>
 
 <meta name="description" content="OfferView es un directorio global que reúne las tiendas más visitadas del mundo en un solo lugar.">
 <meta name="author" content="OfferView">
@@ -42,8 +43,8 @@ header{
 
 header h1{
   color:var(--mamey);
-  font-size:38px;
-  margin-bottom:5px;
+  font-size:40px;
+  margin-bottom:8px;
 }
 
 header p{
@@ -82,17 +83,20 @@ header p{
 
 .card{
   background:var(--card);
-  border-radius:18px;
-  padding:20px 15px;
+  border-radius:16px;
+  padding:18px;
   text-align:center;
   text-decoration:none;
   color:var(--blue);
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  font-weight:700;
+  box-shadow:0 8px 22px rgba(0,0,0,0.08);
   transition:.25s;
 }
 
 .card:hover{
-  transform:translateY(-6px);
+  transform:translateY(-4px);
+  background:var(--mamey);
+  color:#fff;
 }
 
 footer{
@@ -100,6 +104,12 @@ footer{
   padding:35px 15px;
   background:#eef2f7;
   font-size:14px;
+}
+
+footer a{
+  color:var(--blue);
+  text-decoration:none;
+  margin:0 10px;
 }
 </style>
 </head>
@@ -118,78 +128,60 @@ footer{
 <div id="content"></div>
 
 <footer>
-© 2025 <strong>OfferView</strong> · Directorio Global de Tiendas
+  <div>© 2025 <strong>OfferView</strong> · Directorio Global de Tiendas</div>
+  <div style="margin-top:10px;">
+    <a href="privacy.html">Política de Privacidad</a>
+    <a href="proxy.html">Proxy Seguro</a>
+    <a href="mailto:contacto@offerview.com">Contacto</a>
+  </div>
 </footer>
 
 <script>
 const SECTIONS = {
 "Top Stores":[
-["Amazon","amazon.com"],["Alibaba","alibaba.com"],["AliExpress","aliexpress.com"],
-["eBay","ebay.com"],["Walmart","walmart.com"],["Target","target.com"],
-["Best Buy","bestbuy.com"],["Costco","costco.com"],["Burlington","burlington.com"],
-["Marshalls","marshalls.com"],["Ross","rossstores.com"],["Miniso","miniso.com"],
-["Dollar Tree","dollartree.com"],["Made-in-China","made-in-china.com"],
-["Temu","temu.com"],["Shein","shein.com"],["Wish","wish.com"],
-["JD","jd.com"],["Rakuten","rakuten.com"],["Mercado Libre","mercadolibre.com"]
+"Amazon","Alibaba","AliExpress","eBay","Walmart","Target","Costco",
+"Burlington","Marshalls","Ross","Miniso","Dollar Tree","Made in China",
+"Temu","Shein","Wish","JD","Rakuten","Mercado Libre","Flipkart"
 ],
 
 "Gaming Stores":[
-["Steam","steampowered.com"],["Epic Games","epicgames.com"],
-["PlayStation","playstation.com"],["Xbox","xbox.com"],
-["Nintendo","nintendo.com"],["GameStop","gamestop.com"],
-["Ubisoft","ubisoft.com"],["EA","ea.com"],
-["Blizzard","blizzard.com"],["GOG","gog.com"]
-],
-
-"Calzados Stores":[
-["Nike","nike.com"],["Adidas","adidas.com"],["Puma","puma.com"],
-["Foot Locker","footlocker.com"],["New Balance","newbalance.com"],
-["Skechers","skechers.com"],["Reebok","reebok.com"],
-["Converse","converse.com"],["Vans","vans.com"],["Crocs","crocs.com"]
-],
-
-"Moda & Lencería Stores":[
-["Zara","zara.com"],["H&M","hm.com"],["Forever 21","forever21.com"],
-["Uniqlo","uniqlo.com"],["Pull&Bear","pullandbear.com"],
-["Bershka","bershka.com"],["Stradivarius","stradivarius.com"],
-["Fashion Nova","fashionnova.com"],["Gap","gap.com"],["Old Navy","oldnavy.com"],
-["Victoria’s Secret","victoriassecret.com"],["Aerie","aerie.com"],
-["Calvin Klein","calvinklein.com"],["Savage X Fenty","savagex.com"],
-["La Senza","lasenza.com"],["Intimissimi","intimissimi.com"],
-["Oysho","oysho.com"],["ThirdLove","thirdlove.com"],
-["Skims","skims.com"],["Adore Me","adoreme.com"]
+"Steam","Epic Games","PlayStation","Xbox","Nintendo",
+"GameStop","Ubisoft","EA","Blizzard","GOG"
 ],
 
 "Tecnología Stores":[
-["Newegg","newegg.com"],["B&H","bhphotovideo.com"],
-["Lenovo","lenovo.com"],["Dell","dell.com"],
-["HP","hp.com"],["Xiaomi","mi.com"],
-["Asus","asus.com"],["Acer","acer.com"],
-["Microsoft","microsoft.com"],["Samsung","samsung.com"]
+"Newegg","B&H","Lenovo","Dell","HP",
+"Xiaomi","Asus","Acer","Microsoft","Samsung"
+],
+
+"Calzados Stores":[
+"Nike","Adidas","Puma","Foot Locker","New Balance",
+"Skechers","Reebok","Converse","Vans","Crocs"
+],
+
+"Moda Stores":[
+"Zara","H&M","Forever 21","Uniqlo","Pull&Bear",
+"Bershka","Stradivarius","Fashion Nova","Gap","Old Navy"
+],
+
+"Lencería Stores":[
+"Victoria’s Secret","Aerie","Calvin Klein","Savage X Fenty","La Senza",
+"Intimissimi","Oysho","ThirdLove","Skims","Adore Me"
 ],
 
 "Salud y Belleza Stores":[
-["Sephora","sephora.com"],["Ulta Beauty","ulta.com"],
-["Sally Beauty","sallybeauty.com"],["The Body Shop","thebodyshop.com"],
-["Bath & Body Works","bathandbodyworks.com"],["L'Oréal","loreal.com"],
-["Maybelline","maybelline.com"],["Clinique","clinique.com"],
-["Estée Lauder","esteelauder.com"],["NYX","nyxcosmetics.com"]
+"Sephora","Ulta Beauty","Sally Beauty","The Body Shop","Bath & Body Works",
+"L'Oréal","Maybelline","Clinique","Estée Lauder","NYX"
 ],
 
 "Niños y Juguetería Stores":[
-["Toys R Us","toysrus.com"],["Lego","lego.com"],
-["Mattel","mattel.com"],["Hasbro","hasbro.com"],
-["Disney Store","shopdisney.com"],["Fisher-Price","fisher-price.com"],
-["Babylist","babylist.com"],["Carter’s","carters.com"],
-["OshKosh","oshkosh.com"],["Kidpik","kidpik.com"]
+"Toys R Us","Lego","Mattel","Hasbro","Disney Store",
+"Fisher-Price","Babylist","Carter’s","OshKosh","Kidpik"
 ],
 
-"Hoteles y Vuelos Stores":[
-["Booking","booking.com"],["Expedia","expedia.com"],
-["Airbnb","airbnb.com"],["Kayak","kayak.com"],
-["Skyscanner","skyscanner.com"],["Priceline","priceline.com"],
-["Agoda","agoda.com"],["Trip.com","trip.com"],
-["Hotels.com","hotels.com"],["Travelocity","travelocity.com"]
+"Hoteles y Vuelos":[
+"Booking","Expedia","Airbnb","Kayak","Skyscanner",
+"Priceline","Agoda","Trip.com","Hotels.com","Travelocity"
 ]
 };
 
@@ -204,12 +196,11 @@ for(const section in SECTIONS){
   const grid=document.createElement("div");
   grid.className="grid";
 
-  SECTIONS[section].forEach(s=>{
+  SECTIONS[section].forEach(name=>{
     const a=document.createElement("a");
     a.className="card";
-    a.href="https://"+s[1];
-    a.target="_blank";
-    a.textContent = s[0];
+    a.href="#";
+    a.textContent=name;
     grid.appendChild(a);
   });
 
