@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OfferView – Directorio Global de Tiendas</title>
 
-<title>OfferView – Tu Guía a Las Mejores Ofertas</title>
-
-<meta name="description" content="OfferView es un directorio global que reúne las tiendas más visitadas del mundo en un solo lugar.">
+<meta name="description" content="OfferView es tu guía a las mejores ofertas. Directorio global de tiendas organizado por categorías.">
 <meta name="author" content="OfferView">
 
 <!-- Google Analytics -->
@@ -27,6 +26,8 @@ gtag('config', 'G-PDM9GCV149');
   --text:#111827;
 }
 
+*{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
@@ -34,82 +35,118 @@ body{
   color:var(--text);
 }
 
+/* ===== HEADER ===== */
 header{
   text-align:center;
-  padding:40px 15px;
+  padding:60px 20px 50px;
   background:#0b1633;
   color:#fff;
 }
 
 header h1{
   color:var(--mamey);
-  font-size:40px;
-  margin-bottom:8px;
+  font-size:42px;
+  letter-spacing:1px;
+  margin-bottom:10px;
 }
 
 header p{
+  font-size:18px;
   margin:0;
-  font-size:16px;
+  opacity:.95;
+}
+
+header small{
+  display:block;
+  margin-top:10px;
+  opacity:.7;
 }
 
 .lang-switch{
-  margin-top:15px;
+  margin-top:20px;
 }
 
 .lang-switch button{
   background:#1f2937;
   color:#fff;
   border:none;
-  padding:6px 12px;
-  border-radius:8px;
-  margin:0 4px;
+  padding:6px 14px;
+  border-radius:10px;
+  margin:0 5px;
   cursor:pointer;
+}
+
+/* ===== SECTIONS ===== */
+.section{
+  padding:60px 0 20px;
+  opacity:0;
+  transform:translateY(30px);
+  transition:all .6s ease;
+}
+
+.section.visible{
+  opacity:1;
+  transform:translateY(0);
 }
 
 .section-title{
   text-align:center;
-  margin:40px 0 20px;
-  font-size:26px;
+  font-size:28px;
   font-weight:700;
   color:var(--mamey);
+  margin-bottom:10px;
 }
 
+.section-desc{
+  text-align:center;
+  font-size:14px;
+  opacity:.7;
+  margin-bottom:30px;
+}
+
+/* ===== GRID ===== */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:18px;
-  padding:0 20px 40px;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+  padding:0 25px;
 }
 
 .card{
   background:var(--card);
-  border-radius:16px;
-  padding:18px;
+  border-radius:18px;
+  padding:22px 18px;
   text-align:center;
   text-decoration:none;
   color:var(--blue);
-  font-weight:700;
-  box-shadow:0 8px 22px rgba(0,0,0,0.08);
+  font-weight:600;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
   transition:.25s;
+  border:2px solid transparent;
 }
 
 .card:hover{
-  transform:translateY(-4px);
-  background:var(--mamey);
-  color:#fff;
+  transform:translateY(-6px);
+  border-color:var(--mamey);
+  box-shadow:0 18px 35px rgba(0,0,0,0.12);
 }
 
+/* ===== LEGAL ===== */
+.legal{
+  max-width:900px;
+  margin:60px auto;
+  padding:0 25px;
+  font-size:14px;
+  opacity:.8;
+  line-height:1.6;
+}
+
+/* ===== FOOTER ===== */
 footer{
   text-align:center;
-  padding:35px 15px;
+  padding:40px 20px;
   background:#eef2f7;
   font-size:14px;
-}
-
-footer a{
-  color:var(--blue);
-  text-decoration:none;
-  margin:0 10px;
 }
 </style>
 </head>
@@ -119,6 +156,8 @@ footer a{
 <header>
   <h1>OFFERVIEW</h1>
   <p id="slogan">Tu Guía a Las Mejores Ofertas</p>
+  <small>Directorio informativo · OfferView no vende productos</small>
+
   <div class="lang-switch">
     <button onclick="setLang('es')">ES</button>
     <button onclick="setLang('en')">EN</button>
@@ -127,31 +166,30 @@ footer a{
 
 <div id="content"></div>
 
+<div class="legal">
+  <h3>Privacidad & Transparencia</h3>
+  <p>
+    OfferView es un directorio informativo que redirige a tiendas externas.
+    No procesamos pagos, no vendemos productos y no almacenamos información personal sensible.
+    Algunas redirecciones pueden generar comisiones afiliadas sin costo adicional para el usuario.
+  </p>
+</div>
+
 <footer>
-  <div>© 2025 <strong>OfferView</strong> · Directorio Global de Tiendas</div>
-  <div style="margin-top:10px;">
-    <a href="privacy.html">Política de Privacidad</a>
-    <a href="proxy.html">Proxy Seguro</a>
-    <a href="mailto:contacto@offerview.com">Contacto</a>
-  </div>
+  © 2025 <strong>OfferView</strong> · Directorio Global de Tiendas · contacto@offerview.com
 </footer>
 
 <script>
 const SECTIONS = {
 "Top Stores":[
-"Amazon","Alibaba","AliExpress","eBay","Walmart","Target","Costco",
-"Burlington","Marshalls","Ross","Miniso","Dollar Tree","Made in China",
-"Temu","Shein","Wish","JD","Rakuten","Mercado Libre","Flipkart"
+"Amazon","Alibaba","AliExpress","eBay","Walmart","Target","Best Buy","Costco",
+"Burlington","Marshalls","Ross","Miniso","Dollar Tree","Made-in-China",
+"Temu","Shein","Wish","JD","Rakuten","Mercado Libre"
 ],
 
 "Gaming Stores":[
 "Steam","Epic Games","PlayStation","Xbox","Nintendo",
 "GameStop","Ubisoft","EA","Blizzard","GOG"
-],
-
-"Tecnología Stores":[
-"Newegg","B&H","Lenovo","Dell","HP",
-"Xiaomi","Asus","Acer","Microsoft","Samsung"
 ],
 
 "Calzados Stores":[
@@ -167,6 +205,11 @@ const SECTIONS = {
 "Lencería Stores":[
 "Victoria’s Secret","Aerie","Calvin Klein","Savage X Fenty","La Senza",
 "Intimissimi","Oysho","ThirdLove","Skims","Adore Me"
+],
+
+"Tecnología Stores":[
+"Newegg","B&H","Lenovo","Dell","HP",
+"Xiaomi","Asus","Acer","Microsoft","Samsung"
 ],
 
 "Salud y Belleza Stores":[
@@ -188,25 +231,32 @@ const SECTIONS = {
 const content=document.getElementById("content");
 
 for(const section in SECTIONS){
-  const h=document.createElement("h2");
-  h.className="section-title";
-  h.textContent=section;
-  content.appendChild(h);
+  const sec=document.createElement("div");
+  sec.className="section";
 
-  const grid=document.createElement("div");
-  grid.className="grid";
+  sec.innerHTML=`
+    <h2 class="section-title">${section}</h2>
+    <div class="section-desc">Explora tiendas populares de esta categoría</div>
+    <div class="grid">
+      ${SECTIONS[section].map(t=>`<a class="card" href="#">${t}</a>`).join("")}
+    </div>
+  `;
 
-  SECTIONS[section].forEach(name=>{
-    const a=document.createElement("a");
-    a.className="card";
-    a.href="#";
-    a.textContent=name;
-    grid.appendChild(a);
-  });
-
-  content.appendChild(grid);
+  content.appendChild(sec);
 }
 
+/* Scroll animation */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("visible");
+    }
+  });
+},{threshold:.15});
+
+document.querySelectorAll(".section").forEach(s=>observer.observe(s));
+
+/* Language */
 const LANG={
 es:"Tu Guía a Las Mejores Ofertas",
 en:"Your Guide to the Best Deals"
