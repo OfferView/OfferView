@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OfferView – Directorio Global de Tiendas</title>
+<title>OfferView – Tu Guía a Las Mejores Ofertas</title>
 
-<meta name="description" content="OfferView es un directorio global que reúne las tiendas más visitadas del mundo.">
+<meta name="description" content="OfferView es un directorio global de tiendas online. Tu guía a las mejores ofertas del mundo.">
 <meta name="author" content="OfferView">
 
 <!-- Google Analytics -->
@@ -26,6 +26,8 @@ gtag('config', 'G-PDM9GCV149');
   --text:#111827;
 }
 
+*{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
@@ -33,6 +35,7 @@ body{
   color:var(--text);
 }
 
+/* HEADER */
 header{
   text-align:center;
   padding:40px 15px;
@@ -42,13 +45,14 @@ header{
 
 header h1{
   color:var(--mamey);
-  font-size:38px;
-  margin-bottom:5px;
+  font-size:40px;
+  margin:0 0 8px;
+  letter-spacing:1px;
 }
 
 header p{
   margin:0;
-  font-size:16px;
+  font-size:17px;
 }
 
 .lang-switch{
@@ -65,9 +69,10 @@ header p{
   cursor:pointer;
 }
 
+/* SECTIONS */
 .section-title{
   text-align:center;
-  margin:40px 0 20px;
+  margin:45px 0 20px;
   font-size:26px;
   font-weight:700;
   color:var(--mamey);
@@ -83,7 +88,7 @@ header p{
 .card{
   background:var(--card);
   border-radius:18px;
-  padding:20px 15px;
+  padding:22px 15px;
   text-align:center;
   text-decoration:none;
   color:var(--blue);
@@ -100,16 +105,44 @@ header p{
   height:80px;
   object-fit:contain;
   margin-bottom:12px;
-  background:#f3f4f6;
-  border-radius:12px;
-  padding:10px;
 }
 
+/* FOOTER */
 footer{
   text-align:center;
   padding:35px 15px;
   background:#eef2f7;
   font-size:14px;
+}
+
+footer a{
+  color:#2563eb;
+  text-decoration:none;
+  margin:0 8px;
+}
+
+/* COOKIE */
+#cookie{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#111827;
+  color:#fff;
+  padding:14px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  z-index:999;
+}
+
+#cookie button{
+  background:var(--mamey);
+  border:none;
+  padding:6px 14px;
+  border-radius:6px;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -118,7 +151,7 @@ footer{
 
 <header>
   <h1>OFFERVIEW</h1>
-  <p id="slogan">Tu ventana a las mejores ofertas</p>
+  <p id="slogan">Tu Guía a Las Mejores Ofertas</p>
   <div class="lang-switch">
     <button onclick="setLang('es')">ES</button>
     <button onclick="setLang('en')">EN</button>
@@ -128,26 +161,25 @@ footer{
 <div id="content"></div>
 
 <footer>
-© 2025 <strong>OfferView</strong> · Directorio Global de Tiendas
+© 2025 <strong>OfferView</strong> · Directorio Global de Tiendas  
+<br><br>
+<a href="#">Privacidad</a> | <a href="#">Cookies</a> | <a href="mailto:info@offerview.com">Contacto</a>
 </footer>
 
-<script>
-/* Logo genérico profesional (fallback seguro) */
-const FALLBACK_LOGO =
-'data:image/svg+xml;utf8,\
-<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80">\
-<rect width="100%" height="100%" rx="16" fill="%23F3F4F6"/>\
-<text x="50%" y="55%" font-size="28" text-anchor="middle" fill="%239CA3AF" font-family="Arial">OV</text>\
-</svg>';
+<div id="cookie">
+Este sitio usa cookies para mejorar tu experiencia.
+<button onclick="acceptCookies()">Aceptar</button>
+</div>
 
-/* SECCIONES Y TIENDAS */
+<script>
 const SECTIONS = {
+
 "Top Stores":[
 ["Amazon","amazon.com"],["Alibaba","alibaba.com"],["AliExpress","aliexpress.com"],
 ["eBay","ebay.com"],["Walmart","walmart.com"],["Target","target.com"],
 ["Best Buy","bestbuy.com"],["Costco","costco.com"],["Burlington","burlington.com"],
 ["Marshalls","marshalls.com"],["Ross","rossstores.com"],["Miniso","miniso.com"],
-["Dollar Tree","dollartree.com"],["Made-in-China","made-in-china.com"],
+["Dollar Tree","dollartree.com"],["Made in China","made-in-china.com"],
 ["Temu","temu.com"],["Shein","shein.com"],["Wish","wish.com"],
 ["JD","jd.com"],["Rakuten","rakuten.com"],["Mercado Libre","mercadolibre.com"]
 ],
@@ -160,21 +192,21 @@ const SECTIONS = {
 ["Blizzard","blizzard.com"],["GOG","gog.com"]
 ],
 
-"Calzados":[
-["Nike","nike.com"],["Adidas","adidas.com"],["Puma","puma.com"],
-["Foot Locker","footlocker.com"],["New Balance","newbalance.com"],
-["Skechers","skechers.com"],["Reebok","reebok.com"],
-["Converse","converse.com"],["Vans","vans.com"],["Crocs","crocs.com"]
-],
-
-"Moda":[
+"Moda Stores":[
 ["Zara","zara.com"],["H&M","hm.com"],["Forever 21","forever21.com"],
 ["Uniqlo","uniqlo.com"],["Pull&Bear","pullandbear.com"],
 ["Bershka","bershka.com"],["Stradivarius","stradivarius.com"],
 ["Fashion Nova","fashionnova.com"],["Gap","gap.com"],["Old Navy","oldnavy.com"]
 ],
 
-"Lencería":[
+"Calzados Stores":[
+["Nike","nike.com"],["Adidas","adidas.com"],["Puma","puma.com"],
+["Foot Locker","footlocker.com"],["New Balance","newbalance.com"],
+["Skechers","skechers.com"],["Reebok","reebok.com"],
+["Converse","converse.com"],["Vans","vans.com"],["Crocs","crocs.com"]
+],
+
+"Lencería Stores":[
 ["Victoria’s Secret","victoriassecret.com"],["Aerie","aerie.com"],
 ["Calvin Klein","calvinklein.com"],["Savage X Fenty","savagex.com"],
 ["La Senza","lasenza.com"],["Intimissimi","intimissimi.com"],
@@ -182,7 +214,7 @@ const SECTIONS = {
 ["Skims","skims.com"],["Adore Me","adoreme.com"]
 ],
 
-"Tecnología":[
+"Tecnología Stores":[
 ["Newegg","newegg.com"],["B&H","bhphotovideo.com"],
 ["Lenovo","lenovo.com"],["Dell","dell.com"],
 ["HP","hp.com"],["Xiaomi","mi.com"],
@@ -198,7 +230,7 @@ const SECTIONS = {
 ["Estée Lauder","esteelauder.com"],["NYX","nyxcosmetics.com"]
 ],
 
-"Niños y Juguetería":[
+"Niños y Juguetería Stores":[
 ["Toys R Us","toysrus.com"],["Lego","lego.com"],
 ["Mattel","mattel.com"],["Hasbro","hasbro.com"],
 ["Disney Store","shopdisney.com"],["Fisher-Price","fisher-price.com"],
@@ -206,13 +238,14 @@ const SECTIONS = {
 ["OshKosh","oshkosh.com"],["Kidpik","kidpik.com"]
 ],
 
-"Viajes":[
+"Hoteles y Vuelos Stores":[
 ["Booking","booking.com"],["Expedia","expedia.com"],
 ["Airbnb","airbnb.com"],["Kayak","kayak.com"],
 ["Skyscanner","skyscanner.com"],["Priceline","priceline.com"],
 ["Agoda","agoda.com"],["Trip.com","trip.com"],
 ["Hotels.com","hotels.com"],["Travelocity","travelocity.com"]
 ]
+
 };
 
 const content=document.getElementById("content");
@@ -231,9 +264,9 @@ for(const section in SECTIONS){
     a.className="card";
     a.href="https://"+s[1];
     a.target="_blank";
+    a.rel="noopener";
     a.innerHTML=`
-      <img src="https://logo.clearbit.com/${s[1]}" alt="${s[0]}"
-      onerror="this.onerror=null;this.src=FALLBACK_LOGO;">
+      <img src="https://logo.clearbit.com/${s[1]}" alt="${s[0]}">
       <div>${s[0]}</div>`;
     grid.appendChild(a);
   });
@@ -241,13 +274,24 @@ for(const section in SECTIONS){
   content.appendChild(grid);
 }
 
+/* Idiomas */
 const LANG={
-es:"Tu ventana a las mejores ofertas",
-en:"Your window to the best deals"
+es:"Tu Guía a Las Mejores Ofertas",
+en:"Your Guide to the Best Deals"
 };
 
 function setLang(l){
   document.getElementById("slogan").textContent=LANG[l];
+}
+
+/* Cookies */
+function acceptCookies(){
+  localStorage.setItem("cookiesAccepted","yes");
+  document.getElementById("cookie").style.display="none";
+}
+
+if(localStorage.getItem("cookiesAccepted")==="yes"){
+  document.getElementById("cookie").style.display="none";
 }
 </script>
 
