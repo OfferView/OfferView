@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>OfferView – Tu Guía a las Mejores Ofertas</title>
-<meta name="description" content="OfferView es una guía global que reúne tiendas, marcas y plataformas populares para ayudarte a descubrir las mejores ofertas del mundo.">
+<meta name="description" content="OfferView es una guía global que reúne las tiendas más visitadas del mundo y facilita el acceso a las mejores ofertas.">
 <meta name="author" content="OfferView">
 
 <!-- Google Analytics -->
@@ -35,7 +35,7 @@ body{
 
 header{
   text-align:center;
-  padding:40px 15px;
+  padding:45px 15px;
   background:#0b1633;
   color:#fff;
 }
@@ -43,7 +43,7 @@ header{
 header h1{
   color:var(--mamey);
   font-size:42px;
-  margin-bottom:8px;
+  margin-bottom:6px;
 }
 
 header p{
@@ -51,8 +51,36 @@ header p{
   font-size:16px;
 }
 
+/* Buscador */
+.search-box{
+  margin:25px auto 0;
+  max-width:520px;
+}
+
+.search-box form{
+  display:flex;
+}
+
+.search-box input{
+  flex:1;
+  padding:12px;
+  border-radius:10px 0 0 10px;
+  border:none;
+  font-size:15px;
+}
+
+.search-box button{
+  padding:12px 18px;
+  border:none;
+  background:var(--mamey);
+  color:#000;
+  font-weight:bold;
+  border-radius:0 10px 10px 0;
+  cursor:pointer;
+}
+
 .lang-switch{
-  margin-top:15px;
+  margin-top:18px;
 }
 
 .lang-switch button{
@@ -65,32 +93,6 @@ header p{
   cursor:pointer;
 }
 
-/* BUSCADOR GOOGLE */
-.search-box{
-  margin:25px auto 0;
-  max-width:520px;
-  display:flex;
-}
-
-.search-box input{
-  flex:1;
-  padding:14px;
-  border-radius:12px 0 0 12px;
-  border:none;
-  font-size:15px;
-  outline:none;
-}
-
-.search-box button{
-  padding:14px 18px;
-  border:none;
-  border-radius:0 12px 12px 0;
-  background:var(--mamey);
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* SECCIONES */
 .section-title{
   text-align:center;
   margin:50px 0 22px;
@@ -102,7 +104,7 @@ header p{
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:22px;
+  gap:20px;
   padding:0 20px 40px;
 }
 
@@ -122,10 +124,10 @@ header p{
 }
 
 .card img{
-  width:72px;
-  height:72px;
+  width:70px;
+  height:70px;
   object-fit:contain;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
 .card span{
@@ -133,12 +135,25 @@ header p{
   font-weight:700;
 }
 
-/* FOOTER */
 footer{
-  text-align:center;
-  padding:35px 15px;
   background:#eef2f7;
+  padding:40px 15px;
   font-size:14px;
+}
+
+.footer-links{
+  max-width:900px;
+  margin:auto;
+  text-align:center;
+}
+
+.footer-links h3{
+  margin-bottom:10px;
+}
+
+.footer-links p{
+  max-width:720px;
+  margin:8px auto;
 }
 </style>
 </head>
@@ -149,29 +164,45 @@ footer{
   <h1>OFFERVIEW</h1>
   <p id="slogan">Tu Guía a las Mejores Ofertas</p>
 
+  <!-- Buscador Google real -->
+  <div class="search-box">
+    <form action="https://www.google.com/search" method="get" target="_blank">
+      <input type="text" name="q" placeholder="Buscar cualquier tienda o marca del mundo">
+      <button type="submit">Buscar</button>
+    </form>
+  </div>
+
   <div class="lang-switch">
     <button onclick="setLang('es')">ES</button>
     <button onclick="setLang('en')">EN</button>
   </div>
-
-  <!-- BUSCADOR REAL GOOGLE -->
-  <form class="search-box" action="https://www.google.com/search" method="get" target="_blank">
-    <input type="text" name="q" placeholder="Buscar cualquier tienda o marca en Internet..." required>
-    <button type="submit">Buscar</button>
-  </form>
 </header>
 
 <div id="content"></div>
 
 <footer>
-© 2025 <strong>OfferView</strong> · Guía Global de Tiendas · No afiliado oficialmente a las marcas listadas
+  <div class="footer-links">
+    <h3>Privacidad</h3>
+    <p>
+      OfferView es una guía informativa e independiente. No vendemos productos ni somos propietarios de las marcas listadas.
+      Algunas salidas pueden ser enlaces de afiliación. Las marcas y logotipos pertenecen a sus respectivos dueños.
+    </p>
+
+    <h3>Contacto</h3>
+    <p>
+      📧 contacto@offerview.com  
+      <br>
+      🌐 OfferView.com
+    </p>
+
+    <p>© 2025 <strong>OfferView</strong> · Directorio Global de Tiendas</p>
+  </div>
 </footer>
 
 <script>
 const ICON = name => `https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${name}.svg`;
 
 const SECTIONS = {
-
 "Top Stores":[
 ["Amazon","amazon","https://www.amazon.com"],
 ["Alibaba","alibaba","https://www.alibaba.com"],
@@ -259,7 +290,6 @@ const SECTIONS = {
 ["Priceline","priceline","https://www.priceline.com"],
 ["Travelocity","travelocity","https://www.travelocity.com"]
 ]
-
 };
 
 const content=document.getElementById("content");
