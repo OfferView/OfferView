@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>OfferView – Tu Guía a las Mejores Ofertas</title>
-<meta name="description" content="OfferView es un directorio global que reúne las tiendas más visitadas del mundo en un solo lugar.">
+<meta name="description" content="OfferView es una guía global que reúne tiendas, marcas y plataformas populares para ayudarte a descubrir las mejores ofertas del mundo.">
 <meta name="author" content="OfferView">
 
 <!-- Google Analytics -->
@@ -19,6 +20,7 @@ gtag('config', 'G-PDM9GCV149');
 <style>
 :root{
   --mamey:#F59E0B;
+  --blue:#2563EB;
   --bg:#F9FAFB;
   --card:#ffffff;
   --text:#111827;
@@ -33,43 +35,65 @@ body{
 
 header{
   text-align:center;
-  padding:40px 15px 30px;
+  padding:40px 15px;
   background:#0b1633;
   color:#fff;
 }
 
 header h1{
   color:var(--mamey);
-  font-size:40px;
-  margin-bottom:6px;
+  font-size:42px;
+  margin-bottom:8px;
 }
 
 header p{
-  margin:0 0 20px;
+  margin:0;
   font-size:16px;
 }
 
+.lang-switch{
+  margin-top:15px;
+}
+
+.lang-switch button{
+  background:#1f2937;
+  color:#fff;
+  border:none;
+  padding:6px 12px;
+  border-radius:8px;
+  margin:0 4px;
+  cursor:pointer;
+}
+
+/* BUSCADOR GOOGLE */
 .search-box{
-  max-width:420px;
-  margin:0 auto;
+  margin:25px auto 0;
+  max-width:520px;
+  display:flex;
 }
 
 .search-box input{
-  width:100%;
-  padding:14px 16px;
-  border-radius:14px;
-  border:2px solid #e5e7eb;
-  font-size:16px;
+  flex:1;
+  padding:14px;
+  border-radius:12px 0 0 12px;
+  border:none;
+  font-size:15px;
   outline:none;
 }
 
-.search-box input:focus{
-  border-color:var(--mamey);
+.search-box button{
+  padding:14px 18px;
+  border:none;
+  border-radius:0 12px 12px 0;
+  background:var(--mamey);
+  font-weight:bold;
+  cursor:pointer;
 }
 
+/* SECCIONES */
 .section-title{
   text-align:center;
-  margin:45px 0 20px;
+  margin:50px 0 22px;
   font-size:26px;
   font-weight:700;
   color:var(--mamey);
@@ -78,7 +102,7 @@ header p{
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:20px;
+  gap:22px;
   padding:0 20px 40px;
 }
 
@@ -98,10 +122,10 @@ header p{
 }
 
 .card img{
-  width:70px;
-  height:70px;
+  width:72px;
+  height:72px;
   object-fit:contain;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
 .card span{
@@ -109,6 +133,7 @@ header p{
   font-weight:700;
 }
 
+/* FOOTER */
 footer{
   text-align:center;
   padding:35px 15px;
@@ -124,15 +149,22 @@ footer{
   <h1>OFFERVIEW</h1>
   <p id="slogan">Tu Guía a las Mejores Ofertas</p>
 
-  <div class="search-box">
-    <input id="searchInput" type="search" placeholder="Buscar tienda..." onkeyup="filterStores()">
+  <div class="lang-switch">
+    <button onclick="setLang('es')">ES</button>
+    <button onclick="setLang('en')">EN</button>
   </div>
+
+  <!-- BUSCADOR REAL GOOGLE -->
+  <form class="search-box" action="https://www.google.com/search" method="get" target="_blank">
+    <input type="text" name="q" placeholder="Buscar cualquier tienda o marca en Internet..." required>
+    <button type="submit">Buscar</button>
+  </form>
 </header>
 
 <div id="content"></div>
 
 <footer>
-© 2025 <strong>OfferView</strong> · Directorio Global de Tiendas
+© 2025 <strong>OfferView</strong> · Guía Global de Tiendas · No afiliado oficialmente a las marcas listadas
 </footer>
 
 <script>
@@ -230,23 +262,23 @@ const SECTIONS = {
 
 };
 
-const content = document.getElementById("content");
+const content=document.getElementById("content");
 
 for(const section in SECTIONS){
-  const h = document.createElement("h2");
-  h.className = "section-title";
-  h.textContent = section;
+  const h=document.createElement("h2");
+  h.className="section-title";
+  h.textContent=section;
   content.appendChild(h);
 
-  const grid = document.createElement("div");
-  grid.className = "grid";
+  const grid=document.createElement("div");
+  grid.className="grid";
 
   SECTIONS[section].forEach(s=>{
-    const a = document.createElement("a");
-    a.className = "card";
-    a.href = s[2];
-    a.target = "_blank";
-    a.innerHTML = `
+    const a=document.createElement("a");
+    a.className="card";
+    a.href=s[2];
+    a.target="_blank";
+    a.innerHTML=`
       <img src="${ICON(s[1])}" alt="${s[0]} logo">
       <span>${s[0]}</span>`;
     grid.appendChild(a);
@@ -255,21 +287,13 @@ for(const section in SECTIONS){
   content.appendChild(grid);
 }
 
-function filterStores(){
-  const value = document.getElementById("searchInput").value.toLowerCase();
+const LANG={
+  es:"Tu Guía a las Mejores Ofertas",
+  en:"Your Guide to the Best Deals"
+};
 
-  document.querySelectorAll(".grid").forEach(grid=>{
-    let visible = false;
-
-    grid.querySelectorAll(".card").forEach(card=>{
-      const match = card.textContent.toLowerCase().includes(value);
-      card.style.display = match ? "block" : "none";
-      if(match) visible = true;
-    });
-
-    grid.previousElementSibling.style.display = visible ? "block" : "none";
-    grid.style.display = visible ? "grid" : "none";
-  });
+function setLang(l){
+  document.getElementById("slogan").textContent=LANG[l];
 }
 </script>
 
