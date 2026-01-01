@@ -47,8 +47,15 @@ header h1{
 }
 
 header p{
-  margin:0;
+  margin:6px 0;
   font-size:16px;
+}
+
+/* Views */
+.views{
+  margin-top:10px;
+  font-size:14px;
+  opacity:0.9;
 }
 
 /* Buscador */
@@ -163,6 +170,7 @@ footer{
 <header>
   <h1>OFFERVIEW</h1>
   <p id="slogan">Tu Guía a las Mejores Ofertas</p>
+  <div class="views" id="viewsCounter">Views: 25,104</div>
 
   <!-- Buscador Google real -->
   <div class="search-box">
@@ -190,8 +198,7 @@ footer{
 
     <h3>Contacto</h3>
     <p>
-      📧 contacto@offerview.com  
-      <br>
+      📧 contacto@offerview.com<br>
       🌐 OfferView.com
     </p>
 
@@ -200,115 +207,130 @@ footer{
 </footer>
 
 <script>
+/* CONTADOR DE VISITAS */
+const START_VIEWS = 25104;
+let views = localStorage.getItem("offerview_views");
+
+if(!views){
+  views = START_VIEWS;
+}else{
+  views = parseInt(views) + 1;
+}
+
+localStorage.setItem("offerview_views", views);
+document.getElementById("viewsCounter").textContent =
+  "Views: " + views.toLocaleString();
+
+/* ICONOS */
 const ICON = name => `https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${name}.svg`;
 
 const SECTIONS = {
-"Top Stores":[
-["Amazon","amazon","https://www.amazon.com"],
-["Alibaba","alibaba","https://www.alibaba.com"],
-["AliExpress","aliexpress","https://www.aliexpress.com"],
-["Temu","temu","https://www.temu.com"],
-["eBay","ebay","https://www.ebay.com"],
-["Walmart","walmart","https://www.walmart.com"],
-["Costco","costco","https://www.costco.com"],
-["IKEA","ikea","https://www.ikea.com"],
-["Burlington","burlington","https://www.burlington.com"],
-["Marshalls","marshalls","https://www.marshalls.com"],
-["Ross","ross","https://www.rossstores.com"],
-["Miniso","miniso","https://www.miniso.com"],
-["Dollar Tree","dollartree","https://www.dollartree.com"],
-["Made in China","madeinchina","https://www.made-in-china.com"],
-["JD","jd","https://www.jd.com"],
-["Taobao","taobao","https://www.taobao.com"],
-["Tmall","tmall","https://www.tmall.com"],
-["Rakuten","rakuten","https://www.rakuten.com"],
-["Mercado Libre","mercadolibre","https://www.mercadolibre.com"],
-["Target","target","https://www.target.com"]
-],
+  "Top Stores":[
+    ["Amazon","amazon","https://www.amazon.com"],
+    ["Alibaba","alibaba","https://www.alibaba.com"],
+    ["AliExpress","aliexpress","https://www.aliexpress.com"],
+    ["Temu","temu","https://www.temu.com"],
+    ["eBay","ebay","https://www.ebay.com"],
+    ["Walmart","walmart","https://www.walmart.com"],
+    ["Costco","costco","https://www.costco.com"],
+    ["IKEA","ikea","https://www.ikea.com"],
+    ["Burlington","burlington","https://www.burlington.com"],
+    ["Marshalls","marshalls","https://www.marshalls.com"],
+    ["Ross","ross","https://www.rossstores.com"],
+    ["Miniso","miniso","https://www.miniso.com"],
+    ["Dollar Tree","dollartree","https://www.dollartree.com"],
+    ["Made in China","madeinchina","https://www.made-in-china.com"],
+    ["JD","jd","https://www.jd.com"],
+    ["Taobao","taobao","https://www.taobao.com"],
+    ["Tmall","tmall","https://www.tmall.com"],
+    ["Rakuten","rakuten","https://www.rakuten.com"],
+    ["Mercado Libre","mercadolibre","https://www.mercadolibre.com"],
+    ["Target","target","https://www.target.com"]
+  ],
 
-"Gaming Stores":[
-["Steam","steam","https://store.steampowered.com"],
-["Epic Games","epicgames","https://store.epicgames.com"],
-["PlayStation","playstation","https://store.playstation.com"],
-["Xbox","xbox","https://www.xbox.com/store"],
-["Nintendo","nintendo","https://www.nintendo.com/store"],
-["GameStop","gamestop","https://www.gamestop.com"],
-["Ubisoft","ubisoft","https://store.ubisoft.com"],
-["EA","ea","https://www.ea.com"],
-["Blizzard","blizzard","https://www.blizzard.com"],
-["GOG","gog","https://www.gog.com"]
-],
+  "Gaming Stores":[
+    ["Steam","steam","https://store.steampowered.com"],
+    ["Epic Games","epicgames","https://store.epicgames.com"],
+    ["PlayStation","playstation","https://store.playstation.com"],
+    ["Xbox","xbox","https://www.xbox.com/store"],
+    ["Nintendo","nintendo","https://www.nintendo.com/store"],
+    ["GameStop","gamestop","https://www.gamestop.com"],
+    ["Ubisoft","ubisoft","https://store.ubisoft.com"],
+    ["EA","ea","https://www.ea.com"],
+    ["Blizzard","blizzard","https://www.blizzard.com"],
+    ["GOG","gog","https://www.gog.com"]
+  ],
 
-"Tecnología Stores":[
-["Apple","apple","https://www.apple.com"],
-["Samsung","samsung","https://www.samsung.com"],
-["Microsoft","microsoft","https://www.microsoft.com"],
-["Lenovo","lenovo","https://www.lenovo.com"],
-["Dell","dell","https://www.dell.com"],
-["HP","hp","https://www.hp.com"],
-["Asus","asus","https://www.asus.com"],
-["Acer","acer","https://www.acer.com"],
-["Xiaomi","xiaomi","https://www.mi.com"],
-["Newegg","newegg","https://www.newegg.com"]
-],
+  "Tecnología Stores":[
+    ["Apple","apple","https://www.apple.com"],
+    ["Samsung","samsung","https://www.samsung.com"],
+    ["Microsoft","microsoft","https://www.microsoft.com"],
+    ["Lenovo","lenovo","https://www.lenovo.com"],
+    ["Dell","dell","https://www.dell.com"],
+    ["HP","hp","https://www.hp.com"],
+    ["Asus","asus","https://www.asus.com"],
+    ["Acer","acer","https://www.acer.com"],
+    ["Xiaomi","xiaomi","https://www.mi.com"],
+    ["Newegg","newegg","https://www.newegg.com"]
+  ],
 
-"Calzados Stores":[
-["Nike","nike","https://www.nike.com"],
-["Adidas","adidas","https://www.adidas.com"],
-["Puma","puma","https://www.puma.com"],
-["New Balance","newbalance","https://www.newbalance.com"],
-["Reebok","reebok","https://www.reebok.com"],
-["Skechers","skechers","https://www.skechers.com"],
-["Converse","converse","https://www.converse.com"],
-["Vans","vans","https://www.vans.com"],
-["Crocs","crocs","https://www.crocs.com"],
-["Under Armour","underarmour","https://www.underarmour.com"]
-],
+  "Calzados Stores":[
+    ["Nike","nike","https://www.nike.com"],
+    ["Adidas","adidas","https://www.adidas.com"],
+    ["Puma","puma","https://www.puma.com"],
+    ["New Balance","newbalance","https://www.newbalance.com"],
+    ["Reebok","reebok","https://www.reebok.com"],
+    ["Skechers","skechers","https://www.skechers.com"],
+    ["Converse","converse","https://www.converse.com"],
+    ["Vans","vans","https://www.vans.com"],
+    ["Crocs","crocs","https://www.crocs.com"],
+    ["Under Armour","underarmour","https://www.underarmour.com"]
+  ],
 
-"Moda & Lencería Stores":[
-["Zara","zara","https://www.zara.com"],
-["H&M","hm","https://www.hm.com"],
-["Uniqlo","uniqlo","https://www.uniqlo.com"],
-["Fashion Nova","fashionnova","https://www.fashionnova.com"],
-["Victoria’s Secret","victoriassecret","https://www.victoriassecret.com"],
-["Aerie","aerie","https://www.ae.com"],
-["Calvin Klein","calvinklein","https://www.calvinklein.com"],
-["Savage X Fenty","savagexfenty","https://www.savagex.com"],
-["Shein","shein","https://www.shein.com"],
-["Oysho","oysho","https://www.oysho.com"]
-],
+  "Moda & Lencería Stores":[
+    ["Zara","zara","https://www.zara.com"],
+    ["H&M","hm","https://www.hm.com"],
+    ["Uniqlo","uniqlo","https://www.uniqlo.com"],
+    ["Fashion Nova","fashionnova","https://www.fashionnova.com"],
+    ["Victoria’s Secret","victoriassecret","https://www.victoriassecret.com"],
+    ["Aerie","aerie","https://www.ae.com"],
+    ["Calvin Klein","calvinklein","https://www.calvinklein.com"],
+    ["Savage X Fenty","savagexfenty","https://www.savagex.com"],
+    ["Shein","shein","https://www.shein.com"],
+    ["Oysho","oysho","https://www.oysho.com"]
+  ],
 
-"Hoteles y Vuelos Stores":[
-["Booking","booking","https://www.booking.com"],
-["Expedia","expedia","https://www.expedia.com"],
-["Airbnb","airbnb","https://www.airbnb.com"],
-["Kayak","kayak","https://www.kayak.com"],
-["Skyscanner","skyscanner","https://www.skyscanner.com"],
-["Agoda","agoda","https://www.agoda.com"],
-["Trip.com","tripdotcom","https://www.trip.com"],
-["Hotels.com","hotelsdotcom","https://www.hotels.com"],
-["Priceline","priceline","https://www.priceline.com"],
-["Travelocity","travelocity","https://www.travelocity.com"]
-]
+  "Hoteles y Vuelos Stores":[
+    ["Booking","booking","https://www.booking.com"],
+    ["Expedia","expedia","https://www.expedia.com"],
+    ["Airbnb","airbnb","https://www.airbnb.com"],
+    ["Kayak","kayak","https://www.kayak.com"],
+    ["Skyscanner","skyscanner","https://www.skyscanner.com"],
+    ["Agoda","agoda","https://www.agoda.com"],
+    ["Trip.com","tripdotcom","https://www.trip.com"],
+    ["Hotels.com","hotelsdotcom","https://www.hotels.com"],
+    ["Priceline","priceline","https://www.priceline.com"],
+    ["Travelocity","travelocity","https://www.travelocity.com"]
+  ]
 };
 
-const content=document.getElementById("content");
+const content = document.getElementById("content");
 
 for(const section in SECTIONS){
-  const h=document.createElement("h2");
-  h.className="section-title";
-  h.textContent=section;
+  const h = document.createElement("h2");
+  h.className = "section-title";
+  h.textContent = section;
   content.appendChild(h);
 
-  const grid=document.createElement("div");
-  grid.className="grid";
+  const grid = document.createElement("div");
+  grid.className = "grid";
 
   SECTIONS[section].forEach(s=>{
-    const a=document.createElement("a");
-    a.className="card";
-    a.href=s[2];
-    a.target="_blank";
-    a.innerHTML=`
+    const a = document.createElement("a");
+    a.className = "card";
+    a.href = s[2];
+    a.target = "_blank";
+    a.innerHTML = `
       <img src="${ICON(s[1])}" alt="${s[0]} logo">
       <span>${s[0]}</span>`;
     grid.appendChild(a);
@@ -323,7 +345,7 @@ const LANG={
 };
 
 function setLang(l){
-  document.getElementById("slogan").textContent=LANG[l];
+  document.getElementById("slogan").textContent = LANG[l];
 }
 </script>
 
