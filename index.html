@@ -20,101 +20,51 @@ gtag('config', 'G-PDM9GCV149');
 <style>
 :root{
   --mamey:#F59E0B;
-  --blue:#2563EB;
   --bg:#F9FAFB;
   --card:#ffffff;
   --text:#111827;
 }
-
 body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
   background:var(--bg);
   color:var(--text);
 }
-
 header{
   text-align:center;
   padding:45px 15px;
   background:#0b1633;
   color:#fff;
 }
-
 header h1{
   color:var(--mamey);
   font-size:42px;
-  margin-bottom:6px;
 }
-
-header p{
-  margin:6px 0;
-  font-size:16px;
-}
-
-/* Views */
-.views{
-  margin-top:10px;
-  font-size:14px;
-  opacity:0.9;
-}
-
-/* Buscador */
-.search-box{
-  margin:25px auto 0;
-  max-width:520px;
-}
-
-.search-box form{
-  display:flex;
-}
-
+header p{margin:6px 0;}
+.views{margin-top:10px;font-size:14px;}
+.search-box{margin:25px auto 0;max-width:520px;}
+.search-box form{display:flex;}
 .search-box input{
-  flex:1;
-  padding:12px;
-  border-radius:10px 0 0 10px;
-  border:none;
-  font-size:15px;
+  flex:1;padding:12px;border-radius:10px 0 0 10px;border:none;
 }
-
 .search-box button{
-  padding:12px 18px;
-  border:none;
-  background:var(--mamey);
-  color:#000;
-  font-weight:bold;
-  border-radius:0 10px 10px 0;
-  cursor:pointer;
+  padding:12px 18px;border:none;background:var(--mamey);
+  font-weight:bold;border-radius:0 10px 10px 0;cursor:pointer;
 }
-
-.lang-switch{
-  margin-top:18px;
-}
-
+.lang-switch{margin-top:18px;}
 .lang-switch button{
-  background:#1f2937;
-  color:#fff;
-  border:none;
-  padding:6px 12px;
-  border-radius:8px;
-  margin:0 4px;
-  cursor:pointer;
+  background:#1f2937;color:#fff;border:none;
+  padding:6px 12px;border-radius:8px;margin:0 4px;
 }
-
 .section-title{
-  text-align:center;
-  margin:50px 0 22px;
-  font-size:26px;
-  font-weight:700;
-  color:var(--mamey);
+  text-align:center;margin:50px 0 22px;
+  font-size:26px;font-weight:700;color:var(--mamey);
 }
-
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:20px;
-  padding:0 20px 40px;
+  gap:20px;padding:0 20px 40px;
 }
-
 .card{
   background:var(--card);
   border-radius:18px;
@@ -122,45 +72,18 @@ header p{
   text-align:center;
   text-decoration:none;
   color:var(--text);
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
   transition:.25s;
 }
-
-.card:hover{
-  transform:translateY(-6px);
-}
-
+.card:hover{transform:translateY(-6px);}
 .card img{
-  width:70px;
-  height:70px;
-  object-fit:contain;
-  margin-bottom:10px;
+  width:70px;height:70px;object-fit:contain;margin-bottom:10px;
 }
-
-.card span{
-  display:block;
-  font-weight:700;
-}
-
 footer{
   background:#eef2f7;
   padding:40px 15px;
-  font-size:14px;
-}
-
-.footer-links{
-  max-width:900px;
-  margin:auto;
   text-align:center;
-}
-
-.footer-links h3{
-  margin-bottom:10px;
-}
-
-.footer-links p{
-  max-width:720px;
-  margin:8px auto;
+  font-size:14px;
 }
 </style>
 </head>
@@ -172,10 +95,9 @@ footer{
   <p id="slogan">Tu Guía a las Mejores Ofertas</p>
   <div class="views" id="viewsCounter">Views: 25,104</div>
 
-  <!-- Buscador Google real -->
   <div class="search-box">
     <form action="https://www.google.com/search" method="get" target="_blank">
-      <input type="text" name="q" placeholder="Buscar cualquier tienda o marca del mundo">
+      <input id="searchInput" type="text" name="q" placeholder="Buscar cualquier tienda o marca del mundo">
       <button type="submit">Buscar</button>
     </form>
   </div>
@@ -189,41 +111,28 @@ footer{
 <div id="content"></div>
 
 <footer>
-  <div class="footer-links">
-    <h3>Privacidad</h3>
-    <p>
-      OfferView es una guía informativa e independiente. No vendemos productos ni somos propietarios de las marcas listadas.
-      Algunas salidas pueden ser enlaces de afiliación. Las marcas y logotipos pertenecen a sus respectivos dueños.
-    </p>
-
-    <h3>Contacto</h3>
-    <p>
-      📧 contacto@offerview.com<br>
-      🌐 OfferView.com
-    </p>
-
-    <p>© 2025 <strong>OfferView</strong> · Directorio Global de Tiendas</p>
-  </div>
+  <p>
+    OfferView es una guía informativa e independiente.  
+    Algunas salidas pueden ser enlaces de afiliación.  
+    Las marcas y logotipos pertenecen a sus respectivos dueños.
+  </p>
+  <p>© 2025 <strong>OfferView</strong> · Directorio Global de Tiendas</p>
 </footer>
 
 <script>
-/* CONTADOR DE VISITAS */
+/* ================= CONTADOR ================= */
 const START_VIEWS = 25104;
 let views = localStorage.getItem("offerview_views");
-
-if(!views){
-  views = START_VIEWS;
-}else{
-  views = parseInt(views) + 1;
-}
-
+views = views ? parseInt(views) + 1 : START_VIEWS;
 localStorage.setItem("offerview_views", views);
 document.getElementById("viewsCounter").textContent =
   "Views: " + views.toLocaleString();
 
-/* ICONOS */
-const ICON = name => `https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${name}.svg`;
+/* ================= ICONOS ================= */
+const ICON = n =>
+  `https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${n}.svg`;
 
+/* ================= TODAS LAS SECCIONES Y TIENDAS ================= */
 const SECTIONS = {
   "Top Stores":[
     ["Amazon","amazon","https://www.amazon.com"],
@@ -237,8 +146,8 @@ const SECTIONS = {
     ["Burlington","burlington","https://www.burlington.com"],
     ["Marshalls","marshalls","https://www.marshalls.com"],
     ["Ross","ross","https://www.rossstores.com"],
-    ["Miniso","miniso","https://www.miniso.com"],
     ["Dollar Tree","dollartree","https://www.dollartree.com"],
+    ["Miniso","miniso","https://www.miniso.com"],
     ["Made in China","madeinchina","https://www.made-in-china.com"],
     ["JD","jd","https://www.jd.com"],
     ["Taobao","taobao","https://www.taobao.com"],
@@ -314,8 +223,8 @@ const SECTIONS = {
   ]
 };
 
+/* ================= RENDER ================= */
 const content = document.getElementById("content");
-
 for(const section in SECTIONS){
   const h = document.createElement("h2");
   h.className = "section-title";
@@ -330,27 +239,37 @@ for(const section in SECTIONS){
     a.className = "card";
     a.href = s[2];
     a.target = "_blank";
-    a.innerHTML = `
-      <img src="${ICON(s[1])}" alt="${s[0]} logo">
-      <span>${s[0]}</span>`;
+    a.innerHTML = `<img src="${ICON(s[1])}"><span>${s[0]}</span>`;
     grid.appendChild(a);
   });
-
   content.appendChild(grid);
 }
 
-const LANG={
-  es:"Tu Guía a las Mejores Ofertas",
-  en:"Your Guide to the Best Deals"
-};
-
+/* ================= IDIOMAS ================= */
+const LANG={es:"Tu Guía a las Mejores Ofertas",en:"Your Guide to the Best Deals"};
 function setLang(l){
   document.getElementById("slogan").textContent = LANG[l];
 }
+
+/* ================= IA OFFERVIEW + PROMPTS ================= */
+window.OfferViewIA = {
+  prompts:{
+    search:"Analiza la búsqueda del usuario",
+    intent:"Detecta intención de compra",
+    recommend:"Recomienda tiendas confiables",
+    deals:"Prioriza ofertas",
+    location:"Ajusta por país",
+    trends:"Detecta tendencias",
+    personalize:"Personaliza experiencia",
+    monetize:"Selecciona afiliados",
+    ethics:"Guía independiente"
+  },
+  init(){
+    console.log("🤖 OfferView IA activa con prompts");
+  }
+};
+OfferViewIA.init();
 </script>
-<script src="offerview-ia-modules.js"></script>
-<script>
-  OfferViewIA.init();
-</script>
+
 </body>
 </html>
