@@ -6,8 +6,8 @@
 
 <title>OfferView – Tu Guía a las Mejores Ofertas</title>
 
-<meta name="description" content="OfferView es una guía global de tiendas online con inteligencia artificial, afiliación automática y filtro por país.">
-<meta name="keywords" content="ofertas, tiendas online, Amazon, AliExpress, compras RD, ofertas USA">
+<meta name="description" content="OfferView es una guía global de tiendas online con inteligencia artificial, filtrado por país e idiomas.">
+<meta name="keywords" content="ofertas, tiendas online, Amazon, AliExpress, compras, descuentos, RD">
 <meta name="author" content="OfferView">
 <meta name="robots" content="index, follow">
 
@@ -46,22 +46,7 @@ header h1{
 }
 header p{margin:6px 0;}
 .views{margin-top:8px;font-size:14px;}
-
-.controls{
-  margin-top:15px;
-}
-
-select{
-  padding:8px;
-  border-radius:8px;
-  border:none;
-  font-weight:bold;
-}
-
-.search-box{
-  margin:25px auto;
-  max-width:520px;
-}
+.search-box{margin:25px auto;max-width:520px;}
 .search-box form{display:flex;}
 .search-box input{
   flex:1;
@@ -77,7 +62,15 @@ select{
   border-radius:0 10px 10px 0;
   cursor:pointer;
 }
-
+.selectors{
+  margin-top:15px;
+}
+select{
+  padding:6px 10px;
+  border-radius:8px;
+  border:none;
+  margin:0 5px;
+}
 .section-title{
   text-align:center;
   margin:50px 0 22px;
@@ -122,21 +115,7 @@ footer{
 <header>
   <h1>OFFERVIEW</h1>
   <p id="slogan">Tu Guía a las Mejores Ofertas</p>
-  <div class="views" id="viewsCounter">Views: 25,104</div>
-
-  <div class="controls">
-    <select id="countrySelect">
-      <option value="RD">🇩🇴 República Dominicana</option>
-      <option value="US">🇺🇸 Estados Unidos</option>
-      <option value="MX">🇲🇽 México</option>
-      <option value="ES">🇪🇸 España</option>
-    </select>
-
-    <select id="langSelect">
-      <option value="es">ES</option>
-      <option value="en">EN</option>
-    </select>
-  </div>
+  <div class="views" id="viewsCounter">Views: 0</div>
 
   <div class="search-box">
     <form onsubmit="return OfferViewIA.search(event)">
@@ -144,20 +123,44 @@ footer{
       <button type="submit">Buscar</button>
     </form>
   </div>
+
+  <div class="selectors">
+    <select id="countrySelect" onchange="OfferViewIA.setCountry(this.value)">
+      <option value="RD">República Dominicana</option>
+      <option value="US">Estados Unidos</option>
+      <option value="MX">México</option>
+      <option value="ES">España</option>
+      <option value="BR">Brasil</option>
+      <option value="IN">India</option>
+      <option value="RU">Rusia</option>
+      <option value="FR">Francia</option>
+      <option value="DE">Alemania</option>
+      <option value="JP">Japón</option>
+    </select>
+
+    <select id="langSelect" onchange="setLang(this.value)">
+      <option value="es">Español</option>
+      <option value="en">English</option>
+      <option value="pt">Português</option>
+      <option value="fr">Français</option>
+      <option value="de">Deutsch</option>
+    </select>
+  </div>
 </header>
 
 <div id="content"></div>
 
 <footer>
   <p>
-    OfferView es una guía independiente.  
-    Algunos enlaces pueden ser de afiliación.
+    OfferView es una guía informativa e independiente.  
+    Algunos enlaces pueden ser de afiliación.  
+    Las marcas y logotipos pertenecen a sus respectivos dueños.
   </p>
   <p>© 2025 <strong>OfferView</strong></p>
 </footer>
 
 <script>
-/* ================= CONTADOR DE VISITAS ================= */
+/* ================= CONTADOR DE VISTAS ================= */
 const START_VIEWS = 25104;
 let views = localStorage.getItem("offerview_views");
 views = views ? parseInt(views) + 1 : START_VIEWS;
@@ -169,25 +172,33 @@ document.getElementById("viewsCounter").textContent =
 const ICON = n =>
   `https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${n}.svg`;
 
-/* ================= TODAS LAS SECCIONES Y TIENDAS ================= */
+/* ================= SECCIONES Y TIENDAS (2B FINAL) ================= */
 const SECTIONS = {
   "Top Stores":[
     ["Amazon","amazon","https://www.amazon.com"],
-    ["Alibaba","alibaba","https://www.alibaba.com"],
     ["AliExpress","aliexpress","https://www.aliexpress.com"],
+    ["Alibaba","alibaba","https://www.alibaba.com"],
+    ["Flipkart","flipkart","https://www.flipkart.com"],
     ["Temu","temu","https://www.temu.com"],
     ["eBay","ebay","https://www.ebay.com"],
     ["Walmart","walmart","https://www.walmart.com"],
+    ["Target","target","https://www.target.com"],
     ["Costco","costco","https://www.costco.com"],
     ["IKEA","ikea","https://www.ikea.com"],
-    ["Burlington","burlington","https://www.burlington.com"],
-    ["Marshalls","marshalls","https://www.marshalls.com"],
+    ["Mercado Libre","mercadolibre","https://www.mercadolibre.com"],
+    ["JD","jd","https://www.jd.com"],
+    ["Rakuten","rakuten","https://www.rakuten.com"],
     ["Ross","ross","https://www.rossstores.com"],
+    ["Marshalls","marshalls","https://www.marshalls.com"],
+    ["Burlington","burlington","https://www.burlington.com"],
     ["Dollar Tree","dollartree","https://www.dollartree.com"],
     ["Miniso","miniso","https://www.miniso.com"],
-    ["Rakuten","rakuten","https://www.rakuten.com"],
-    ["Mercado Libre","mercadolibre","https://www.mercadolibre.com"],
-    ["Target","target","https://www.target.com"]
+    ["Carrefour","carrefour","https://www.carrefour.com"],
+    ["Tesco","tesco","https://www.tesco.com"],
+    ["Ozon","ozon","https://www.ozon.ru"],
+    ["Wildberries","wildberries","https://www.wildberries.ru"],
+    ["Best Buy","bestbuy","https://www.bestbuy.com"],
+    ["Home Depot","homedepot","https://www.homedepot.com"]
   ],
 
   "Gaming Stores":[
@@ -216,69 +227,99 @@ const SECTIONS = {
     ["Newegg","newegg","https://www.newegg.com"]
   ],
 
-  "Moda & Calzados":[
-    ["Nike","nike","https://www.nike.com"],
-    ["Adidas","adidas","https://www.adidas.com"],
+  "Moda & Lencería Stores":[
     ["Zara","zara","https://www.zara.com"],
     ["H&M","hm","https://www.hm.com"],
+    ["Uniqlo","uniqlo","https://www.uniqlo.com"],
     ["Shein","shein","https://www.shein.com"],
-    ["Victoria’s Secret","victoriassecret","https://www.victoriassecret.com"]
+    ["Fashion Nova","fashionnova","https://www.fashionnova.com"],
+    ["Victoria’s Secret","victoriassecret","https://www.victoriassecret.com"],
+    ["Aerie","aerie","https://www.ae.com"],
+    ["Calvin Klein","calvinklein","https://www.calvinklein.com"],
+    ["Savage X Fenty","savagexfenty","https://www.savagex.com"],
+    ["Oysho","oysho","https://www.oysho.com"]
   ],
 
-  "Viajes":[
+  "Calzados Stores":[
+    ["Nike","nike","https://www.nike.com"],
+    ["Adidas","adidas","https://www.adidas.com"],
+    ["Puma","puma","https://www.puma.com"],
+    ["New Balance","newbalance","https://www.newbalance.com"],
+    ["Reebok","reebok","https://www.reebok.com"],
+    ["Skechers","skechers","https://www.skechers.com"],
+    ["Converse","converse","https://www.converse.com"],
+    ["Vans","vans","https://www.vans.com"],
+    ["Crocs","crocs","https://www.crocs.com"],
+    ["Under Armour","underarmour","https://www.underarmour.com"]
+  ],
+
+  "Hoteles y Vuelos Stores":[
     ["Booking","booking","https://www.booking.com"],
     ["Expedia","expedia","https://www.expedia.com"],
     ["Airbnb","airbnb","https://www.airbnb.com"],
-    ["Skyscanner","skyscanner","https://www.skyscanner.com"]
+    ["Kayak","kayak","https://www.kayak.com"],
+    ["Skyscanner","skyscanner","https://www.skyscanner.com"],
+    ["Agoda","agoda","https://www.agoda.com"],
+    ["Trip.com","tripdotcom","https://www.trip.com"],
+    ["Hotels.com","hotelsdotcom","https://www.hotels.com"],
+    ["Priceline","priceline","https://www.priceline.com"],
+    ["Travelocity","travelocity","https://www.travelocity.com"]
   ]
 };
 
 /* ================= RENDER ================= */
 const content = document.getElementById("content");
 for(const section in SECTIONS){
-  const h=document.createElement("h2");
-  h.className="section-title";
-  h.textContent=section;
+  const h = document.createElement("h2");
+  h.className = "section-title";
+  h.textContent = section;
   content.appendChild(h);
 
-  const grid=document.createElement("div");
-  grid.className="grid";
+  const grid = document.createElement("div");
+  grid.className = "grid";
 
   SECTIONS[section].forEach(s=>{
-    const a=document.createElement("a");
-    a.className="card";
-    a.href=OfferViewIA.affiliate(s[2]);
-    a.target="_blank";
-    a.innerHTML=`<img src="${ICON(s[1])}"><span>${s[0]}</span>`;
+    const a = document.createElement("a");
+    a.className = "card";
+    a.href = OfferViewIA.affiliate(s[2]);
+    a.target = "_blank";
+    a.innerHTML = `<img src="${ICON(s[1])}"><span>${s[0]}</span>`;
     grid.appendChild(a);
   });
+
   content.appendChild(grid);
 }
 
-/* ================= PROMPTS IA ================= */
-const OfferViewPrompts={
+/* ================= PROMPTS OFICIALES ================= */
+const OfferViewPrompts = {
   search:"Analiza la búsqueda del usuario",
   intent:"Detecta intención de compra",
   recommend:"Recomienda tiendas confiables",
-  deals:"Prioriza ofertas",
+  deals:"Prioriza descuentos",
   location:"Filtra por país",
   trends:"Detecta tendencias",
-  personalize:"Personaliza experiencia",
+  personalize:"Personaliza resultados",
   monetize:"Afiliación ética",
   ethics:"Guía independiente"
 };
 
 /* ================= IA OFFERVIEW ================= */
-const OfferViewIA={
-  country: localStorage.getItem("ov_country") || "RD",
-  language: localStorage.getItem("ov_lang") || "es",
-  prompts: OfferViewPrompts,
+const OfferViewIA = {
+  country:"RD",
+  prompts:OfferViewPrompts,
+
+  setCountry(c){
+    this.country = c;
+    console.log("🌍 País seleccionado:",c);
+  },
 
   search(e){
     e.preventDefault();
-    const q=document.getElementById("searchInput").value;
-    const query=`${q} ofertas ${this.country}`;
-    window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`,"_blank");
+    const q = document.getElementById("searchInput").value;
+    window.open(
+      `https://www.google.com/search?q=${encodeURIComponent(q+" ofertas "+this.country)}`,
+      "_blank"
+    );
   },
 
   affiliate(url){
@@ -288,25 +329,19 @@ const OfferViewIA={
   }
 };
 
-/* ================= SELECTORES ================= */
-document.getElementById("countrySelect").value=OfferViewIA.country;
-document.getElementById("langSelect").value=OfferViewIA.language;
-
-document.getElementById("countrySelect").onchange=e=>{
-  OfferViewIA.country=e.target.value;
-  localStorage.setItem("ov_country",e.target.value);
+/* ================= IDIOMAS ================= */
+const LANG = {
+  es:"Tu Guía a las Mejores Ofertas",
+  en:"Your Guide to the Best Deals",
+  pt:"Seu Guia para as Melhores Ofertas",
+  fr:"Votre Guide des Meilleures Offres",
+  de:"Ihr Leitfaden für die besten Angebote"
 };
+function setLang(l){
+  document.getElementById("slogan").textContent = LANG[l];
+}
 
-document.getElementById("langSelect").onchange=e=>{
-  OfferViewIA.language=e.target.value;
-  localStorage.setItem("ov_lang",e.target.value);
-  document.getElementById("slogan").textContent =
-    e.target.value==="es"
-    ? "Tu Guía a las Mejores Ofertas"
-    : "Your Guide to the Best Deals";
-};
-
-console.log("🤖 OfferView IA activa",OfferViewIA);
+console.log("🤖 OfferView 2B cargado correctamente");
 </script>
 
 </body>
