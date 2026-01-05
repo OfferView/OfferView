@@ -6,19 +6,10 @@
 
 <title>OfferView – Tu Guía a las Mejores Ofertas</title>
 
-<meta name="description" content="OfferView es una guía global de tiendas online con inteligencia artificial, filtrado por país e idiomas.">
-<meta name="keywords" content="ofertas, tiendas online, Amazon, AliExpress, compras, descuentos, RD">
+<meta name="description" content="OfferView es una guía global de tiendas online con IA, filtrado por país e idiomas.">
+<meta name="keywords" content="ofertas, tiendas online, Amazon, AliExpress, compras, descuentos">
 <meta name="author" content="OfferView">
 <meta name="robots" content="index, follow">
-
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDM9GCV149"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-PDM9GCV149');
-</script>
 
 <style>
 :root{
@@ -62,14 +53,13 @@ header p{margin:6px 0;}
   border-radius:0 10px 10px 0;
   cursor:pointer;
 }
-.selectors{
+.controls{
   margin-top:15px;
 }
-select{
-  padding:6px 10px;
-  border-radius:8px;
-  border:none;
-  margin:0 5px;
+.controls select{
+  padding:6px;
+  border-radius:6px;
+  margin:0 4px;
 }
 .section-title{
   text-align:center;
@@ -124,26 +114,28 @@ footer{
     </form>
   </div>
 
-  <div class="selectors">
+  <div class="controls">
     <select id="countrySelect" onchange="OfferViewIA.setCountry(this.value)">
-      <option value="RD">República Dominicana</option>
-      <option value="US">Estados Unidos</option>
-      <option value="MX">México</option>
-      <option value="ES">España</option>
-      <option value="BR">Brasil</option>
-      <option value="IN">India</option>
-      <option value="RU">Rusia</option>
-      <option value="FR">Francia</option>
-      <option value="DE">Alemania</option>
-      <option value="JP">Japón</option>
+      <option value="GLOBAL">🌍 Global</option>
+      <option value="RD">🇩🇴 República Dominicana</option>
+      <option value="US">🇺🇸 Estados Unidos</option>
+      <option value="ES">🇪🇸 España</option>
+      <option value="MX">🇲🇽 México</option>
+      <option value="BR">🇧🇷 Brasil</option>
+      <option value="IN">🇮🇳 India</option>
+      <option value="RU">🇷🇺 Rusia</option>
     </select>
 
-    <select id="langSelect" onchange="setLang(this.value)">
-      <option value="es">Español</option>
-      <option value="en">English</option>
-      <option value="pt">Português</option>
-      <option value="fr">Français</option>
-      <option value="de">Deutsch</option>
+    <select onchange="setLang(this.value)">
+      <option value="es">ES</option>
+      <option value="en">EN</option>
+      <option value="pt">PT</option>
+      <option value="fr">FR</option>
+      <option value="de">DE</option>
+      <option value="ru">RU</option>
+      <option value="hi">HI</option>
+      <option value="zh">中文</option>
+      <option value="ar">AR</option>
     </select>
   </div>
 </header>
@@ -152,15 +144,14 @@ footer{
 
 <footer>
   <p>
-    OfferView es una guía informativa e independiente.  
-    Algunos enlaces pueden ser de afiliación.  
-    Las marcas y logotipos pertenecen a sus respectivos dueños.
+    OfferView es una guía independiente.  
+    Algunos enlaces pueden ser de afiliación.
   </p>
   <p>© 2025 <strong>OfferView</strong></p>
 </footer>
 
 <script>
-/* ================= CONTADOR DE VISTAS ================= */
+/* ================= CONTADOR DE VISITAS ================= */
 const START_VIEWS = 25104;
 let views = localStorage.getItem("offerview_views");
 views = views ? parseInt(views) + 1 : START_VIEWS;
@@ -172,12 +163,69 @@ document.getElementById("viewsCounter").textContent =
 const ICON = n =>
   `https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${n}.svg`;
 
-/* ================= SECCIONES Y TIENDAS (2B FINAL) ================= */
+/* ================= PROMPTS IA OFICIALES ================= */
+const OfferViewPrompts = {
+  search:"Analiza la búsqueda del usuario",
+  intent:"Detecta intención de compra",
+  recommend:"Recomienda tiendas confiables",
+  deals:"Prioriza ofertas",
+  location:"Ajusta por país",
+  language:"Ajusta por idioma",
+  trends:"Detecta tendencias",
+  personalize:"Personaliza experiencia",
+  monetize:"Afiliación ética",
+  ethics:"Guía independiente"
+};
+
+/* ================= IA OFFERVIEW ================= */
+const OfferViewIA = {
+  country:"GLOBAL",
+  prompts:OfferViewPrompts,
+
+  setCountry(c){
+    this.country=c;
+  },
+
+  search(e){
+    e.preventDefault();
+    const q=document.getElementById("searchInput").value;
+    window.open(
+      "https://www.google.com/search?q="+
+      encodeURIComponent(q+" ofertas "+this.country),
+      "_blank"
+    );
+  },
+
+  affiliate(url){
+    if(url.includes("amazon")) return url+"?tag=offerview-20";
+    if(url.includes("aliexpress")) return url+"?aff=offerview";
+    if(url.includes("booking")) return url+"?aid=offerview";
+    return url;
+  }
+};
+
+/* ================= IDIOMAS ================= */
+const LANG={
+  es:"Tu Guía a las Mejores Ofertas",
+  en:"Your Guide to the Best Deals",
+  pt:"Seu Guia das Melhores Ofertas",
+  fr:"Votre guide des meilleures offres",
+  de:"Ihr Leitfaden für die besten Angebote",
+  ru:"Ваш гид по лучшим предложениям",
+  hi:"सर्वश्रेष्ठ ऑफ़रों के लिए आपका मार्गदर्शक",
+  zh:"最佳优惠指南",
+  ar:"دليلك لأفضل العروض"
+};
+function setLang(l){
+  document.getElementById("slogan").textContent=LANG[l]||LANG.es;
+}
+
+/* ================= SECCIONES Y TIENDAS ================= */
 const SECTIONS = {
   "Top Stores":[
     ["Amazon","amazon","https://www.amazon.com"],
-    ["AliExpress","aliexpress","https://www.aliexpress.com"],
     ["Alibaba","alibaba","https://www.alibaba.com"],
+    ["AliExpress","aliexpress","https://www.aliexpress.com"],
     ["Flipkart","flipkart","https://www.flipkart.com"],
     ["Temu","temu","https://www.temu.com"],
     ["eBay","ebay","https://www.ebay.com"],
@@ -185,20 +233,20 @@ const SECTIONS = {
     ["Target","target","https://www.target.com"],
     ["Costco","costco","https://www.costco.com"],
     ["IKEA","ikea","https://www.ikea.com"],
-    ["Mercado Libre","mercadolibre","https://www.mercadolibre.com"],
-    ["JD","jd","https://www.jd.com"],
-    ["Rakuten","rakuten","https://www.rakuten.com"],
-    ["Ross","ross","https://www.rossstores.com"],
-    ["Marshalls","marshalls","https://www.marshalls.com"],
     ["Burlington","burlington","https://www.burlington.com"],
+    ["Marshalls","marshalls","https://www.marshalls.com"],
+    ["Ross","ross","https://www.rossstores.com"],
     ["Dollar Tree","dollartree","https://www.dollartree.com"],
-    ["Miniso","miniso","https://www.miniso.com"],
-    ["Carrefour","carrefour","https://www.carrefour.com"],
-    ["Tesco","tesco","https://www.tesco.com"],
+    ["Rakuten","rakuten","https://www.rakuten.com"],
+    ["JD","jd","https://www.jd.com"],
+    ["Taobao","taobao","https://www.taobao.com"],
+    ["Tmall","tmall","https://www.tmall.com"],
+    ["Mercado Libre","mercadolibre","https://www.mercadolibre.com"],
     ["Ozon","ozon","https://www.ozon.ru"],
     ["Wildberries","wildberries","https://www.wildberries.ru"],
-    ["Best Buy","bestbuy","https://www.bestbuy.com"],
-    ["Home Depot","homedepot","https://www.homedepot.com"]
+    ["Shopee","shopee","https://shopee.com"],
+    ["Lazada","lazada","https://www.lazada.com"],
+    ["Coupang","coupang","https://www.coupang.com"]
   ],
 
   "Gaming Stores":[
@@ -227,7 +275,7 @@ const SECTIONS = {
     ["Newegg","newegg","https://www.newegg.com"]
   ],
 
-  "Moda & Lencería Stores":[
+  "Moda y Lencería Stores":[
     ["Zara","zara","https://www.zara.com"],
     ["H&M","hm","https://www.hm.com"],
     ["Uniqlo","uniqlo","https://www.uniqlo.com"],
@@ -268,80 +316,28 @@ const SECTIONS = {
 };
 
 /* ================= RENDER ================= */
-const content = document.getElementById("content");
+const content=document.getElementById("content");
 for(const section in SECTIONS){
-  const h = document.createElement("h2");
-  h.className = "section-title";
-  h.textContent = section;
+  const h=document.createElement("h2");
+  h.className="section-title";
+  h.textContent=section;
   content.appendChild(h);
 
-  const grid = document.createElement("div");
-  grid.className = "grid";
+  const grid=document.createElement("div");
+  grid.className="grid";
 
   SECTIONS[section].forEach(s=>{
-    const a = document.createElement("a");
-    a.className = "card";
-    a.href = OfferViewIA.affiliate(s[2]);
-    a.target = "_blank";
-    a.innerHTML = `<img src="${ICON(s[1])}"><span>${s[0]}</span>`;
+    const a=document.createElement("a");
+    a.className="card";
+    a.href=OfferViewIA.affiliate(s[2]);
+    a.target="_blank";
+    a.innerHTML=`<img src="${ICON(s[1])}"><span>${s[0]}</span>`;
     grid.appendChild(a);
   });
-
   content.appendChild(grid);
 }
 
-/* ================= PROMPTS OFICIALES ================= */
-const OfferViewPrompts = {
-  search:"Analiza la búsqueda del usuario",
-  intent:"Detecta intención de compra",
-  recommend:"Recomienda tiendas confiables",
-  deals:"Prioriza descuentos",
-  location:"Filtra por país",
-  trends:"Detecta tendencias",
-  personalize:"Personaliza resultados",
-  monetize:"Afiliación ética",
-  ethics:"Guía independiente"
-};
-
-/* ================= IA OFFERVIEW ================= */
-const OfferViewIA = {
-  country:"RD",
-  prompts:OfferViewPrompts,
-
-  setCountry(c){
-    this.country = c;
-    console.log("🌍 País seleccionado:",c);
-  },
-
-  search(e){
-    e.preventDefault();
-    const q = document.getElementById("searchInput").value;
-    window.open(
-      `https://www.google.com/search?q=${encodeURIComponent(q+" ofertas "+this.country)}`,
-      "_blank"
-    );
-  },
-
-  affiliate(url){
-    if(url.includes("amazon")) return url+"?tag=offerview-20";
-    if(url.includes("aliexpress")) return url+"?aff=offerview";
-    return url;
-  }
-};
-
-/* ================= IDIOMAS ================= */
-const LANG = {
-  es:"Tu Guía a las Mejores Ofertas",
-  en:"Your Guide to the Best Deals",
-  pt:"Seu Guia para as Melhores Ofertas",
-  fr:"Votre Guide des Meilleures Offres",
-  de:"Ihr Leitfaden für die besten Angebote"
-};
-function setLang(l){
-  document.getElementById("slogan").textContent = LANG[l];
-}
-
-console.log("🤖 OfferView 2B cargado correctamente");
+console.log("🤖 OfferView 3B activo y funcionando");
 </script>
 
 </body>
