@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>OfferView – Tu Guía a las Mejores Ofertas</title>
-
 <meta name="description" content="OfferView es una guía global e independiente que te ayuda a encontrar las mejores ofertas en tiendas online confiables.">
 <meta name="keywords" content="ofertas, tiendas online, descuentos, Amazon, Temu, AliExpress, compras">
 <meta name="author" content="OfferView">
@@ -95,10 +94,7 @@ footer{
   text-align:center;
   font-size:14px;
 }
-footer h3{
-  margin-top:25px;
-  color:#111827;
-}
+footer a{color:var(--mamey); text-decoration:none;}
 </style>
 </head>
 
@@ -147,45 +143,23 @@ footer h3{
 <div id="content"></div>
 
 <footer>
-  <div style="max-width:900px;margin:auto;line-height:1.6">
-
-    <p>
-      <strong>OfferView</strong> es una guía informativa e independiente cuyo objetivo
-      es ayudar a los usuarios a encontrar ofertas en tiendas online confiables.
-    </p>
-
-    <h3>Aviso Legal</h3>
-    <p>
-      OfferView no vende productos ni servicios directamente.
-      No garantizamos precios, disponibilidad, envíos ni condiciones ofrecidas
-      por las tiendas enlazadas. Las decisiones de compra son responsabilidad
-      exclusiva del usuario.
-    </p>
-
-    <h3>Aviso de Afiliación</h3>
-    <p>
-      Algunos enlaces publicados en OfferView pueden ser enlaces de afiliación.
-      Esto significa que OfferView podría recibir una comisión sin costo adicional
-      para el usuario. La afiliación no influye en el orden ni en la selección
-      de las tiendas mostradas.
-    </p>
-
-    <h3>Política de Privacidad</h3>
-    <p>
-      OfferView no solicita ni almacena datos personales sensibles.
-      Solo se utilizan datos técnicos básicos (como idioma o país seleccionado)
-      con el fin de mejorar la experiencia del usuario.
-    </p>
-
-    <h3>Contacto</h3>
-    <p><strong>soporte.offerviews01@gmail.com</strong></p>
-
-    <p style="margin-top:25px">
-      © 2025 <strong>OfferView</strong> · Guía Global de Ofertas
-    </p>
-
-  </div>
+  <p>
+    OfferView es una guía independiente. Algunos enlaces pueden ser de afiliación.
+  </p>
+  <p>Contacto: soporte.offerviews01@gmail.com</p>
+  <p><a href="#aviso-legal">Aviso Legal</a> | <a href="#privacidad">Política de Privacidad</a></p>
+  <p>© 2025 <strong>OfferView</strong></p>
 </footer>
+
+<!-- Aviso Legal y Privacidad -->
+<div id="aviso-legal" style="display:none;">
+  <h2>Aviso Legal</h2>
+  <p>OfferView es una guía independiente que proporciona enlaces a tiendas online. Algunas compras realizadas a través de los enlaces pueden generar comisiones de afiliación para mantener el servicio.</p>
+</div>
+<div id="privacidad" style="display:none;">
+  <h2>Política de Privacidad</h2>
+  <p>OfferView respeta la privacidad de sus usuarios y no comparte información personal. El sitio puede usar cookies para mejorar la experiencia y personalizar contenidos y anuncios.</p>
+</div>
 
 <script>
 /* ================= CONTADOR DE VISITAS ================= */
@@ -196,9 +170,37 @@ localStorage.setItem("offerview_views", views);
 document.getElementById("viewsCounter").textContent =
   "Views: " + views.toLocaleString();
 
-/* ================= ICONOS ================= */
-const ICON = n =>
-  `https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${n}.svg`;
+/* ================= ICONOS DEFAULT ================= */
+const ICON = n => `https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${n}.svg`;
+
+/* ================= LOGOS OFICIALES ================= */
+const LOGOS_OFICIALES = {
+  "custom-temu":"https://upload.wikimedia.org/wikipedia/commons/4/4a/Temu_logo.svg",
+  "booking":"https://upload.wikimedia.org/wikipedia/commons/7/7c/Booking.com_logo.svg",
+  "airbnb":"https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg",
+  "expedia":"https://upload.wikimedia.org/wikipedia/commons/f/f7/Expedia_Logo.svg",
+  "kayak":"https://upload.wikimedia.org/wikipedia/commons/3/34/Kayak_logo.svg",
+  "skyscanner":"https://upload.wikimedia.org/wikipedia/commons/0/08/Skyscanner_logo.svg",
+  "agoda":"https://upload.wikimedia.org/wikipedia/commons/3/3b/Agoda_logo.svg",
+  "tripdotcom":"https://upload.wikimedia.org/wikipedia/commons/f/f1/Trip.com_logo.svg",
+  "hotelsdotcom":"https://upload.wikimedia.org/wikipedia/commons/1/1b/Hotels.com_Logo.svg",
+  "priceline":"https://upload.wikimedia.org/wikipedia/commons/1/14/Priceline_logo.svg",
+  "travelocity":"https://upload.wikimedia.org/wikipedia/commons/2/28/Travelocity_logo.svg",
+  "ebay":"https://upload.wikimedia.org/wikipedia/commons/1/1b/EBay_logo.svg",
+  "flipkart":"https://upload.wikimedia.org/wikipedia/commons/0/0d/Flipkart_logo.png",
+  "walmart":"https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg",
+  "target":"https://upload.wikimedia.org/wikipedia/commons/9/9a/Target_logo.svg",
+  "costco":"https://upload.wikimedia.org/wikipedia/commons/3/33/Costco_Wholesale_logo_2010.svg",
+  "ikea":"https://upload.wikimedia.org/wikipedia/commons/5/5d/IKEA_logo.svg",
+  "marshalls":"https://upload.wikimedia.org/wikipedia/commons/2/2e/Marshalls_logo.svg",
+  "ross":"https://upload.wikimedia.org/wikipedia/commons/0/0e/Ross_Stores_logo.svg",
+  "dollartree":"https://upload.wikimedia.org/wikipedia/commons/e/e7/Dollar_Tree_logo.svg",
+  "rakuten":"https://upload.wikimedia.org/wikipedia/commons/f/f5/Rakuten_logo.svg",
+  "mercadolibre":"https://upload.wikimedia.org/wikipedia/commons/5/59/Mercado_Libre_logo.svg",
+  "shopee":"https://upload.wikimedia.org/wikipedia/commons/5/5d/Shopee_logo.svg",
+  "lazada":"https://upload.wikimedia.org/wikipedia/commons/0/0b/Lazada_Logo.svg",
+  "coupang":"https://upload.wikimedia.org/wikipedia/commons/9/92/Coupang_logo.svg"
+};
 
 /* ================= PROMPTS IA ================= */
 const OfferViewPrompts = {
@@ -218,9 +220,7 @@ const OfferViewPrompts = {
 const OfferViewIA = {
   country:"GLOBAL",
   prompts:OfferViewPrompts,
-
   setCountry(c){ this.country=c; },
-
   search(e){
     e.preventDefault();
     const q=document.getElementById("searchInput").value;
@@ -230,7 +230,6 @@ const OfferViewIA = {
       "_blank"
     );
   },
-
   affiliate(url){
     if(url.includes("temu")) return "https://temu.to/k/gfiiqs13cbu";
     if(url.includes("amazon")) return url+"?tag=offerview-20";
@@ -246,15 +245,13 @@ const LANG={
   en:"Your Guide to the Best Deals",
   pt:"Seu Guia das Melhores Ofertas",
   fr:"Votre guide des meilleures offres",
-  de:"Ihr Leitfaden für die besten ofertas",
+  de:"Ihr Leitfaden für die besten Angebote",
   ru:"Ваш гид по лучшим предложениям",
   hi:"सर्वश्रेष्ठ ऑफ़रों के लिए आपका मार्गदर्शक",
   zh:"最佳优惠指南",
   ar:"دليلك لأفضل العروض"
 };
-function setLang(l){
-  document.getElementById("slogan").textContent=LANG[l]||LANG.es;
-}
+function setLang(l){ document.getElementById("slogan").textContent=LANG[l]||LANG.es; }
 
 /* ================= SECCIONES Y TIENDAS ================= */
 const SECTIONS = {
@@ -363,12 +360,7 @@ for(const section in SECTIONS){
     a.className="card";
     a.href=OfferViewIA.affiliate(s[2]);
     a.target="_blank";
-
-    const img =
-      s[1]==="custom-temu"
-      ? "https://upload.wikimedia.org/wikipedia/commons/4/4a/Temu_logo.svg"
-      : ICON(s[1]);
-
+    const img = LOGOS_OFICIALES[s[1]] || ICON(s[1]);
     a.innerHTML=`<img src="${img}"><span>${s[0]}</span>`;
     grid.appendChild(a);
   });
@@ -376,7 +368,7 @@ for(const section in SECTIONS){
   content.appendChild(grid);
 }
 
-console.log("✅ OfferView estable cargado correctamente");
+console.log("✅ OfferView 100% completo y profesional cargado correctamente");
 </script>
 
 </body>
