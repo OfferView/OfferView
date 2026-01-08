@@ -6,8 +6,8 @@
 
 <title>OfferView – Tu Guía a las Mejores Ofertas</title>
 
-<meta name="description" content="OfferView es una guía global de tiendas online con IA, filtrado por país e idiomas.">
-<meta name="keywords" content="ofertas, tiendas online, Amazon, AliExpress, compras, descuentos">
+<meta name="description" content="OfferView es una guía global e independiente que te ayuda a encontrar las mejores ofertas en tiendas online confiables.">
+<meta name="keywords" content="ofertas, tiendas online, descuentos, Amazon, Temu, AliExpress, compras">
 <meta name="author" content="OfferView">
 <meta name="robots" content="index, follow">
 
@@ -53,9 +53,7 @@ header p{margin:6px 0;}
   border-radius:0 10px 10px 0;
   cursor:pointer;
 }
-.controls{
-  margin-top:15px;
-}
+.controls{margin-top:15px;}
 .controls select{
   padding:6px;
   border-radius:6px;
@@ -97,6 +95,10 @@ footer{
   text-align:center;
   font-size:14px;
 }
+footer h3{
+  margin-top:25px;
+  color:#111827;
+}
 </style>
 </head>
 
@@ -107,6 +109,7 @@ footer{
   <p id="slogan">Tu Guía a las Mejores Ofertas</p>
   <div class="views" id="viewsCounter">Views: 0</div>
 
+  <!-- BUSCADOR GOOGLE -->
   <div class="search-box">
     <form onsubmit="return OfferViewIA.search(event)">
       <input id="searchInput" placeholder="Buscar tiendas, marcas u ofertas">
@@ -114,8 +117,9 @@ footer{
     </form>
   </div>
 
+  <!-- CONTROLES -->
   <div class="controls">
-    <select id="countrySelect" onchange="OfferViewIA.setCountry(this.value)">
+    <select onchange="OfferViewIA.setCountry(this.value)">
       <option value="GLOBAL">🌍 Global</option>
       <option value="RD">🇩🇴 República Dominicana</option>
       <option value="US">🇺🇸 Estados Unidos</option>
@@ -143,11 +147,44 @@ footer{
 <div id="content"></div>
 
 <footer>
-  <p>
-    OfferView es una guía independiente.  
-    Algunos enlaces pueden ser de afiliación.
-  </p>
-  <p>© 2025 <strong>OfferView</strong></p>
+  <div style="max-width:900px;margin:auto;line-height:1.6">
+
+    <p>
+      <strong>OfferView</strong> es una guía informativa e independiente cuyo objetivo
+      es ayudar a los usuarios a encontrar ofertas en tiendas online confiables.
+    </p>
+
+    <h3>Aviso Legal</h3>
+    <p>
+      OfferView no vende productos ni servicios directamente.
+      No garantizamos precios, disponibilidad, envíos ni condiciones ofrecidas
+      por las tiendas enlazadas. Las decisiones de compra son responsabilidad
+      exclusiva del usuario.
+    </p>
+
+    <h3>Aviso de Afiliación</h3>
+    <p>
+      Algunos enlaces publicados en OfferView pueden ser enlaces de afiliación.
+      Esto significa que OfferView podría recibir una comisión sin costo adicional
+      para el usuario. La afiliación no influye en el orden ni en la selección
+      de las tiendas mostradas.
+    </p>
+
+    <h3>Política de Privacidad</h3>
+    <p>
+      OfferView no solicita ni almacena datos personales sensibles.
+      Solo se utilizan datos técnicos básicos (como idioma o país seleccionado)
+      con el fin de mejorar la experiencia del usuario.
+    </p>
+
+    <h3>Contacto</h3>
+    <p><strong>soporte.offerviews01@gmail.com</strong></p>
+
+    <p style="margin-top:25px">
+      © 2025 <strong>OfferView</strong> · Guía Global de Ofertas
+    </p>
+
+  </div>
 </footer>
 
 <script>
@@ -163,7 +200,7 @@ document.getElementById("viewsCounter").textContent =
 const ICON = n =>
   `https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${n}.svg`;
 
-/* ================= PROMPTS IA OFICIALES ================= */
+/* ================= PROMPTS IA ================= */
 const OfferViewPrompts = {
   search:"Analiza la búsqueda del usuario",
   intent:"Detecta intención de compra",
@@ -182,9 +219,7 @@ const OfferViewIA = {
   country:"GLOBAL",
   prompts:OfferViewPrompts,
 
-  setCountry(c){
-    this.country=c;
-  },
+  setCountry(c){ this.country=c; },
 
   search(e){
     e.preventDefault();
@@ -197,6 +232,7 @@ const OfferViewIA = {
   },
 
   affiliate(url){
+    if(url.includes("temu")) return "https://temu.to/k/gfiiqs13cbu";
     if(url.includes("amazon")) return url+"?tag=offerview-20";
     if(url.includes("aliexpress")) return url+"?aff=offerview";
     if(url.includes("booking")) return url+"?aid=offerview";
@@ -210,7 +246,7 @@ const LANG={
   en:"Your Guide to the Best Deals",
   pt:"Seu Guia das Melhores Ofertas",
   fr:"Votre guide des meilleures offres",
-  de:"Ihr Leitfaden für die besten Angebote",
+  de:"Ihr Leitfaden für die besten ofertas",
   ru:"Ваш гид по лучшим предложениям",
   hi:"सर्वश्रेष्ठ ऑफ़रों के लिए आपका मार्गदर्शक",
   zh:"最佳优惠指南",
@@ -224,10 +260,10 @@ function setLang(l){
 const SECTIONS = {
   "Top Stores":[
     ["Amazon","amazon","https://www.amazon.com"],
+    ["Temu","custom-temu","https://temu.to/k/gfiiqs13cbu"],
     ["Alibaba","alibaba","https://www.alibaba.com"],
     ["AliExpress","aliexpress","https://www.aliexpress.com"],
     ["Flipkart","flipkart","https://www.flipkart.com"],
-    ["Temu","temu","https://www.temu.com"],
     ["eBay","ebay","https://www.ebay.com"],
     ["Walmart","walmart","https://www.walmart.com"],
     ["Target","target","https://www.target.com"],
@@ -248,7 +284,6 @@ const SECTIONS = {
     ["Lazada","lazada","https://www.lazada.com"],
     ["Coupang","coupang","https://www.coupang.com"]
   ],
-
   "Gaming Stores":[
     ["Steam","steam","https://store.steampowered.com"],
     ["Epic Games","epicgames","https://store.epicgames.com"],
@@ -261,7 +296,6 @@ const SECTIONS = {
     ["Blizzard","blizzard","https://www.blizzard.com"],
     ["GOG","gog","https://www.gog.com"]
   ],
-
   "Tecnología Stores":[
     ["Apple","apple","https://www.apple.com"],
     ["Samsung","samsung","https://www.samsung.com"],
@@ -274,7 +308,6 @@ const SECTIONS = {
     ["Xiaomi","xiaomi","https://www.mi.com"],
     ["Newegg","newegg","https://www.newegg.com"]
   ],
-
   "Moda y Lencería Stores":[
     ["Zara","zara","https://www.zara.com"],
     ["H&M","hm","https://www.hm.com"],
@@ -287,7 +320,6 @@ const SECTIONS = {
     ["Savage X Fenty","savagexfenty","https://www.savagex.com"],
     ["Oysho","oysho","https://www.oysho.com"]
   ],
-
   "Calzados Stores":[
     ["Nike","nike","https://www.nike.com"],
     ["Adidas","adidas","https://www.adidas.com"],
@@ -300,7 +332,6 @@ const SECTIONS = {
     ["Crocs","crocs","https://www.crocs.com"],
     ["Under Armour","underarmour","https://www.underarmour.com"]
   ],
-
   "Hoteles y Vuelos Stores":[
     ["Booking","booking","https://www.booking.com"],
     ["Expedia","expedia","https://www.expedia.com"],
@@ -317,6 +348,7 @@ const SECTIONS = {
 
 /* ================= RENDER ================= */
 const content=document.getElementById("content");
+
 for(const section in SECTIONS){
   const h=document.createElement("h2");
   h.className="section-title";
@@ -331,13 +363,20 @@ for(const section in SECTIONS){
     a.className="card";
     a.href=OfferViewIA.affiliate(s[2]);
     a.target="_blank";
-    a.innerHTML=`<img src="${ICON(s[1])}"><span>${s[0]}</span>`;
+
+    const img =
+      s[1]==="custom-temu"
+      ? "https://upload.wikimedia.org/wikipedia/commons/4/4a/Temu_logo.svg"
+      : ICON(s[1]);
+
+    a.innerHTML=`<img src="${img}"><span>${s[0]}</span>`;
     grid.appendChild(a);
   });
+
   content.appendChild(grid);
 }
 
-console.log("🤖 OfferView 3B activo y funcionando");
+console.log("✅ OfferView estable cargado correctamente");
 </script>
 
 </body>
