@@ -95,14 +95,12 @@ footer{
   text-align:center;
   font-size:14px;
 }
-.footer-links a{
+footer a{
   color:var(--mamey);
   text-decoration:none;
-  margin:0 5px;
 }
 </style>
 </head>
-
 <body>
 
 <header>
@@ -149,24 +147,11 @@ footer{
 
 <footer>
   <p>OfferView es una guía independiente. Algunos enlaces pueden ser de afiliación.</p>
-  <p>Contacto: soporte.offerviews01@gmail.com | Tel: 829-542-5652</p>
-  <p>
-    <a class="footer-links" href="#aviso-legal">Aviso Legal</a> | 
-    <a class="footer-links" href="#privacidad">Privacidad</a>
-  </p>
-  <p>© 2025 <strong>OfferView</strong></p>
+  <p>Contacto: <a href="mailto:soporte.offerviews01@gmail.com">soporte.offerviews01@gmail.com</a></p>
+  <p><strong>Aviso Legal:</strong> Toda la información proporcionada en OfferView es únicamente con fines informativos y de guía. Las tiendas y enlaces mostrados pueden incluir afiliaciones. No nos hacemos responsables de compras externas.</p>
+  <p><strong>Política de Privacidad:</strong> Los datos de los usuarios no se almacenan ni se comparten. Solo se usa información para mejorar la experiencia de búsqueda.</p>
+  <p>© 2026 <strong>OfferView</strong></p>
 </footer>
-
-<!-- AVISO LEGAL Y PRIVACIDAD -->
-<section id="aviso-legal" style="padding:20px;background:#fff;margin:20px;border-radius:10px;">
-  <h3>Aviso Legal</h3>
-  <p>OfferView es una guía independiente. Algunos enlaces en este sitio web son de afiliación, lo que significa que podemos recibir una comisión si realiza compras a través de estos enlaces. Nuestra misión es ofrecer información imparcial para ayudarte a encontrar las mejores ofertas online.</p>
-</section>
-
-<section id="privacidad" style="padding:20px;background:#fff;margin:20px;border-radius:10px;">
-  <h3>Política de Privacidad</h3>
-  <p>Recopilamos datos mínimos de navegación solo con fines estadísticos y de mejora del servicio. No compartimos información personal con terceros. Los datos pueden incluir: país, idioma, búsquedas y vistas en la página.</p>
-</section>
 
 <script>
 /* ================= CONTADOR DE VISITAS ================= */
@@ -178,8 +163,7 @@ document.getElementById("viewsCounter").textContent =
   "Views: " + views.toLocaleString();
 
 /* ================= ICONOS ================= */
-const ICON = n =>
-  `https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${n}.svg`;
+const ICON = n => `https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${n}.svg`;
 
 /* ================= PROMPTS IA ================= */
 const OfferViewPrompts = {
@@ -206,8 +190,7 @@ const OfferViewIA = {
     e.preventDefault();
     const q=document.getElementById("searchInput").value;
     window.open(
-      "https://www.google.com/search?q="+
-      encodeURIComponent(q+" ofertas "+this.country),
+      "https://www.google.com/search?q="+encodeURIComponent(q+" ofertas "+this.country),
       "_blank"
     );
   },
@@ -237,7 +220,7 @@ function setLang(l){
   document.getElementById("slogan").textContent=LANG[l]||LANG.es;
 }
 
-/* ================= SECCIONES Y TIENDAS COMPLETAS ================= */
+/* ================= SECCIONES Y TIENDAS ================= */
 const SECTIONS = {
   "Top Stores":[
     ["Amazon","amazon","https://www.amazon.com"],
@@ -265,7 +248,6 @@ const SECTIONS = {
     ["Lazada","lazada","https://www.lazada.com"],
     ["Coupang","coupang","https://www.coupang.com"]
   ],
-
   "Gaming Stores":[
     ["Steam","steam","https://store.steampowered.com"],
     ["Epic Games","epicgames","https://store.epicgames.com"],
@@ -278,7 +260,6 @@ const SECTIONS = {
     ["Blizzard","blizzard","https://www.blizzard.com"],
     ["GOG","gog","https://www.gog.com"]
   ],
-
   "Tecnología Stores":[
     ["Apple","apple","https://www.apple.com"],
     ["Samsung","samsung","https://www.samsung.com"],
@@ -291,7 +272,6 @@ const SECTIONS = {
     ["Xiaomi","xiaomi","https://www.mi.com"],
     ["Newegg","newegg","https://www.newegg.com"]
   ],
-
   "Moda y Lencería Stores":[
     ["Zara","zara","https://www.zara.com"],
     ["H&M","hm","https://www.hm.com"],
@@ -304,7 +284,6 @@ const SECTIONS = {
     ["Savage X Fenty","savagexfenty","https://www.savagex.com"],
     ["Oysho","oysho","https://www.oysho.com"]
   ],
-
   "Calzados Stores":[
     ["Nike","nike","https://www.nike.com"],
     ["Adidas","adidas","https://www.adidas.com"],
@@ -317,7 +296,6 @@ const SECTIONS = {
     ["Crocs","crocs","https://www.crocs.com"],
     ["Under Armour","underarmour","https://www.underarmour.com"]
   ],
-
   "Hoteles y Vuelos Stores":[
     ["Booking","booking","https://www.booking.com"],
     ["Expedia","expedia","https://www.expedia.com"],
@@ -350,20 +328,22 @@ for(const section in SECTIONS){
     a.href=OfferViewIA.affiliate(s[2]);
     a.target="_blank";
 
-    const img =
-      s[1]==="custom-temu"
-      ? "https://upload.wikimedia.org/wikipedia/commons/4/4a/Temu_logo.svg"
-      : ICON(s[1]);
+    // Logos en color o Temu
+    let img;
+    if(s[1]==="custom-temu"){
+      img="https://upload.wikimedia.org/wikipedia/commons/4/4a/Temu_logo.svg";
+    } else {
+      img=`https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/${s[1]}.svg`;
+    }
 
-    a.innerHTML=`<img src="${img}"><span>${s[0]}</span>`;
+    a.innerHTML=`<img src="${img}" alt="${s[0]}"><span>${s[0]}</span>`;
     grid.appendChild(a);
   });
 
   content.appendChild(grid);
 }
 
-console.log("✅ OfferView completo con todas las tiendas y secciones cargado");
+console.log("✅ OfferView completo cargado correctamente");
 </script>
-
 </body>
 </html>
