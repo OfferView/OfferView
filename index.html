@@ -30,12 +30,15 @@ header{
   background:#0b1633;
   color:#fff;
 }
+.logo-offerview{
+  width:120px;
+  margin-bottom:12px;
+}
 header h1{
   color:var(--mamey);
   font-size:42px;
   margin:0;
 }
-header p{margin:6px 0;}
 .views{margin-top:8px;font-size:14px;}
 .search-box{margin:25px auto;max-width:520px;}
 .search-box form{display:flex;}
@@ -73,134 +76,57 @@ header p{margin:6px 0;}
   padding:0 20px 40px;
 }
 .card{
-  background:var(--card);
+  background:#fff;
   border-radius:18px;
   padding:26px 15px;
   text-align:center;
   text-decoration:none;
   box-shadow:0 10px 25px rgba(0,0,0,.08);
-  transition:.25s;
 }
-.card:hover{transform:translateY(-6px);}
-.card span{
-  font-size:18px;
-  font-weight:700;
-}
+.card span{font-size:18px;font-weight:700}
 
-/* ===== COLORES OFICIALES ===== */
-.amazon{color:#FF9900}
-.temu{color:#FB7701}
-.alibaba{color:#FF6A00}
-.aliexpress{color:#FF4747}
-.ebay{color:#0064D2}
-.walmart{color:#0071CE}
-.target{color:#CC0000}
-.costco{color:#E31837}
-.ikea{color:#0058A3}
-.rakuten{color:#BF0000}
-.jd{color:#E2231A}
-.taobao{color:#FF5000}
-.tmall{color:#FF0036}
-.mercadolibre{color:#FFE600}
-.ozon{color:#005BFF}
-.wildberries{color:#CB11AB}
-.shopee{color:#EE4D2D}
-.lazada{color:#1A2B6D}
-.coupang{color:#4A90E2}
-.flipkart{color:#2874F0}
-.burlington{color:#00539B}
-.marshalls{color:#00539B}
-.ross{color:#1B75BC}
-.dollartree{color:#00853F}
-
-.steam{color:#171A21}
-.epicgames{color:#000}
-.playstation{color:#003791}
-.xbox{color:#107C10}
-.nintendo{color:#E60012}
-.gamestop{color:#E0001B}
-.ubisoft{color:#000}
-.ea{color:#FF4747}
-.blizzard{color:#00AEFF}
-.gog{color:#86328A}
-
-.apple{color:#000}
-.samsung{color:#1428A0}
-.microsoft{color:#737373}
-.lenovo{color:#E2231A}
-.dell{color:#007DB8}
-.hp{color:#0096D6}
-.asus{color:#00539B}
-.acer{color:#83B81A}
-.xiaomi{color:#FF6900}
-.newegg{color:#F28C28}
-
-.zara{color:#000}
-.hm{color:#E50010}
-.uniqlo{color:#FF0000}
-.shein{color:#111}
-.fashionnova{color:#000}
-.victoriassecret{color:#000}
-.aerie{color:#1A2B6D}
-.calvinklein{color:#000}
-.savagexfenty{color:#000}
-.oysho{color:#000}
-
-.nike{color:#111}
-.adidas{color:#000}
-.puma{color:#000}
-.newbalance{color:#CF0A2C}
-.reebok{color:#000}
-.skechers{color:#ED1C24}
-.converse{color:#000}
-.vans{color:#000}
-.crocs{color:#4DA94C}
-.underarmour{color:#000}
-
-.booking{color:#003580}
-.expedia{color:#FDBB2D}
-.airbnb{color:#FF5A5F}
-.kayak{color:#FF6900}
-.skyscanner{color:#0770E3}
-.agoda{color:#5C2D91}
-.tripdotcom{color:#287DFA}
-.hotelsdotcom{color:#D32F2F}
-.priceline{color:#0A84FF}
-.travelocity{color:#1F75FE}
+/* COLORES */
+.amazon{color:#FF9900}.temu{color:#FB7701}.aliexpress{color:#FF4747}
+.ebay{color:#0064D2}.walmart{color:#0071CE}.target{color:#CC0000}
+.costco{color:#E31837}.ikea{color:#0058A3}.mercadolibre{color:#FFE600}
+.shopee{color:#EE4D2D}.lazada{color:#1A2B6D}.coupang{color:#4A90E2}
+.steam{color:#171A21}.epicgames{color:#000}.playstation{color:#003791}
+.xbox{color:#107C10}.nintendo{color:#E60012}.gamestop{color:#E0001B}
+.apple{color:#000}.samsung{color:#1428A0}.microsoft{color:#737373}
+.nike{color:#111}.adidas{color:#000}.puma{color:#000}
+.booking{color:#003580}.expedia{color:#FDBB2D}.airbnb{color:#FF5A5F}
 
 footer{
   background:#eef2f7;
-  padding:40px 15px;
+  padding:40px;
   text-align:center;
   font-size:14px;
 }
 footer a{color:var(--mamey);text-decoration:none}
 </style>
 </head>
+
 <body>
 
 <header>
+  <img src="offerview-logo.png" class="logo-offerview" alt="OfferView">
   <h1>OFFERVIEW</h1>
   <p id="slogan">Tu Guía a las Mejores Ofertas</p>
-  <div class="views" id="viewsCounter">Views: 0</div>
+  <div class="views" id="viewsCounter"></div>
 
   <div class="search-box">
     <form onsubmit="return OfferViewIA.search(event)">
       <input id="searchInput" placeholder="Buscar tiendas, marcas u ofertas">
-      <button type="submit">Buscar</button>
+      <button>Buscar</button>
     </form>
   </div>
 
   <div class="controls">
     <select onchange="OfferViewIA.setCountry(this.value)">
       <option value="GLOBAL">🌍 Global</option>
-      <option value="RD">🇩🇴 República Dominicana</option>
-      <option value="US">🇺🇸 Estados Unidos</option>
-      <option value="ES">🇪🇸 España</option>
-      <option value="MX">🇲🇽 México</option>
-      <option value="BR">🇧🇷 Brasil</option>
+      <option value="RD">🇩🇴 RD</option>
+      <option value="US">🇺🇸 US</option>
     </select>
-
     <select onchange="setLang(this.value)">
       <option value="es">ES</option>
       <option value="en">EN</option>
@@ -211,150 +137,72 @@ footer a{color:var(--mamey);text-decoration:none}
 <div id="content"></div>
 
 <footer>
-  <p>OfferView es una guía independiente. Algunos enlaces pueden ser de afiliación.</p>
+  <p>OfferView es una guía independiente.</p>
   <p>Contacto: <a href="mailto:soporte.offerviews01@gmail.com">soporte.offerviews01@gmail.com</a></p>
-  <p><strong>Aviso Legal:</strong> OfferView no vende productos directamente.</p>
-  <p><strong>Política de Privacidad:</strong> No almacenamos datos personales.</p>
-  <p>© 2026 <strong>OfferView</strong></p>
+  <p><strong>Aviso Legal:</strong> No vendemos productos.</p>
+  <p><strong>Privacidad:</strong> No almacenamos datos.</p>
+  <p>© 2026 OfferView</p>
 </footer>
 
 <script>
-/* ===== VISTAS ===== */
 let v=localStorage.getItem("offerview_views")||25104;
 localStorage.setItem("offerview_views",++v);
 viewsCounter.textContent="Views: "+v.toLocaleString();
 
-/* ===== PROMPTS IA ===== */
-const OfferViewPrompts={
-search:"Analiza búsqueda",
-intent:"Detecta intención",
-recommend:"Recomienda tiendas",
-deals:"Prioriza ofertas",
-ethics:"Guía independiente"
-};
-
-/* ===== IA ===== */
 const OfferViewIA={
 country:"GLOBAL",
 setCountry(c){this.country=c},
 search(e){
 e.preventDefault();
-window.open("https://www.google.com/search?q="+encodeURIComponent(searchInput.value+" ofertas "+this.country),"_blank");
+window.open("https://www.google.com/search?q="+encodeURIComponent(searchInput.value+" ofertas "+this.country));
 },
 affiliate(u){
-if(u.includes("temu"))return"https://temu.to/k/gfiiqs13cbu";
-return u;
+return u.includes("temu")?"https://temu.to/k/gfiiqs13cbu":u;
 }
 };
 
-/* ===== IDIOMAS ===== */
 function setLang(l){
 slogan.textContent=l==="en"?"Your Guide to the Best Deals":"Tu Guía a las Mejores Ofertas";
 }
 
-/* ===== SECCIONES COMPLETAS ===== */
 const SECTIONS={
 "Top Stores":[
 ["Amazon","amazon","https://amazon.com"],
 ["Temu","temu","https://temu.to/k/gfiiqs13cbu"],
-["Alibaba","alibaba","https://alibaba.com"],
 ["AliExpress","aliexpress","https://aliexpress.com"],
-["Flipkart","flipkart","https://flipkart.com"],
 ["eBay","ebay","https://ebay.com"],
 ["Walmart","walmart","https://walmart.com"],
 ["Target","target","https://target.com"],
 ["Costco","costco","https://costco.com"],
 ["IKEA","ikea","https://ikea.com"],
-["Burlington","burlington","https://burlington.com"],
-["Marshalls","marshalls","https://marshalls.com"],
-["Ross","ross","https://rossstores.com"],
-["Dollar Tree","dollartree","https://dollartree.com"],
-["Rakuten","rakuten","https://rakuten.com"],
-["JD","jd","https://jd.com"],
-["Taobao","taobao","https://taobao.com"],
-["Tmall","tmall","https://tmall.com"],
 ["Mercado Libre","mercadolibre","https://mercadolibre.com"],
-["Ozon","ozon","https://ozon.ru"],
-["Wildberries","wildberries","https://wildberries.ru"],
 ["Shopee","shopee","https://shopee.com"],
 ["Lazada","lazada","https://lazada.com"],
 ["Coupang","coupang","https://coupang.com"]
 ],
-
-"Gaming Stores":[
+"Gaming":[
 ["Steam","steam","https://store.steampowered.com"],
 ["Epic Games","epicgames","https://store.epicgames.com"],
 ["PlayStation","playstation","https://store.playstation.com"],
 ["Xbox","xbox","https://xbox.com/store"],
 ["Nintendo","nintendo","https://nintendo.com/store"],
-["GameStop","gamestop","https://gamestop.com"],
-["Ubisoft","ubisoft","https://store.ubisoft.com"],
-["EA","ea","https://ea.com"],
-["Blizzard","blizzard","https://blizzard.com"],
-["GOG","gog","https://gog.com"]
+["GameStop","gamestop","https://gamestop.com"]
 ],
-
-"Tecnología Stores":[
+"Tecnología":[
 ["Apple","apple","https://apple.com"],
 ["Samsung","samsung","https://samsung.com"],
-["Microsoft","microsoft","https://microsoft.com"],
-["Lenovo","lenovo","https://lenovo.com"],
-["Dell","dell","https://dell.com"],
-["HP","hp","https://hp.com"],
-["Asus","asus","https://asus.com"],
-["Acer","acer","https://acer.com"],
-["Xiaomi","xiaomi","https://mi.com"],
-["Newegg","newegg","https://newegg.com"]
+["Microsoft","microsoft","https://microsoft.com"]
 ],
-
-"Moda y Lencería Stores":[
-["Zara","zara","https://zara.com"],
-["H&M","hm","https://hm.com"],
-["Uniqlo","uniqlo","https://uniqlo.com"],
-["Shein","shein","https://shein.com"],
-["Fashion Nova","fashionnova","https://fashionnova.com"],
-["Victoria’s Secret","victoriassecret","https://victoriassecret.com"],
-["Aerie","aerie","https://ae.com"],
-["Calvin Klein","calvinklein","https://calvinklein.com"],
-["Savage X Fenty","savagexfenty","https://savagex.com"],
-["Oysho","oysho","https://oysho.com"]
-],
-
-"Calzados Stores":[
-["Nike","nike","https://nike.com"],
-["Adidas","adidas","https://adidas.com"],
-["Puma","puma","https://puma.com"],
-["New Balance","newbalance","https://newbalance.com"],
-["Reebok","reebok","https://reebok.com"],
-["Skechers","skechers","https://skechers.com"],
-["Converse","converse","https://converse.com"],
-["Vans","vans","https://vans.com"],
-["Crocs","crocs","https://crocs.com"],
-["Under Armour","underarmour","https://underarmour.com"]
-],
-
-"Hoteles y Vuelos Stores":[
+"Viajes":[
 ["Booking","booking","https://booking.com"],
 ["Expedia","expedia","https://expedia.com"],
-["Airbnb","airbnb","https://airbnb.com"],
-["Kayak","kayak","https://kayak.com"],
-["Skyscanner","skyscanner","https://skyscanner.com"],
-["Agoda","agoda","https://agoda.com"],
-["Trip.com","tripdotcom","https://trip.com"],
-["Hotels.com","hotelsdotcom","https://hotels.com"],
-["Priceline","priceline","https://priceline.com"],
-["Travelocity","travelocity","https://travelocity.com"]
+["Airbnb","airbnb","https://airbnb.com"]
 ]
 };
 
-/* ===== RENDER ===== */
-for(const section in SECTIONS){
-  content.innerHTML+=`<h2 class="section-title">${section}</h2><div class="grid">${
-    SECTIONS[section].map(s=>`
-      <a class="card" href="${OfferViewIA.affiliate(s[2])}" target="_blank">
-        <span class="${s[1]}">${s[0]}</span>
-      </a>
-    `).join("")
+for(const s in SECTIONS){
+  content.innerHTML+=`<h2 class="section-title">${s}</h2><div class="grid">${
+    SECTIONS[s].map(t=>`<a class="card" href="${OfferViewIA.affiliate(t[2])}" target="_blank"><span class="${t[1]}">${t[0]}</span></a>`).join("")
   }</div>`;
 }
 </script>
