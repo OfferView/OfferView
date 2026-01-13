@@ -252,6 +252,52 @@ ${SECTIONS[section].map(s=>`
 </div>`;
 }
 </script>
+<div id="offerModal" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.6);
+z-index:999;
+align-items:center;
+justify-content:center;
+">
+  <form onsubmit="registrarOferta(event)" style="
+  background:#fff;
+  padding:30px;
+  border-radius:18px;
+  max-width:420px;
+  width:90%;
+  ">
+    <h2 style="margin-top:0;color:#F59E0B">Publicar Oferta</h2>
 
+    <input id="titulo" required placeholder="Título de la oferta"
+      style="width:100%;padding:12px;margin:8px 0">
+
+    <textarea id="descripcion" required placeholder="Descripción"
+      style="width:100%;padding:12px;margin:8px 0"></textarea>
+
+    <input id="link" required placeholder="Link de la oferta"
+      style="width:100%;padding:12px;margin:8px 0">
+
+    <button style="
+    width:100%;
+    padding:14px;
+    background:#F59E0B;
+    border:none;
+    font-weight:bold;
+    border-radius:12px;
+    margin-top:10px
+    ">Publicar</button>
+
+    <button type="button" onclick="closeModal()" style="
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    background:#eee;
+    border:none;
+    border-radius:12px
+    ">Cancelar</button>
+  </form>
+</div>
 </body>
 </html>
