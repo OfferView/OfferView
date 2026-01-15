@@ -129,27 +129,16 @@ footer a{color:var(--mamey);text-decoration:none}
 <p>Contacto: <a href="mailto:soporte.offerviews01@gmail.com">soporte.offerviews01@gmail.com</a></p>
 <p>© 2026 OfferView</p>
 </footer>
-<!-- Modal Publicar Ofertas (solo imagen) -->
+<button id="adBtn" onclick="openOfferModal()">Publicar Ofertas</button>
+
+<!-- Modal Publicar Ofertas -->
 <div id="offerModal">
   <form onsubmit="publicarImagen(event)">
     <h2>Publicar Oferta</h2>
-
     <input id="imagenOferta" type="file" accept="image/*" required>
-
     <button type="submit">Publicar</button>
     <button type="button" onclick="closeOfferModal()">Cancelar</button>
   </form>
-</div>
-<!-- Modal Publicidad -->
-<div id="adModal">
-<div>
-<h3>Publicar Publicidad</h3>
-<input id="adName" placeholder="Negocio">
-<input id="adImg" type="file">
-<textarea id="adText" placeholder="Texto de la publicidad"></textarea>
-<button onclick="publishAd()">Publicar</button>
-<button onclick="adModal.style.display='none'">Cancelar</button>
-</div>
 </div>
 
 <!-- Firebase -->
