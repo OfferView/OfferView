@@ -95,8 +95,13 @@ footer a{color:var(--mamey);text-decoration:none}
 
 <h2 class="section-title" id="offersTitle">Ofertas Para Ti</h2>
 <div id="adCarousel"></div>
-<button id="adBtn" onclick="openAdModal()">Registro & Publicar Ofertas</button>
-
+<button id="adBtn" onclick="openOfferModal()">
+  Registro & Publicar Ofertas
+</button>
+<button id="adBtn" onclick="adModal.style.display='flex'">
+  Publicar Publicidad
+</button>
+  
 <div id="content"></div>
 
 <footer>
@@ -226,10 +231,12 @@ titulo: document.getElementById("titulo").value,
 descripcion: document.getElementById("descripcion").value,
 link: document.getElementById("link").value,
 fecha: new Date()
-}).then(()=>{closeOfferModal();loadOffers();});
+  }).then(()=>{
+  closeOfferModal();
+});
 }
 
-// Cargar ofertas globales
+// ofertas globales
 function loadAds() {
   const adCarousel = document.getElementById("adCarousel");
   adCarousel.innerHTML = "";
@@ -238,13 +245,14 @@ function loadAds() {
     .orderBy("fecha", "desc")
     .onSnapshot(snapshot => {
       adCarousel.innerHTML = "";
+
       snapshot.forEach(doc => {
         const ad = doc.data();
         const id = doc.id;
 
         adCarousel.innerHTML += `
           <div class="ad-card">
-            <img src="${ad.imagenURL}" loading="lazy">
+            <img src="${ad.imagen}" loading="lazy">
             <h4>${ad.nombre}</h4>
             <p>${ad.texto}</p>
           </div>
@@ -252,8 +260,7 @@ function loadAds() {
       });
     });
 }
-loadOffers();
-
+loadAds();
 // Secciones y tiendas
 const SECTIONS = {
 "Top Stores":[
@@ -345,17 +352,25 @@ const SECTIONS = {
 ]
 };
 
-const contentEl = document.getElementById("content");
-for(const section in SECTIONS){
-contentEl.innerHTML+=`
-<h2 class="section-title">${section}</h2>
-<div class="grid">
-${SECTIONS[section].map(s=>`
-<a class="card" href="${OfferViewIA.affiliate(s[2])}" target="_blank">
-<span class="${s[1]}">${s[0]}</span>
-</a>`).join("")}
-</div>`;
+function loadOffers(){
+  const adCarousel = document.getElementById("adCarousel");
+
+  db.collection("ofertas")
+    .orderBy("fecha","desc")
+    .onSnapshot(snapshot=>{
+      snapshot.forEach(doc=>{
+        const o = doc.data();
+        adCarousel.innerHTML += `
+          <div class="ad-card">
+            <h4>${o.titulo}</h4>
+            <p>${o.descripcion}</p>
+            <a href="${o.link}" target="_blank" style="color:#F59E0B">Ver oferta</a>
+          </div>
+        `;
+      });
+    });
 }
+loadAds();  
 </script>
 </body>
 </html>
