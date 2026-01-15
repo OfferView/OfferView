@@ -107,13 +107,16 @@ footer a{color:var(--mamey);text-decoration:none}
 <p>© 2026 OfferView</p>
 </footer>
 
-<!-- Modal Publicar Oferta -->
+<!-- Modal Registro & Publicar Ofertas -->
 <div id="offerModal">
 <form onsubmit="registrarOferta(event)">
-<h2>Publicar Oferta</h2>
-<input id="titulo" required placeholder="Título de la oferta">
-<textarea id="descripcion" required placeholder="Descripción"></textarea>
-<input id="link" required placeholder="Link de la oferta">
+<h2>Registro & Publicar Ofertas</h2>
+
+<input id="titulo" required placeholder="Nombre del negocio o oferta">
+<textarea id="descripcion" required placeholder="Descripción de la oferta"></textarea>
+<input id="link" required placeholder="Link de contacto o tienda">
+<input id="imagenOferta" type="file" accept="image/*" required>
+
 <button type="submit">Publicar</button>
 <button type="button" onclick="closeOfferModal()">Cancelar</button>
 </form>
@@ -367,7 +370,7 @@ function loadOffers(){
       });
     });
 }
-loadAds();  
+loadOffers();
 </script>
 </body>
 </html>
