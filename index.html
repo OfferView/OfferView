@@ -96,6 +96,29 @@ footer a{color:var(--mamey);text-decoration:none}
 <h2 class="section-title" id="offersTitle">Ofertas Para Ti</h2>
 <div id="adCarousel"></div>
 <button id="adBtn" onclick="openOfferModal()">
+ function publicarImagen(e){
+  e.preventDefault();
+
+  const file = document.getElementById("imagenOferta").files[0];
+  if(!file){
+    alert("Debes subir una imagen");
+    return;
+  }
+
+  const ref = storage.ref("ofertas/" + Date.now() + "_" + file.name);
+
+  ref.put(file).then(snap=>{
+    snap.ref.getDownloadURL().then(url=>{
+      db.collection("publicidad").add({
+        imagen: url,
+        fecha: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(()=>{
+        closeOfferModal();
+        loadAds();
+      });
+    });
+  });
+} 
   Registro & Publicar Ofertas
 </button>
 
@@ -106,22 +129,17 @@ footer a{color:var(--mamey);text-decoration:none}
 <p>Contacto: <a href="mailto:soporte.offerviews01@gmail.com">soporte.offerviews01@gmail.com</a></p>
 <p>© 2026 OfferView</p>
 </footer>
-
-<!-- Modal Registro & Publicar Ofertas -->
+<!-- Modal Publicar Ofertas (solo imagen) -->
 <div id="offerModal">
-<form onsubmit="registrarOferta(event)">
-<h2>Registro & Publicar Ofertas</h2>
+  <form onsubmit="publicarImagen(event)">
+    <h2>Publicar Oferta</h2>
 
-<input id="titulo" required placeholder="Nombre del negocio o oferta">
-<textarea id="descripcion" required placeholder="Descripción de la oferta"></textarea>
-<input id="link" required placeholder="Link de contacto o tienda">
-<input id="imagenOferta" type="file" accept="image/*" required>
+    <input id="imagenOferta" type="file" accept="image/*" required>
 
-<button type="submit">Publicar</button>
-<button type="button" onclick="closeOfferModal()">Cancelar</button>
-</form>
+    <button type="submit">Publicar</button>
+    <button type="button" onclick="closeOfferModal()">Cancelar</button>
+  </form>
 </div>
-
 <!-- Modal Publicidad -->
 <div id="adModal">
 <div>
@@ -351,7 +369,31 @@ const SECTIONS = {
 ["Travelocity","travelocity","https://travelocity.com"]
 ]
 };
+<script>
+function renderSections() {
+  const content = document.getElementById("content");
+  content.innerHTML = "";
 
+  Object.entries(SECTIONS).forEach(([sectionName, stores]) => {
+    let html = `
+      <h2 class="section-title">${sectionName}</h2>
+      <div class="grid">
+    `;
+
+    stores.forEach(store => {
+      const [name, cls, url] = store;
+      html += `
+        <a class="card ${cls}" href="${url}" target="_blank">
+          <span>${name}</span>
+        </a>
+      `;
+    });
+
+    html += `</div>`;
+    content.innerHTML += html;
+  });
+}
+</script>
 function loadOffers(){
   const adCarousel = document.getElementById("adCarousel");
 
@@ -371,6 +413,7 @@ function loadOffers(){
     });
 }
 loadOffers();
+renderSections();
 </script>
 </body>
 </html>
