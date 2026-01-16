@@ -3,124 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>OfferView – Tu Guía a las Mejores Ofertas</title>
-<meta name="description" content="OfferView es una guía global e independiente que te ayuda a encontrar las mejores ofertas en tiendas online confiables.">
-<meta name="keywords" content="ofertas, tiendas online, descuentos, Amazon, Temu, AliExpress, Alibaba">
+<meta name="description" content="OfferView es una guía global e independiente de ofertas">
+<meta name="keywords" content="ofertas, Amazon, Temu, Alibaba">
 <meta name="author" content="OfferView">
-<meta name="robots" content="index, follow">
 
 <style>
 :root{
 --mamey:#F59E0B;--bg:#F9FAFB;--card:#fff;--text:#111827;
 }
 body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
-header{text-align:center;padding:45px 15px;background:#0b1633;color:#fff}
+header{text-align:center;padding:40px 15px;background:#0b1633;color:#fff}
 header h1{color:var(--mamey);font-size:42px;margin:0}
-.logo-offerview{width:180px;margin-bottom:15px}
-.views{font-size:14px}
-.search-box{margin:25px auto;max-width:520px}
+.views{font-size:14px;margin-top:6px}
+
+.search-box{margin:20px auto;max-width:520px}
 .search-box form{display:flex}
 .search-box input{flex:1;padding:12px;border:none;border-radius:10px 0 0 10px}
 .search-box button{padding:12px 18px;border:none;background:var(--mamey);font-weight:bold;border-radius:0 10px 10px 0}
+
 .controls select{padding:6px;border-radius:6px;margin:4px}
 
-.section-title{text-align:center;margin:50px 0 22px;font-size:26px;font-weight:700;color:var(--mamey)}
+.section-title{text-align:center;margin:55px 0 22px;font-size:26px;font-weight:700;color:var(--mamey)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;padding:0 20px 40px}
 .card{background:#fff;border-radius:18px;padding:26px 15px;text-align:center;text-decoration:none;box-shadow:0 10px 25px rgba(0,0,0,.08);transition:.25s}
 .card:hover{transform:translateY(-6px)}
-.card span{font-size:18px;font-weight:700}
+.card span{font-size:17px;font-weight:700}
 
-/* Colores tiendas */
-.amazon{color:#FF9900}.temu{color:#FB7701}.aliexpress{color:#FF4747}
-.ebay{color:#0064D2}.walmart{color:#0071CE}.target{color:#CC0000}
-.costco{color:#E31837}.bestbuy{color:#003B64}.newegg{color:#F28C28}
-.etsy{color:#F1641E}.shein{color:#111}.shopee{color:#EE4D2D}
-.miniso{color:#E50012}.ross{color:#1B75BC}.marshalls{color:#00539B}
-.burlington{color:#00539B}.ikea{color:#0058A3}.rakuten{color:#BF0000}
-.coppel{color:#005AA9}.falabella{color:#0072CE}
-.magalu{color:#0086FF}.americanas{color:#E60014}.linio{color:#00AEEF}.mercadolibre{color:#FFE600}
-.alibaba{color:#FF6600}
-
-footer{background:#eef2f7;padding:40px;text-align:center;font-size:14px}
-footer a{color:var(--mamey);text-decoration:none}
-
-/* Publicidad */
+/* Carrusel */
 #adCarousel{display:flex;gap:20px;overflow-x:auto;padding:20px}
 .ad-card{min-width:260px;background:#0b1633;color:#fff;border-radius:18px;padding:14px}
 .ad-card img{width:100%;border-radius:12px}
-#adBtn{display:block;margin:0 auto 40px;padding:14px 28px;background:var(--mamey);border:none;border-radius:14px;font-weight:bold}
+
+/* Botón */
+#publishBtn{display:block;margin:0 auto 40px;padding:14px 28px;background:var(--mamey);border:none;border-radius:14px;font-weight:bold;cursor:pointer}
 
 /* Modal */
-#offerModal,#adModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center}
-#offerModal form,#adModal div{background:#fff;padding:30px;border-radius:18px;max-width:420px;width:90%}
-#offerModal h2,#adModal h3{margin-top:0;color:#F59E0B}
-#offerModal input,#offerModal textarea,#adModal input,#adModal textarea{width:100%;padding:12px;margin:8px 0}
-#offerModal button,#adModal button{width:100%;padding:14px;margin-top:10px;border:none;border-radius:12px;font-weight:bold}
-#offerModal button[type=button]{background:#eee}
-#offerModal button[type=submit]{background:#F59E0B}
+#offerModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center}
+#offerModal form{background:#fff;padding:30px;border-radius:18px;max-width:420px;width:90%}
+#offerModal h3{margin-top:0;color:var(--mamey)}
+#offerModal input,#offerModal button{width:100%;padding:12px;margin-top:10px}
+#offerModal button[type="button"]{background:#eee}
+
+footer{background:#eef2f7;padding:40px;text-align:center;font-size:14px}
+footer a{color:var(--mamey);text-decoration:none}
 </style>
 </head>
 
 <body>
 
 <header>
-<img src="pngofferview.jpg" class="logo-offerview">
 <h1>OFFERVIEW</h1>
 <p id="slogan">Tu Guía a las Mejores Ofertas</p>
-<div class="views" id="viewsCounter"></div>
+
+<div class="views">
+<span id="viewsCounter">Visitas: 0</span>
+</div>
 
 <div class="search-box">
-<form onsubmit="return OfferViewIA.search(event)">
-<input id="searchInput" placeholder="Buscar tiendas, marcas u ofertas">
+<form onsubmit="return buscar(event)">
+<input id="searchInput" placeholder="Buscar tiendas u ofertas">
 <button>Buscar</button>
 </form>
 </div>
 
 <div class="controls">
-<select onchange="OfferViewIA.setCountry(this.value)">
-<option value="GLOBAL">🌍 Global</option>
-<option value="RD">🇩🇴 RD</option>
-<option value="US">🇺🇸 US</option>
-<option value="ES">🇪🇸 ES</option>
-<option value="MX">🇲🇽 MX</option>
-<option value="BR">🇧🇷 BR</option>
-</select>
-<select id="languageSelect" onchange="OfferViewIA.setLanguage(this.value)">
+<select onchange="setLanguage(this.value)">
 <option value="ES">🇪🇸 Español</option>
-<option value="PT">🇵🇹 Português</option>
 <option value="EN">🇺🇸 English</option>
+<option value="PT">🇵🇹 Português</option>
 </select>
 </div>
 </header>
 
 <h2 class="section-title" id="offersTitle">Ofertas Para Ti</h2>
 <div id="adCarousel"></div>
-<button id="adBtn" onclick="openOfferModal()">
- function publicarImagen(e){
-  e.preventDefault();
 
-  const file = document.getElementById("imagenOferta").files[0];
-  if(!file){
-    alert("Debes subir una imagen");
-    return;
-  }
-
-  const ref = storage.ref("ofertas/" + Date.now() + "_" + file.name);
-
-  ref.put(file).then(snap=>{
-    snap.ref.getDownloadURL().then(url=>{
-      db.collection("publicidad").add({
-        imagen: url,
-        fecha: firebase.firestore.FieldValue.serverTimestamp()
-      }).then(()=>{
-        closeOfferModal();
-        loadAds();
-      });
-    });
-  });
-} 
-  Registro & Publicar Ofertas
-</button>
+<button id="publishBtn" onclick="openOfferModal()">Publicar Imagen de Oferta</button>
 
 <div id="content"></div>
 
@@ -129,280 +89,203 @@ footer a{color:var(--mamey);text-decoration:none}
 <p>Contacto: <a href="mailto:soporte.offerviews01@gmail.com">soporte.offerviews01@gmail.com</a></p>
 <p>© 2026 OfferView</p>
 </footer>
-<button id="adBtn" onclick="openOfferModal()">Publicar Ofertas</button>
 
-<!-- Modal Publicar Ofertas -->
+<!-- MODAL -->
 <div id="offerModal">
-  <form onsubmit="publicarImagen(event)">
-    <h2>Publicar Oferta</h2>
-    <input id="imagenOferta" type="file" accept="image/*" required>
-    <button type="submit">Publicar</button>
-    <button type="button" onclick="closeOfferModal()">Cancelar</button>
-  </form>
+<form onsubmit="publicarImagen(event)">
+<h3>Publicar Imagen de Oferta</h3>
+<input type="file" id="imagenOferta" accept="image/*" required>
+<button type="submit">Publicar</button>
+<button type="button" onclick="closeOfferModal()">Cancelar</button>
+</form>
 </div>
 
-<!-- Firebase -->
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
-  
+
 <script>
-// Configuración Firebase global
-const firebaseConfig = {
-  apiKey: "AIzaSyDBb8-HKRm_HZNZhi55DF2XQ-VeWXWsgSE",
-  authDomain: "offerview-a0837.firebaseapp.com",
-  projectId: "offerview-a0837",
-  storageBucket: "offerview-a0837.appspot.com",
-  messagingSenderId: "949865345608",
-  appId: "1:949865345608:web:2f7cd6fc231b9151ffde7d"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const storage = firebase.storage();
-  
-// Contador global de visitas
-const viewsCounterEl = document.getElementById("viewsCounter");
-db.collection("visitas").doc("contador").get().then(doc=>{
-  let v = doc.exists ? doc.data().count : 0;
-  v++;
-  viewsCounterEl.textContent = "Views: " + v.toLocaleString();
-  db.collection("visitas").doc("contador").set({count: v});
+/* ================= FIREBASE ================= */
+firebase.initializeApp({
+apiKey:"AIzaSyDBb8-HKRm_HZNZhi55DF2XQ-VeWXWsgSE",
+authDomain:"offerview-a0837.firebaseapp.com",
+projectId:"offerview-a0837",
+storageBucket:"offerview-a0837.appspot.com",
+messagingSenderId:"949865345608",
+appId:"1:949865345608:web:2f7cd6fc231b9151ffde7d"
+});
+const db=firebase.firestore();
+const storage=firebase.storage();
+
+/* ================= VISTAS ================= */
+const viewsEl=document.getElementById("viewsCounter");
+db.collection("stats").doc("views").get().then(d=>{
+let v=d.exists?d.data().count:0;
+v++;
+viewsEl.textContent="Visitas: "+v.toLocaleString();
+db.collection("stats").doc("views").set({count:v});
 });
 
-// Prompts internos
-const OfferViewPrompts = {
-search:"Analiza búsqueda",
-intent:"Detecta intención",
-recommend:"Recomienda tiendas",
-deals:"Prioriza ofertas",
-ethics:"Guía independiente"
+/* ================= PROMPTS ================= */
+const OfferViewPrompts={
+search:"Analizar intención de búsqueda",
+recommend:"Recomendar tiendas confiables",
+deals:"Priorizar ofertas reales",
+ethics:"Guía neutral e independiente"
 };
 
-// Funciones principales
-const OfferViewIA = {
-country:"GLOBAL",
-language:"ES",
-setCountry(c){this.country=c},
-setLanguage(l){
-this.language=l;
-document.getElementById("offersTitle").textContent=
-(l==="ES")?"Ofertas Para Ti":(l==="PT")?"Ofertas Para Você":"Deals For You";
-},
-search(e){
+/* ================= BUSCADOR ================= */
+function buscar(e){
 e.preventDefault();
-window.open("https://www.google.com/search?q="+encodeURIComponent(document.getElementById("searchInput").value+" ofertas "+this.country),"_blank");
-},
-affiliate(u){
-if(u.includes("temu")) return "https://temu.to/k/gfiiqs13cbu";
-return u;
-}
-};
-
-// Publicidad
-function publishAd() {
-  const name = document.getElementById("adName").value;
-  const text = document.getElementById("adText").value;
-  const file = document.getElementById("adImg").files[0];
-
-  if (!name || !text || !file) {
-    alert("Completa todos los campos");
-    return;
-  }
-
-  const storageRef = storage.ref("publicidad/" + Date.now() + "_" + file.name);
-
-  storageRef.put(file).then(snapshot => {
-    snapshot.ref.getDownloadURL().then(url => {
-
-      db.collection("publicidad").add({
-        nombre: name,
-        texto: text,
-        imagen: url,
-        fecha: firebase.firestore.FieldValue.serverTimestamp()
-      }).then(() => {
-        document.getElementById("adModal").style.display = "none";
-        loadAds();
-      });
-
-    });
-  });
+window.open("https://www.google.com/search?q="+encodeURIComponent(searchInput.value+" ofertas"),"_blank");
 }
 
-// Registro & Publicar Ofertas
-function openOfferModal(){document.getElementById("offerModal").style.display="flex";}
-function closeOfferModal(){document.getElementById("offerModal").style.display="none";}
-function registrarOferta(e){
+/* ================= IDIOMAS ================= */
+function setLanguage(l){
+offersTitle.textContent =
+l==="EN" ? "Deals For You" :
+l==="PT" ? "Ofertas Para Você" :
+"Ofertas Para Ti";
+}
+
+/* ================= MODAL ================= */
+function openOfferModal(){offerModal.style.display="flex";}
+function closeOfferModal(){offerModal.style.display="none";}
+
+/* ================= PUBLICAR IMAGEN ================= */
+function publicarImagen(e){
 e.preventDefault();
-db.collection("ofertas").add({
-titulo: document.getElementById("titulo").value,
-descripcion: document.getElementById("descripcion").value,
-link: document.getElementById("link").value,
-fecha: new Date()
-  }).then(()=>{
-  closeOfferModal();
+const file=document.getElementById("imagenOferta").files[0];
+if(!file){alert("Debes subir una imagen");return;}
+const ref=storage.ref("ofertas/"+Date.now()+"_"+file.name);
+ref.put(file).then(s=>s.ref.getDownloadURL().then(url=>{
+db.collection("publicidad").add({
+imagen:url,
+fecha:firebase.firestore.FieldValue.serverTimestamp()
 });
+closeOfferModal();
+}));
 }
 
-// ofertas globales
-function loadAds() {
-  const adCarousel = document.getElementById("adCarousel");
-  adCarousel.innerHTML = "";
-
-  db.collection("publicidad")
-    .orderBy("fecha", "desc")
-    .onSnapshot(snapshot => {
-      adCarousel.innerHTML = "";
-
-      snapshot.forEach(doc => {
-        const ad = doc.data();
-        const id = doc.id;
-
-        adCarousel.innerHTML += `
-          <div class="ad-card">
-            <img src="${ad.imagen}" loading="lazy">
-            <h4>${ad.nombre}</h4>
-            <p>${ad.texto}</p>
-          </div>
-        `;
-      });
-    });
+/* ================= CARRUSEL ================= */
+function loadAds(){
+db.collection("publicidad").orderBy("fecha","desc").onSnapshot(s=>{
+adCarousel.innerHTML="";
+s.forEach(d=>{
+adCarousel.innerHTML+=`
+<div class="ad-card">
+<img src="${d.data().imagen}" loading="lazy">
+</div>`;
+});
+});
 }
 loadAds();
-// Secciones y tiendas
+
+/* ================= SECCIONES Y TIENDAS ================= */
 const SECTIONS = {
-"Top Stores":[
-["Amazon","amazon","https://amazon.com"],
-["Mercado Libre","mercadolibre","https://mercadolibre.com"],
-["Alibaba","alibaba","https://alibaba.com"],
-["Temu","temu","https://temu.to/k/gfiiqs13cbu"],
-["AliExpress","aliexpress","https://aliexpress.com"],
-["eBay","ebay","https://ebay.com"],
-["Walmart","walmart","https://walmart.com"],
-["Target","target","https://target.com"],
-["Costco","costco","https://costco.com"],
-["Best Buy","bestbuy","https://bestbuy.com"],
-["Newegg","newegg","https://newegg.com"],
-["Etsy","etsy","https://etsy.com"],
-["Shein","shein","https://shein.com"],
-["Shopee","shopee","https://shopee.com"],
-["MINISO","miniso","https://miniso.com"],
-["Ross","ross","https://rossstores.com"],
-["Marshalls","marshalls","https://marshalls.com"],
-["Burlington","burlington","https://burlington.com"],
-["IKEA","ikea","https://ikea.com"],
-["Rakuten","rakuten","https://rakuten.com"],
-["Coppel","coppel","https://coppel.com"],
-["Falabella","falabella","https://falabella.com"],
-["Magalu","magalu","https://magazineluiza.com.br"],
-["Americanas","americanas","https://americanas.com.br"],
-["Linio","linio","https://linio.com"]
-],
-"Gaming Stores":[
-["Steam","steam","https://store.steampowered.com"],
-["Epic Games","epicgames","https://store.epicgames.com"],
-["PlayStation","playstation","https://store.playstation.com"],
-["Xbox","xbox","https://xbox.com/store"],
-["Nintendo","nintendo","https://nintendo.com/store"],
-["GameStop","gamestop","https://gamestop.com"],
-["Ubisoft","ubisoft","https://store.ubisoft.com"],
-["EA","ea","https://ea.com"],
-["Blizzard","blizzard","https://blizzard.com"],
-["GOG","gog","https://gog.com"]
-],
-"Tecnología Stores":[
-["Apple","apple","https://apple.com"],
-["Samsung","samsung","https://samsung.com"],
-["Microsoft","microsoft","https://microsoft.com"],
-["Lenovo","lenovo","https://lenovo.com"],
-["Dell","dell","https://dell.com"],
-["HP","hp","https://hp.com"],
-["Asus","asus","https://asus.com"],
-["Acer","acer","https://acer.com"],
-["Xiaomi","xiaomi","https://mi.com"],
-["Newegg","newegg","https://newegg.com"]
-],
-"Moda y Lencería Stores":[
-["Zara","zara","https://zara.com"],
-["H&M","hm","https://hm.com"],
-["Uniqlo","uniqlo","https://uniqlo.com"],
-["Shein","shein","https://shein.com"],
-["Fashion Nova","fashionnova","https://fashionnova.com"],
-["Victoria’s Secret","victoriassecret","https://victoriassecret.com"],
-["Aerie","aerie","https://ae.com"],
-["Calvin Klein","calvinklein","https://calvinklein.com"],
-["Savage X Fenty","savagexfenty","https://savagex.com"],
-["Oysho","oysho","https://oysho.com"]
-],
-"Calzados Stores":[
-["Nike","nike","https://nike.com"],
-["Adidas","adidas","https://adidas.com"],
-["Puma","puma","https://puma.com"],
-["New Balance","newbalance","https://newbalance.com"],
-["Reebok","reebok","https://reebok.com"],
-["Skechers","skechers","https://skechers.com"],
-["Converse","converse","https://converse.com"],
-["Vans","vans","https://vans.com"],
-["Crocs","crocs","https://crocs.com"],
-["Under Armour","underarmour","https://underarmour.com"]
-],
-"Hoteles y Vuelos Stores":[
-["Booking","booking","https://booking.com"],
-["Expedia","expedia","https://expedia.com"],
-["Airbnb","airbnb","https://airbnb.com"],
-["Kayak","kayak","https://kayak.com"],
-["Skyscanner","skyscanner","https://skyscanner.com"],
-["Agoda","agoda","https://agoda.com"],
-["Trip.com","tripdotcom","https://trip.com"],
-["Hotels.com","hotelsdotcom","https://hotels.com"],
-["Priceline","priceline","https://priceline.com"],
-["Travelocity","travelocity","https://travelocity.com"]
-]
+  "Top Stores":[
+    ["Amazon","amazon","https://amazon.com"],
+    ["Mercado Libre","mercadolibre","https://mercadolibre.com"],
+    ["Alibaba","alibaba","https://alibaba.com"],
+    ["Temu","temu","https://temu.to/k/gfiiqs13cbu"],
+    ["AliExpress","aliexpress","https://aliexpress.com"],
+    ["eBay","ebay","https://ebay.com"],
+    ["Walmart","walmart","https://walmart.com"],
+    ["Target","target","https://target.com"],
+    ["Costco","costco","https://costco.com"],
+    ["Best Buy","bestbuy","https://bestbuy.com"],
+    ["Newegg","newegg","https://newegg.com"],
+    ["Etsy","etsy","https://etsy.com"],
+    ["Shein","shein","https://shein.com"],
+    ["Shopee","shopee","https://shopee.com"],
+    ["MINISO","miniso","https://miniso.com"],
+    ["Ross","ross","https://rossstores.com"],
+    ["Marshalls","marshalls","https://marshalls.com"],
+    ["Burlington","burlington","https://burlington.com"],
+    ["IKEA","ikea","https://ikea.com"],
+    ["Rakuten","rakuten","https://rakuten.com"],
+    ["Coppel","coppel","https://coppel.com"],
+    ["Falabella","falabella","https://falabella.com"],
+    ["Magalu","magalu","https://magazineluiza.com.br"],
+    ["Americanas","americanas","https://americanas.com.br"],
+    ["Linio","linio","https://linio.com"]
+  ],
+  "Gaming Stores":[
+    ["Steam","steam","https://store.steampowered.com"],
+    ["Epic Games","epicgames","https://store.epicgames.com"],
+    ["PlayStation","playstation","https://store.playstation.com"],
+    ["Xbox","xbox","https://xbox.com/store"],
+    ["Nintendo","nintendo","https://nintendo.com/store"],
+    ["GameStop","gamestop","https://gamestop.com"],
+    ["Ubisoft","ubisoft","https://store.ubisoft.com"],
+    ["EA","ea","https://ea.com"],
+    ["Blizzard","blizzard","https://blizzard.com"],
+    ["GOG","gog","https://gog.com"]
+  ],
+  "Tecnología Stores":[
+    ["Apple","apple","https://apple.com"],
+    ["Samsung","samsung","https://samsung.com"],
+    ["Microsoft","microsoft","https://microsoft.com"],
+    ["Lenovo","lenovo","https://lenovo.com"],
+    ["Dell","dell","https://dell.com"],
+    ["HP","hp","https://hp.com"],
+    ["Asus","asus","https://asus.com"],
+    ["Acer","acer","https://acer.com"],
+    ["Xiaomi","xiaomi","https://mi.com"],
+    ["Newegg","newegg","https://newegg.com"]
+  ],
+  "Moda y Lencería Stores":[
+    ["Zara","zara","https://zara.com"],
+    ["H&M","hm","https://hm.com"],
+    ["Uniqlo","uniqlo","https://uniqlo.com"],
+    ["Shein","shein","https://shein.com"],
+    ["Fashion Nova","fashionnova","https://fashionnova.com"],
+    ["Victoria’s Secret","victoriassecret","https://victoriassecret.com"],
+    ["Aerie","aerie","https://ae.com"],
+    ["Calvin Klein","calvinklein","https://calvinklein.com"],
+    ["Savage X Fenty","savagexfenty","https://savagex.com"],
+    ["Oysho","oysho","https://oysho.com"]
+  ],
+  "Calzados Stores":[
+    ["Nike","nike","https://nike.com"],
+    ["Adidas","adidas","https://adidas.com"],
+    ["Puma","puma","https://puma.com"],
+    ["New Balance","newbalance","https://newbalance.com"],
+    ["Reebok","reebok","https://reebok.com"],
+    ["Skechers","skechers","https://skechers.com"],
+    ["Converse","converse","https://converse.com"],
+    ["Vans","vans","https://vans.com"],
+    ["Crocs","crocs","https://crocs.com"],
+    ["Under Armour","underarmour","https://underarmour.com"]
+  ],
+  "Hoteles y Vuelos Stores":[
+    ["Booking","booking","https://booking.com"],
+    ["Expedia","expedia","https://expedia.com"],
+    ["Airbnb","airbnb","https://airbnb.com"],
+    ["Kayak","kayak","https://kayak.com"],
+    ["Skyscanner","skyscanner","https://skyscanner.com"],
+    ["Agoda","agoda","https://agoda.com"],
+    ["Trip.com","tripdotcom","https://trip.com"],
+    ["Hotels.com","hotelsdotcom","https://hotels.com"],
+    ["Priceline","priceline","https://priceline.com"],
+    ["Travelocity","travelocity","https://travelocity.com"]
+  ]
 };
-<script>
-function renderSections() {
-  const content = document.getElementById("content");
-  content.innerHTML = "";
 
-  Object.entries(SECTIONS).forEach(([sectionName, stores]) => {
-    let html = `
-      <h2 class="section-title">${sectionName}</h2>
-      <div class="grid">
-    `;
-
-    stores.forEach(store => {
-      const [name, cls, url] = store;
-      html += `
-        <a class="card ${cls}" href="${url}" target="_blank">
-          <span>${name}</span>
-        </a>
-      `;
-    });
-
-    html += `</div>`;
-    content.innerHTML += html;
-  });
+function renderSections(){
+const content=document.getElementById("content");
+content.innerHTML="";
+Object.entries(SECTIONS).forEach(([section,stores])=>{
+let html=`<h2 class="section-title">${section}</h2><div class="grid">`;
+stores.forEach(([name,cls,url])=>{
+html+=`<a class="card ${cls}" href="${url}" target="_blank"><span>${name}</span></a>`;
+});
+content.innerHTML+=html+"</div>";
+});
 }
-</script>
-function loadOffers(){
-  const adCarousel = document.getElementById("adCarousel");
-
-  db.collection("ofertas")
-    .orderBy("fecha","desc")
-    .onSnapshot(snapshot=>{
-      snapshot.forEach(doc=>{
-        const o = doc.data();
-        adCarousel.innerHTML += `
-          <div class="ad-card">
-            <h4>${o.titulo}</h4>
-            <p>${o.descripcion}</p>
-            <a href="${o.link}" target="_blank" style="color:#F59E0B">Ver oferta</a>
-          </div>
-        `;
-      });
-    });
-}
-loadOffers();
 renderSections();
 </script>
+
 </body>
 </html>
