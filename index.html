@@ -92,7 +92,7 @@ footer a{color:var(--mamey);text-decoration:none}
 
 <!-- MODAL -->
 <div id="offerModal">
-<form onsubmit="publicarImagenCloudinary(event)">
+<form onsubmit="publicarImagen(event)">
 <h3>Publicar Imagen de Oferta</h3>
 <input type="file" id="imagenOferta" accept="image/*" required>
 <button type="submit">Publicar</button>
@@ -100,71 +100,99 @@ footer a{color:var(--mamey);text-decoration:none}
 </form>
 </div>
 
-<!-- CLOUDINARY (JavaScript) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
 <script>
+/* ================= FIREBASE ================= */
+firebase.initializeApp({
+apiKey:"AIzaSyDBb8-HKRm_HZNZhi55DF2XQ-VeWXWsgSE",
+authDomain:"offerview-a0837.firebaseapp.com",
+projectId:"offerview-a0837",
+storageBucket:"offerview-a0837.appspot.com",
+messagingSenderId:"949865345608",
+appId:"1:949865345608:web:2f7cd6fc231b9151ffde7d"
+});
+const db=firebase.firestore();
+
 /* ================= VISTAS ================= */
-let views = localStorage.getItem("viewsCount") || 0;
-views++;
-localStorage.setItem("viewsCount", views);
-document.getElementById("viewsCounter").textContent = "Visitas: " + views.toLocaleString();
+const viewsEl=document.getElementById("viewsCounter");
+db.collection("stats").doc("views").get().then(d=>{
+let v=d.exists?d.data().count:0;
+v++;
+viewsEl.textContent="Visitas: "+v.toLocaleString();
+db.collection("stats").doc("views").set({count:v});
+});
+
+/* ================= PROMPTS ================= */
+const OfferViewPrompts={
+search:"Analizar intención de búsqueda",
+recommend:"Recomendar tiendas confiables",
+deals:"Priorizar ofertas reales",
+ethics:"Guía neutral e independiente"
+};
 
 /* ================= BUSCADOR ================= */
 function buscar(e){
 e.preventDefault();
-window.open("https://www.google.com/search?q="+encodeURIComponent(document.getElementById("searchInput").value+" ofertas"),"_blank");
+window.open("https://www.google.com/search?q="+encodeURIComponent(searchInput.value+" ofertas"),"_blank");
 }
 
 /* ================= IDIOMAS ================= */
 function setLanguage(l){
-document.getElementById("offersTitle").textContent =
+offersTitle.textContent =
 l==="EN" ? "Deals For You" :
 l==="PT" ? "Ofertas Para Você" :
 "Ofertas Para Ti";
 }
 
 /* ================= MODAL ================= */
-function openOfferModal(){document.getElementById("offerModal").style.display="flex";}
-function closeOfferModal(){document.getElementById("offerModal").style.display="none";}
+function openOfferModal(){offerModal.style.display="flex";}
+function closeOfferModal(){offerModal.style.display="none";}
 
-/* ================= PUBLICAR IMAGEN CLOUDINARY ================= */
-async function publicarImagenCloudinary(e){
+/* ================= PUBLICAR IMAGEN (CLOUDINARY) ================= */
+function publicarImagen(e){
 e.preventDefault();
-const fileInput = document.getElementById("imagenOferta");
-const file = fileInput.files[0];
-if(!file){alert("Debes subir una imagen"); return;}
+const file=document.getElementById("imagenOferta").files[0];
+if(!file){alert("Debes subir una imagen");return;}
 
 const formData = new FormData();
 formData.append("file", file);
-formData.append("upload_preset", "visita_oferta_publica"); // tu preset en Cloudinary
+formData.append("upload_preset", "ajuste_preestablecido"); // CAMBIA por tu preajuste en Cloudinary
 
-try{
-  const res = await axios.post("https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload", formData);
-  const url = res.data.secure_url;
-
-  // Agregar al carrusel temporal en localStorage
-  let ads = JSON.parse(localStorage.getItem("adsList") || "[]");
-  ads.unshift(url);
-  localStorage.setItem("adsList", JSON.stringify(ads));
-  renderAds();
+fetch("https://api.cloudinary.com/v1_1/tu_cuenta_cloudinary/image/upload", { // CAMBIA "tu_cuenta_cloudinary" por tu nombre
+  method:"POST",
+  body: formData
+})
+.then(res=>res.json())
+.then(data=>{
+  db.collection("publicidad").add({
+    imagen: data.secure_url,
+    fecha: firebase.firestore.FieldValue.serverTimestamp()
+  });
   closeOfferModal();
-}catch(err){
+  alert("Imagen publicada correctamente!");
+})
+.catch(err=>{
   console.error(err);
-  alert("Error al subir la imagen");
-}
+  alert("Error al subir la imagen.");
+});
 }
 
 /* ================= CARRUSEL ================= */
-function renderAds(){
-const adCarousel = document.getElementById("adCarousel");
-let ads = JSON.parse(localStorage.getItem("adsList") || "[]");
-adCarousel.innerHTML = "";
-ads.forEach(url=>{
-adCarousel.innerHTML += `<div class="ad-card"><img src="${url}" loading="lazy"></div>`;
+function loadAds(){
+db.collection("publicidad").orderBy("fecha","desc").onSnapshot(s=>{
+adCarousel.innerHTML="";
+s.forEach(d=>{
+adCarousel.innerHTML+=`
+<div class="ad-card">
+<img src="${d.data().imagen}" loading="lazy">
+</div>`;
+});
 });
 }
-renderAds();
+loadAds();
 
 /* ================= SECCIONES Y TIENDAS ================= */
 const SECTIONS = {
