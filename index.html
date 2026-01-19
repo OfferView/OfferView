@@ -194,16 +194,22 @@ function publicarImagen(e){
   
 /* ================= CARRUSEL ================= */
 function loadAds(){
-db.collection("publicidad").orderBy("fecha","desc").onSnapshot(s=>{
-adCarousel.innerHTML="";
-s.forEach(d=>{
-adCarousel.innerHTML+=`
-<div class="ad-card">
-<img src="${d.data().imagen}" loading="lazy">
-</div>`;
-});
-});
+  db.collection("publicidad")
+    .orderBy("fecha","desc")
+    .onSnapshot(s => {
+      const adCarousel = document.getElementById("adCarousel");
+      adCarousel.innerHTML = "";
+
+      s.forEach(d => {
+        adCarousel.innerHTML += `
+          <div class="ad-card">
+            <img src="${d.data().imagen}" loading="lazy">
+          </div>
+        `;
+      });
+    });
 }
+
 loadAds();
 
 /* ================= SECCIONES Y TIENDAS ================= */
