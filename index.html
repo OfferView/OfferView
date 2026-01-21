@@ -255,6 +255,22 @@ function loadAds(){
 
 loadAds();
 
+  /* ================= ELIMINAR PUBLICIDAD ================= */
+function eliminarAd(id){
+  if(!confirm("¿Eliminar esta publicación?")) return;
+
+  db.collection("publicidad")
+    .doc(id)
+    .delete()
+    .then(() => {
+      console.log("Publicidad eliminada correctamente");
+    })
+    .catch(error => {
+      console.error("Error al eliminar:", error);
+      alert("No se pudo eliminar la publicidad");
+    });
+}
+
 /* ================= SECCIONES Y TIENDAS ================= */
 const SECTIONS = {
   "Top Stores":[
