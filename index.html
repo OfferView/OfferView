@@ -237,8 +237,17 @@ function loadAds(){
       s.forEach(d => {
         adCarousel.innerHTML += `
           <div class="ad-card">
-            <img src="${d.data().imagen}" loading="lazy">
-          </div>
+
+  <button class="delete-btn" onclick="eliminarAd('${d.id}')">✖</button>
+
+  ${d.data().link ? `
+    <a href="${d.data().link}" target="_blank">
+      <img src="${d.data().imagen}" loading="lazy">
+    </a>
+  ` : `
+    <img src="${d.data().imagen}" loading="lazy">
+  `}
+</div>
         `;
       });
     });
