@@ -126,14 +126,21 @@ footer a{color:var(--mamey);text-decoration:none}
 
 <!-- MODAL -->
 <div id="offerModal">
-<form onsubmit="publicarImagen(event)">
-<h3>Publicar Imagen de Oferta</h3>
-<input type="file" id="imagenOferta" accept="image/*" required>
-<button type="submit">Publicar</button>
-<button type="button" onclick="closeOfferModal()">Cancelar</button>
-</form>
-</div>
+  <form onsubmit="publicarImagen(event)">
+    <h3>Publicar Imagen de Oferta</h3>
 
+    <!-- Imagen -->
+    <input type="file" id="imagenOferta" accept="image/*" required>
+
+    <!-- Link opcional (web, Instagram, WhatsApp, etc.) -->
+    <input type="url" id="linkOferta" placeholder="Link de la oferta o Instagram (opcional)">
+
+    <!-- Acciones -->
+    <button type="submit">Publicar</button>
+    <button type="button" onclick="closeOfferModal()">Cancelar</button>
+  </form>
+</div>
+  
 <!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
