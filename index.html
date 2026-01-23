@@ -82,6 +82,63 @@ header h1{color:var(--mamey);font-size:42px;margin:0}
 
 footer{background:#eef2f7;padding:40px;text-align:center;font-size:14px}
 footer a{color:var(--mamey);text-decoration:none}
+  
+ /* ================= BOTONES AUTH ================= */
+.btn-mamey{
+  background:#F59E0B;
+  color:#fff;
+  border:none;
+  padding:10px 18px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.btn-secundario{
+  background:#eee;
+  border:none;
+  padding:10px 18px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* ================= MODAL AUTH ================= */
+.modal-auth{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  z-index:1000;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-auth-box{
+  background:#fff;
+  padding:30px;
+  border-radius:18px;
+  max-width:400px;
+  width:90%;
+  text-align:center;
+}
+
+.modal-auth-box h3{
+  color:#F59E0B;
+  margin-top:0;
+}
+
+.modal-auth-box input{
+  width:100%;
+  padding:12px;
+  margin-top:12px;
+  border-radius:8px;
+  border:1px solid #ddd;
+}
+
+.modal-auth-box button{
+  width:100%;
+  margin-top:12px;
+} 
 </style>
 </head>
 
@@ -108,6 +165,20 @@ footer a{color:var(--mamey);text-decoration:none}
 <option value="EN">🇺🇸 English</option>
 <option value="PT">🇵🇹 Português</option>
 </select>
+</div>
+
+<div class="auth-buttons">
+<button id="authBtn" class="btn-mamey">
+Registrarse / Iniciar sesión
+</button>
+
+<button id="favBtn" class="btn-mamey" style="display:none;">
+Mis Plataformas & Tiendas Preferidas
+</button>
+
+<button id="logoutBtn" class="btn-secundario" style="display:none;">
+Cerrar sesión
+</button>
 </div>
 </header>
 
@@ -143,9 +214,10 @@ footer a{color:var(--mamey);text-decoration:none}
   
 <!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-
 <script>
+  
 /* ================= FIREBASE ================= */
 firebase.initializeApp({
 apiKey:"AIzaSyDBb8-HKRm_HZNZhi55DF2XQ-VeWXWsgSE",
@@ -156,7 +228,50 @@ messagingSenderId:"949865345608",
 appId:"1:949865345608:web:2f7cd6fc231b9151ffde7d"
 });
 const db=firebase.firestore();
+const auth = firebase.auth();
 
+/* Abrir modal */
+document.getElementById("authBtn").onclick = () =>{
+  document.getElementById("authModal").style.display="flex";
+};
+
+/* Registro */
+function registrar(){
+  const email = authEmail.value;
+  const pass = authPass.value;
+
+  auth.createUserWithEmailAndPassword(email,pass)
+  .then(cred=>{
+    cred.user.sendEmailVerification();
+    alert("Te enviamos un correo de verificación.");
+  })
+  .catch(e=>alert(e.message));
+}
+
+/* Login */
+function login(){
+  auth.signInWithEmailAndPassword(authEmail.value,authPass.value)
+  .catch(e=>alert(e.message));
+}
+
+/* Estado sesión */
+auth.onAuthStateChanged(user=>{
+  if(user && user.emailVerified){
+    authBtn.style.display="none";
+    favBtn.style.display="inline-block";
+    logoutBtn.style.display="inline-block";
+    publishBtn.style.display="block";
+  }else{
+    authBtn.style.display="inline-block";
+    favBtn.style.display="none";
+    logoutBtn.style.display="none";
+    publishBtn.style.display="none";
+  }
+});
+
+/* Logout */
+logoutBtn.onclick=()=>auth.signOut();
+  
 /* ================= VISTAS ================= */
 const viewsEl=document.getElementById("viewsCounter");
 db.collection("stats").doc("views").get().then(d=>{
@@ -242,11 +357,14 @@ function loadAds(){
   db.collection("publicidad")
     .orderBy("fecha","desc")
     .onSnapshot(s => {
+
       const adCarousel = document.getElementById("adCarousel");
       adCarousel.innerHTML = "";
 
       s.forEach(d => {
+
         const data = d.data();
+        const postId = d.id;
 
         let imgHTML = `<img src="${data.imagen}" loading="lazy">`;
 
@@ -256,11 +374,25 @@ function loadAds(){
 
         adCarousel.innerHTML += `
           <div class="ad-card">
-            <button class="delete-btn" onclick="eliminarAd('${d.id}')">✖</button>
+            ${auth.currentUser && auth.currentUser.uid === data.uid ? 
+              `<button class="delete-btn" onclick="eliminarAd('${postId}')">✖</button>` : ''}
+
             ${imgHTML}
+
+            <div class="like-box" onclick="toggleLike('${postId}')">
+              ❤️ <span id="likes-${postId}">0</span>
+            </div>
           </div>
         `;
+
+        db.collection("likes")
+          .where("postId","==",postId)
+          .onSnapshot(l=>{
+            document.getElementById("likes-"+postId).textContent=l.size;
+          });
+
       });
+
     });
 }
 
@@ -385,6 +517,15 @@ content.innerHTML+=html+"</div>";
 });
 }
 renderSections();
+
+  /* ================= ABRIR / CERRAR MODAL AUTH ================= */
+function abrirAuth(){
+  document.getElementById("authModal").style.display="flex";
+}
+
+function cerrarAuth(){
+  document.getElementById("authModal").style.display="none";
+}
 </script>
 
 </body>
