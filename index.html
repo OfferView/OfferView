@@ -307,9 +307,14 @@ l==="PT" ? "Ofertas Para Você" :
 function openOfferModal(){offerModal.style.display="flex";}
 function closeOfferModal(){offerModal.style.display="none";}
 
-/* ================= PUBLICAR IMAGEN (CLOUDINARY) ================= */
+/* ================= PUBLICAR IMAGEN (CLOUDINARY RR SEGURO) ================= */
 function publicarImagen(e){
   e.preventDefault();
+
+  if(!auth.currentUser){
+    alert("Debes iniciar sesión para publicar");
+    return;
+  }
 
   const file = document.getElementById("imagenOferta").files[0];
   const linkOferta = document.getElementById("linkOferta").value;
@@ -321,36 +326,44 @@ function publicarImagen(e){
 
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("upload_preset", "ofertas_publicas"); // ✅ PRESET REAL
+  formData.append("upload_preset", "ofertas_publicas");
 
-  fetch("https://api.cloudinary.com/v1_1/dveqauvqh/image/upload", { // ✅ CLOUD NAME REAL
+  fetch("https://api.cloudinary.com/v1_1/dveqauvqh/image/upload", {
     method: "POST",
     body: formData
   })
   .then(res => res.json())
   .then(data => {
+
     if(!data.secure_url){
       console.error(data);
       alert("Cloudinary rechazó la imagen");
       return;
     }
 
-    db.collection("publicidad").add({
+    return db.collection("publicidad").add({
       imagen: data.secure_url,
       link: linkOferta || null,
+      uid: auth.currentUser.uid, // 🔥 FUNDAMENTAL
       fecha: firebase.firestore.FieldValue.serverTimestamp()
     });
 
+  })
+  .then(()=>{
     closeOfferModal();
     alert("Imagen publicada correctamente ✅");
+
+    // limpiar campos
+    document.getElementById("imagenOferta").value = "";
+    document.getElementById("linkOferta").value = "";
   })
-  .catch(err => {
+  .catch(err=>{
     console.error(err);
     alert("Error al subir la imagen");
   });
 
   return false;
-}  
+}
   
 /* ================= CARRUSEL ================= */
 function loadAds(){
@@ -414,6 +427,36 @@ function eliminarAd(id){
     });
 }
 
+ /* ================= LIKE SISTEMA RR ================= */
+function toggleLike(postId){
+
+  if(!auth.currentUser){
+    alert("Debes iniciar sesión para dar like");
+    return;
+  }
+
+  const uid = auth.currentUser.uid;
+
+  const likeRef = db.collection("likes")
+    .where("postId","==",postId)
+    .where("uid","==",uid);
+
+  likeRef.get().then(snapshot=>{
+    if(snapshot.empty){
+      db.collection("likes").add({
+        postId: postId,
+        uid: uid,
+        fecha: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    }else{
+      snapshot.forEach(doc=>{
+        doc.ref.delete();
+      });
+    }
+  });
+
+} 
+  
 /* ================= SECCIONES Y TIENDAS ================= */
 const SECTIONS = {
   "Top Stores":[
