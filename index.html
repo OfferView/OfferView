@@ -70,6 +70,18 @@ header h1{color:var(--mamey);font-size:42px;margin:0}
   font-size:16px;
 }
 
+  .like-box{
+  position:absolute;
+  bottom:8px;
+  left:10px;
+  background:rgba(0,0,0,0.6);
+  color:#fff;
+  padding:6px 10px;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:14px;
+}
+  
 /* Botón */
 #publishBtn{display:block;margin:0 auto 40px;padding:14px 28px;background:var(--mamey);border:none;border-radius:14px;font-weight:bold;cursor:pointer}
 
@@ -211,6 +223,28 @@ Cerrar sesión
     <button type="button" onclick="closeOfferModal()">Cancelar</button>
   </form>
 </div>
+
+  <!-- MODAL AUTH -->
+<div id="authModal" class="modal-auth">
+  <div class="modal-auth-box">
+    <h3>Acceso OfferView</h3>
+
+    <input type="email" id="authEmail" placeholder="Correo electrónico" required>
+    <input type="password" id="authPass" placeholder="Contraseña" required>
+
+    <button type="button" class="btn-mamey" onclick="registrar()">
+      Registrarse
+    </button>
+
+    <button type="button" class="btn-mamey" onclick="login()">
+      Iniciar sesión
+    </button>
+
+    <button type="button" class="btn-secundario" onclick="cerrarAuth()">
+      Cancelar
+    </button>
+  </div>
+</div>
   
 <!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -248,9 +282,11 @@ function registrar(){
   .catch(e=>alert(e.message));
 }
 
-/* Login */
 function login(){
   auth.signInWithEmailAndPassword(authEmail.value,authPass.value)
+  .then(()=>{
+    cerrarAuth();
+  })
   .catch(e=>alert(e.message));
 }
 
@@ -364,44 +400,65 @@ function publicarImagen(e){
 
   return false;
 }
-  
-/* ================= CARRUSEL ================= */
+
+ /* ================= CARRUSEL RR COMPLETO ================= */
 function loadAds(){
+
   db.collection("publicidad")
     .orderBy("fecha","desc")
-    .onSnapshot(s => {
+    .onSnapshot(snapshot => {
 
       const adCarousel = document.getElementById("adCarousel");
       adCarousel.innerHTML = "";
 
-      s.forEach(d => {
+      snapshot.forEach(doc => {
 
-        const data = d.data();
-        const postId = d.id;
+        const data = doc.data();
+        const postId = doc.id;
 
+        // Imagen base
         let imgHTML = `<img src="${data.imagen}" loading="lazy">`;
 
+        // Si tiene link
         if(data.link){
           imgHTML = `<a href="${data.link}" target="_blank">${imgHTML}</a>`;
         }
 
-        adCarousel.innerHTML += `
-          <div class="ad-card">
-            ${auth.currentUser && auth.currentUser.uid === data.uid ? 
-              `<button class="delete-btn" onclick="eliminarAd('${postId}')">✖</button>` : ''}
+        // Crear card
+        const card = document.createElement("div");
+        card.className = "ad-card";
 
-            ${imgHTML}
+        // Botón eliminar solo dueño
+        if(auth.currentUser && auth.currentUser.uid === data.uid){
+          const deleteBtn = document.createElement("button");
+          deleteBtn.className = "delete-btn";
+          deleteBtn.innerHTML = "✖";
+          deleteBtn.onclick = () => eliminarAd(postId);
+          card.appendChild(deleteBtn);
+        }
 
-            <div class="like-box" onclick="toggleLike('${postId}')">
-              ❤️ <span id="likes-${postId}">0</span>
-            </div>
-          </div>
-        `;
+        // Insertar imagen
+        card.innerHTML += imgHTML;
 
+        // Like box
+        const likeBox = document.createElement("div");
+        likeBox.className = "like-box";
+        likeBox.innerHTML = `❤️ <span id="likes-${postId}">0</span>`;
+        likeBox.onclick = () => toggleLike(postId);
+
+        card.appendChild(likeBox);
+
+        adCarousel.appendChild(card);
+
+        // Contador en tiempo real
         db.collection("likes")
           .where("postId","==",postId)
-          .onSnapshot(l=>{
-            document.getElementById("likes-"+postId).textContent=l.size;
+          .onSnapshot(likesSnapshot=>{
+            const likesCount = likesSnapshot.size;
+            const likesEl = document.getElementById("likes-"+postId);
+            if(likesEl){
+              likesEl.textContent = likesCount;
+            }
           });
 
       });
@@ -409,7 +466,7 @@ function loadAds(){
     });
 }
 
-loadAds();
+loadAds(); 
 
   /* ================= ELIMINAR PUBLICIDAD ================= */
 function eliminarAd(id){
