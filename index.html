@@ -626,6 +626,80 @@ function abrirAuth(){
 function cerrarAuth(){
   document.getElementById("authModal").style.display="none";
 }
+  /* ================= MIS PLATAFORMAS RR ================= */
+
+function abrirFavModal(){
+  document.getElementById("favModal").style.display="flex";
+  cargarPlataformas();
+}
+
+function cerrarFavModal(){
+  document.getElementById("favModal").style.display="none";
+}
+
+favBtn.onclick = () => {
+  abrirFavModal();
+};
+
+function guardarPlataforma(){
+
+  if(!auth.currentUser){
+    alert("Debes iniciar sesión");
+    return;
+  }
+
+  const nombre = document.getElementById("nombrePlataforma").value;
+  const link = document.getElementById("linkPlataforma").value;
+
+  if(!nombre || !link){
+    alert("Completa todos los campos");
+    return;
+  }
+
+  db.collection("plataformas").add({
+    uid: auth.currentUser.uid,
+    nombre: nombre,
+    link: link,
+    fecha: firebase.firestore.FieldValue.serverTimestamp()
+  })
+  .then(()=>{
+    document.getElementById("nombrePlataforma").value="";
+    document.getElementById("linkPlataforma").value="";
+    cargarPlataformas();
+  });
+}
+
+function cargarPlataformas(){
+
+  if(!auth.currentUser) return;
+
+  const lista = document.getElementById("listaPlataformas");
+  lista.innerHTML="";
+
+  db.collection("plataformas")
+    .where("uid","==",auth.currentUser.uid)
+    .orderBy("fecha","desc")
+    .onSnapshot(snapshot=>{
+
+      lista.innerHTML="";
+
+      snapshot.forEach(doc=>{
+        const data = doc.data();
+
+        lista.innerHTML += `
+          <div style="margin-bottom:8px;">
+            <a href="${data.link}" target="_blank">${data.nombre}</a>
+            <button onclick="eliminarPlataforma('${doc.id}')" style="margin-left:8px;">✖</button>
+          </div>
+        `;
+      });
+
+    });
+}
+
+function eliminarPlataforma(id){
+  db.collection("plataformas").doc(id).delete();
+}
 </script>
 
 </body>
