@@ -245,6 +245,26 @@ Cerrar sesión
     </button>
   </div>
 </div>
+
+  <!-- MODAL MIS PLATAFORMAS -->
+<div id="favModal" class="modal-auth">
+  <div class="modal-auth-box">
+    <h3>Mis Plataformas & Tiendas</h3>
+
+    <input type="text" id="nombrePlataforma" placeholder="Nombre (Ej: Amazon)">
+    <input type="url" id="linkPlataforma" placeholder="Link de tu cuenta">
+
+    <button class="btn-mamey" onclick="guardarPlataforma()">
+      Guardar
+    </button>
+
+    <div id="listaPlataformas" style="margin-top:15px;text-align:left;"></div>
+
+    <button class="btn-secundario" onclick="cerrarFavModal()">
+      Cerrar
+    </button>
+  </div>
+</div>
   
 <!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -324,15 +344,6 @@ auth.onAuthStateChanged(user=>{
 /* Logout */
 logoutBtn.onclick=()=>auth.signOut();
   
-/* ================= VISTAS ================= */
-const viewsEl=document.getElementById("viewsCounter");
-db.collection("stats").doc("views").get().then(d=>{
-let v=d.exists?d.data().count:0;
-v++;
-viewsEl.textContent="Visitas: "+v.toLocaleString();
-db.collection("stats").doc("views").set({count:v});
-});
-
 /* ================= PROMPTS ================= */
 const OfferViewPrompts={
 search:"Analizar intención de búsqueda",
@@ -641,7 +652,8 @@ function abrirAuth(){
 function cerrarAuth(){
   document.getElementById("authModal").style.display="none";
 }
-  /* ================= MIS PLATAFORMAS RR ================= */
+
+/* ================= MIS PLATAFORMAS RR ================= */
 
 function abrirFavModal(){
   document.getElementById("favModal").style.display="flex";
@@ -651,10 +663,6 @@ function abrirFavModal(){
 function cerrarFavModal(){
   document.getElementById("favModal").style.display="none";
 }
-
-favBtn.onclick = () => {
-  abrirFavModal();
-};
 
 function guardarPlataforma(){
 
@@ -714,7 +722,8 @@ function cargarPlataformas(){
 
 function eliminarPlataforma(id){
   db.collection("plataformas").doc(id).delete();
-}
+}  
+  
 </script>
 
 </body>
