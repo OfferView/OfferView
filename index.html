@@ -264,11 +264,27 @@ appId:"1:949865345608:web:2f7cd6fc231b9151ffde7d"
 const db=firebase.firestore();
 const auth = firebase.auth();
 
+  /* ================= CONTADOR DE VISITAS ================= */
+
+const viewsEl = document.getElementById("viewsCounter");
+
+db.collection("stats").doc("views").get().then(d=>{
+  let v = d.exists ? d.data().count : 0;
+  v++;
+  viewsEl.textContent = "Visitas: " + v.toLocaleString();
+  db.collection("stats").doc("views").set({count:v});
+});
+  
 /* Abrir modal */
 document.getElementById("authBtn").onclick = () =>{
   document.getElementById("authModal").style.display="flex";
 };
 
+  /* Botón Mis Plataformas */
+document.getElementById("favBtn").onclick = () => {
+  abrirFavModal();
+};
+  
 /* Registro */
 function registrar(){
   const email = authEmail.value;
@@ -401,7 +417,7 @@ function publicarImagen(e){
   return false;
 }
 
- /* ================= CARRUSEL RR COMPLETO ================= */
+ /* ================= CARRUSEL RR OPTIMIZADO ================= */
 function loadAds(){
 
   db.collection("publicidad")
@@ -416,19 +432,23 @@ function loadAds(){
         const data = doc.data();
         const postId = doc.id;
 
-        // Imagen base
-        let imgHTML = `<img src="${data.imagen}" loading="lazy">`;
-
-        // Si tiene link
-        if(data.link){
-          imgHTML = `<a href="${data.link}" target="_blank">${imgHTML}</a>`;
-        }
-
-        // Crear card
         const card = document.createElement("div");
         card.className = "ad-card";
 
-        // Botón eliminar solo dueño
+        let img = document.createElement("img");
+        img.src = data.imagen;
+        img.loading = "lazy";
+
+        if(data.link){
+          const link = document.createElement("a");
+          link.href = data.link;
+          link.target = "_blank";
+          link.appendChild(img);
+          card.appendChild(link);
+        } else {
+          card.appendChild(img);
+        }
+
         if(auth.currentUser && auth.currentUser.uid === data.uid){
           const deleteBtn = document.createElement("button");
           deleteBtn.className = "delete-btn";
@@ -437,27 +457,22 @@ function loadAds(){
           card.appendChild(deleteBtn);
         }
 
-        // Insertar imagen
-        card.innerHTML += imgHTML;
-
-        // Like box
         const likeBox = document.createElement("div");
         likeBox.className = "like-box";
         likeBox.innerHTML = `❤️ <span id="likes-${postId}">0</span>`;
         likeBox.onclick = () => toggleLike(postId);
 
         card.appendChild(likeBox);
-
         adCarousel.appendChild(card);
 
-        // Contador en tiempo real
+        // Contador simple (sin crear múltiples listeners pesados)
         db.collection("likes")
           .where("postId","==",postId)
-          .onSnapshot(likesSnapshot=>{
-            const likesCount = likesSnapshot.size;
+          .get()
+          .then(likesSnapshot=>{
             const likesEl = document.getElementById("likes-"+postId);
             if(likesEl){
-              likesEl.textContent = likesCount;
+              likesEl.textContent = likesSnapshot.size;
             }
           });
 
@@ -467,7 +482,7 @@ function loadAds(){
 }
 
 loadAds(); 
-
+  
   /* ================= ELIMINAR PUBLICIDAD ================= */
 function eliminarAd(id){
   if(!confirm("¿Eliminar esta publicación?")) return;
