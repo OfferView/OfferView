@@ -3,390 +3,439 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>OfferView – Tu Guía a las Mejores Ofertas</title>
 
+<!-- Fuentes -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
 /* ================= ROOT ================= */
-
 :root{
---mamey:#F59E0B;
---dark:#111827;
---bg:#F9FAFB;
---card:#ffffff;
-}
-
-html{
-scroll-behavior:smooth;
+  --mamey:#F59E0B;
+  --dark:#111827;
+  --bg:#F9FAFB;
+  --card:#ffffff;
 }
 
 body{
-margin:0;
-background:var(--bg);
-font-family:'Inter', sans-serif;
-color:#1a1a1a;
+  margin:0;
+  background:var(--bg);
+  font-family:'Inter', sans-serif;
+  color:#1a1a1a;
 }
 
-/* ================= HEADER ================= */
-
+/* ================= HEADER / PUNTO 1 ================= */
 header{
-background:#0b1633;
-color:#fff;
-padding:18px 20px 30px;
+  background:#0b1633;
+  color:#fff;
+  padding:18px 20px 30px;
 }
 
 .top-bar{
-display:flex;
-align-items:center;
-justify-content:space-between;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
 .left-area{
-display:flex;
-align-items:center;
-gap:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
 
 .menu-btn{
-font-size:24px;
-cursor:pointer;
+  font-size:24px;
+  cursor:pointer;
 }
 
 .logo-text{
-font-family:'Montserrat', sans-serif;
-font-weight:800;
-font-size:26px;
-letter-spacing:-1px;
-color:var(--mamey);
+  font-family:'Montserrat', sans-serif;
+  font-weight:800;
+  font-size:26px;
+  letter-spacing:-1px;
+  color:#ffffff;
 }
 
 .right-area{
-display:flex;
-align-items:center;
-gap:10px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
 }
 
-.btn-mamey{
-background:var(--mamey);
-border:none;
-padding:10px 16px;
-border-radius:10px;
-font-family:'Montserrat', sans-serif;
-font-weight:600;
-cursor:pointer;
-color:#fff;
+.mini-select{
+  padding:6px 8px;
+  border-radius:6px;
+  border:none;
+  font-family:'Inter', sans-serif;
+  cursor:pointer;
 }
 
+.btn-small{
+  background:var(--mamey);
+  border:none;
+  padding:8px 14px;
+  border-radius:8px;
+  font-family:'Montserrat', sans-serif;
+  font-weight:600;
+  cursor:pointer;
+  color:#fff;
+  font-size:13px;
+}
+
+/* ================= BUSCADOR ================= */
 .search-box{
-margin-top:25px;
-max-width:700px;
-margin-left:auto;
-margin-right:auto;
+  margin-top:25px;
+  max-width:700px;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .search-box form{
-display:flex;
+  display:flex;
 }
 
 .search-box input{
-flex:1;
-padding:15px;
-border:none;
-border-radius:12px 0 0 12px;
-font-size:15px;
+  flex:1;
+  padding:15px;
+  border:none;
+  border-radius:12px 0 0 12px;
+  font-size:15px;
 }
 
 .search-box button{
-padding:15px 20px;
-border:none;
-background:var(--mamey);
-border-radius:0 12px 12px 0;
-font-family:'Montserrat', sans-serif;
-font-weight:600;
-cursor:pointer;
+  padding:15px 20px;
+  border:none;
+  background:var(--mamey);
+  border-radius:0 12px 12px 0;
+  font-family:'Montserrat', sans-serif;
+  font-weight:600;
+  cursor:pointer;
 }
 
+/* ================= ESLOGAN ================= */
 .slogan{
-text-align:center;
-margin-top:14px;
-font-family:'Montserrat', sans-serif;
-font-weight:600;
-font-size:16px;
+  text-align:center;
+  margin-top:14px;
+  font-family:'Montserrat', sans-serif;
+  font-weight:600;
+  font-size:16px;
+}
+
+/* ================= MENÚ LATERAL ================= */
+.side-menu{
+  position:fixed;
+  top:0;
+  left:-260px;
+  width:240px;
+  height:100%;
+  background:#ffffff;
+  box-shadow:2px 0 10px rgba(0,0,0,0.2);
+  padding:30px 20px;
+  transition:0.3s;
+  z-index:2000;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.side-menu a{
+  text-decoration:none;
+  color:#111827;
+  font-family:'Montserrat', sans-serif;
+  font-weight:600;
+}
+
+.side-menu.open{
+  left:0;
 }
 
 /* ================= PUNTO 2 CARRUSEL STORES ================= */
-
 .section-wrapper{
-margin-top:50px;
+  margin-top:50px;
 }
 
 .section-title{
-font-family:'Montserrat', sans-serif;
-font-weight:700;
-font-size:24px;
-text-align:center;
-color:var(--mamey);
-margin-bottom:20px;
+  font-family:'Montserrat', sans-serif;
+  font-weight:700;
+  font-size:24px;
+  text-align:center;
+  color:var(--mamey);
+  margin-bottom:20px;
 }
 
 .store-carousel{
-display:flex;
-gap:20px;
-overflow-x:auto;
-padding:20px;
-scroll-behavior:smooth;
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  padding:20px;
+  scroll-behavior:smooth;
 }
 
 .store-box{
-min-width:260px;
-background:#fff;
-padding:20px;
-border-radius:20px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
+  min-width:260px;
+  background:#fff;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 .store-box h3{
-font-family:'Montserrat', sans-serif;
-font-size:16px;
-margin-top:0;
+  font-family:'Montserrat', sans-serif;
+  font-size:16px;
+  margin-top:0;
 }
 
 .store-box a{
-display:block;
-margin-top:8px;
-text-decoration:none;
-color:#333;
-font-size:14px;
+  display:block;
+  margin-top:8px;
+  text-decoration:none;
+  color:#333;
+  font-size:14px;
 }
 
 .store-box a:hover{
-color:var(--mamey);
+  color:var(--mamey);
 }
 
 /* ================= DIVISOR ================= */
-
 .divider{
-height:4px;
-width:100px;
-background:var(--mamey);
-margin:60px auto 20px;
-border-radius:20px;
+  height:4px;
+  width:100px;
+  background:var(--mamey);
+  margin:60px auto 20px;
+  border-radius:20px;
 }
 
-/* ================= FEED VERTICAL ================= */
-
+/* ================= PUNTO 3 FEED VERTICAL ================= */
 #adCarousel{
-display:flex;
-flex-direction:column;
-gap:30px;
-max-width:520px;
-margin:0 auto;
-padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  max-width:520px;
+  margin:0 auto;
+  padding:20px;
 }
 
 .ad-card{
-width:100%;
-aspect-ratio:1/1;
-border-radius:22px;
-overflow:hidden;
-background:#000;
-position:relative;
-box-shadow:0 15px 35px rgba(0,0,0,.12);
-transition:.3s;
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:22px;
+  overflow:hidden;
+  background:#000;
+  position:relative;
+  box-shadow:0 15px 35px rgba(0,0,0,.12);
+  transition:.3s;
 }
 
 .ad-card:hover{
-transform:scale(1.02);
+  transform:scale(1.02);
 }
 
 .ad-card img{
-width:100%;
-height:100%;
-object-fit:cover;
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
 .like-box{
-position:absolute;
-bottom:12px;
-left:12px;
-background:rgba(0,0,0,0.65);
-color:#fff;
-padding:8px 14px;
-border-radius:30px;
-font-family:'Montserrat', sans-serif;
-font-size:14px;
-cursor:pointer;
-transition:.3s;
+  position:absolute;
+  bottom:12px;
+  left:12px;
+  background:rgba(0,0,0,0.65);
+  color:#fff;
+  padding:8px 14px;
+  border-radius:30px;
+  font-family:'Montserrat', sans-serif;
+  font-size:14px;
+  cursor:pointer;
+  transition:.3s;
 }
 
 .like-box:hover{
-background:var(--mamey);
+  background:var(--mamey);
 }
 
-/* ================= LEGAL ================= */
-
+/* ================= PUNTO 4 LEGAL ================= */
 .legal-section{
-max-width:800px;
-margin:60px auto;
-padding:20px;
+  max-width:800px;
+  margin:60px auto;
+  padding:20px;
 }
 
 .legal-btn{
-width:100%;
-background:var(--dark);
-color:#fff;
-border:none;
-padding:16px;
-margin-top:12px;
-border-radius:12px;
-font-family:'Montserrat', sans-serif;
-font-weight:600;
-cursor:pointer;
-transition:.3s;
+  width:100%;
+  background:var(--dark);
+  color:#fff;
+  border:none;
+  padding:16px;
+  margin-top:12px;
+  border-radius:12px;
+  font-family:'Montserrat', sans-serif;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
 }
 
 .legal-btn:hover{
-background:var(--mamey);
+  background:var(--mamey);
 }
 
 .legal-content{
-display:none;
-padding:20px;
-background:#fff;
-border-radius:12px;
-margin-top:6px;
-font-size:14px;
-line-height:1.7;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
+  display:none;
+  padding:20px;
+  background:#fff;
+  border-radius:12px;
+  margin-top:6px;
+  font-size:14px;
+  line-height:1.7;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 /* Responsive */
 @media(max-width:768px){
-.store-box{
-min-width:220px;
+  .store-box{
+    min-width:220px;
+  }
 }
-}
-
 </style>
 </head>
 
 <body>
 
+<!-- ================= PUNTO 1 HEADER ================= -->
 <header>
+  <div class="top-bar">
+    <!-- IZQUIERDA -->
+    <div class="left-area">
+      <div class="menu-btn" onclick="toggleMenu()">☰</div>
+      <div class="logo-text">OfferView</div>
+    </div>
 
-<div class="top-bar">
+    <!-- DERECHA -->
+    <div class="right-area">
+      <select class="mini-select" onchange="setLanguage(this.value)">
+        <option value="ES">ES</option>
+        <option value="EN">EN</option>
+        <option value="PT">PT</option>
+      </select>
 
-<div class="left-area">
-<div class="menu-btn">☰</div>
-<div class="logo-text">OfferView</div>
-</div>
+      <select class="mini-select">
+        <option>🌍 Global</option>
+        <option>🇩🇴 República Dominicana</option>
+        <option>🇺🇸 USA</option>
+        <option>🇧🇷 Brasil</option>
+      </select>
 
-<div class="right-area">
-<button class="btn-mamey">Registro & Publicar Ofertas</button>
-</div>
+      <button class="btn-small" onclick="abrirAuth()">Registro & Publicar</button>
+    </div>
+  </div>
 
-</div>
+  <!-- BUSCADOR -->
+  <div class="search-box">
+    <form onsubmit="return buscar(event)">
+      <input id="searchInput" placeholder="Busca productos, tiendas o marcas…">
+      <button>Buscar</button>
+    </form>
+  </div>
 
-<div class="search-box">
-<form onsubmit="return buscar(event)">
-<input placeholder="Busca productos, tiendas o marcas…">
-<button>Buscar</button>
-</form>
-</div>
-
-<div class="slogan">
-Tu guía a Las Mejores Ofertas
-</div>
-
+  <!-- ESLOGAN -->
+  <div class="slogan">Tu guía a las Mejores Ofertas</div>
 </header>
 
-<!-- ================= PUNTO 2 ================= -->
+<!-- ================= MENÚ LATERAL ================= -->
+<div id="sideMenu" class="side-menu">
+  <a href="#" onclick="openOfferModal()">Subir Imagen & Link de Oferta</a>
+  <a href="#" onclick="abrirFavModal()">Mis Plataformas & Tiendas Preferidas</a>
+  <a href="#">Afiliados</a>
+  <a href="#">País</a>
+</div>
 
+<!-- ================= PUNTO 2 CARRUSEL STORES ================= -->
 <div class="section-wrapper">
-
-<h2 class="section-title">Explora Stores</h2>
-
-<div class="store-carousel">
-
-<div class="store-box">
-<h3>Top Stores</h3>
-<a href="https://amazon.com" target="_blank">Amazon</a>
-<a href="https://alibaba.com" target="_blank">Alibaba</a>
-<a href="https://temu.com" target="_blank">Temu</a>
-<a href="https://aliexpress.com" target="_blank">AliExpress</a>
-</div>
-
-<div class="store-box">
-<h3>Gaming Stores</h3>
-<a href="https://store.steampowered.com" target="_blank">Steam</a>
-<a href="https://store.epicgames.com" target="_blank">Epic Games</a>
-<a href="https://xbox.com" target="_blank">Xbox</a>
-<a href="https://playstation.com" target="_blank">PlayStation</a>
-</div>
-
-<div class="store-box">
-<h3>Tecnología</h3>
-<a href="https://apple.com" target="_blank">Apple</a>
-<a href="https://samsung.com" target="_blank">Samsung</a>
-<a href="https://lenovo.com" target="_blank">Lenovo</a>
-<a href="https://dell.com" target="_blank">Dell</a>
-</div>
-
-</div>
-
+  <h2 class="section-title">Explora Stores</h2>
+  <div class="store-carousel">
+    <div class="store-box">
+      <h3>Top Stores</h3>
+      <a href="https://amazon.com" target="_blank">Amazon</a>
+      <a href="https://alibaba.com" target="_blank">Alibaba</a>
+      <a href="https://temu.com" target="_blank">Temu</a>
+      <a href="https://aliexpress.com" target="_blank">AliExpress</a>
+    </div>
+    <div class="store-box">
+      <h3>Gaming Stores</h3>
+      <a href="https://store.steampowered.com" target="_blank">Steam</a>
+      <a href="https://store.epicgames.com" target="_blank">Epic Games</a>
+      <a href="https://xbox.com" target="_blank">Xbox</a>
+      <a href="https://playstation.com" target="_blank">PlayStation</a>
+    </div>
+    <div class="store-box">
+      <h3>Tecnología</h3>
+      <a href="https://apple.com" target="_blank">Apple</a>
+      <a href="https://samsung.com" target="_blank">Samsung</a>
+      <a href="https://lenovo.com" target="_blank">Lenovo</a>
+      <a href="https://dell.com" target="_blank">Dell</a>
+    </div>
+  </div>
 </div>
 
 <div class="divider"></div>
 
-<!-- ================= PUNTO 3 ================= -->
-
-<h2 class="section-title">Ofertas Para Ti</h2>
-
+<!-- ================= PUNTO 3 OFERTAS ================= -->
+<h2 class="section-title" style="text-align:center;">Ofertas Para Ti</h2>
 <div id="adCarousel">
-<div class="ad-card">
-<img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1200" loading="lazy">
-<div class="like-box">🤍 0</div>
-</div>
+  <div class="ad-card">
+    <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1200" loading="lazy">
+    <div class="like-box">🤍 0</div>
+  </div>
 </div>
 
-<!-- ================= PUNTO 4 ================= -->
-
+<!-- ================= PUNTO 4 LEGAL ================= -->
 <div class="legal-section">
+  <button class="legal-btn" onclick="toggleLegal('privacidad')">Política de Privacidad</button>
+  <div id="privacidad" class="legal-content">OfferView respeta tu privacidad y no vende datos personales.</div>
 
-<button class="legal-btn" onclick="toggleLegal('privacidad')">Política de Privacidad</button>
-<div id="privacidad" class="legal-content">
-OfferView respeta tu privacidad y no vende datos personales.
+  <button class="legal-btn" onclick="toggleLegal('terminos')">Términos y Condiciones</button>
+  <div id="terminos" class="legal-content">OfferView es una guía independiente. Algunos enlaces pueden ser afiliados.</div>
+
+  <button class="legal-btn" onclick="toggleLegal('proxy')">Proxy / Aviso Legal</button>
+  <div id="proxy" class="legal-content">Las compras se realizan en sitios externos.</div>
+
+  <button class="legal-btn" onclick="toggleLegal('contacto')">Contacto</button>
+  <div id="contacto" class="legal-content">soporte.offerviews01@gmail.com</div>
 </div>
 
-<button class="legal-btn" onclick="toggleLegal('terminos')">Términos y Condiciones</button>
-<div id="terminos" class="legal-content">
-OfferView es una guía independiente. Algunos enlaces pueden ser afiliados.
-</div>
-
-<button class="legal-btn" onclick="toggleLegal('proxy')">Proxy / Aviso Legal</button>
-<div id="proxy" class="legal-content">
-Las compras se realizan en sitios externos.
-</div>
-
-<button class="legal-btn" onclick="toggleLegal('contacto')">Contacto</button>
-<div id="contacto" class="legal-content">
-soporte.offerviews01@gmail.com
-</div>
-
-</div>
-
+<!-- ================= JS ================= -->
 <script>
+function toggleMenu(){
+  document.getElementById("sideMenu").classList.toggle("open");
+}
+
 function buscar(e){
-e.preventDefault();
-window.open("https://www.google.com/search?q=ofertas","_blank");
+  e.preventDefault();
+  const query = document.getElementById("searchInput").value;
+  if(query) window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, "_blank");
+}
+
+function abrirAuth(){
+  alert("Función de Registro & Publicar activada.");
+}
+
+function setLanguage(lang){
+  alert("Idioma seleccionado: " + lang);
+}
+
+function openOfferModal(){
+  alert("Subir Imagen & Link de Oferta.");
+}
+
+function abrirFavModal(){
+  alert("Mis Plataformas & Tiendas Preferidas.");
 }
 
 function toggleLegal(id){
-const el=document.getElementById(id);
-el.style.display=el.style.display==="block"?"none":"block";
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === "block" ? "none" : "block";
 }
 </script>
 
