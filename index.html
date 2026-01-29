@@ -5,793 +5,389 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>OfferView – Tu Guía a las Mejores Ofertas</title>
-<meta name="description" content="OfferView es una guía global e independiente de ofertas">
-<meta name="keywords" content="ofertas, Amazon, Temu, Alibaba">
-<meta name="author" content="OfferView">
 
-  <!-- ================= TIPOGRAFÍA OFICIAL OFFERVIEW ================= -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  
+
 <style>
+
+/* ================= ROOT ================= */
+
 :root{
---mamey:#F59E0B;--bg:#F9FAFB;--card:#fff;--text:#111827;
+--mamey:#F59E0B;
+--dark:#111827;
+--bg:#F9FAFB;
+--card:#ffffff;
 }
 
-/* ================= TIPOGRAFÍA GLOBAL OFFERVIEW ================= */
+html{
+scroll-behavior:smooth;
+}
 
 body{
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  color: #1a1a1a;
-  background-color: #f8f9fa;
+margin:0;
+background:var(--bg);
+font-family:'Inter', sans-serif;
+color:#1a1a1a;
 }
 
-/* Logo */
+/* ================= HEADER ================= */
+
+header{
+background:#0b1633;
+color:#fff;
+padding:18px 20px 30px;
+}
+
+.top-bar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.left-area{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.menu-btn{
+font-size:24px;
+cursor:pointer;
+}
+
 .logo-text{
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  letter-spacing: -1px;
-  font-size: 28px;
+font-family:'Montserrat', sans-serif;
+font-weight:800;
+font-size:26px;
+letter-spacing:-1px;
+color:var(--mamey);
 }
 
-/* Títulos de secciones */
-h1, h2, h3{
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.5px;
+.right-area{
+display:flex;
+align-items:center;
+gap:10px;
 }
 
-/* Botones principales */
-button,
-.btn-mamey,
-.btn-secundario{
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+.btn-mamey{
+background:var(--mamey);
+border:none;
+padding:10px 16px;
+border-radius:10px;
+font-family:'Montserrat', sans-serif;
+font-weight:600;
+cursor:pointer;
+color:#fff;
 }
 
-/* Efecto profesional hover */
-button:hover,
-.btn-mamey:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+.search-box{
+margin-top:25px;
+max-width:700px;
+margin-left:auto;
+margin-right:auto;
 }
 
-/* Texto de tarjetas y productos */
-.card,
-.product-card,
+.search-box form{
+display:flex;
+}
+
+.search-box input{
+flex:1;
+padding:15px;
+border:none;
+border-radius:12px 0 0 12px;
+font-size:15px;
+}
+
+.search-box button{
+padding:15px 20px;
+border:none;
+background:var(--mamey);
+border-radius:0 12px 12px 0;
+font-family:'Montserrat', sans-serif;
+font-weight:600;
+cursor:pointer;
+}
+
+.slogan{
+text-align:center;
+margin-top:14px;
+font-family:'Montserrat', sans-serif;
+font-weight:600;
+font-size:16px;
+}
+
+/* ================= PUNTO 2 CARRUSEL STORES ================= */
+
+.section-wrapper{
+margin-top:50px;
+}
+
+.section-title{
+font-family:'Montserrat', sans-serif;
+font-weight:700;
+font-size:24px;
+text-align:center;
+color:var(--mamey);
+margin-bottom:20px;
+}
+
+.store-carousel{
+display:flex;
+gap:20px;
+overflow-x:auto;
+padding:20px;
+scroll-behavior:smooth;
+}
+
 .store-box{
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
+min-width:260px;
+background:#fff;
+padding:20px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
-/* Textos legales */
-.legal-content{
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #444;
-  }
-  
-body{
-  margin:0;
-  font-family:'Inter', sans-serif;
-  font-weight:400;
-  color:#1a1a1a;
-  background-color:#f8f9fa;
+.store-box h3{
+font-family:'Montserrat', sans-serif;
+font-size:16px;
+margin-top:0;
 }
-header{text-align:center;padding:40px 15px;background:#0b1633;color:#fff}
-header h1{color:var(--mamey);font-size:42px;margin:0}
-.views{font-size:14px;margin-top:6px}
 
-.search-box{margin:20px auto;max-width:520px}
-.search-box form{display:flex}
-.search-box input{flex:1;padding:12px;border:none;border-radius:10px 0 0 10px}
-.search-box button{padding:12px 18px;border:none;background:var(--mamey);font-weight:bold;border-radius:0 10px 10px 0}
+.store-box a{
+display:block;
+margin-top:8px;
+text-decoration:none;
+color:#333;
+font-size:14px;
+}
 
-.controls select{padding:6px;border-radius:6px;margin:4px}
+.store-box a:hover{
+color:var(--mamey);
+}
 
-.section-title{text-align:center;margin:55px 0 22px;font-size:26px;font-weight:700;color:var(--mamey)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;padding:0 20px 40px}
-.card{background:#fff;border-radius:18px;padding:26px 15px;text-align:center;text-decoration:none;box-shadow:0 10px 25px rgba(0,0,0,.08);transition:.25s}
-.card:hover{transform:translateY(-6px)}
-.card span{font-size:17px;font-weight:700}
+/* ================= DIVISOR ================= */
 
-  /* Carrusel */
+.divider{
+height:4px;
+width:100px;
+background:var(--mamey);
+margin:60px auto 20px;
+border-radius:20px;
+}
+
+/* ================= FEED VERTICAL ================= */
+
 #adCarousel{
-  display:flex;
-  gap:20px;
-  overflow-x:auto;
-  padding:20px
+display:flex;
+flex-direction:column;
+gap:30px;
+max-width:520px;
+margin:0 auto;
+padding:20px;
 }
 
-/* Imagen cuadrada tipo Instagram */
 .ad-card{
-  min-width:260px;
-  aspect-ratio:1/1;
-  overflow:hidden;
-  border-radius:18px;
-  background:#000;
-  position:relative; /* IMPORTANTE para el botón */
+width:100%;
+aspect-ratio:1/1;
+border-radius:22px;
+overflow:hidden;
+background:#000;
+position:relative;
+box-shadow:0 15px 35px rgba(0,0,0,.12);
+transition:.3s;
+}
+
+.ad-card:hover{
+transform:scale(1.02);
 }
 
 .ad-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
-/* botón eliminar */
-.delete-btn{
-  position:absolute;
-  top:8px;
-  right:8px;
-  background:rgba(0,0,0,0.7);
-  color:#fff;
-  border:none;
-  border-radius:50%;
-  width:30px;
-  height:30px;
-  cursor:pointer;
-  font-size:16px;
+.like-box{
+position:absolute;
+bottom:12px;
+left:12px;
+background:rgba(0,0,0,0.65);
+color:#fff;
+padding:8px 14px;
+border-radius:30px;
+font-family:'Montserrat', sans-serif;
+font-size:14px;
+cursor:pointer;
+transition:.3s;
 }
 
-  .like-box{
-  position:absolute;
-  bottom:8px;
-  left:10px;
-  background:rgba(0,0,0,0.6);
-  color:#fff;
-  padding:6px 10px;
-  border-radius:20px;
-  cursor:pointer;
-  font-size:14px;
-}
-  
-/* Botón */
-#publishBtn{display:block;margin:0 auto 40px;padding:14px 28px;background:var(--mamey);border:none;border-radius:14px;font-weight:bold;cursor:pointer}
-
-/* Modal */
-#offerModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center}
-#offerModal form{background:#fff;padding:30px;border-radius:18px;max-width:420px;width:90%}
-#offerModal h3{margin-top:0;color:var(--mamey)}
-#offerModal input,#offerModal button{width:100%;padding:12px;margin-top:10px}
-#offerModal button[type="button"]{background:#eee}
-
-footer{background:#eef2f7;padding:40px;text-align:center;font-size:14px}
-footer a{color:var(--mamey);text-decoration:none}
-  
- /* ================= BOTONES AUTH ================= */
-.btn-mamey{
-  background:#F59E0B;
-  color:#fff;
-  border:none;
-  padding:10px 18px;
-  border-radius:10px;
-  font-weight:bold;
-  cursor:pointer;
+.like-box:hover{
+background:var(--mamey);
 }
 
-.btn-secundario{
-  background:#eee;
-  border:none;
-  padding:10px 18px;
-  border-radius:10px;
-  cursor:pointer;
+/* ================= LEGAL ================= */
+
+.legal-section{
+max-width:800px;
+margin:60px auto;
+padding:20px;
 }
 
-/* ================= MODAL AUTH ================= */
-.modal-auth{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  z-index:1000;
-  align-items:center;
-  justify-content:center;
+.legal-btn{
+width:100%;
+background:var(--dark);
+color:#fff;
+border:none;
+padding:16px;
+margin-top:12px;
+border-radius:12px;
+font-family:'Montserrat', sans-serif;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
 }
 
-.modal-auth-box{
-  background:#fff;
-  padding:30px;
-  border-radius:18px;
-  max-width:400px;
-  width:90%;
-  text-align:center;
+.legal-btn:hover{
+background:var(--mamey);
 }
 
-.modal-auth-box h3{
-  color:#F59E0B;
-  margin-top:0;
+.legal-content{
+display:none;
+padding:20px;
+background:#fff;
+border-radius:12px;
+margin-top:6px;
+font-size:14px;
+line-height:1.7;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
-.modal-auth-box input{
-  width:100%;
-  padding:12px;
-  margin-top:12px;
-  border-radius:8px;
-  border:1px solid #ddd;
+/* Responsive */
+@media(max-width:768px){
+.store-box{
+min-width:220px;
+}
 }
 
-.modal-auth-box button{
-  width:100%;
-  margin-top:12px;
-} 
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>OFFERVIEW</h1>
-<p id="slogan">Tu Guía a las Mejores Ofertas</p>
 
-<div class="views">
-<span id="viewsCounter">Visitas: 0</span>
+<div class="top-bar">
+
+<div class="left-area">
+<div class="menu-btn">☰</div>
+<div class="logo-text">OfferView</div>
+</div>
+
+<div class="right-area">
+<button class="btn-mamey">Registro & Publicar Ofertas</button>
+</div>
+
 </div>
 
 <div class="search-box">
 <form onsubmit="return buscar(event)">
-<input id="searchInput" placeholder="Buscar tiendas u ofertas">
+<input placeholder="Busca productos, tiendas o marcas…">
 <button>Buscar</button>
 </form>
 </div>
 
-<div class="controls">
-<select onchange="setLanguage(this.value)">
-<option value="ES">🇪🇸 Español</option>
-<option value="EN">🇺🇸 English</option>
-<option value="PT">🇵🇹 Português</option>
-</select>
+<div class="slogan">
+Tu guía a Las Mejores Ofertas
 </div>
 
-<div class="auth-buttons">
-<button id="authBtn" class="btn-mamey">
-Registrarse / Iniciar sesión
-</button>
-
-<button id="favBtn" class="btn-mamey" style="display:none;">
-Mis Plataformas & Tiendas Preferidas
-</button>
-
-<button id="logoutBtn" class="btn-secundario" style="display:none;">
-Cerrar sesión
-</button>
-</div>
 </header>
 
-<h2 class="section-title" id="offersTitle">Ofertas Para Ti</h2>
-<div id="adCarousel"></div>
+<!-- ================= PUNTO 2 ================= -->
 
-<button id="publishBtn" onclick="openOfferModal()">Publicar Imagen de Oferta</button>
+<div class="section-wrapper">
 
-<div id="content"></div>
+<h2 class="section-title">Explora Stores</h2>
 
-<footer>
-<p>OfferView es una guía independiente. Algunos enlaces pueden ser de afiliación.</p>
-<p>Contacto: <a href="mailto:soporte.offerviews01@gmail.com">soporte.offerviews01@gmail.com</a></p>
-<p>© 2026 OfferView</p>
-</footer>
+<div class="store-carousel">
 
-<!-- MODAL -->
-<div id="offerModal">
-  <form onsubmit="publicarImagen(event)">
-    <h3>Publicar Imagen de Oferta</h3>
-
-    <!-- Imagen -->
-    <input type="file" id="imagenOferta" accept="image/*" required>
-
-    <!-- Link opcional (web, Instagram, WhatsApp, etc.) -->
-    <input type="url" id="linkOferta" placeholder="Link de la oferta o Instagram (opcional)">
-
-    <!-- Acciones -->
-    <button type="submit">Publicar</button>
-    <button type="button" onclick="closeOfferModal()">Cancelar</button>
-  </form>
+<div class="store-box">
+<h3>Top Stores</h3>
+<a href="https://amazon.com" target="_blank">Amazon</a>
+<a href="https://alibaba.com" target="_blank">Alibaba</a>
+<a href="https://temu.com" target="_blank">Temu</a>
+<a href="https://aliexpress.com" target="_blank">AliExpress</a>
 </div>
 
-  <!-- MODAL AUTH -->
-<div id="authModal" class="modal-auth">
-  <div class="modal-auth-box">
-    <h3>Acceso OfferView</h3>
-
-    <input type="email" id="authEmail" placeholder="Correo electrónico" required>
-    <input type="password" id="authPass" placeholder="Contraseña" required>
-
-    <button type="button" class="btn-mamey" onclick="registrar()">
-      Registrarse
-    </button>
-
-    <button type="button" class="btn-mamey" onclick="login()">
-      Iniciar sesión
-    </button>
-
-    <button type="button" class="btn-secundario" onclick="cerrarAuth()">
-      Cancelar
-    </button>
-  </div>
+<div class="store-box">
+<h3>Gaming Stores</h3>
+<a href="https://store.steampowered.com" target="_blank">Steam</a>
+<a href="https://store.epicgames.com" target="_blank">Epic Games</a>
+<a href="https://xbox.com" target="_blank">Xbox</a>
+<a href="https://playstation.com" target="_blank">PlayStation</a>
 </div>
 
-  <!-- MODAL MIS PLATAFORMAS -->
-<div id="favModal" class="modal-auth">
-  <div class="modal-auth-box">
-    <h3>Mis Plataformas & Tiendas</h3>
-
-    <input type="text" id="nombrePlataforma" placeholder="Nombre (Ej: Amazon)">
-    <input type="url" id="linkPlataforma" placeholder="Link de tu cuenta">
-
-    <button class="btn-mamey" onclick="guardarPlataforma()">
-      Guardar
-    </button>
-
-    <div id="listaPlataformas" style="margin-top:15px;text-align:left;"></div>
-
-    <button class="btn-secundario" onclick="cerrarFavModal()">
-      Cerrar
-    </button>
-  </div>
+<div class="store-box">
+<h3>Tecnología</h3>
+<a href="https://apple.com" target="_blank">Apple</a>
+<a href="https://samsung.com" target="_blank">Samsung</a>
+<a href="https://lenovo.com" target="_blank">Lenovo</a>
+<a href="https://dell.com" target="_blank">Dell</a>
 </div>
-  
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+</div>
+
+</div>
+
+<div class="divider"></div>
+
+<!-- ================= PUNTO 3 ================= -->
+
+<h2 class="section-title">Ofertas Para Ti</h2>
+
+<div id="adCarousel">
+<div class="ad-card">
+<img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1200" loading="lazy">
+<div class="like-box">🤍 0</div>
+</div>
+</div>
+
+<!-- ================= PUNTO 4 ================= -->
+
+<div class="legal-section">
+
+<button class="legal-btn" onclick="toggleLegal('privacidad')">Política de Privacidad</button>
+<div id="privacidad" class="legal-content">
+OfferView respeta tu privacidad y no vende datos personales.
+</div>
+
+<button class="legal-btn" onclick="toggleLegal('terminos')">Términos y Condiciones</button>
+<div id="terminos" class="legal-content">
+OfferView es una guía independiente. Algunos enlaces pueden ser afiliados.
+</div>
+
+<button class="legal-btn" onclick="toggleLegal('proxy')">Proxy / Aviso Legal</button>
+<div id="proxy" class="legal-content">
+Las compras se realizan en sitios externos.
+</div>
+
+<button class="legal-btn" onclick="toggleLegal('contacto')">Contacto</button>
+<div id="contacto" class="legal-content">
+soporte.offerviews01@gmail.com
+</div>
+
+</div>
+
 <script>
-  
-/* ================= FIREBASE ================= */
-firebase.initializeApp({
-apiKey:"AIzaSyDBb8-HKRm_HZNZhi55DF2XQ-VeWXWsgSE",
-authDomain:"offerview-a0837.firebaseapp.com",
-projectId:"offerview-a0837",
-storageBucket:"offerview-a0837.appspot.com",
-messagingSenderId:"949865345608",
-appId:"1:949865345608:web:2f7cd6fc231b9151ffde7d"
-});
-const db=firebase.firestore();
-const auth = firebase.auth();
-
-  /* ================= CONTADOR DE VISITAS ================= */
-
-const viewsEl = document.getElementById("viewsCounter");
-
-db.collection("stats").doc("views").get().then(d=>{
-  let v = d.exists ? d.data().count : 0;
-  v++;
-  viewsEl.textContent = "Visitas: " + v.toLocaleString();
-  db.collection("stats").doc("views").set({count:v});
-});
-  
-/* Abrir modal */
-document.getElementById("authBtn").onclick = () =>{
-  document.getElementById("authModal").style.display="flex";
-};
-
-  /* Botón Mis Plataformas */
-document.getElementById("favBtn").onclick = () => {
-  abrirFavModal();
-};
-  
-/* Registro */
-function registrar(){
-  const email = authEmail.value;
-  const pass = authPass.value;
-
-  auth.createUserWithEmailAndPassword(email,pass)
-  .then(cred=>{
-    cred.user.sendEmailVerification();
-    alert("Te enviamos un correo de verificación.");
-  })
-  .catch(e=>alert(e.message));
-}
-
-function login(){
-  auth.signInWithEmailAndPassword(authEmail.value,authPass.value)
-  .then(()=>{
-    cerrarAuth();
-  })
-  .catch(e=>alert(e.message));
-}
-
-/* Estado sesión */
-auth.onAuthStateChanged(user=>{
-  if(user && user.emailVerified){
-    authBtn.style.display="none";
-    favBtn.style.display="inline-block";
-    logoutBtn.style.display="inline-block";
-    publishBtn.style.display="block";
-  }else{
-    authBtn.style.display="inline-block";
-    favBtn.style.display="none";
-    logoutBtn.style.display="none";
-    publishBtn.style.display="none";
-  }
-});
-
-/* Logout */
-logoutBtn.onclick=()=>auth.signOut();
-  
-/* ================= PROMPTS ================= */
-const OfferViewPrompts={
-search:"Analizar intención de búsqueda",
-recommend:"Recomendar tiendas confiables",
-deals:"Priorizar ofertas reales",
-ethics:"Guía neutral e independiente"
-};
-
-/* ================= BUSCADOR ================= */
 function buscar(e){
 e.preventDefault();
-window.open("https://www.google.com/search?q="+encodeURIComponent(searchInput.value+" ofertas"),"_blank");
+window.open("https://www.google.com/search?q=ofertas","_blank");
 }
 
-/* ================= IDIOMAS ================= */
-function setLanguage(l){
-offersTitle.textContent =
-l==="EN" ? "Deals For You" :
-l==="PT" ? "Ofertas Para Você" :
-"Ofertas Para Ti";
+function toggleLegal(id){
+const el=document.getElementById(id);
+el.style.display=el.style.display==="block"?"none":"block";
 }
-
-/* ================= MODAL ================= */
-function openOfferModal(){offerModal.style.display="flex";}
-function closeOfferModal(){offerModal.style.display="none";}
-
-/* ================= PUBLICAR IMAGEN (CLOUDINARY RR SEGURO) ================= */
-function publicarImagen(e){
-  e.preventDefault();
-
-  if(!auth.currentUser){
-    alert("Debes iniciar sesión para publicar");
-    return;
-  }
-
-  const file = document.getElementById("imagenOferta").files[0];
-  const linkOferta = document.getElementById("linkOferta").value;
-
-  if(!file){
-    alert("Debes subir una imagen");
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("upload_preset", "ofertas_publicas");
-
-  fetch("https://api.cloudinary.com/v1_1/dveqauvqh/image/upload", {
-    method: "POST",
-    body: formData
-  })
-  .then(res => res.json())
-  .then(data => {
-
-    if(!data.secure_url){
-      console.error(data);
-      alert("Cloudinary rechazó la imagen");
-      return;
-    }
-
-    return db.collection("publicidad").add({
-      imagen: data.secure_url,
-      link: linkOferta || null,
-      uid: auth.currentUser.uid, // 🔥 FUNDAMENTAL
-      fecha: firebase.firestore.FieldValue.serverTimestamp()
-    });
-
-  })
-  .then(()=>{
-    closeOfferModal();
-    alert("Imagen publicada correctamente ✅");
-
-    // limpiar campos
-    document.getElementById("imagenOferta").value = "";
-    document.getElementById("linkOferta").value = "";
-  })
-  .catch(err=>{
-    console.error(err);
-    alert("Error al subir la imagen");
-  });
-
-  return false;
-}
-
- /* ================= CARRUSEL RR OPTIMIZADO ================= */
-function loadAds(){
-
-  db.collection("publicidad")
-    .orderBy("fecha","desc")
-    .onSnapshot(snapshot => {
-
-      const adCarousel = document.getElementById("adCarousel");
-      adCarousel.innerHTML = "";
-
-      snapshot.forEach(doc => {
-
-        const data = doc.data();
-        const postId = doc.id;
-
-        const card = document.createElement("div");
-        card.className = "ad-card";
-
-        let img = document.createElement("img");
-        img.src = data.imagen;
-        img.loading = "lazy";
-
-        if(data.link){
-          const link = document.createElement("a");
-          link.href = data.link;
-          link.target = "_blank";
-          link.appendChild(img);
-          card.appendChild(link);
-        } else {
-          card.appendChild(img);
-        }
-
-        if(auth.currentUser && auth.currentUser.uid === data.uid){
-          const deleteBtn = document.createElement("button");
-          deleteBtn.className = "delete-btn";
-          deleteBtn.innerHTML = "✖";
-          deleteBtn.onclick = () => eliminarAd(postId);
-          card.appendChild(deleteBtn);
-        }
-
-        const likeBox = document.createElement("div");
-        likeBox.className = "like-box";
-        likeBox.innerHTML = `❤️ <span id="likes-${postId}">0</span>`;
-        likeBox.onclick = () => toggleLike(postId);
-
-        card.appendChild(likeBox);
-        adCarousel.appendChild(card);
-
-        // Contador simple (sin crear múltiples listeners pesados)
-        db.collection("likes")
-          .where("postId","==",postId)
-          .get()
-          .then(likesSnapshot=>{
-            const likesEl = document.getElementById("likes-"+postId);
-            if(likesEl){
-              likesEl.textContent = likesSnapshot.size;
-            }
-          });
-
-      });
-
-    });
-}
-
-loadAds(); 
-  
-  /* ================= ELIMINAR PUBLICIDAD ================= */
-function eliminarAd(id){
-  if(!confirm("¿Eliminar esta publicación?")) return;
-
-  db.collection("publicidad")
-    .doc(id)
-    .delete()
-    .then(() => {
-      console.log("Publicidad eliminada correctamente");
-    })
-    .catch(error => {
-      console.error("Error al eliminar:", error);
-      alert("No se pudo eliminar la publicidad");
-    });
-}
-
- /* ================= LIKE SISTEMA RR ================= */
-function toggleLike(postId){
-
-  if(!auth.currentUser){
-    alert("Debes iniciar sesión para dar like");
-    return;
-  }
-
-  const uid = auth.currentUser.uid;
-
-  const likeRef = db.collection("likes")
-    .where("postId","==",postId)
-    .where("uid","==",uid);
-
-  likeRef.get().then(snapshot=>{
-    if(snapshot.empty){
-      db.collection("likes").add({
-        postId: postId,
-        uid: uid,
-        fecha: firebase.firestore.FieldValue.serverTimestamp()
-      });
-    }else{
-      snapshot.forEach(doc=>{
-        doc.ref.delete();
-      });
-    }
-  });
-
-} 
-  
-/* ================= SECCIONES Y TIENDAS ================= */
-const SECTIONS = {
-  "Top Stores":[
-    ["Amazon","amazon","https://amazon.com"],
-    ["Mercado Libre","mercadolibre","https://mercadolibre.com"],
-    ["Alibaba","alibaba","https://alibaba.com"],
-    ["Temu","temu","https://temu.to/k/gfiiqs13cbu"],
-    ["AliExpress","aliexpress","https://aliexpress.com"],
-    ["eBay","ebay","https://ebay.com"],
-    ["Walmart","walmart","https://walmart.com"],
-    ["Target","target","https://target.com"],
-    ["Costco","costco","https://costco.com"],
-    ["Best Buy","bestbuy","https://bestbuy.com"],
-    ["Newegg","newegg","https://newegg.com"],
-    ["Etsy","etsy","https://etsy.com"],
-    ["Shein","shein","https://shein.com"],
-    ["Shopee","shopee","https://shopee.com"],
-    ["MINISO","miniso","https://miniso.com"],
-    ["Ross","ross","https://rossstores.com"],
-    ["Marshalls","marshalls","https://marshalls.com"],
-    ["Burlington","burlington","https://burlington.com"],
-    ["IKEA","ikea","https://ikea.com"],
-    ["Rakuten","rakuten","https://rakuten.com"],
-    ["Coppel","coppel","https://coppel.com"],
-    ["Falabella","falabella","https://falabella.com"],
-    ["Magalu","magalu","https://magazineluiza.com.br"],
-    ["Americanas","americanas","https://americanas.com.br"],
-    ["Linio","linio","https://linio.com"]
-  ],
-  "Gaming Stores":[
-    ["Steam","steam","https://store.steampowered.com"],
-    ["Epic Games","epicgames","https://store.epicgames.com"],
-    ["PlayStation","playstation","https://store.playstation.com"],
-    ["Xbox","xbox","https://xbox.com/store"],
-    ["Nintendo","nintendo","https://nintendo.com/store"],
-    ["GameStop","gamestop","https://gamestop.com"],
-    ["Ubisoft","ubisoft","https://store.ubisoft.com"],
-    ["EA","ea","https://ea.com"],
-    ["Blizzard","blizzard","https://blizzard.com"],
-    ["GOG","gog","https://gog.com"]
-  ],
-  "Tecnología Stores":[
-    ["Apple","apple","https://apple.com"],
-    ["Samsung","samsung","https://samsung.com"],
-    ["Microsoft","microsoft","https://microsoft.com"],
-    ["Lenovo","lenovo","https://lenovo.com"],
-    ["Dell","dell","https://dell.com"],
-    ["HP","hp","https://hp.com"],
-    ["Asus","asus","https://asus.com"],
-    ["Acer","acer","https://acer.com"],
-    ["Xiaomi","xiaomi","https://mi.com"],
-    ["Newegg","newegg","https://newegg.com"]
-  ],
-  "Moda y Lencería Stores":[
-    ["Zara","zara","https://zara.com"],
-    ["H&M","hm","https://hm.com"],
-    ["Uniqlo","uniqlo","https://uniqlo.com"],
-    ["Shein","shein","https://shein.com"],
-    ["Fashion Nova","fashionnova","https://fashionnova.com"],
-    ["Victoria’s Secret","victoriassecret","https://victoriassecret.com"],
-    ["Aerie","aerie","https://ae.com"],
-    ["Calvin Klein","calvinklein","https://calvinklein.com"],
-    ["Savage X Fenty","savagexfenty","https://savagex.com"],
-    ["Oysho","oysho","https://oysho.com"]
-  ],
-  "Calzados Stores":[
-    ["Nike","nike","https://nike.com"],
-    ["Adidas","adidas","https://adidas.com"],
-    ["Puma","puma","https://puma.com"],
-    ["New Balance","newbalance","https://newbalance.com"],
-    ["Reebok","reebok","https://reebok.com"],
-    ["Skechers","skechers","https://skechers.com"],
-    ["Converse","converse","https://converse.com"],
-    ["Vans","vans","https://vans.com"],
-    ["Crocs","crocs","https://crocs.com"],
-    ["Under Armour","underarmour","https://underarmour.com"]
-  ],
-  "Hoteles y Vuelos Stores":[
-    ["Booking","booking","https://booking.com"],
-    ["Expedia","expedia","https://expedia.com"],
-    ["Airbnb","airbnb","https://airbnb.com"],
-    ["Kayak","kayak","https://kayak.com"],
-    ["Skyscanner","skyscanner","https://skyscanner.com"],
-    ["Agoda","agoda","https://agoda.com"],
-    ["Trip.com","tripdotcom","https://trip.com"],
-    ["Hotels.com","hotelsdotcom","https://hotels.com"],
-    ["Priceline","priceline","https://priceline.com"],
-    ["Travelocity","travelocity","https://travelocity.com"]
-  ]
-};
-
-function renderSections(){
-const content=document.getElementById("content");
-content.innerHTML="";
-Object.entries(SECTIONS).forEach(([section,stores])=>{
-let html=`<h2 class="section-title">${section}</h2><div class="grid">`;
-stores.forEach(([name,cls,url])=>{
-html+=`<a class="card ${cls}" href="${url}" target="_blank"><span>${name}</span></a>`;
-});
-content.innerHTML+=html+"</div>";
-});
-}
-renderSections();
-
-  /* ================= ABRIR / CERRAR MODAL AUTH ================= */
-function abrirAuth(){
-  document.getElementById("authModal").style.display="flex";
-}
-
-function cerrarAuth(){
-  document.getElementById("authModal").style.display="none";
-}
-
-/* ================= MIS PLATAFORMAS RR ================= */
-
-function abrirFavModal(){
-  document.getElementById("favModal").style.display="flex";
-  cargarPlataformas();
-}
-
-function cerrarFavModal(){
-  document.getElementById("favModal").style.display="none";
-}
-
-function guardarPlataforma(){
-
-  if(!auth.currentUser){
-    alert("Debes iniciar sesión");
-    return;
-  }
-
-  const nombre = document.getElementById("nombrePlataforma").value;
-  const link = document.getElementById("linkPlataforma").value;
-
-  if(!nombre || !link){
-    alert("Completa todos los campos");
-    return;
-  }
-
-  db.collection("plataformas").add({
-    uid: auth.currentUser.uid,
-    nombre: nombre,
-    link: link,
-    fecha: firebase.firestore.FieldValue.serverTimestamp()
-  })
-  .then(()=>{
-    document.getElementById("nombrePlataforma").value="";
-    document.getElementById("linkPlataforma").value="";
-    cargarPlataformas();
-  });
-}
-
-function cargarPlataformas(){
-
-  if(!auth.currentUser) return;
-
-  const lista = document.getElementById("listaPlataformas");
-  lista.innerHTML="";
-
-  db.collection("plataformas")
-    .where("uid","==",auth.currentUser.uid)
-    .orderBy("fecha","desc")
-    .onSnapshot(snapshot=>{
-
-      lista.innerHTML="";
-
-      snapshot.forEach(doc=>{
-        const data = doc.data();
-
-        lista.innerHTML += `
-          <div style="margin-bottom:8px;">
-            <a href="${data.link}" target="_blank">${data.nombre}</a>
-            <button onclick="eliminarPlataforma('${doc.id}')" style="margin-left:8px;">✖</button>
-          </div>
-        `;
-      });
-
-    });
-}
-
-function eliminarPlataforma(id){
-  db.collection("plataformas").doc(id).delete();
-}  
-  
 </script>
 
 </body>
