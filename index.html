@@ -625,14 +625,20 @@ const SECTIONS = {
 };
 
 function renderSections(){
-const content=document.getElementById("content");
-content.innerHTML="";
+const content = document.getElementById("content");
+content.innerHTML = "";
+
 Object.entries(SECTIONS).forEach(([section,stores])=>{
-let html=<h2 class="section-title">${section}</h2><div class="grid">;
+
+let html = `<h2 class="section-title">${section}</h2><div class="grid">`;
+
 stores.forEach(([name,cls,url])=>{
-html+=<a class="card ${cls}" href="${url}" target="_blank"><span>${name}</span></a>;
+html += `<a class="card ${cls}" href="${url}" target="_blank"><span>${name}</span></a>`;
 });
-content.innerHTML+=html+"</div>";
+
+html += "</div>";
+content.innerHTML += html;
+
 });
 }
 renderSections();
