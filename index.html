@@ -209,32 +209,74 @@ border:1px solid #ddd;
 width:100%;
 margin-top:12px;
 }
-</style>  </head>  <body>  <header>
+</style>  
+</head> 
+  <body>  
+   <!-- ================= MODULO 1 OFFERVIEW ================= -->
 
-<h1>OFFERVIEW</h1>      
-<p id="slogan">Tu Guía a las Mejores Ofertas</p>  <div class="views">      
-<span id="viewsCounter">Visitas: 0</span>      
-</div>  <div class="search-box">      
-<form onsubmit="return buscar(event)">      
-<input id="searchInput" placeholder="Buscar tiendas u ofertas">      
-<button>Buscar</button>      
-</form>      
-</div>  <div class="controls">      
-<select onchange="setLanguage(this.value)">      
-<option value="ES">🇪🇸 Español</option>      
-<option value="EN">🇺🇸 English</option>      
-<option value="PT">🇵🇹 Português</option>      
-</select>      
-</div>  <div class="auth-buttons">      
-<button id="authBtn" class="btn-mamey">      
-Registrarse / Iniciar sesión      
-</button>  <button id="favBtn" class="btn-mamey" style="display:none;">      
-Mis Plataformas & Tiendas Preferidas      
-</button>  <button id="logoutBtn" class="btn-secundario" style="display:none;">      
-Cerrar sesión      
-</button>      
-</div>      
-</header>  <h2 class="section-title" id="offersTitle">Ofertas Para Ti</h2>      
+<div class="modulo1">
+
+  <!-- 🔹 Barra Superior -->
+  <div class="topbar">
+
+    <!-- Botón Hamburguesa -->
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+    <!-- Logo -->
+    <div class="logo-text">OFFERVIEW</div>
+
+    <!-- Botón Registro / Login -->
+    <button id="authBtn" class="btn-mamey">
+      Registrarse / Iniciar sesión
+    </button>
+
+  </div>
+
+  <!-- 🔹 Eslogan -->
+  <div class="slogan">
+    Tu Guía a las Mejores Ofertas
+  </div>
+
+  <!-- 🔹 Buscador -->
+  <div class="search-box">
+    <form onsubmit="return buscar(event)">
+      <input id="searchInput" placeholder="Buscar tiendas u ofertas">
+      <button>Buscar</button>
+    </form>
+  </div>
+
+</div>
+
+<!-- 🔹 Overlay -->
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+<!-- 🔹 MENÚ LATERAL -->
+<div id="sideMenu" class="side-menu">
+
+  <button onclick="abrirAuth()">Mi Cuenta</button>
+
+  <hr>
+
+  <button onclick="setLanguage('ES')">Idioma: Español</button>
+  <button onclick="setLanguage('EN')">Idioma: English</button>
+  <button onclick="setLanguage('PT')">Idioma: Português</button>
+
+  <hr>
+
+  <button onclick="seleccionarPais()">País / Ubicación</button>
+
+  <hr>
+
+  <button onclick="openOfferModal()">Publicar Ofertas</button>
+  <button onclick="verMisOfertas()">Mis Ofertas</button>
+  <button onclick="abrirFavModal()">Mis Plataformas & Tiendas Preferidas</button>
+
+  <hr>
+
+  <button onclick="logoutUser()">Cerrar sesión</button>
+
+</div> 
+      <h2 class="section-title" id="offersTitle">Ofertas Para Ti</h2>      
 <div id="adCarousel"></div>  <button id="publishBtn" onclick="openOfferModal()">Publicar Imagen de Oferta</button>    <div id="content"></div>  <footer>      
 <p>OfferView es una guía independiente. Algunos enlaces pueden ser de afiliación.</p>      
 <p>Contacto: <a href="mailto:soporte.offerviews01@gmail.com">soporte.offerviews01@gmail.com</a></p>      
