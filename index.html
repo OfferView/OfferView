@@ -421,17 +421,15 @@ appId:"1:949865345608:web:2f7cd6fc231b9151ffde7d"
 const db=firebase.firestore();
 const auth = firebase.auth();
 
-/* ================= CONTADOR DE VISITAS ================= */
+ /* ================= CONTADOR DE VISITAS (INVISIBLE) ================= */
 
-const viewsEl = document.getElementById("viewsCounter");
-
-db.collection("stats").doc("views").get().then(d=>{
-let v = d.exists ? d.data().count : 0;
-v++;
-viewsEl.textContent = "Visitas: " + v.toLocaleString();
-db.collection("stats").doc("views").set({count:v});
+// Actualiza el contador internamente en Firebase sin mostrarlo en la página
+db.collection("stats").doc("views").get().then(doc => {
+    let v = doc.exists ? doc.data().count : 0;
+    v++;
+    db.collection("stats").doc("views").set({ count: v });
 });
-
+  
 /* Abrir modal */
 document.getElementById("authBtn").onclick = () =>{
 document.getElementById("authModal").style.display="flex";
