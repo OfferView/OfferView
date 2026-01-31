@@ -71,16 +71,13 @@ font-weight:400;
 color:#1a1a1a;
 background-color:#f8f9fa;
 }
-header{text-align:center;padding:40px 15px;background:#0b1633;color:#fff}
-header h1{color:var(--mamey);font-size:42px;margin:0}
-.views{font-size:14px;margin-top:6px}
+
 
 .search-box{margin:20px auto;max-width:520px}
 .search-box form{display:flex}
 .search-box input{flex:1;padding:12px;border:none;border-radius:10px 0 0 10px}
 .search-box button{padding:12px 18px;border:none;background:var(--mamey);font-weight:bold;border-radius:0 10px 10px 0}
 
-.controls select{padding:6px;border-radius:6px;margin:4px}
 
 .section-title{text-align:center;margin:55px 0 22px;font-size:26px;font-weight:700;color:var(--mamey)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;padding:0 20px 40px}
@@ -209,7 +206,113 @@ border:1px solid #ddd;
 width:100%;
 margin-top:12px;
 }
-</style>  
+
+/* todo tu CSS actual */
+
+/* ================= MODULO 1 ================= */
+
+.modulo1{
+padding:15px 20px 25px 20px;
+background:#ffffff;
+box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.topbar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.hamburger{
+font-size:26px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.logo-text{
+font-family:'Montserrat',sans-serif;
+font-weight:800;
+font-size:26px;
+color:#111827;
+letter-spacing:-1px;
+}
+
+.slogan{
+text-align:center;
+margin-top:18px;
+font-family:'Montserrat',sans-serif;
+font-weight:600;
+font-size:18px;
+color:#F59E0B;
+}
+
+.search-box{
+margin:20px auto 0;
+max-width:520px;
+}
+
+.search-box form{
+display:flex; /* 🔥 AGREGA ESTA LÍNEA */
+}
+
+.search-box input{
+flex:1;       /* 🔥 AGREGA ESTA LÍNEA */
+padding:12px;
+border-radius:10px 0 0 10px;
+border:1px solid #ddd;
+}
+
+.search-box button{
+background:#F59E0B;
+border:none;
+padding:12px 18px;
+border-radius:0 10px 10px 0;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* MENÚ LATERAL */
+.side-menu{
+position:fixed;
+top:0;
+left:-280px;
+width:260px;
+height:100%;
+background:#fff;
+box-shadow:4px 0 20px rgba(0,0,0,0.15);
+padding:20px;
+transition:0.3s;
+z-index:1001;
+display:flex;
+flex-direction:column;
+}
+
+.side-menu button{
+margin:8px 0;
+padding:10px;
+border:none;
+background:#f3f4f6;
+border-radius:8px;
+cursor:pointer;
+text-align:left;
+font-family:'Montserrat',sans-serif;
+font-weight:600;
+}
+
+.side-menu button:hover{
+background:#F59E0B;
+color:#fff;
+}
+
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.4);
+display:none;
+z-index:1000;
+}
+
+</style> 
 </head> 
   <body>  
    <!-- ================= MODULO 1 OFFERVIEW ================= -->
@@ -334,11 +437,6 @@ document.getElementById("authBtn").onclick = () =>{
 document.getElementById("authModal").style.display="flex";
 };
 
-/* Botón Mis Plataformas */
-document.getElementById("favBtn").onclick = () => {
-abrirFavModal();
-};
-
 /* Registro */
 function registrar(){
 const email = authEmail.value;
@@ -360,23 +458,31 @@ cerrarAuth();
 .catch(e=>alert(e.message));
 }
 
-/* Estado sesión */
-auth.onAuthStateChanged(user=>{
-if(user && user.emailVerified){
-authBtn.style.display="none";
-favBtn.style.display="inline-block";
-logoutBtn.style.display="inline-block";
-publishBtn.style.display="block";
-}else{
-authBtn.style.display="inline-block";
-favBtn.style.display="none";
-logoutBtn.style.display="none";
-publishBtn.style.display="none";
-}
-});
+/* ================= ESTADO DE SESIÓN ================= */
 
-/* Logout */
-logoutBtn.onclick=()=>auth.signOut();
+auth.onAuthStateChanged(user=>{
+
+  const authBtn = document.getElementById("authBtn");
+  const publishBtn = document.getElementById("publishBtn");
+
+  if(user && user.emailVerified){
+
+    // Oculta botón de registro
+    if(authBtn) authBtn.style.display = "none";
+
+    // Muestra botón publicar
+    if(publishBtn) publishBtn.style.display = "block";
+
+  }else{
+
+    // Muestra botón registro
+    if(authBtn) authBtn.style.display = "inline-block";
+
+    // Oculta botón publicar
+    if(publishBtn) publishBtn.style.display = "none";
+  }
+
+});
 
 /* ================= PROMPTS ================= */
 const OfferViewPrompts={
@@ -766,7 +872,26 @@ lista.innerHTML="";
 function eliminarPlataforma(id){
 db.collection("plataformas").doc(id).delete();
 }
+/* ================= MENU HAMBURGUESA ================= */
 
+function toggleMenu(){
+const menu = document.getElementById("sideMenu");
+const overlay = document.getElementById("overlay");
+
+menu.classList.toggle("active");
+
+if(menu.classList.contains("active")){
+  overlay.style.display = "block";
+}else{
+  overlay.style.display = "none";
+}
+}
+
+function logoutUser(){
+auth.signOut();
+toggleMenu();
+}
+  
 </script>  
 </body>
 
