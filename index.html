@@ -70,6 +70,7 @@ font-family:'Inter', sans-serif;
 font-weight:400;
 color:#1a1a1a;
 background-color:#f8f9fa;
+overflow-x:hidden;
 }
 
 
@@ -358,31 +359,52 @@ z-index:1000;
 
 <!-- 🔹 Overlay -->
 <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
-
 <!-- 🔹 MENÚ LATERAL -->
 <div id="sideMenu" class="side-menu">
 
-  <button onclick="abrirAuth()">Mi Cuenta</button>
+  <!-- Mi Cuenta -->
+  <button onclick="abrirAuth(); closeMenu();">Mi Cuenta</button>
 
   <hr>
 
-  <button onclick="setLanguage('ES')">Idioma: Español</button>
-  <button onclick="setLanguage('EN')">Idioma: English</button>
-  <button onclick="setLanguage('PT')">Idioma: Português</button>
+  <!-- Idiomas -->
+  <button onclick="setLanguage('ES'); closeMenu();">Idioma: Español</button>
+  <button onclick="setLanguage('EN'); closeMenu();">Idioma: English</button>
+  <button onclick="setLanguage('PT'); closeMenu();">Idioma: Português</button>
 
   <hr>
 
-  <button onclick="seleccionarPais()">País / Ubicación</button>
+  <!-- País / Ubicación -->
+  <button onclick="seleccionarPais(); closeMenu();">
+    País / Ubicación
+  </button>
 
   <hr>
 
-  <button onclick="openOfferModal()">Publicar Ofertas</button>
-  <button onclick="verMisOfertas()">Mis Ofertas</button>
-  <button onclick="abrirFavModal()">Mis Plataformas & Tiendas Preferidas</button>
+  <!-- Ofertas -->
+  <button onclick="openOfferModal(); closeMenu();">
+    Publicar Ofertas
+  </button>
+
+  <button onclick="abrirMisOfertas(); closeMenu();">
+    Mis Ofertas
+  </button>
+
+  <button onclick="abrirFavModal(); closeMenu();">
+    Mis Plataformas & Tiendas Preferidas
+  </button>
 
   <hr>
 
-  <button onclick="logoutUser()">Cerrar sesión</button>
+  <!-- Cerrar sesión -->
+  <button onclick="logoutUser()">
+    Cerrar sesión
+  </button>
+
+</div>
+
+<!-- Fondo oscuro -->
+<div id="overlay" class="overlay"></div>
 
 </div> 
       <h2 class="section-title" id="offersTitle">Ofertas Para Ti</h2>      
@@ -878,22 +900,35 @@ db.collection("plataformas").doc(id).delete();
 }
 /* ================= MENU HAMBURGUESA ================= */
 
-function toggleMenu(){
-const menu = document.getElementById("sideMenu");
-const overlay = document.getElementById("overlay");
+function toggleMenu() {
+  const menu = document.getElementById("sideMenu");
+  const overlay = document.getElementById("overlay");
 
-menu.classList.toggle("active");
-
-if(menu.classList.contains("active")){
-  overlay.style.display = "block";
-}else{
-  overlay.style.display = "none";
+  if (menu.classList.contains("active")) {
+    // Cerrar menú
+    menu.classList.remove("active");
+    overlay.style.display = "none";
+  } else {
+    // Abrir menú
+    menu.classList.add("active");
+    overlay.style.display = "block";
+  }
 }
+
+/* Cerrar menú manualmente */
+function closeMenu() {
+  document.getElementById("sideMenu").classList.remove("active");
+  document.getElementById("overlay").style.display = "none";
 }
 
-function logoutUser(){
-auth.signOut();
-toggleMenu();
+/* Cerrar menú al tocar fondo oscuro */
+document.getElementById("overlay").addEventListener("click", closeMenu);
+
+/* Logout */
+function logoutUser() {
+  auth.signOut().then(() => {
+    closeMenu();
+  });
 }
   
 </script>  
