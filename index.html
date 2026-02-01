@@ -336,13 +336,6 @@ z-index:1000;
     <!-- Logo -->
     <div class="logo-text">OFFERVIEW</div>
 
-    <!-- Botón Registro / Login -->
-    <button id="authBtn" class="btn-mamey">
-      Registrarse / Iniciar sesión
-    </button>
-
-  </div>
-
   <!-- 🔹 Eslogan -->
   <div class="slogan">
     Tu Guía a las Mejores Ofertas
@@ -363,44 +356,51 @@ z-index:1000;
 <!-- 🔹 MENÚ LATERAL -->
 <div id="sideMenu" class="side-menu">
 
-  <!-- Mi Cuenta -->
-  <button onclick="abrirAuth(); closeMenu();">Mi Cuenta</button>
-
-  <hr>
-
-  <!-- Idiomas -->
-  <button onclick="setLanguage('ES'); closeMenu();">Idioma: Español</button>
-  <button onclick="setLanguage('EN'); closeMenu();">Idioma: English</button>
-  <button onclick="setLanguage('PT'); closeMenu();">Idioma: Português</button>
-
-  <hr>
-
-  <!-- País / Ubicación -->
-  <button onclick="seleccionarPais(); closeMenu();">
-    País / Ubicación
+  <!-- 🔐 BOTÓN AUTH (solo si NO está logeado) -->
+  <button id="menuAuthBtn" onclick="abrirAuth(); closeMenu();">
+    Registrarse / Iniciar sesión
   </button>
 
-  <hr>
+  <!-- 🔓 CONTENIDO SOLO PARA USUARIOS LOGEADOS -->
+  <div id="menuUserOptions" style="display:none;">
 
-  <!-- Ofertas -->
-  <button onclick="openOfferModal(); closeMenu();">
-    Publicar Ofertas
-  </button>
+    <button onclick="abrirAuth(); closeMenu();">
+      Mi Cuenta
+    </button>
 
-  <button onclick="abrirMisOfertas(); closeMenu();">
-    Mis Ofertas
-  </button>
+    <hr>
 
-  <button onclick="abrirFavModal(); closeMenu();">
-    Mis Plataformas & Tiendas Preferidas
-  </button>
+    <button onclick="setLanguage('ES'); closeMenu();">Idioma: Español</button>
+    <button onclick="setLanguage('EN'); closeMenu();">Idioma: English</button>
+    <button onclick="setLanguage('PT'); closeMenu();">Idioma: Português</button>
 
-  <hr>
+    <hr>
 
-  <!-- Cerrar sesión -->
-  <button onclick="logoutUser()">
-    Cerrar sesión
-  </button>
+    <button onclick="seleccionarPais(); closeMenu();">
+      Global / Ubicación
+    </button>
+
+    <hr>
+
+    <button onclick="openOfferModal(); closeMenu();">
+      Subir Imagen de Ofertas
+    </button>
+
+    <button onclick="abrirMisOfertas(); closeMenu();">
+      Mis Ofertas
+    </button>
+
+    <button onclick="abrirFavModal(); closeMenu();">
+      Mis Plataformas & Tiendas Preferidas
+    </button>
+
+    <hr>
+
+    <button onclick="logoutUser();">
+      Cerrar sesión
+    </button>
+
+  </div>
 
 </div>
 
@@ -486,25 +486,32 @@ cerrarAuth();
 
 /* ================= ESTADO DE SESIÓN ================= */
 
-auth.onAuthStateChanged(user=>{
+auth.onAuthStateChanged(user => {
 
-  const authBtn = document.getElementById("authBtn");
+  const menuAuthBtn = document.getElementById("menuAuthBtn");
+  const menuUserOptions = document.getElementById("menuUserOptions");
   const publishBtn = document.getElementById("publishBtn");
 
   if(user && user.emailVerified){
 
-    // Oculta botón de registro
-    if(authBtn) authBtn.style.display = "none";
+    // Oculta botón de login del menú
+    if(menuAuthBtn) menuAuthBtn.style.display = "none";
 
-    // Muestra botón publicar
+    // Muestra opciones privadas
+    if(menuUserOptions) menuUserOptions.style.display = "block";
+
+    // Mostrar botón publicar principal
     if(publishBtn) publishBtn.style.display = "block";
 
   }else{
 
-    // Muestra botón registro
-    if(authBtn) authBtn.style.display = "inline-block";
+    // Mostrar botón login
+    if(menuAuthBtn) menuAuthBtn.style.display = "block";
 
-    // Oculta botón publicar
+    // Ocultar opciones privadas
+    if(menuUserOptions) menuUserOptions.style.display = "none";
+
+    // Ocultar botón publicar principal
     if(publishBtn) publishBtn.style.display = "none";
   }
 
