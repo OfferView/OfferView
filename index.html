@@ -139,7 +139,16 @@ font-size:14px;
 }
 
 /* Botón */
-#publishBtn{display:block;margin:0 auto 40px;padding:14px 28px;background:var(--mamey);border:none;border-radius:14px;font-weight:bold;cursor:pointer}
+#publishBtn{
+  display:none;
+  margin:0 auto 40px;
+  padding:14px 28px;
+  background:var(--mamey);
+  border:none;
+  border-radius:14px;
+  font-weight:bold;
+  cursor:pointer;
+}
 
 /* Modal */
 #offerModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center}
@@ -222,23 +231,23 @@ box-shadow:0 4px 12px rgba(0,0,0,0.05);
 }
 
 .topbar{
-display:flex;
-align-items:center;
-justify-content:space-between;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+  gap:10px;
 }
 
 .hamburger{
-font-size:26px;
-cursor:pointer;
-font-weight:bold;
+  font-size:26px;
+  cursor:pointer;
+  font-weight:bold;
+  flex-shrink:0;
 }
 
 .logo-text{
-font-family:'Montserrat',sans-serif;
-font-weight:800;
-font-size:26px;
-color:#111827;
-letter-spacing:-1px;
+  flex:1;
+  text-align:center;
 }
 
 .slogan{
@@ -277,18 +286,18 @@ cursor:pointer;
 
 /* MENÚ LATERAL */
 .side-menu{
-position:fixed;
-top:0;
-left:-280px;
-width:260px;
-height:100%;
-background:#fff;
-box-shadow:4px 0 20px rgba(0,0,0,0.15);
-padding:20px;
-transition:0.3s;
-z-index:1001;
-display:flex;
-flex-direction:column;
+  position:fixed;
+  top:0;
+  left:-260px;   /* mismo valor que width */
+  width:260px;
+  height:100%;
+  background:#fff;
+  box-shadow:4px 0 20px rgba(0,0,0,0.15);
+  padding:20px;
+  transition:0.3s ease;
+  z-index:1200;
+  display:flex;
+  flex-direction:column;
 }
 
 .side-menu button{
@@ -323,19 +332,17 @@ z-index:1000;
 </style> 
 </head> 
   <body>  
-   <!-- ================= MODULO 1 OFFERVIEW ================= -->
-<div class="topbar">
+    
+<!-- ================= MODULO 1 OFFERVIEW ================= -->
+<div class="modulo1">
 
-  <div class="hamburger" onclick="toggleMenu()">☰</div>
-
-  <div class="logo-text">OFFERVIEW</div>
-
-  <!-- Botón login visible solo si NO está logueado -->
-  <button id="authTopBtn" class="btn-mamey" onclick="abrirAuth()">
-    Registrarse / Iniciar sesión
-  </button>
-
-</div>
+  <div class="topbar">
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <div class="logo-text">OFFERVIEW</div>
+    <button id="authTopBtn" class="btn-mamey" onclick="abrirAuth()">
+      Registrarse
+    </button>
+  </div>
 
   <!-- 🔹 Buscador -->
   <div class="search-box">
@@ -397,7 +404,7 @@ z-index:1000;
 </div>
 
      <h2 class="section-title" id="offersTitle">Ofertas Para Ti</h2>      
-<div id="adCarousel"></div>  <button id="publishBtn" onclick="openOfferModal()">Publicar Imagen de Oferta</button>    <div id="content"></div>  <footer>      
+<div id="adCarousel"></div>   <button id="publishBtn"> onclick="openOfferModal()">Publicar Imagen de Oferta</button>    <div id="content"></div>  <footer>      
 <p>OfferView es una guía independiente. Algunos enlaces pueden ser de afiliación.</p>      
 <p>Contacto: <a href="mailto:soporte.offerviews01@gmail.com">soporte.offerviews01@gmail.com</a></p>      
 <p>© 2026 OfferView</p>      
