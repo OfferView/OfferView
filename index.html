@@ -329,12 +329,9 @@ z-index:1000;
 
   <!-- 🔹 Barra Superior -->
   <div class="topbar">
-
-    <!-- Botón Hamburguesa -->
     <div class="hamburger" onclick="toggleMenu()">☰</div>
-
-    <!-- Logo -->
     <div class="logo-text">OFFERVIEW</div>
+  </div>
 
   <!-- 🔹 Eslogan -->
   <div class="slogan">
@@ -404,9 +401,6 @@ z-index:1000;
 
 </div>
 
-<!-- Fondo oscuro -->
-<div id="overlay" class="overlay"></div>
-
      <h2 class="section-title" id="offersTitle">Ofertas Para Ti</h2>      
 <div id="adCarousel"></div>  <button id="publishBtn" onclick="openOfferModal()">Publicar Imagen de Oferta</button>    <div id="content"></div>  <footer>      
 <p>OfferView es una guía independiente. Algunos enlaces pueden ser de afiliación.</p>      
@@ -458,11 +452,6 @@ db.collection("stats").doc("views").get().then(doc => {
     db.collection("stats").doc("views").set({ count: v });
 });
   
-/* Abrir modal */
-document.getElementById("authBtn").onclick = () =>{
-document.getElementById("authModal").style.display="flex";
-};
-
 /* Registro */
 function registrar(){
 const email = authEmail.value;
