@@ -229,13 +229,13 @@ padding:15px 20px 25px 20px;
 background:#ffffff;
 box-shadow:0 4px 12px rgba(0,0,0,0.05);
 }
-
 .topbar{
   display:flex;
   align-items:center;
   justify-content:space-between;
   width:100%;
   gap:10px;
+  box-sizing:border-box;
 }
 
 .hamburger{
@@ -404,7 +404,9 @@ z-index:1000;
 </div>
 
      <h2 class="section-title" id="offersTitle">Ofertas Para Ti</h2>      
-<div id="adCarousel"></div>   <button id="publishBtn"> onclick="openOfferModal()">Publicar Imagen de Oferta</button>    <div id="content"></div>  <footer>      
+<div id="adCarousel"></div>   <button id="publishBtn" onclick="openOfferModal()">
+  Publicar Imagen de Oferta
+</button>   <div id="content"></div>  <footer>      
 <p>OfferView es una guía independiente. Algunos enlaces pueden ser de afiliación.</p>      
 <p>Contacto: <a href="mailto:soporte.offerviews01@gmail.com">soporte.offerviews01@gmail.com</a></p>      
 <p>© 2026 OfferView</p>      
@@ -894,6 +896,18 @@ lista.innerHTML="";
 
 function eliminarPlataforma(id){
 db.collection("plataformas").doc(id).delete();
+}
+
+  /* 🔥 ARREGLO GENERAL PARA QUITAR RAYA BLANCA */
+*{
+  box-sizing:border-box;
+}
+
+html, body{
+  margin:0;
+  padding:0;
+  max-width:100%;
+  overflow-x:hidden;
 }
 /* ================= MENU HAMBURGUESA ================= */
 
