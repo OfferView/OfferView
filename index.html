@@ -324,19 +324,18 @@ z-index:1000;
 </head> 
   <body>  
    <!-- ================= MODULO 1 OFFERVIEW ================= -->
+<div class="topbar">
 
-<div class="modulo1">
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
 
-  <!-- 🔹 Barra Superior -->
-  <div class="topbar">
-    <div class="hamburger" onclick="toggleMenu()">☰</div>
-    <div class="logo-text">OFFERVIEW</div>
-  </div>
+  <div class="logo-text">OFFERVIEW</div>
 
-  <!-- 🔹 Eslogan -->
-  <div class="slogan">
-    Tu Guía a las Mejores Ofertas
-  </div>
+  <!-- Botón login visible solo si NO está logueado -->
+  <button id="authTopBtn" class="btn-mamey" onclick="abrirAuth()">
+    Registrarse / Iniciar sesión
+  </button>
+
+</div>
 
   <!-- 🔹 Buscador -->
   <div class="search-box">
@@ -353,11 +352,7 @@ z-index:1000;
 <!-- 🔹 MENÚ LATERAL -->
 <div id="sideMenu" class="side-menu">
 
-  <!-- 🔐 BOTÓN AUTH (solo si NO está logeado) -->
-  <button id="menuAuthBtn" onclick="abrirAuth(); closeMenu();">
-    Registrarse / Iniciar sesión
-  </button>
-
+  
   <!-- 🔓 CONTENIDO SOLO PARA USUARIOS LOGEADOS -->
   <div id="menuUserOptions" style="display:none;">
 
@@ -474,33 +469,32 @@ cerrarAuth();
 }
 
 /* ================= ESTADO DE SESIÓN ================= */
-
 auth.onAuthStateChanged(user => {
 
-  const menuAuthBtn = document.getElementById("menuAuthBtn");
+  const authTopBtn = document.getElementById("authTopBtn");
   const menuUserOptions = document.getElementById("menuUserOptions");
   const publishBtn = document.getElementById("publishBtn");
 
   if(user && user.emailVerified){
 
-    // Oculta botón de login del menú
-    if(menuAuthBtn) menuAuthBtn.style.display = "none";
+    // 🔥 Oculta botón login superior
+    if(authTopBtn) authTopBtn.style.display = "none";
 
-    // Muestra opciones privadas
+    // 🔥 Muestra opciones privadas del menú
     if(menuUserOptions) menuUserOptions.style.display = "block";
 
-    // Mostrar botón publicar principal
+    // 🔥 Mostrar botón publicar principal
     if(publishBtn) publishBtn.style.display = "block";
 
   }else{
 
-    // Mostrar botón login
-    if(menuAuthBtn) menuAuthBtn.style.display = "block";
+    // 🔥 Mostrar botón login superior
+    if(authTopBtn) authTopBtn.style.display = "inline-block";
 
-    // Ocultar opciones privadas
+    // 🔥 Ocultar opciones privadas
     if(menuUserOptions) menuUserOptions.style.display = "none";
 
-    // Ocultar botón publicar principal
+    // 🔥 Ocultar botón publicar principal
     if(publishBtn) publishBtn.style.display = "none";
   }
 
