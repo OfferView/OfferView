@@ -361,7 +361,11 @@ z-index:1000;
       Registrarse
     </button>
   </div>
-
+  
+<div class="slogan">
+  Tu Guía a Las Mejores Ofertas
+</div>
+  
   <!-- 🔹 Buscador -->
   <div class="search-box">
     <form onsubmit="return buscar(event)">
@@ -374,11 +378,20 @@ z-index:1000;
 
 <!-- 🔹 Overlay -->
 <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
 <!-- 🔹 MENÚ LATERAL -->
 <div id="sideMenu" class="side-menu">
 
-  
-  <!-- 🔓 CONTENIDO SOLO PARA USUARIOS LOGEADOS -->
+  <!-- 🔓 OPCIÓN PÚBLICA (cuando NO está logueado) -->
+  <div id="menuPublicOptions">
+
+    <button onclick="abrirAuth(); closeMenu();">
+      Registrarse / Iniciar sesión
+    </button>
+
+  </div>
+
+  <!-- 🔒 OPCIONES SOLO LOGUEADO -->
   <div id="menuUserOptions" style="display:none;">
 
     <button onclick="abrirAuth(); closeMenu();">
@@ -393,12 +406,6 @@ z-index:1000;
 
     <hr>
 
-    <button onclick="seleccionarPais(); closeMenu();">
-      Global / Ubicación
-    </button>
-
-    <hr>
-
     <button onclick="openOfferModal(); closeMenu();">
       Subir Imagen de Ofertas
     </button>
@@ -408,7 +415,7 @@ z-index:1000;
     </button>
 
     <button onclick="abrirFavModal(); closeMenu();">
-      Mis Plataformas & Tiendas Preferidas
+      Mis Plataformas
     </button>
 
     <hr>
@@ -500,33 +507,40 @@ auth.onAuthStateChanged(user => {
 
   const authTopBtn = document.getElementById("authTopBtn");
   const menuUserOptions = document.getElementById("menuUserOptions");
+  const menuPublicOptions = document.getElementById("menuPublicOptions");
   const publishBtn = document.getElementById("publishBtn");
 
   if(user && user.emailVerified){
 
-    // 🔥 Oculta botón login superior
+    // Ocultar botón superior
     if(authTopBtn) authTopBtn.style.display = "none";
 
-    // 🔥 Muestra opciones privadas del menú
+    // Mostrar menú privado
     if(menuUserOptions) menuUserOptions.style.display = "block";
 
-    // 🔥 Mostrar botón publicar principal
+    // Ocultar menú público
+    if(menuPublicOptions) menuPublicOptions.style.display = "none";
+
+    // Mostrar botón publicar
     if(publishBtn) publishBtn.style.display = "block";
 
   }else{
 
-    // 🔥 Mostrar botón login superior
+    // Mostrar botón superior
     if(authTopBtn) authTopBtn.style.display = "inline-block";
 
-    // 🔥 Ocultar opciones privadas
+    // Ocultar menú privado
     if(menuUserOptions) menuUserOptions.style.display = "none";
 
-    // 🔥 Ocultar botón publicar principal
+    // Mostrar menú público
+    if(menuPublicOptions) menuPublicOptions.style.display = "block";
+
+    // Ocultar botón publicar
     if(publishBtn) publishBtn.style.display = "none";
   }
 
 });
-
+ 
 /* ================= PROMPTS ================= */
 const OfferViewPrompts={
 search:"Analizar intención de búsqueda",
