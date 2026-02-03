@@ -4,7 +4,25 @@
 <meta name="description" content="OfferView es una guía global e independiente de ofertas">      
 <meta name="keywords" content="ofertas, Amazon, Temu, Alibaba">      
 <meta name="author" content="OfferView">    <!-- ================= TIPOGRAFÍA OFICIAL OFFERVIEW ================= -->  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">  <style>      
-:root{      
+:root{  
+  /* ===== FIX OVERFLOW GLOBAL DEFINITIVO ===== */
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+}
+
+html{
+  width:100%;
+  overflow-x:hidden;
+}
+
+body{
+  width:100%;
+  margin:0;
+  padding:0;
+  overflow-x:hidden;
+}
 --mamey:#F59E0B;--bg:#F9FAFB;--card:#fff;--text:#111827;      
 }      /* ================= TIPOGRAFÍA GLOBAL OFFERVIEW ================= */
 
@@ -81,7 +99,12 @@ overflow-x:hidden;
 
 
 .section-title{text-align:center;margin:55px 0 22px;font-size:26px;font-weight:700;color:var(--mamey)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;padding:0 20px 40px}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+width:100%;
+}
 .card{background:#fff;border-radius:18px;padding:26px 15px;text-align:center;text-decoration:none;box-shadow:0 10px 25px rgba(0,0,0,.08);transition:.25s}
 .card:hover{transform:translateY(-6px)}
 .card span{font-size:17px;font-weight:700}
@@ -95,14 +118,14 @@ padding:25px 15px;
 }
 
 .ad-card{
-width:100%;
-max-width:400px;
-aspect-ratio:4/5;
-overflow:hidden;
-border-radius:20px;
-background:#fff;
-box-shadow:0 8px 25px rgba(0,0,0,0.08);
-position:relative;
+  width:100%;
+  max-width:100%;     /* 🔥 quitar límite fijo */
+  aspect-ratio:4/5;
+  overflow:hidden;
+  border-radius:20px;
+  background:#fff;
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+  position:relative;
 }
 
 .ad-card img{
@@ -257,11 +280,6 @@ font-family:'Montserrat',sans-serif;
 font-weight:600;
 font-size:18px;
 color:#F59E0B;
-}
-
-.search-box{
-margin:20px auto 0;
-max-width:520px;
 }
 
 .search-box form{
@@ -898,17 +916,6 @@ function eliminarPlataforma(id){
 db.collection("plataformas").doc(id).delete();
 }
 
-  /* 🔥 ARREGLO GENERAL PARA QUITAR RAYA BLANCA */
-*{
-  box-sizing:border-box;
-}
-
-html, body{
-  margin:0;
-  padding:0;
-  max-width:100%;
-  overflow-x:hidden;
-}
 /* ================= MENU HAMBURGUESA ================= */
 
 function toggleMenu() {
