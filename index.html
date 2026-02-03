@@ -510,32 +510,26 @@ auth.onAuthStateChanged(user => {
   const menuPublicOptions = document.getElementById("menuPublicOptions");
   const publishBtn = document.getElementById("publishBtn");
 
-  if(user && user.emailVerified){
+  if(user){
 
-    // Ocultar botón superior
+    // 🔥 Usuario logueado (sin importar verificación)
+
     if(authTopBtn) authTopBtn.style.display = "none";
 
-    // Mostrar menú privado
     if(menuUserOptions) menuUserOptions.style.display = "block";
 
-    // Ocultar menú público
     if(menuPublicOptions) menuPublicOptions.style.display = "none";
 
-    // Mostrar botón publicar
     if(publishBtn) publishBtn.style.display = "block";
 
   }else{
 
-    // Mostrar botón superior
     if(authTopBtn) authTopBtn.style.display = "inline-block";
 
-    // Ocultar menú privado
     if(menuUserOptions) menuUserOptions.style.display = "none";
 
-    // Mostrar menú público
     if(menuPublicOptions) menuPublicOptions.style.display = "block";
 
-    // Ocultar botón publicar
     if(publishBtn) publishBtn.style.display = "none";
   }
 
