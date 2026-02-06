@@ -238,13 +238,11 @@ margin-top:12px;
 /* todo tu CSS actual */
 
 /* ================= MODULO 1 ================= */
-/* 🔵 MODULO 1 */
 .modulo1{
-  background:#0F172A;
+  background:#0F172A !important;
   width:100%;
-  padding:20px 16px 35px 16px;
+  padding:20px 16px 40px 16px;
   text-align:center;
-  box-sizing:border-box;
 }
 
 /* TOPBAR */
@@ -272,21 +270,11 @@ margin-top:12px;
   margin-left:-35px; /* Compensa espacio del botón */
 }
 
-/* LOGO */
 .logo-img{
-  height:48px;
+  height:65px;
   width:auto;
 }
-
-/* NOMBRE */
-.brand-name{
-  color:#ffffff;
-  font-weight:700;
-  font-size:18px;
-  margin-top:6px;
-  font-family:'Montserrat', sans-serif;
-}
-
+  
 /* ESLOGAN */
 .slogan{
   margin-top:25px;
@@ -299,29 +287,28 @@ margin-top:12px;
 /* BUSCADOR */
 .search-box{
   margin:30px auto 0;
-  width:90%;
+  width:95%;
   max-width:520px;
   display:flex;
+  border:2px solid #FB923C;
+  border-radius:12px;
+  overflow:hidden;
+  background:#ffffff;
 }
 
-/* INPUT */
 .search-box input{
   flex:1;
   padding:15px;
-  border:2px solid #F59E0B;
-  border-right:none;
-  border-radius:14px 0 0 14px;
+  border:none;
   outline:none;
   font-size:15px;
 }
 
-/* BOTÓN BUSCAR */
 .search-box button{
-  padding:15px 20px;
-  border:2px solid #F59E0B;
-  background:#F59E0B;
+  padding:15px 22px;
+  border:none;
+  background:#FB923C;
   color:#ffffff;
-  border-radius:0 14px 14px 0;
   cursor:pointer;
   font-weight:600;
 }
@@ -423,7 +410,6 @@ z-index:1000;
     <!-- Bloque Logo + Nombre -->
     <div class="brand-block">
       <img src="offerviewlogojpg17jpg.jpg" class="logo-img">
-      <div class="brand-name">OfferView</div>
     </div>
 
   </div>
