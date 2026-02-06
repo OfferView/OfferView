@@ -238,15 +238,16 @@ margin-top:12px;
 /* todo tu CSS actual */
 
 /* ================= MODULO 1 ================= */
-
+/* 🔵 MODULO 1 */
 .modulo1{
   background:#0F172A;
   width:100%;
-  padding:20px 16px 30px 16px;
+  padding:20px 16px 35px 16px;
   text-align:center;
+  box-sizing:border-box;
 }
 
-/* Topbar */
+/* TOPBAR */
 .topbar{
   display:flex;
   align-items:flex-start;
@@ -254,36 +255,39 @@ margin-top:12px;
   width:100%;
 }
 
-/* Hamburguesa */
+/* HAMBURGUESA */
 .hamburger{
   font-size:26px;
   color:#ffffff;
   cursor:pointer;
   font-weight:bold;
+  flex-shrink:0;
 }
 
-/* Bloque Marca */
+/* BLOQUE MARCA */
 .brand-block{
   display:flex;
   flex-direction:column;
   align-items:center;
-  margin-left:-40px; /* compensa espacio del botón */
+  margin-left:-35px; /* Compensa espacio del botón */
 }
 
+/* LOGO */
 .logo-img{
-  height:45px;
+  height:48px;
   width:auto;
 }
 
+/* NOMBRE */
 .brand-name{
   color:#ffffff;
   font-weight:700;
   font-size:18px;
-  margin-top:4px;
+  margin-top:6px;
   font-family:'Montserrat', sans-serif;
 }
 
-/* Eslogan */
+/* ESLOGAN */
 .slogan{
   margin-top:25px;
   color:#ffffff;
@@ -292,32 +296,39 @@ margin-top:12px;
   font-family:'Montserrat', sans-serif;
 }
 
-/* Buscador */
+/* BUSCADOR */
 .search-box{
-  margin:25px auto 0;
+  margin:30px auto 0;
   width:90%;
   max-width:520px;
   display:flex;
-  justify-content:center;
 }
 
+/* INPUT */
 .search-box input{
-  width:70%;
-  padding:14px;
+  flex:1;
+  padding:15px;
   border:2px solid #F59E0B;
-  border-radius:10px 0 0 10px;
+  border-right:none;
+  border-radius:14px 0 0 14px;
   outline:none;
-  font-size:14px;
+  font-size:15px;
 }
 
+/* BOTÓN BUSCAR */
 .search-box button{
-  padding:14px 18px;
-  border:none;
+  padding:15px 20px;
+  border:2px solid #F59E0B;
   background:#F59E0B;
   color:#ffffff;
-  border-radius:0 10px 10px 0;
+  border-radius:0 14px 14px 0;
   cursor:pointer;
   font-weight:600;
+}
+
+/* EFECTO FOCUS PREMIUM */
+.search-box input:focus{
+  box-shadow:0 0 10px rgba(245,158,11,0.5);
 }
 
 /* Botón registrarse */
@@ -405,20 +416,15 @@ z-index:1000;
 <section class="modulo1">
 
   <div class="topbar">
-
+    
     <!-- Hamburguesa -->
     <div class="hamburger" onclick="toggleMenu()">☰</div>
 
-    <!-- Bloque Logo -->
+    <!-- Bloque Logo + Nombre -->
     <div class="brand-block">
-      <img src="offerview104.png" alt="OfferView Logo" class="logo-img">
+      <img src="offerviewlogojpg17jpg.jpg" class="logo-img">
       <div class="brand-name">OfferView</div>
     </div>
-
-    <!-- Botón Registrarse -->
-    <button id="authTopBtn" class="btn-mamey" onclick="abrirAuth()">
-      Registrarse
-    </button>
 
   </div>
 
@@ -429,10 +435,8 @@ z-index:1000;
 
   <!-- Buscador -->
   <div class="search-box">
-    <form>
-      <input type="text" placeholder="Buscar tiendas u ofertas...">
-      <button type="submit">Buscar</button>
-    </form>
+    <input type="text" placeholder="Buscar ofertas...">
+    <button>Buscar</button>
   </div>
 
 </section>
