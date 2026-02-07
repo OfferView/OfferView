@@ -395,6 +395,54 @@ display:none;
 z-index:1000;
 }
 
+/* ================= MODULO 2 ================= */
+
+.modulo2{
+  background:#1E293B;
+  padding:20px 0;
+  width:100%;
+  overflow:hidden;
+}
+
+.sections-bar{
+  display:flex;
+  overflow-x:auto;
+  gap:12px;
+  padding:10px 15px;
+  scroll-behavior:smooth;
+}
+
+.sections-bar::-webkit-scrollbar{
+  display:none;
+}
+
+.section-btn{
+  flex:0 0 auto;
+  padding:10px 18px;
+  background:#334155;
+  color:#fff;
+  border:none;
+  border-radius:20px;
+  font-family:'Montserrat',sans-serif;
+  font-weight:600;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:0.3s;
+}
+
+.section-btn:hover{
+  background:#F59E0B;
+}
+
+.section-btn.active{
+  background:#F59E0B;
+}
+
+.stores-container{
+  padding:20px;
+  background:#F8FAFC;
+  }
+
 </style> 
 </head> 
   <body>  
@@ -424,6 +472,13 @@ z-index:1000;
     <input type="text" placeholder="Buscar ofertas...">
     <button>Buscar</button>
   </div>
+
+  <!-- 🟣 MODULO 2 - SECCIONES -->
+<section class="modulo2">
+
+  <div class="sections-bar" id="sectionsBar"></div>
+
+  <div id="storesContainer" class="stores-container"></div>
 
 </section>
 
@@ -874,25 +929,61 @@ const SECTIONS = {
 ["Travelocity","travelocity","https://travelocity.com"]
 ]
 };
+/* ================= MODULO 2 LOGICA ================= */
 
-function renderSections(){
-const content = document.getElementById("content");
-content.innerHTML = "";
+function renderSectionButtons(){
 
-Object.entries(SECTIONS).forEach(([section,stores])=>{
+  const bar = document.getElementById("sectionsBar");
+  bar.innerHTML = "";
 
-let html = `<h2 class="section-title">${section}</h2><div class="grid">`;
+  Object.keys(SECTIONS).forEach((section,index)=>{
 
-stores.forEach(([name,cls,url])=>{
-html += `<a class="card ${cls}" href="${url}" target="_blank"><span>${name}</span></a>`;
-});
+    const btn = document.createElement("button");
+    btn.className = "section-btn";
+    btn.textContent = section;
 
-html += "</div>";
-content.innerHTML += html;
+    btn.onclick = ()=>{
+      document.querySelectorAll(".section-btn")
+        .forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      renderStores(section);
+    };
 
-});
+    bar.appendChild(btn);
+
+    if(index === 0){
+      btn.classList.add("active");
+      renderStores(section);
+    }
+
+  });
+
 }
-renderSections();
+
+function renderStores(section){
+
+  const container = document.getElementById("storesContainer");
+  container.innerHTML = "";
+
+  const stores = SECTIONS[section];
+
+  let html = `<div class="grid">`;
+
+  stores.forEach(([name,cls,url])=>{
+    html += `
+      <a class="card ${cls}" href="${url}" target="_blank">
+        <span>${name}</span>
+      </a>
+    `;
+  });
+
+  html += "</div>";
+
+  container.innerHTML = html;
+}
+
+renderSectionButtons();
+
 
 /* ================= ABRIR / CERRAR MODAL AUTH ================= */
 function abrirAuth(){
