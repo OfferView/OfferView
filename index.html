@@ -437,12 +437,25 @@ z-index:1000;
 .section-btn.active{
   background:#F59E0B;
 }
+  
+.section-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
 
-.stores-container{
+.section-btn .plus{
+  font-weight:bold;
+  font-size:18px;
+}
+
+  .stores-container{
+  display:none;
   padding:20px;
   background:#F8FAFC;
-  }
-
+  border-top:2px solid #e5e7eb;
+}
+  
 </style> 
 </head> 
   <body>  
@@ -929,32 +942,46 @@ const SECTIONS = {
 ["Travelocity","travelocity","https://travelocity.com"]
 ]
 };
-/* ================= MODULO 2 LOGICA ================= */
+/* ================= MODULO 2 LÓGICA CARRUSEL + ACORDEÓN ================= */
 
 function renderSectionButtons(){
 
   const bar = document.getElementById("sectionsBar");
+  const container = document.getElementById("storesContainer");
+
   bar.innerHTML = "";
 
-  Object.keys(SECTIONS).forEach((section,index)=>{
+  Object.keys(SECTIONS).forEach(section => {
 
     const btn = document.createElement("button");
     btn.className = "section-btn";
-    btn.textContent = section;
+    btn.innerHTML = `${section} <span class="plus">+</span>`;
 
     btn.onclick = ()=>{
+
+      const isOpen = btn.classList.contains("active");
+
+      // Cerrar todos
       document.querySelectorAll(".section-btn")
-        .forEach(b=>b.classList.remove("active"));
+        .forEach(b => {
+          b.classList.remove("active");
+          const plus = b.querySelector(".plus");
+          if(plus) plus.textContent = "+";
+        });
+
+      if(isOpen){
+        container.style.display = "none";
+        container.innerHTML = "";
+        return;
+      }
+
       btn.classList.add("active");
+      btn.querySelector(".plus").textContent = "−";
+
       renderStores(section);
     };
 
     bar.appendChild(btn);
-
-    if(index === 0){
-      btn.classList.add("active");
-      renderStores(section);
-    }
 
   });
 
@@ -963,8 +990,6 @@ function renderSectionButtons(){
 function renderStores(section){
 
   const container = document.getElementById("storesContainer");
-  container.innerHTML = "";
-
   const stores = SECTIONS[section];
 
   let html = `<div class="grid">`;
@@ -972,7 +997,7 @@ function renderStores(section){
   stores.forEach(([name,cls,url])=>{
     html += `
       <a class="card ${cls}" href="${url}" target="_blank">
-        <span>${name}</span>
+        ${name}
       </a>
     `;
   });
@@ -980,9 +1005,37 @@ function renderStores(section){
   html += "</div>";
 
   container.innerHTML = html;
+  container.style.display = "block";
 }
 
 renderSectionButtons();
+
+
+/* ========= AUTO CARRUSEL ========= */
+
+const carouselSpeed = 1;
+let carouselInterval;
+
+function startCarousel(){
+  const bar = document.getElementById("sectionsBar");
+  carouselInterval = setInterval(()=>{
+    bar.scrollLeft += carouselSpeed;
+    if(bar.scrollLeft + bar.clientWidth >= bar.scrollWidth){
+      bar.scrollLeft = 0;
+    }
+  },20);
+}
+
+function stopCarousel(){
+  clearInterval(carouselInterval);
+}
+
+document.getElementById("sectionsBar").addEventListener("mouseenter", stopCarousel);
+document.getElementById("sectionsBar").addEventListener("mouseleave", startCarousel);
+
+window.addEventListener("load", startCarousel);
+
+
 
 
 /* ================= ABRIR / CERRAR MODAL AUTH ================= */
