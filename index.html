@@ -460,34 +460,64 @@ z-index:1000;
 
 .modulo3{
   width:100%;
-  min-height:100vh;
   background:#ffffff;
-  padding:40px 15px;
+  padding:40px 20px 60px 20px;
 }
 
+/* Título */
+.ofertas-header{
+  width:100%;
+  max-width:1100px;   /* MÁS ANCHO */
+  margin:0 auto 30px auto;
+}
+
+.ofertas-header h2{
+  font-size:26px;
+  font-weight:700;
+  font-family:'Montserrat', sans-serif;
+  color:#0F172A;
+}
+
+/* Contenedor del feed */
 .feed-container{
-  max-width:600px;
+  width:100%;
+  max-width:1100px;   /* MÁS ANCHO */
   margin:auto;
   display:flex;
   flex-direction:column;
-  gap:20px;
+  gap:25px;
 }
 
+/* Tarjetas */
 .post-card{
   background:#ffffff;
   border-radius:20px;
-  padding:20px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.06);
+  padding:25px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.06);
   border:1px solid #E2E8F0;
-  font-family:'Montserrat', sans-serif;
+  width:100%;
+  transition:0.3s ease;
 }
 
+.post-card:hover{
+  transform:translateY(-3px);
+}
+
+/* Imagen de oferta */
+.post-card img{
+  width:100%;
+  border-radius:14px;
+  margin-bottom:15px;
+}
+
+/* Header tienda */
 .post-header{
   display:flex;
   align-items:center;
   gap:8px;
   font-weight:600;
-  margin-bottom:10px;
+  margin-bottom:12px;
+  font-family:'Montserrat', sans-serif;
 }
 
 .verified{
@@ -495,17 +525,24 @@ z-index:1000;
   font-size:14px;
 }
 
+/* Texto */
 .post-card p{
-  font-size:15px;
+  font-size:16px;
+  color:#334155;
   margin-bottom:15px;
 }
 
+/* Acciones */
 .post-actions{
   display:flex;
-  gap:20px;
-  font-size:18px;
+  gap:25px;
+  font-size:20px;
   color:#64748B;
   cursor:pointer;
+}
+
+.post-actions span:hover{
+  color:#F59E0B;
 } 
   
 </style> 
@@ -547,46 +584,19 @@ z-index:1000;
 
 </section>
 
- <!-- ================= MODULO 3 ================= -->
+  <!-- ================= MODULO 3 ================= -->
 <section class="modulo3">
 
-  <div class="feed-container">
-
-    <div class="post-card">
-      <div class="post-header">
-        <strong>Walmart</strong>
-        <span class="verified">✔</span>
-      </div>
-
-      <p>Descuentos hasta 40% en electrónicos.</p>
-
-      <div class="post-actions">
-        <span>♡</span>
-        <span>💬</span>
-        <span>↗</span>
-      </div>
-    </div>
-
-
-    <div class="post-card">
-      <div class="post-header">
-        <strong>Amazon USA</strong>
-        <span class="verified">✔</span>
-      </div>
-
-      <p>Oferta imperdible hasta 30% en dispositivos Echo.</p>
-
-      <div class="post-actions">
-        <span>♡</span>
-        <span>💬</span>
-        <span>↗</span>
-      </div>
-    </div>
-
+  <div class="ofertas-header">
+    <h2>Ofertas Para Ti</h2>
   </div>
 
-</section> 
-  
+  <div class="feed-container" id="realOffers">
+    <!-- Aquí se cargarán las ofertas reales -->
+  </div>
+
+</section>
+
 <!-- 🔹 Overlay -->
 <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 
