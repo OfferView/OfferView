@@ -634,9 +634,7 @@ z-index:1000;
 </div>
 
      <h2 class="section-title" id="offersTitle">Ofertas Para Ti</h2>      
-<div id="adCarousel"></div>   <button id="publishBtn" onclick="openOfferModal()">
-  Publicar Imagen de Oferta
-</button>   <div id="content"></div>  <footer>      
+<div id="adCarousel"></div>   <div id="content"></div>  <footer>      
 <p>OfferView es una guía independiente. Algunos enlaces pueden ser de afiliación.</p>      
 <p>Contacto: <a href="mailto:soporte.offerviews01@gmail.com">soporte.offerviews01@gmail.com</a></p>      
 <p>© 2026 OfferView</p>      
@@ -713,7 +711,7 @@ auth.onAuthStateChanged(user => {
   const authTopBtn = document.getElementById("authTopBtn");
   const menuUserOptions = document.getElementById("menuUserOptions");
   const menuPublicOptions = document.getElementById("menuPublicOptions");
-  const publishBtn = document.getElementById("publishBtn");
+  
 
   if(user){
 
@@ -725,7 +723,6 @@ auth.onAuthStateChanged(user => {
 
     if(menuPublicOptions) menuPublicOptions.style.display = "none";
 
-    if(publishBtn) publishBtn.style.display = "block";
 
   }else{
 
@@ -735,7 +732,6 @@ auth.onAuthStateChanged(user => {
 
     if(menuPublicOptions) menuPublicOptions.style.display = "block";
 
-    if(publishBtn) publishBtn.style.display = "none";
   }
 loadAds();
 });
