@@ -395,67 +395,77 @@ display:none;
 z-index:1000;
 }
 
-/* ================= MODULO 2 ================= */
+
+  /* ================= MODULO 2 TARJETAS ================= */
 
 .modulo2{
-  background:#1E293B;
-  padding:20px 0;
-  width:100%;
+  background:#0F172A;
+  padding:30px 0;
   overflow:hidden;
 }
 
-.sections-bar{
+.stores-carousel{
   display:flex;
+  gap:20px;
   overflow-x:auto;
-  gap:12px;
-  padding:10px 15px;
+  padding:0 20px;
   scroll-behavior:smooth;
 }
 
-.sections-bar::-webkit-scrollbar{
+.stores-carousel::-webkit-scrollbar{
   display:none;
 }
 
-.section-btn{
-  flex:0 0 auto;
-  padding:10px 18px;
-  background:#334155;
-  color:#fff;
-  border:none;
+/* TARJETA */
+.store-card{
+  flex:0 0 300px;
   border-radius:20px;
+  padding:20px;
+  color:#fff;
   font-family:'Montserrat',sans-serif;
-  font-weight:600;
-  cursor:pointer;
-  white-space:nowrap;
-  transition:0.3s;
+  transition:0.3s ease;
+  box-shadow:0 10px 25px rgba(0,0,0,0.25);
 }
 
-.section-btn:hover{
-  background:#F59E0B;
+.store-card:hover{
+  transform:translateY(-5px);
 }
 
-.section-btn.active{
-  background:#F59E0B;
-}
-  
-.section-btn{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-.section-btn .plus{
-  font-weight:bold;
+.store-card h3{
+  margin:0 0 12px 0;
   font-size:18px;
 }
 
-  .stores-container{
-  display:none;
-  padding:20px;
-  background:#F8FAFC;
-  border-top:2px solid #e5e7eb;
+.store-list{
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  line-height:1.7;
 }
 
+.store-list span{
+  display:block;
+}
+
+.expand-btn{
+  margin-top:12px;
+  background:rgba(255,255,255,0.2);
+  border:none;
+  padding:6px 12px;
+  border-radius:8px;
+  color:#fff;
+  cursor:pointer;
+  font-weight:600;
+}
+
+/* COLORES POR SECCIÓN */
+
+.topstores{ background:#F59E0B; }
+.gaming{ background:#8B5CF6; }
+.tecnologia{ background:#0EA5E9; }
+.moda{ background:#EC4899; }
+.calzados{ background:#10B981; }
+.hoteles{ background:#EF4444; }
+  
  /* ================= MODULO 3 ================= */
 .modulo3{
   background:#0F172A;
@@ -572,15 +582,11 @@ z-index:1000;
     <button>Buscar</button>
   </div>
 
-  <!-- 🟣 MODULO 2 - SECCIONES -->
+<!-- 🟣 MODULO 2 - STORES EN TARJETAS -->
 <section class="modulo2">
-
-  <div class="sections-bar" id="sectionsBar"></div>
-
-  <div id="storesContainer" class="stores-container"></div>
-
+  <div class="stores-carousel" id="storesCarousel"></div>
 </section>
-
+  
 <!-- 🔹 Overlay -->
 <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 
@@ -1026,99 +1032,103 @@ const SECTIONS = {
 };
 /* ================= MODULO 2 LÓGICA CARRUSEL + ACORDEÓN ================= */
 
-function renderSectionButtons(){
+const SECTION_COLORS = {
+  "Top Stores":"topstores",
+  "Gaming Stores":"gaming",
+  "Tecnología Stores":"tecnologia",
+  "Moda y Lencería Stores":"moda",
+  "Calzados Stores":"calzados",
+  "Hoteles y Vuelos Stores":"hoteles"
+};
 
-  const bar = document.getElementById("sectionsBar");
-  const container = document.getElementById("storesContainer");
+function renderStoreCards(){
 
-  bar.innerHTML = "";
+  const carousel = document.getElementById("storesCarousel");
+  carousel.innerHTML = "";
 
   Object.keys(SECTIONS).forEach(section => {
 
-    const btn = document.createElement("button");
-    btn.className = "section-btn";
-    btn.innerHTML = `${section} <span class="plus">+</span>`;
+    const stores = SECTIONS[section];
+    const colorClass = SECTION_COLORS[section];
+
+    const firstFive = stores.slice(0,5);
+    const remaining = stores.slice(5);
+
+    let visibleStores = "";
+    firstFive.forEach(([name])=>{
+      visibleStores += `<span>${name}</span>`;
+    });
+
+    let hiddenStores = "";
+    remaining.forEach(([name])=>{
+      hiddenStores += `<span>${name}</span>`;
+    });
+
+    const card = document.createElement("div");
+    card.className = `store-card ${colorClass}`;
+
+    card.innerHTML = `
+      <h3>${section}</h3>
+      <div class="store-list">
+        ${visibleStores}
+        <div class="more-stores" style="display:none;">
+          ${hiddenStores}
+        </div>
+        <button class="expand-btn">+ Ver más</button>
+      </div>
+    `;
+
+    const btn = card.querySelector(".expand-btn");
+    const more = card.querySelector(".more-stores");
 
     btn.onclick = ()=>{
-
-      const isOpen = btn.classList.contains("active");
-
-      // Cerrar todos
-      document.querySelectorAll(".section-btn")
-        .forEach(b => {
-          b.classList.remove("active");
-          const plus = b.querySelector(".plus");
-          if(plus) plus.textContent = "+";
-        });
-
-      if(isOpen){
-        container.style.display = "none";
-        container.innerHTML = "";
-        return;
+      if(more.style.display === "none"){
+        more.style.display = "block";
+        btn.textContent = "− Ver menos";
+      }else{
+        more.style.display = "none";
+        btn.textContent = "+ Ver más";
       }
-
-      btn.classList.add("active");
-      btn.querySelector(".plus").textContent = "−";
-
-      renderStores(section);
     };
 
-    bar.appendChild(btn);
-
+    carousel.appendChild(card);
   });
 
+  // 🔥 DUPLICAR PARA CARRUSEL INFINITO
+  carousel.innerHTML += carousel.innerHTML;
 }
 
-function renderStores(section){
+renderStoreCards();
 
-  const container = document.getElementById("storesContainer");
-  const stores = SECTIONS[section];
+/* ========= AUTO CARRUSEL STORES ========= */
 
-  let html = `<div class="grid">`;
+let storeInterval;
+const storeSpeed = 1;
 
-  stores.forEach(([name,cls,url])=>{
-    html += `
-      <a class="card ${cls}" href="${url}" target="_blank">
-        ${name}
-      </a>
-    `;
-  });
+function startStoreCarousel(){
+  const carousel = document.getElementById("storesCarousel");
 
-  html += "</div>";
+  storeInterval = setInterval(()=>{
+    carousel.scrollLeft += storeSpeed;
 
-  container.innerHTML = html;
-  container.style.display = "block";
-}
-
-renderSectionButtons();
-
-
-/* ========= AUTO CARRUSEL ========= */
-
-const carouselSpeed = 1;
-let carouselInterval;
-
-function startCarousel(){
-  const bar = document.getElementById("sectionsBar");
-  carouselInterval = setInterval(()=>{
-    bar.scrollLeft += carouselSpeed;
-    if(bar.scrollLeft + bar.clientWidth >= bar.scrollWidth){
-      bar.scrollLeft = 0;
+    if(carousel.scrollLeft >= carousel.scrollWidth / 2){
+      carousel.scrollLeft = 0;
     }
+
   },20);
 }
 
-function stopCarousel(){
-  clearInterval(carouselInterval);
+function stopStoreCarousel(){
+  clearInterval(storeInterval);
 }
 
-document.getElementById("sectionsBar").addEventListener("mouseenter", stopCarousel);
-document.getElementById("sectionsBar").addEventListener("mouseleave", startCarousel);
+document.getElementById("storesCarousel")
+  .addEventListener("mouseenter", stopStoreCarousel);
 
-window.addEventListener("load", startCarousel);
+document.getElementById("storesCarousel")
+  .addEventListener("mouseleave", startStoreCarousel);
 
-
-
+window.addEventListener("load", startStoreCarousel);
 
 /* ================= ABRIR / CERRAR MODAL AUTH ================= */
 function abrirAuth(){
