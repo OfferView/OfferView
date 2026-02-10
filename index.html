@@ -958,7 +958,8 @@ const SECTIONS = {
 ["Shein","shein","https://shein.com"],
 ["Shopee","shopee","https://shopee.com"],
 ["MINISO","miniso","https://miniso.com"],
-["Ross","ross","https://rossstores.com"],
+
+  ,"ross","https://rossstores.com"],
 ["Marshalls","marshalls","https://marshalls.com"],
 ["Burlington","burlington","https://burlington.com"],
 ["IKEA","ikea","https://ikea.com"],
@@ -1052,6 +1053,43 @@ function renderStoreCards(){
 
     const stores = SECTIONS[section];
 
+    card.innerHTML = `
+  <h3>${section}</h3>
+
+  <div class="store-list">
+    ${stores.slice(0,5).map(store =>
+      `<span><a href="${store.url}" target="_blank">${store.name}</a></span>`
+    ).join("")}
+  </div>
+
+  <div class="extra-stores" style="display:none;">
+    ${stores.slice(5).map(store =>
+      `<span><a href="${store.url}" target="_blank">${store.name}</a></span>`
+    ).join("")}
+  </div>
+
+  ${stores.length > 5 
+    ? `<button class="expand-btn">+</button>` 
+    : ""}
+`;
+
+    const expandBtn = card.querySelector(".expand-btn");
+
+if(expandBtn){
+  expandBtn.addEventListener("click", function(){
+
+    const extra = card.querySelector(".extra-stores");
+
+    if(extra.style.display === "none"){
+      extra.style.display = "block";
+      expandBtn.textContent = "−";
+    }else{
+      extra.style.display = "none";
+      expandBtn.textContent = "+";
+    }
+
+  });
+}
     const card = document.createElement("div");
     card.className = "store-card";
 
