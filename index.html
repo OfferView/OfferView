@@ -1041,6 +1041,8 @@ const SECTION_COLORS = {
   "Hoteles y Vuelos Stores":"hoteles"
 };
 
+/* ================= RENDER STORE CARDS ================= */
+
 function renderStoreCards(){
 
   const carousel = document.getElementById("storesCarousel");
@@ -1049,57 +1051,86 @@ function renderStoreCards(){
   Object.keys(SECTIONS).forEach(section => {
 
     const stores = SECTIONS[section];
-    const colorClass = SECTION_COLORS[section];
-
-    const firstFive = stores.slice(0,5);
-    const remaining = stores.slice(5);
-
-    let visibleStores = "";
-    firstFive.forEach(([name])=>{
-      visibleStores += `<span>${name}</span>`;
-    });
-
-    let hiddenStores = "";
-    remaining.forEach(([name])=>{
-      hiddenStores += `<span>${name}</span>`;
-    });
 
     const card = document.createElement("div");
-    card.className = `store-card ${colorClass}`;
+    card.className = "store-card";
 
-    card.innerHTML = `
-      <h3>${section}</h3>
-      <div class="store-list">
-        ${visibleStores}
-        <div class="more-stores" style="display:none;">
-          ${hiddenStores}
-        </div>
-        <button class="expand-btn">+ Ver más</button>
-      </div>
-    `;
+    /* Asignar color por sección */
+    if(section === "Top Stores") card.classList.add("topstores");
+    if(section === "Gaming Stores") card.classList.add("gaming");
+    if(section === "Tecnología Stores") card.classList.add("tecnologia");
+    if(section === "Moda y Lencería Stores") card.classList.add("moda");
+    if(section === "Calzados Stores") card.classList.add("calzados");
+    if(section === "Hoteles y Vuelos Stores") card.classList.add("hoteles");
 
-    const btn = card.querySelector(".expand-btn");
-    const more = card.querySelector(".more-stores");
+    /* Título */
+    const title = document.createElement("h3");
+    title.textContent = section;
+    card.appendChild(title);
 
-    btn.onclick = ()=>{
-      if(more.style.display === "none"){
-        more.style.display = "block";
-        btn.textContent = "− Ver menos";
-      }else{
-        more.style.display = "none";
-        btn.textContent = "+ Ver más";
-      }
-    };
+    /* Lista visible (primeras 5) */
+    const list = document.createElement("div");
+    list.className = "store-list";
+
+    const firstFive = stores.slice(0,5);
+    const rest = stores.slice(5);
+
+    firstFive.forEach(store=>{
+      list.innerHTML += `
+        <a href="${store[2]}" target="_blank" class="store-link">
+          ${store[0]}
+        </a>
+      `;
+    });
+
+    card.appendChild(list);
+
+    /* Si hay más tiendas */
+    if(rest.length > 0){
+
+      const more = document.createElement("div");
+      more.className = "store-list";
+      more.style.display = "none";
+
+      rest.forEach(store=>{
+        more.innerHTML += `
+          <a href="${store[2]}" target="_blank" class="store-link">
+            ${store[0]}
+          </a>
+        `;
+      });
+
+      card.appendChild(more);
+
+      const btn = document.createElement("button");
+      btn.className = "expand-btn";
+      btn.textContent = "+";
+
+      btn.onclick = function(){
+
+        const isOpen = more.style.display === "block";
+
+        if(isOpen){
+          more.style.display = "none";
+          btn.textContent = "+";
+        }else{
+          more.style.display = "block";
+          btn.textContent = "−";
+        }
+
+      };
+
+      card.appendChild(btn);
+    }
 
     carousel.appendChild(card);
+
   });
 
-  // 🔥 DUPLICAR PARA CARRUSEL INFINITO
+  /* DUPLICAR CONTENIDO PARA CARRUSEL INFINITO */
   carousel.innerHTML += carousel.innerHTML;
 }
-
-renderStoreCards();
-
+  
 /* ========= AUTO CARRUSEL STORES ========= */
 
 let storeInterval;
@@ -1122,14 +1153,18 @@ function stopStoreCarousel(){
   clearInterval(storeInterval);
 }
 
-document.getElementById("storesCarousel")
-  .addEventListener("mouseenter", stopStoreCarousel);
+window.addEventListener("load", function(){
 
-document.getElementById("storesCarousel")
-  .addEventListener("mouseleave", startStoreCarousel);
+  renderStoreCards();
+  startStoreCarousel();
 
-window.addEventListener("load", startStoreCarousel);
+  const carousel = document.getElementById("storesCarousel");
 
+  carousel.addEventListener("mouseenter", stopStoreCarousel);
+  carousel.addEventListener("mouseleave", startStoreCarousel);
+
+});
+  
 /* ================= ABRIR / CERRAR MODAL AUTH ================= */
 function abrirAuth(){
 document.getElementById("authModal").style.display="flex";
