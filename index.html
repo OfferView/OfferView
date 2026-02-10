@@ -4,7 +4,7 @@
 <meta name="description" content="OfferView es una guía global e independiente de ofertas">      
 <meta name="keywords" content="ofertas, Amazon, Temu, Alibaba">      
 <meta name="author" content="OfferView">    <!-- ================= TIPOGRAFÍA OFICIAL OFFERVIEW ================= -->  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">  <style>      
-:root{  
+
   /* ===== FIX OVERFLOW GLOBAL DEFINITIVO ===== */
 *,
 *::before,
@@ -551,6 +551,91 @@ z-index:1000;
 .post-actions span:hover{
   color:#F59E0B;
 } 
+
+ /* ================= MODULO 4 ================= */
+
+.modulo4{
+  background:#ffffff;
+  padding:50px 20px;
+  text-align:center;
+  font-family:'Montserrat',sans-serif;
+}
+
+.footer-container{
+  max-width:700px;
+  margin:auto;
+}
+
+.footer-desc{
+  margin:15px 0;
+  color:#475569;
+}
+
+.contact a{
+  color:#F59E0B;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.footer-buttons{
+  margin-top:25px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+}
+
+.footer-buttons button{
+  background:#0F172A;
+  color:#fff;
+  border:none;
+  padding:10px 15px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.footer-buttons button:hover{
+  background:#1E293B;
+}
+
+.copyright{
+  margin-top:30px;
+  font-size:13px;
+  color:#64748B;
+}
+
+/* MODAL */
+
+.legal-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.legal-content{
+  background:#ffffff;
+  max-width:600px;
+  width:100%;
+  max-height:80vh;
+  overflow-y:auto;
+  padding:25px;
+  border-radius:15px;
+  position:relative;
+  text-align:left;
+}
+
+.close-btn{
+  position:absolute;
+  right:15px;
+  top:10px;
+  font-size:20px;
+  cursor:pointer;
+} 
   
 </style> 
 </head> 
@@ -640,11 +725,50 @@ z-index:1000;
 </div>
 
      <h2 class="section-title" id="offersTitle">Ofertas Para Ti</h2>      
-<div id="adCarousel"></div>   <div id="content"></div>  <footer>      
-<p>OfferView es una guía independiente. Algunos enlaces pueden ser de afiliación.</p>      
-<p>Contacto: <a href="mailto:soporte.offerviews01@gmail.com">soporte.offerviews01@gmail.com</a></p>      
-<p>© 2026 OfferView</p>      
-</footer>  <!-- MODAL -->  <div id="offerModal">      
+<div id="adCarousel"></div>   <div id="content"></div> 
+ 
+  <!-- ================= MODULO 4 ================= -->
+<section class="modulo4">
+
+  <div class="footer-container">
+
+    <h3>OfferView</h3>
+
+    <p class="footer-desc">
+      OfferView es una guía independiente. Algunos enlaces pueden ser de afiliación.
+    </p>
+
+    <p class="contact">
+      Contacto:
+      <a href="mailto:soporte.offerviews01@gmail.com">
+        soporte.offerviews01@gmail.com
+      </a>
+    </p>
+
+    <div class="footer-buttons">
+      <button onclick="openLegal('privacy')">Política de Privacidad</button>
+      <button onclick="openLegal('terms')">Términos y Condiciones</button>
+      <button onclick="openLegal('cookies')">Política de Cookies</button>
+      <button onclick="openLegal('affiliate')">Divulgación de Afiliados</button>
+    </div>
+
+    <p class="copyright">
+      © 2026 OfferView
+    </p>
+
+  </div>
+
+</section>
+
+<!-- MODAL LEGAL -->
+<div id="legalModal" class="legal-modal">
+  <div class="legal-content">
+    <span class="close-btn" onclick="closeLegal()">×</span>
+    <div id="legalText"></div>
+  </div>
+</div>
+  
+    <!-- MODAL -->  <div id="offerModal">      
   <form onsubmit="publicarImagen(event)">      
     <h3>Publicar Imagen de Oferta</h3>  <!-- Imagen -->      
 <input type="file" id="imagenOferta" accept="image/*" required>      <!-- Link opcional (web, Instagram, WhatsApp, etc.) -->      <input type="url" id="linkOferta" placeholder="Link de la oferta o Instagram (opcional)">      <!-- Acciones -->      <button type="submit">Publicar</button>
@@ -1282,7 +1406,53 @@ function logoutUser() {
     closeMenu();
   });
 }
-  
+
+ 
+
+function openLegal(type){
+
+  const modal = document.getElementById("legalModal");
+  const text = document.getElementById("legalText");
+
+  let content = "";
+
+  if(type === "privacy"){
+    content = `
+      <h2>Política de Privacidad</h2>
+      <p>En OfferView respetamos tu privacidad. No recopilamos información personal sin consentimiento.</p>
+    `;
+  }
+
+  if(type === "terms"){
+    content = `
+      <h2>Términos y Condiciones</h2>
+      <p>El uso de OfferView implica la aceptación de nuestros términos.</p>
+    `;
+  }
+
+  if(type === "cookies"){
+    content = `
+      <h2>Política de Cookies</h2>
+      <p>Utilizamos cookies para mejorar la experiencia del usuario.</p>
+    `;
+  }
+
+  if(type === "affiliate"){
+    content = `
+      <h2>Divulgación de Afiliados</h2>
+      <p>Algunos enlaces pueden generar comisiones sin costo adicional para el usuario.</p>
+    `;
+  }
+
+  text.innerHTML = content;
+  modal.style.display = "flex";
+}
+
+function closeLegal(){
+  document.getElementById("legalModal").style.display = "none";
+}
+
+
 </script>  
 </body>
 
