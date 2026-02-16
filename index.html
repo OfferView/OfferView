@@ -559,23 +559,34 @@ z-index:1000;
   color:#F59E0B;
 } 
 
- /* ================= MODULO 4 ================= */
+ /* ================= MODULO 4 COMPACTO ================= */
 
 .modulo4{
   background:#ffffff;
-  padding:50px 20px;
+  padding:25px 15px;   /* 🔥 antes 50px */
   text-align:center;
   font-family:'Montserrat',sans-serif;
 }
 
 .footer-container{
-  max-width:700px;
+  max-width:600px;
   margin:auto;
 }
 
+.footer-container h3{
+  font-size:18px;   /* 🔥 más pequeño */
+  margin-bottom:8px;
+}
+
 .footer-desc{
-  margin:15px 0;
+  margin:8px 0;
+  font-size:13px;
   color:#475569;
+}
+
+.contact{
+  font-size:13px;
+  margin:6px 0;
 }
 
 .contact a{
@@ -585,21 +596,21 @@ z-index:1000;
 }
 
 .footer-buttons{
-  margin-top:25px;
+  margin-top:12px;   /* 🔥 antes 25px */
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
-  gap:10px;
+  gap:6px;           /* 🔥 menos espacio entre botones */
 }
 
 .footer-buttons button{
   background:#0F172A;
   color:#fff;
   border:none;
-  padding:10px 15px;
-  border-radius:8px;
+  padding:6px 10px;  /* 🔥 antes 10px 15px */
+  border-radius:6px;
   cursor:pointer;
-  font-size:14px;
+  font-size:12px;    /* 🔥 antes 14px */
 }
 
 .footer-buttons button:hover{
@@ -607,11 +618,11 @@ z-index:1000;
 }
 
 .copyright{
-  margin-top:30px;
-  font-size:13px;
+  margin-top:12px;   /* 🔥 antes 30px */
+  font-size:12px;
   color:#64748B;
 }
-
+  
 /* MODAL */
 
 .legal-modal{
