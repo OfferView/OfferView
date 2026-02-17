@@ -799,30 +799,19 @@ z-index:1000;
 <div class="section-divider"></div>
     
 <!-- ================= MODULO 3 ================= -->
-
-    <section id="modulo3">
+<section id="modulo3">
 
   <h2 class="ofertas-title">Ofertas Para Ti</h2>
 
   <div id="offersContainer">
 
-    <!-- 🔥 AQUÍ VA LA TARJETA -->
-    <div class="offer-card">
-
-      <div class="offer-image-container">
-        <img src="IMAGEN-AQUI.jpg" class="offer-image">
-      </div>
-
-      <div class="offer-content">
-        <h3 class="offer-title">Título de la oferta</h3>
-        <p class="offer-store">Nombre de la tienda</p>
-      </div>
-
-    </div>
+    <!-- 🔥 CONTENEDOR REAL DE OFERTAS -->
+    <div id="adCarousel"></div>
 
   </div>
 
 </section>
+    
   <!-- ================= MODULO 4 ================= -->
 <section class="modulo4">
 
@@ -1548,6 +1537,55 @@ function closeLegal(){
   document.getElementById("legalModal").style.display = "none";
 }
 
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  // Cargar anuncios/ofertas
+  if(typeof loadAds === "function"){
+    loadAds();
+  }
+
+  // Iniciar carrusel si existe
+  if(document.getElementById("storesCarousel")){
+    startStoreCarousel();
+  }
+
+});
+
+
+let scrollAmount = 0;
+let autoScroll;
+let carousel = null;
+
+
+function startStoreCarousel(){
+
+  carousel = document.getElementById("storesCarousel");
+
+  if(!carousel) return;
+
+  autoScroll = setInterval(() => {
+
+    scrollAmount += 1;
+
+    carousel.scrollLeft = scrollAmount;
+
+    if(scrollAmount >= carousel.scrollWidth - carousel.clientWidth){
+      scrollAmount = 0;
+    }
+
+  }, 20);
+
+  carousel.addEventListener("mouseenter", stopStoreCarousel);
+  carousel.addEventListener("mouseleave", startStoreCarousel);
+
+}
+
+
+function stopStoreCarousel(){
+  clearInterval(autoScroll);
+}
 
 </script>  
 </body>
