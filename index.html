@@ -648,22 +648,16 @@ z-index:1000;
   font-size:20px;
   cursor:pointer;
 } 
+ 
+/* ================= DIVISOR ENTRE MODULOS ================= */
 
-  /* ================= DIVISOR ENTRE MODULOS ================= */
-
-  .section-divider{
-  width:100%;
-  height:2px;
-  background:linear-gradient(
-    to right,
-    transparent,
-    var(--mamey),
-    transparent
-  );
-  opacity:0.6;
-  margin:-30px 0 -30px 0;   /* 🔥 esta es la clave */
+.section-divider{
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.15);
+  margin: 30px 0;
 }
-
+  
   /* CONTENEDOR PRINCIPAL */
 .offer-card{
   background:#ffffff;
@@ -799,18 +793,9 @@ z-index:1000;
 <div class="section-divider"></div>
     
 <!-- ================= MODULO 3 ================= -->
-<section class="modulo3" id="modulo3">
-
-  <div class="ofertas-header">
-    <h2>Ofertas Para Ti</h2>
-  </div>
-
-  <div class="feed-container">
-
-    <div id="adCarousel"></div>
-
-  </div>
-
+    <section class="offers-section">
+  <h2 class="section-title">Ofertas Para Ti</h2>
+  <div id="offersContainer"></div>
 </section>
     
   <!-- ================= MODULO 4 ================= -->
