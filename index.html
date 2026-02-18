@@ -97,7 +97,13 @@ overflow-x:hidden;
 .search-box button{padding:12px 18px;border:none;background:var(--mamey);font-weight:bold;border-radius:0 10px 10px 0}
 
 
-.section-title{text-align:center;margin:55px 0 22px;font-size:26px;font-weight:700;color:var(--mamey)}
+ .section-title{
+  text-align:center;
+  margin:20px 0 15px 0;   /* antes 55px */
+  font-size:26px;
+  font-weight:700;
+  color:var(--mamey);
+}
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -404,10 +410,9 @@ z-index:1000;
 
 
   /* ================= MODULO 2 TARJETAS ================= */
-
 .modulo2{
   background:#0F172A;
-  padding:30px 0;
+  padding:10px 0;   /* antes 30px */
   overflow:hidden;
 }
 
@@ -650,12 +655,11 @@ z-index:1000;
 } 
  
 /* ================= DIVISOR ENTRE MODULOS ================= */
-
 .section-divider{
-  width: 100%;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.15);
-  margin: 30px 0;
+  width:100%;
+  height:1px;
+  background:rgba(255,255,255,0.12);
+  margin:0;
 }
   
   /* CONTENEDOR PRINCIPAL */
