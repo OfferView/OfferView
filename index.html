@@ -799,13 +799,14 @@ z-index:1000;
 <div class="section-divider"></div>
     
 <!-- ================= MODULO 3 ================= -->
-<section id="modulo3">
+<section class="modulo3" id="modulo3">
 
-  <h2 class="ofertas-title">Ofertas Para Ti</h2>
+  <div class="ofertas-header">
+    <h2>Ofertas Para Ti</h2>
+  </div>
 
-  <div id="offersContainer">
+  <div class="feed-container">
 
-    <!-- 🔥 CONTENEDOR REAL DE OFERTAS -->
     <div id="adCarousel"></div>
 
   </div>
@@ -1366,16 +1367,20 @@ function stopStoreCarousel(){
   clearInterval(storeInterval);
 }
 
-window.addEventListener("load", function(){
+  window.addEventListener("load", function(){
 
   renderStoreCards();
-  startStoreCarousel();
 
   const carousel = document.getElementById("storesCarousel");
 
+  startStoreCarousel();
+
   carousel.addEventListener("mouseenter", stopStoreCarousel);
-  carousel...
-  
+
+  carousel.addEventListener("mouseleave", startStoreCarousel);
+
+});
+
 /* ================= ABRIR / CERRAR MODAL AUTH ================= */
 function abrirAuth(){
 document.getElementById("authModal").style.display="flex";
