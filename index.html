@@ -97,13 +97,14 @@ overflow-x : oculto ;
 .search-box button{padding:12px 18px;border:none;background:var(--mamey);font-weight:bold;border-radius:0 10px 10px 0}
 
 
- .section-title{
+  .section-title{
   text-align:center;
-  margin:20px 0 15px 0;   /* antes 55px */
-  font-size:26px;
+  margin:8px 0;        /* 🔥 elimina el bloque grande */
+  font-size:22px;      /* tamaño profesional */
   font-weight:700;
   color:var(--mamey);
 }
+  
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -479,8 +480,9 @@ z-index:1000;
 .hoteles{ background:#EF4444; }
   
  /* ================= MODULO 3 ================= */
-.modulo3{
+  .modulo3{
   background:#0F172A;
+  padding:20px;
 }
   
 /* Título */
@@ -658,8 +660,9 @@ z-index:1000;
 .section-divider{
   width:100%;
   height:1px;
-  background:rgba(255,255,255,0.08);
-  margin:6px 0;
+  background:#FFFFFF;
+  opacity:0.08;   /* ultra fina */
+  margin:4px 0;   /* espacio mínimo */
 }
   
   /* CONTENEDOR PRINCIPAL */
@@ -805,11 +808,15 @@ z-index:1000;
 <div class="section-divider"></div>
     
 <!-- ================= MODULO 3 ================= -->
-   <section class="offers-section modulo3">
+   <div class="section-divider"></div>
+
+<section class="modulo3">
+
   <h2 class="section-title">Ofertas Para Ti</h2>
+
   <div id="offersContainer"></div>
+
 </section>
-    
   <!-- ================= MODULO 4 ================= -->
 <section class="modulo4">
 
