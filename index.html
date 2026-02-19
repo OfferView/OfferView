@@ -298,33 +298,43 @@ margin-top:12px;
   font-family:'Montserrat', sans-serif;
 }
 
-/* BUSCADOR */
+/* ================= BUSCADOR OFFERVIEW PROFESIONAL ================= */
+
 .search-box{
   margin:30px auto 0;
   width:95%;
-  max-width:520px;
+  max-width:650px;        /* 🔥 más ancho */
   display:flex;
   border:2px solid #FB923C;
-  border-radius:12px;
+  border-radius:14px;
   overflow:hidden;
   background:#ffffff;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);  /* 🔥 efecto premium */
 }
 
 .search-box input{
   flex:1;
-  padding:15px;
+  padding:20px 22px;      /* 🔥 más alto */
   border:none;
   outline:none;
-  font-size:15px;
+  font-size:18px;         /* 🔥 texto más grande */
+  font-family:'Inter', sans-serif;
 }
 
 .search-box button{
-  padding:15px 22px;
+  padding:20px 26px;      /* 🔥 botón proporcional */
   border:none;
   background:#FB923C;
   color:#ffffff;
   cursor:pointer;
   font-weight:600;
+  font-size:16px;
+  font-family:'Montserrat', sans-serif;
+}
+
+/* efecto focus profesional */
+.search-box:focus-within{
+  box-shadow:0 0 0 3px rgba(251,146,60,0.25);
 }
 
 /* EFECTO FOCUS PREMIUM */
