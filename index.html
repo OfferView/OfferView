@@ -479,92 +479,71 @@ z-index:1000;
 .calzados{ background:#10B981; }
 .hoteles{ background:#EF4444; }
   
- /* ================= MODULO 3 ================= */
- .modulo3{
-  background:#0F172A;
-  padding:10px 12px 20px 12px;
+ /* ================= MODULO 3 - TARJETAS UNIFORMES ================= */
+
+#modulo3{
+  padding:20px;
 }
-  
-/* Título */
-.ofertas-header{
+
+/* TARJETA */
+.offer-card{
+
   width:100%;
-  max-width:1100px;   /* MÁS ANCHO */
-  margin:0 auto 30px auto;
+  max-width:420px;
+
+  background:#111827;
+  border-radius:16px;
+
+  overflow:hidden;
+
+  margin:0 auto 20px auto;
+
+  box-shadow:0 4px 12px rgba(0,0,0,0.25);
+
 }
 
-.ofertas-header h2{
-  font-size:26px;
-  font-weight:700;
-  font-family:'Montserrat', sans-serif;
-  color:#F59E0B; /* color mamey visible */
-}
+/* CONTENEDOR IMAGEN */
+.offer-image-container{
 
-/* Contenedor del feed */
-.feed-container{
   width:100%;
-  max-width:1100px;   /* MÁS ANCHO */
-  margin:auto;
-  display:flex;
-  flex-direction:column;
-  gap:25px;
-}
 
-/* Tarjetas */
-.post-card{
-  background:#ffffff;
-  border-radius:20px;
-  padding:25px;
-  box-shadow:0 8px 25px rgba(0,0,0,0.06);
-  border:1px solid #E2E8F0;
-  width:100%;
-  transition:0.3s ease;
-}
+  aspect-ratio: 1 / 1;   /* 🔥 tamaño cuadrado profesional */
 
-.post-card:hover{
-  transform:translateY(-3px);
-}
+  background:#000;
 
-/* Imagen de oferta */
-.post-card img{
-  width:100%;
-  border-radius:14px;
-  margin-bottom:15px;
-}
-
-/* Header tienda */
-.post-header{
   display:flex;
   align-items:center;
-  gap:8px;
-  font-weight:600;
-  margin-bottom:12px;
-  font-family:'Montserrat', sans-serif;
+  justify-content:center;
+
 }
 
-.verified{
-  color:#3B82F6;
-  font-size:14px;
+/* IMAGEN */
+.offer-image{
+
+  width:100%;
+  height:100%;
+
+  object-fit:contain;  /* 🔥 NO corta la imagen */
+
+  background:#000;
+
 }
 
-/* Texto */
-.post-card p{
+/* CONTENIDO */
+.offer-content{
+  padding:12px;
+}
+
+.offer-title{
   font-size:16px;
-  color:#334155;
-  margin-bottom:15px;
+  font-weight:600;
+  color:#fff;
 }
 
-/* Acciones */
-.post-actions{
-  display:flex;
-  gap:25px;
-  font-size:20px;
-  color:#64748B;
-  cursor:pointer;
+.offer-store{
+  font-size:14px;
+  color:#9CA3AF;
 }
-
-.post-actions span:hover{
-  color:#F59E0B;
-} 
 
 /* ================= MODULO 4 ULTRA COMPACTO ================= */
 
