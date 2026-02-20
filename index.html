@@ -321,16 +321,21 @@ margin-top:12px;
   font-family:'Inter', sans-serif;
 }
 
-.search-box button{
-  padding:20px 26px;      /* 🔥 botón proporcional */
+ .search-box button{
+
+  width:60px;              /* tamaño fijo profesional */
   border:none;
   background:#FB923C;
-  color:#ffffff;
   cursor:pointer;
-  font-weight:600;
-  font-size:16px;
-  font-family:'Montserrat', sans-serif;
-}
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:0;               /* elimina el padding viejo */
+  font-size:22px;          /* tamaño de la lupa */
+
+} 
 
 /* efecto focus profesional */
 .search-box:focus-within{
@@ -729,7 +734,7 @@ z-index:1000;
   <!-- Buscador -->
   <div class="search-box">
     <input type="text" placeholder="Buscar ofertas...">
-    <button>Buscar</button>
+    <button>🔍</button>
   </div>
 
   </section>
