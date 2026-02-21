@@ -495,9 +495,61 @@ z-index:1000;
 .hoteles{ background:#EF4444; }
   
  /* ================= MODULO 3 - TARJETAS UNIFORMES ================= */
-
 #modulo3{
-  padding:20px;
+
+  position:relative;
+
+  padding:25px 15px;
+
+  background-image:url("offerviewfondojpg.jpg");
+
+  background-size:cover;
+
+  background-position:center;
+
+  background-repeat:no-repeat;
+
+}
+
+
+/* CAPA OSCURA PARA MEJOR VISIBILIDAD */
+#modulo3::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+
+  background:rgba(0,0,0,0.55);
+
+  z-index:0;
+
+}
+
+/* TARJETAS ENCIMA DEL FONDO */
+.offer-card{
+
+  position:relative;
+
+  z-index:1;
+
+  width:100%;
+  max-width:420px;
+
+  background:#111827;
+
+  border-radius:16px;
+
+  overflow:hidden;
+
+  margin:0 auto 20px auto;
+
+  box-shadow:0 4px 12px rgba(0,0,0,0.25);
+
 }
 
 /* TARJETA */
