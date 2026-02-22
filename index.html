@@ -253,10 +253,13 @@ margin-top:12px;
 
 /* ================= MODULO 1 ================= */
 .modulo1{
-  background:#0F172A !important;
+
+  background:#5FA3D7; /* 🔥 azul igual a tu imagen */
+
   width:100%;
+
   padding:20px 16px 40px 16px;
-  text-align:center;
+
 }
 
 /* TOPBAR */
@@ -276,6 +279,20 @@ margin-top:12px;
   flex-shrink:0;
 }
 
+ .logo-text{
+
+  font-size:32px;
+
+  font-weight:800;
+
+  font-family:'Montserrat', sans-serif;
+
+  color:#FB923C; /* naranja */
+
+  -webkit-text-stroke: 1.5px white; /* borde blanco */
+
+} 
+  
 /* BLOQUE MARCA */
 .brand-block{
   display:flex;
@@ -288,15 +305,22 @@ margin-top:12px;
   height:65px;
   width:auto;
 }
-  
-/* ESLOGAN */
-.slogan{
-  margin-top:25px;
-  color:#ffffff;
+
+ .slogan{
+
+  margin-top:20px;
+
+  color:white;
+
   font-size:18px;
-  font-weight:500;
+
+  font-weight:600;
+
   font-family:'Montserrat', sans-serif;
-}
+
+  -webkit-text-stroke: 0.5px #FB923C;
+
+} 
 
 /* ================= BUSCADOR OFFERVIEW PROFESIONAL ================= */
 
@@ -755,11 +779,11 @@ z-index:1000;
     <!-- Hamburguesa -->
     <div class="hamburger" onclick="toggleMenu()">☰</div>
 
-    <!-- Bloque Logo + Nombre -->
-    <div class="brand-block">
-      <img src="offerviewlogojpg17jpg.jpg" class="logo-img">
-    </div>
-
+    <!-- TEXTO OfferView -->
+<div class="logo-text">
+  OfferView
+</div>
+    
   </div>
 
   <!-- Eslogan -->
