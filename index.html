@@ -523,7 +523,10 @@ z-index:1000;
 
   padding:25px 15px;
 
-  background-image:url("offerviewfondojpg.jpg");
+
+  background:#ffffff; /* fondo blanco limpio */
+
+  padding:0;
 
   background-size:cover;
 
@@ -534,45 +537,34 @@ z-index:1000;
 }
 
 
-/* CAPA BLANCA CLARA (REEMPLAZA LA OSCURA) */
-#modulo3::before{
+/* ================= ESTILO FEED PROFESIONAL (TIPO X / INSTAGRAM) ================= */
 
-  content:"";
-
-  position:absolute;
-
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-
-  background:rgba(255,255,255,0.90); /* BLANCO CLARO */
-
-  z-index:0;
-
-}
-
-
-/* TARJETAS ENCIMA DEL FONDO */
 .offer-card{
 
   position:relative;
-
   z-index:1;
 
   width:100%;
-  max-width:420px;
+  max-width:500px;
 
-  background:#ffffff; /* CAMBIADO A BLANCO */
+  margin:0 auto;
 
-  border-radius:16px;
+  background:#ffffff;
 
-  overflow:hidden;
+  border-radius:0; /* sin bordes redondeados */
 
-  margin:0 auto 20px auto;
+  box-shadow:none; /* elimina efecto caja */
 
-  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  border-bottom:1px solid #E5E7EB; /* 🔥 divisor profesional */
 
+  padding-bottom:16px;
+  margin-bottom:16px;
+
+}
+
+/* eliminar línea en el último */
+.offer-card:last-child{
+  border-bottom:none;
 }
 
 /* CONTENEDOR IMAGEN */
