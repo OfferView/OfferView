@@ -707,16 +707,7 @@ z-index:1000;
   background:#FFFFFF;
   opacity:0.15;
   margin:0;
-}
-  
-  /* CONTENEDOR PRINCIPAL */
-.offer-card{
-  background:#ffffff;
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
-  margin-bottom:20px;
-}
+  }
 
 /* CONTENEDOR DE IMAGEN (TAMAÑO FIJO) */
 .offer-image-container{
@@ -756,6 +747,24 @@ z-index:1000;
  .modulo3 .section-title{
   color:#F59E0B;
 } 
+
+  /* DIVISOR PROFESIONAL ENTRE PUBLICACIONES */
+.offer-card{
+
+  width:100%;
+  max-width:500px;
+  margin:0 auto;
+
+  background:#ffffff;
+
+  border-bottom:1.5px solid #E5E7EB;
+
+}
+
+/* eliminar último divisor */
+.offer-card:last-child{
+  border-bottom:none;
+}
   
 </style> 
 </head> 
@@ -1116,7 +1125,7 @@ const adCarousel = document.getElementById("adCarousel");
     const postId = doc.id;      
   
     const card = document.createElement("div");      
-    card.className = "ad-card";      
+    card.className = "offer-card";      
   
     let img = document.createElement("img");      
     img.src = data.imagen;      
