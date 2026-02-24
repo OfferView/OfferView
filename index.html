@@ -81,15 +81,19 @@ altura de línea : 1.6 ;
 color : #444;
 }
 
-cuerpo {
-margen : 0 ;
-familia de fuentes : 'Inter' , sans-serif ;
-peso de fuente : 400 ;
-color : #1a1a1a;
-color de fondo :#f8f9fa;
-overflow-x : oculto ;
+  body{
+  margin:0;
+  font-family:'Inter', sans-serif;
+  font-weight:400;
+  color:#1a1a1a;
+  background-color:#f8f9fa;
+  overflow-x:hidden;
 }
 
+h1, h2, h3{
+  font-family:'Montserrat', sans-serif;
+  font-weight:700;
+}
 
 . cuadro de búsqueda { margen : 20 px  automático ; ancho máximo : 520 px }
 . formulario de cuadro de búsqueda  { display : flex }
@@ -547,8 +551,7 @@ z-index:1000;
   background-repeat:no-repeat;
 
 }
-
-/* DIVISOR OFICIAL OFFERVIEW COLOR NARANJA */
+  /* DIVISOR OFICIAL OFFERVIEW */
 .offer-card{
 
   width:100%;
@@ -557,10 +560,9 @@ z-index:1000;
 
   background:#ffffff;
 
-  border-bottom:2px solid #FB923C; /* 🔥 NARANJA OFFERVIEW */
+  border-bottom:2px solid #FB923C; /* NARANJA OFFERVIEW */
 
 }
-
 
 /* eliminar línea en el último */
 .offer-card:last-child{
@@ -765,6 +767,12 @@ z-index:1000;
 .offer-card:last-child{
   border-bottom:none;
 }
+  
+  /* FIX FINAL OFFERVIEW DIVISOR */
+#modulo3 .offer-card{
+  border-bottom:2px solid #FB923C !important;
+}
+  
   
 </style> 
 </head> 
