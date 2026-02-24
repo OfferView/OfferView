@@ -1127,20 +1127,30 @@ const adCarousel = document.getElementById("adCarousel");
     const card = document.createElement("div");      
     card.className = "offer-card";      
   
-    let img = document.createElement("img");      
-    img.src = data.imagen;      
-    img.loading = "lazy";      
-  
-    if(data.link){      
-      const link = document.createElement("a");      
-      link.href = data.link;      
-      link.target = "_blank";      
-      link.appendChild(img);      
-      card.appendChild(link);      
-    } else {      
-      card.appendChild(img);      
-    }      
-  
+  const imageContainer = document.createElement("div");
+imageContainer.className = "offer-image-container";
+
+const img = document.createElement("img");
+img.className = "offer-image";
+img.src = data.imagen;
+img.loading = "lazy";
+
+if(data.link){
+
+  const link = document.createElement("a");
+  link.href = data.link;
+  link.target = "_blank";
+
+  link.appendChild(img);
+  imageContainer.appendChild(link);
+
+}else{
+
+  imageContainer.appendChild(img);
+
+}
+
+card.appendChild(imageContainer);
     if(auth.currentUser && auth.currentUser.uid === data.uid){      
       const deleteBtn = document.createElement("button");      
       deleteBtn.className = "delete-btn";      
