@@ -269,15 +269,12 @@ margin-top:12px;
   background-repeat:no-repeat;
 
 }
-  
-/* TOPBAR */
-.topbar {
+  /* TOPBAR */
+.topbar{
 
-  display: flex;
-
-  align-items: center;
-
-  gap: 16px;
+  display:flex;
+  align-items:center;   /* centra verticalmente */
+  gap:10px;             /* espacio entre hamburguesa y logo */
 
 }
 
@@ -294,6 +291,14 @@ margin-top:12px;
 
 }
 
+ /* LOGO OFFERVIEW */
+.logo-img{
+
+  height:40px;
+  width:auto;
+
+} 
+  
 /* TEXTO OFFERVIEW PROFESIONAL */
 .logo-text {
 
@@ -810,18 +815,16 @@ z-index:1000;
     
 <!-- 🔵 MODULO 1 -->
 <section class="modulo1">
+<div class="topbar">
 
-  <div class="topbar">
-    
-    <!-- Hamburguesa -->
-    <div class="hamburger" onclick="toggleMenu()">☰</div>
+  <!-- botón hamburguesa -->
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
 
-    <!-- TEXTO OfferView -->
-<div class="logo-text">
-  OFFERVIEW
+  <!-- logo OfferView -->
+  <img src="offerviewlogojpg104.jpg" class="logo-img">
+
 </div>
-    
-  </div>
+" onclick="toggleMenu()">☰</div>
 
   <!-- Eslogan -->
   <div class="slogan">
