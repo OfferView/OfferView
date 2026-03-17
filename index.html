@@ -805,6 +805,44 @@ z-index:1000;
   border-bottom:2px solid #FB923C !important;
 }
   
+  #resultadosBusqueda{
+
+padding:30px 20px;
+background:#ffffff;
+
+}
+
+#listaResultados{
+
+display:flex;
+flex-direction:column;
+gap:12px;
+
+}
+
+.resultado{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+border-bottom:2px solid #FB923C;
+padding:12px 0;
+
+font-family:'Inter', sans-serif;
+
+}
+
+.resultado a{
+
+background:#FB923C;
+color:white;
+padding:8px 14px;
+border-radius:8px;
+text-decoration:none;
+font-weight:600;
+
+}
   
 </style> 
 </head> 
@@ -916,6 +954,16 @@ z-index:1000;
   <h2 class="section-title">Ofertas Para Ti</h2>
 
  <div id="adCarousel"></div>   
+
+</section>
+
+    <!-- 🔎 MODULO 3.2 RESULTADOS BUSQUEDA -->
+
+<section id="resultadosBusqueda">
+
+<h2>Ofertas encontradas</h2>
+
+<div id="listaResultados"></div>
 
 </section>
   <!-- ================= MODULO 4 ================= -->
@@ -1655,9 +1703,7 @@ function closeLegal(){
 }
 
 
-
-/* BUSCADOR INTELIGENTE OFFERVIEW */
-function buscarOfertas(){
+  function buscarOfertas(){
 
 let busqueda = document.getElementById("searchInput").value;
 
@@ -1666,89 +1712,49 @@ alert("Escribe algo para buscar");
 return;
 }
 
-busqueda = busqueda.toLowerCase();
 let query = encodeURIComponent(busqueda);
 
-/* PALABRAS CLAVE */
+let resultados = [
 
-let tecnologia = ["celular","iphone","laptop","computadora","tablet","pc","monitor","teclado","mouse"];
+{tienda:"Amazon", url:"https://www.amazon.com/s?k="+query},
 
-let moda = ["ropa","camisa","pantalon","zapatos","tenis","vestido","chaqueta","moda"];
+{tienda:"Temu", url:"https://www.temu.com/search_result.html?search_key="+query},
 
-let hogar = ["mueble","sofa","mesa","silla","cama","decoracion","cocina"];
+{tienda:"AliExpress", url:"https://www.aliexpress.com/wholesale?SearchText="+query},
 
-/* MARKETPLACES PRINCIPALES */
+{tienda:"eBay", url:"https://www.ebay.com/sch/i.html?_nkw="+query},
 
-let marketplaces = [
+{tienda:"Walmart", url:"https://www.walmart.com/search?q="+query},
 
-"https://www.amazon.com/s?k=" + query,
-"https://www.temu.com/search_result.html?search_key=" + query,
-"https://www.aliexpress.com/wholesale?SearchText=" + query,
-"https://www.ebay.com/sch/i.html?_nkw=" + query
+{tienda:"Shein", url:"https://us.shein.com/pdsearch/"+query}
 
 ];
 
-/* TECNOLOGIA */
+let contenedor = document.getElementById("listaResultados");
 
-let techStores = [
+contenedor.innerHTML="";
 
-"https://www.bestbuy.com/site/searchpage.jsp?st=" + query,
-"https://www.newegg.com/p/pl?d=" + query,
-"https://www.amazon.com/s?k=" + query,
-"https://www.ebay.com/sch/i.html?_nkw=" + query
+resultados.forEach(r=>{
 
-];
+let item = document.createElement("div");
 
-/* MODA */
+item.className="resultado";
 
-let fashionStores = [
+item.innerHTML=`
 
-"https://us.shein.com/pdsearch/" + query,
-"https://www.amazon.com/s?k=" + query,
-"https://www.aliexpress.com/wholesale?SearchText=" + query,
-"https://www.temu.com/search_result.html?search_key=" + query
+<span>${r.tienda}</span>
 
-];
+<a href="${r.url}" target="_blank">Ver oferta</a>
 
-/* HOGAR */
+`;
 
-let homeStores = [
+contenedor.appendChild(item);
 
-"https://www.ikea.com/us/en/search/?q=" + query,
-"https://www.walmart.com/search?q=" + query,
-"https://www.amazon.com/s?k=" + query
-
-];
-
-/* DETECTAR CATEGORIA */
-
-if(tecnologia.some(p => busqueda.includes(p))){
-
-techStores.forEach(url => window.open(url,"_blank"));
+});
 
 }
 
-else if(moda.some(p => busqueda.includes(p))){
 
-fashionStores.forEach(url => window.open(url,"_blank"));
-
-}
-
-else if(hogar.some(p => busqueda.includes(p))){
-
-homeStores.forEach(url => window.open(url,"_blank"));
-
-}
-
-else{
-
-marketplaces.forEach(url => window.open(url,"_blank"));
-
-}
-
-}
-
-  
 </script>  
 </body>
 
