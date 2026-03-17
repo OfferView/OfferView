@@ -820,9 +820,9 @@ z-index:1000;
 
 <!-- Buscador -->
 <div class="search-box">
-  <input type="text" placeholder="Buscar ofertas...">
+<input type="text" id="searchInput" placeholder="Buscar ofertas...">
 
-  <button class="search-btn">
+   <button class="search-btn" onclick="buscarOfertas()">
   <svg xmlns="http://www.w3.org/2000/svg"
        width="22"
        height="22"
@@ -1656,6 +1656,99 @@ function closeLegal(){
 
 
 
+/* BUSCADOR INTELIGENTE OFFERVIEW */
+function buscarOfertas(){
+
+let busqueda = document.getElementById("searchInput").value;
+
+if(busqueda === ""){
+alert("Escribe algo para buscar");
+return;
+}
+
+busqueda = busqueda.toLowerCase();
+let query = encodeURIComponent(busqueda);
+
+/* PALABRAS CLAVE */
+
+let tecnologia = ["celular","iphone","laptop","computadora","tablet","pc","monitor","teclado","mouse"];
+
+let moda = ["ropa","camisa","pantalon","zapatos","tenis","vestido","chaqueta","moda"];
+
+let hogar = ["mueble","sofa","mesa","silla","cama","decoracion","cocina"];
+
+/* MARKETPLACES PRINCIPALES */
+
+let marketplaces = [
+
+"https://www.amazon.com/s?k=" + query,
+"https://www.temu.com/search_result.html?search_key=" + query,
+"https://www.aliexpress.com/wholesale?SearchText=" + query,
+"https://www.ebay.com/sch/i.html?_nkw=" + query
+
+];
+
+/* TECNOLOGIA */
+
+let techStores = [
+
+"https://www.bestbuy.com/site/searchpage.jsp?st=" + query,
+"https://www.newegg.com/p/pl?d=" + query,
+"https://www.amazon.com/s?k=" + query,
+"https://www.ebay.com/sch/i.html?_nkw=" + query
+
+];
+
+/* MODA */
+
+let fashionStores = [
+
+"https://us.shein.com/pdsearch/" + query,
+"https://www.amazon.com/s?k=" + query,
+"https://www.aliexpress.com/wholesale?SearchText=" + query,
+"https://www.temu.com/search_result.html?search_key=" + query
+
+];
+
+/* HOGAR */
+
+let homeStores = [
+
+"https://www.ikea.com/us/en/search/?q=" + query,
+"https://www.walmart.com/search?q=" + query,
+"https://www.amazon.com/s?k=" + query
+
+];
+
+/* DETECTAR CATEGORIA */
+
+if(tecnologia.some(p => busqueda.includes(p))){
+
+techStores.forEach(url => window.open(url,"_blank"));
+
+}
+
+else if(moda.some(p => busqueda.includes(p))){
+
+fashionStores.forEach(url => window.open(url,"_blank"));
+
+}
+
+else if(hogar.some(p => busqueda.includes(p))){
+
+homeStores.forEach(url => window.open(url,"_blank"));
+
+}
+
+else{
+
+marketplaces.forEach(url => window.open(url,"_blank"));
+
+}
+
+}
+
+  
 </script>  
 </body>
 
