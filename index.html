@@ -65,12 +65,9 @@ transformar : translateY ( -2 px ) ;
 caja-sombra : 0  6 px  18 px  rgba ( 0 , 0 , 0 , 0.15 ) ;
 }
 
-/* Texto de tarjetas y productos */
-. tarjeta ,
-. tarjeta de producto ,
-. caja de tienda {
-familia de fuentes : 'Inter' , sans-serif ;
-peso de fuente : 500 ;
+ font-family:'Montserrat', sans-serif;
+font-weight:700;
+letter-spacing:-0.5px; 
 }
 
 /* Textos legales */
@@ -1706,7 +1703,7 @@ function closeLegal(){
 }
 
 
-  function buscarOfertas(){
+function buscarOfertas(){
 
 let busqueda = document.getElementById("searchInput").value;
 
@@ -1717,47 +1714,59 @@ return;
 
 let query = encodeURIComponent(busqueda);
 
-let resultados = [
+/* 🌐 GOOGLE */
+let google = "https://www.google.com/search?q=" + query;
 
-{tienda:"Amazon", url:"https://www.amazon.com/s?k="+query},
+/* 🛒 TIENDAS */
+let tiendas = [
 
-{tienda:"Temu", url:"https://www.temu.com/search_result.html?search_key="+query},
-
-{tienda:"AliExpress", url:"https://www.aliexpress.com/wholesale?SearchText="+query},
-
-{tienda:"eBay", url:"https://www.ebay.com/sch/i.html?_nkw="+query},
-
-{tienda:"Walmart", url:"https://www.walmart.com/search?q="+query},
-
-{tienda:"Shein", url:"https://us.shein.com/pdsearch/"+query}
+"https://www.amazon.com/s?k=" + query,
+"https://www.temu.com/search_result.html?search_key=" + query,
+"https://www.aliexpress.com/wholesale?SearchText=" + query,
+"https://www.ebay.com/sch/i.html?_nkw=" + query
 
 ];
 
+/* 🔥 MOSTRAR OPCIONES */
+
 let contenedor = document.getElementById("listaResultados");
 
-contenedor.innerHTML="";
+contenedor.innerHTML = "";
 
-resultados.forEach(r=>{
+/* GOOGLE */
+let googleDiv = document.createElement("div");
+googleDiv.className = "resultado-item";
 
-let item = document.createElement("div");
-
-item.className="resultado";
-
-item.innerHTML=`
-
-<span>${r.tienda}</span>
-
-<a href="${r.url}" target="_blank">Ver oferta</a>
-
+googleDiv.innerHTML = `
+<strong>🌐 Buscar en Google</strong><br>
+<a href="${google}" target="_blank">Ver resultados</a>
 `;
 
-contenedor.appendChild(item);
+contenedor.appendChild(googleDiv);
+
+/* TIENDAS */
+tiendas.forEach(url=>{
+
+let div = document.createElement("div");
+
+div.className = "resultado-item";
+
+div.innerHTML = `
+<strong>🛒 Ver ofertas en tienda</strong><br>
+<a href="${url}" target="_blank">Ir a la tienda</a>
+`;
+
+contenedor.appendChild(div);
 
 });
 
+/* 🔥 SCROLL */
+document.getElementById("resultadosBusqueda").scrollIntoView({
+behavior:"smooth"
+});
+
 }
-
-
+  
 </script>  
 </body>
 
