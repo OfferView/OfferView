@@ -389,9 +389,6 @@ margin-top:12px;
   cursor:pointer;
 }
 
-.search-box form{
-display:flex; /* 🔥 AGREGA ESTA LÍNEA */
-}
 
 .search-box input{
 flex:1;       /* 🔥 AGREGA ESTA LÍNEA */
@@ -848,44 +845,50 @@ font-weight:600;
 </head> 
   <body>  
 
- <!-- 🔵 MODULO 1 -->
+  <!-- 🔵 MODULO 1 -->
 <section class="modulo1">
 
 <div class="topbar">
-  <!-- botón hamburguesa -->
+
   <div class="hamburger" onclick="toggleMenu()">☰</div>
-</div>
 
-<!-- Buscador -->
-<div class="search-box">
-<input type="text" id="searchInput" placeholder="Buscar ofertas...">
-
-   <button class="search-btn" onclick="buscarOfertas()">
-  <svg xmlns="http://www.w3.org/2000/svg"
-       width="22"
-       height="22"
-       viewBox="0 0 24 24"
-       fill="none"
-       stroke="white"
-       stroke-width="2.5"
-       stroke-linecap="round"
-       stroke-linejoin="round">
-
-    <circle cx="11" cy="11" r="8"/>
-    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-
-  </svg>
-  </button>
 </div>
 
 <!-- Eslogan -->
 <div class="slogan">
-  Tu Guía a Las Mejores Ofertas
+Tu Guía a Las Mejores Ofertas
 </div>
 
-</section>
+<!-- 🔎 BUSCADOR OFFERVIEW -->
+<form class="search-box" onsubmit="buscarOfertas(); return false;">
 
-<div class="section-divider"></div>   
+  <input 
+  type="text" 
+  id="searchInput" 
+  placeholder="Buscar ofertas...">
+
+  <button type="submit" class="search-btn">
+
+    <svg xmlns="http://www.w3.org/2000/svg"
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="white"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round">
+
+      <circle cx="11" cy="11" r="8"/>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+
+    </svg>
+
+  </button>
+
+</form>
+
+</section>
 
 <!-- ================= MODULO 2 ================= -->
 <!-- 🟣 MODULO 2 - STORES EN TARJETAS -->
