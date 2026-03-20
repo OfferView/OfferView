@@ -1703,69 +1703,57 @@ function closeLegal(){
 }
 
 
-function buscarOfertas(){
+ function buscarOfertas(){
 
-let busqueda = document.getElementById("searchInput").value;
+let busqueda = document.getElementById("searchInput").value.toLowerCase();
 
 if(busqueda === ""){
 alert("Escribe algo para buscar");
 return;
 }
 
-let query = encodeURIComponent(busqueda);
-
-/* 🌐 GOOGLE */
-let google = "https://www.google.com/search?q=" + query;
-
-/* 🛒 TIENDAS */
-let tiendas = [
-
-"https://www.amazon.com/s?k=" + query,
-"https://www.temu.com/search_result.html?search_key=" + query,
-"https://www.aliexpress.com/wholesale?SearchText=" + query,
-"https://www.ebay.com/sch/i.html?_nkw=" + query
-
-];
-
-/* 🔥 MOSTRAR OPCIONES */
-
 let contenedor = document.getElementById("listaResultados");
-
 contenedor.innerHTML = "";
 
-/* GOOGLE */
-let googleDiv = document.createElement("div");
-googleDiv.className = "resultado-item";
+/* 🔥 TRAER DATOS DE FIREBASE */
+db.collection("ofertas").get().then((querySnapshot)=>{
 
-googleDiv.innerHTML = `
-<strong>🌐 Buscar en Google</strong><br>
-<a href="${google}" target="_blank">Ver resultados</a>
+querySnapshot.forEach((doc)=>{
+
+let data = doc.data();
+
+/* 🔍 FILTRO */
+let texto = (data.titulo + " " + data.descripcion).toLowerCase();
+
+if(texto.includes(busqueda)){
+
+let item = document.createElement("div");
+item.className = "resultado";
+
+item.innerHTML = `
+<img src="${data.imagen}" class="resultado-img">
+
+<div class="resultado-info">
+<h3>${data.titulo}</h3>
+<p>${data.descripcion}</p>
+<span class="usuario">${data.usuario}</span>
+</div>
 `;
 
-contenedor.appendChild(googleDiv);
+contenedor.appendChild(item);
 
-/* TIENDAS */
-tiendas.forEach(url=>{
-
-let div = document.createElement("div");
-
-div.className = "resultado-item";
-
-div.innerHTML = `
-<strong>🛒 Ver ofertas en tienda</strong><br>
-<a href="${url}" target="_blank">Ir a la tienda</a>
-`;
-
-contenedor.appendChild(div);
+}
 
 });
 
-/* 🔥 SCROLL */
+});
+
+/* 🔥 SCROLL AUTOMÁTICO */
 document.getElementById("resultadosBusqueda").scrollIntoView({
 behavior:"smooth"
 });
 
-}
+} 
   
 </script>  
 </body>
