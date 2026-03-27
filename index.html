@@ -838,6 +838,39 @@ font-weight:600;
 
 }
   
+.resultado{
+display:flex;
+gap:12px;
+background:#fff;
+padding:12px;
+border-radius:12px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+align-items:center;
+}
+
+.resultado-img{
+width:80px;
+height:80px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.resultado-info{
+flex:1;
+}
+
+.resultado-info h3{
+margin:0;
+font-size:16px;
+font-weight:600;
+}
+
+.resultado-info p{
+margin:4px 0;
+font-size:14px;
+color:#555;
+}
+
 </style> 
 </head> 
   <body>  
@@ -856,7 +889,7 @@ font-weight:600;
 Tu Guía a Las Mejores Ofertas
 </div>
 
-<!-- 🔎 BUSCADOR OFFERVIEW -->
+    <!-- 🔎 BUSCADOR OFFERVIEW -->
 <form class="search-box" onsubmit="buscarOfertas(); return false;">
 
   <input 
@@ -865,7 +898,6 @@ Tu Guía a Las Mejores Ofertas
   placeholder="Buscar ofertas...">
 
   <button type="submit" class="search-btn">
-
     <svg xmlns="http://www.w3.org/2000/svg"
     width="22"
     height="22"
@@ -880,13 +912,17 @@ Tu Guía a Las Mejores Ofertas
       <line x1="21" y1="21" x2="16.65" y2="16.65"/>
 
     </svg>
-
   </button>
 
 </form>
 
+  <h2>Resultados de ofertas</h2>
+
+  <div id="listaResultados"></div>
+
 </section>
 
+</section>
 <!-- ================= MODULO 2 ================= -->
 <!-- 🟣 MODULO 2 - STORES EN TARJETAS -->
 <section class="modulo2">
@@ -1702,8 +1738,7 @@ function closeLegal(){
   document.getElementById("legalModal").style.display = "none";
 }
 
-
- function buscarOfertas(){
+function buscarOfertas(){
 
 let busqueda = document.getElementById("searchInput").value.toLowerCase();
 
@@ -1715,15 +1750,15 @@ return;
 let contenedor = document.getElementById("listaResultados");
 contenedor.innerHTML = "";
 
-/* 🔥 TRAER DATOS DE FIREBASE */
-db.collection("ofertas").get().then((querySnapshot)=>{
+/* 🔥 BUSCAR EN PUBLICIDAD (LO QUE YA EXISTE) */
+db.collection("publicidad").get().then((querySnapshot)=>{
 
 querySnapshot.forEach((doc)=>{
 
 let data = doc.data();
 
-/* 🔍 FILTRO */
-let texto = (data.titulo + " " + data.descripcion).toLowerCase();
+/* 🔍 FILTRO (por link o texto básico) */
+let texto = (data.link || "").toLowerCase();
 
 if(texto.includes(busqueda)){
 
@@ -1734,9 +1769,8 @@ item.innerHTML = `
 <img src="${data.imagen}" class="resultado-img">
 
 <div class="resultado-info">
-<h3>${data.titulo}</h3>
-<p>${data.descripcion}</p>
-<span class="usuario">${data.usuario}</span>
+<h3>Oferta encontrada</h3>
+<p>${data.link || "Sin descripción"}</p>
 </div>
 `;
 
@@ -1748,12 +1782,13 @@ contenedor.appendChild(item);
 
 });
 
-/* 🔥 SCROLL AUTOMÁTICO */
+/* SCROLL */
 document.getElementById("resultadosBusqueda").scrollIntoView({
 behavior:"smooth"
 });
 
-} 
+}
+
   
 </script>  
 </body>
