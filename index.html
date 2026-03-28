@@ -993,15 +993,6 @@ Tu Guía a Las Mejores Ofertas
 
 </section>
 
-    <!-- 🔎 MODULO 3.2 RESULTADOS BUSQUEDA -->
-
-<section id="resultadosBusqueda">
-
-<h2>Ofertas encontradas</h2>
-
-<div id="listaResultados"></div>
-
-</section>
   <!-- ================= MODULO 4 ================= -->
 <section class="modulo4">
 
@@ -1738,57 +1729,87 @@ function closeLegal(){
   document.getElementById("legalModal").style.display = "none";
 }
 
+
 function buscarOfertas(){
 
-let busqueda = document.getElementById("searchInput").value.toLowerCase();
+let busqueda = document.getElementById("searchInput").value.toLowerCase().trim();
 
 if(busqueda === ""){
 alert("Escribe algo para buscar");
 return;
 }
 
-let contenedor = document.getElementById("listaResultados");
-contenedor.innerHTML = "";
+let query = encodeURIComponent(busqueda);
 
-/* 🔥 BUSCAR EN PUBLICIDAD (LO QUE YA EXISTE) */
-db.collection("publicidad").get().then((querySnapshot)=>{
+/* 🧠 IA SIMULADA (INTENCIÓN) */
 
-querySnapshot.forEach((doc)=>{
+let tecnologia = ["celular","iphone","laptop","pc","tablet","monitor","teclado","mouse"];
+let moda = ["ropa","camisa","pantalon","zapatos","tenis","vestido","moda"];
+let hogar = ["mueble","sofa","mesa","silla","cama","cocina","decoracion"];
+let viajes = ["hotel","vuelo","viaje","resort"];
 
-let data = doc.data();
+/* 🔥 TODAS LAS TIENDAS PRINCIPALES */
 
-/* 🔍 FILTRO (por link o texto básico) */
-let texto = (data.link || "").toLowerCase();
+let tiendas = [
+"https://www.amazon.com/s?k=" + query,
+"https://www.temu.com/search_result.html?search_key=" + query,
+"https://www.aliexpress.com/wholesale?SearchText=" + query,
+"https://www.ebay.com/sch/i.html?_nkw=" + query,
+"https://www.walmart.com/search?q=" + query,
+"https://www.target.com/s?searchTerm=" + query
+];
 
-if(texto.includes(busqueda)){
+/* 🎯 IA DECIDE MEJORES TIENDAS */
 
-let item = document.createElement("div");
-item.className = "resultado";
+if(tecnologia.some(p => busqueda.includes(p))){
 
-item.innerHTML = `
-<img src="${data.imagen}" class="resultado-img">
-
-<div class="resultado-info">
-<h3>Oferta encontrada</h3>
-<p>${data.link || "Sin descripción"}</p>
-</div>
-`;
-
-contenedor.appendChild(item);
-
-}
-
-});
-
-});
-
-/* SCROLL */
-document.getElementById("resultadosBusqueda").scrollIntoView({
-behavior:"smooth"
-});
+tiendas = [
+"https://www.bestbuy.com/site/searchpage.jsp?st=" + query,
+"https://www.newegg.com/p/pl?d=" + query,
+"https://www.amazon.com/s?k=" + query,
+"https://www.ebay.com/sch/i.html?_nkw=" + query
+];
 
 }
 
+else if(moda.some(p => busqueda.includes(p))){
+
+tiendas = [
+"https://us.shein.com/pdsearch/" + query,
+"https://www.temu.com/search_result.html?search_key=" + query,
+"https://www.aliexpress.com/wholesale?SearchText=" + query,
+"https://www.amazon.com/s?k=" + query
+];
+
+}
+
+else if(hogar.some(p => busqueda.includes(p))){
+
+tiendas = [
+"https://www.ikea.com/us/en/search/?q=" + query,
+"https://www.walmart.com/search?q=" + query,
+"https://www.amazon.com/s?k=" + query
+];
+
+}
+
+else if(viajes.some(p => busqueda.includes(p))){
+
+tiendas = [
+"https://www.booking.com/searchresults.html?ss=" + query,
+"https://www.expedia.com/Hotel-Search?destination=" + query,
+"https://www.airbnb.com/s/" + query
+];
+
+}
+
+/* 🚀 ABRIR RESULTADOS (ESTILO GOOGLE MULTI-BÚSQUEDA) */
+
+tiendas.forEach(url => {
+window.open(url, "_blank");
+});
+
+}
   
 </script>  
 </body>
