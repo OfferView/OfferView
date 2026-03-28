@@ -31,79 +31,89 @@ body{
   overflow-x:hidden;
 }
      
-  /* ================= TIPOGRAFÍA GLOBAL OFFERVIEW ================= */
+/* ================= TIPOGRAFÍA GLOBAL OFFERVIEW ================= */
 
-body{
-font-family: 'Inter', sans-serif;
-font-weight: 400;
-color: #1a1a1a;
-background-color: #f8f9fa;
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  color: #1a1a1a;
+  background-color: #f8f9fa;
+  overflow-x: hidden;
 }
 
 /* Títulos de secciones */
-h1 , h2 , h3 {
-familia de fuentes : 'Montserrat' , sans-serif ;
-peso de fuente : 700 ;
-espaciado entre letras : -0,5 px ;
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 /* Botones principales */
-botón ,
-. btn-mamey ,
-. btn-secundario {
-familia de fuentes : 'Montserrat' , sans-serif ;
-peso de fuente : 600 ;
-espaciado entre letras : 0,5 px ;
-radio del borde : 8 px ;
-transición : todos  los 0,3 s de  facilidad ;
+button,
+.btn-mamey,
+.btn-secundario {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 /* Efecto profesional hover */
-botón : pasar el cursor ,
-. btn-mamey : pasar el cursor {
-transformar : translateY ( -2 px ) ;
-caja-sombra : 0  6 px  18 px  rgba ( 0 , 0 , 0 , 0.15 ) ;
+button:hover,
+.btn-mamey:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
- font-family:'Montserrat', sans-serif;
-font-weight:700;
-letter-spacing:-0.5px; 
+/* Texto destacado */
+.texto-destacado {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 /* Textos legales */
-. contenido legal {
-familia de fuentes : 'Inter' , sans-serif ;
-tamaño de fuente : 14 px ;
-altura de línea : 1.6 ;
-color : #444;
+.contenido-legal {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444;
 }
 
-  body{
-  margin:0;
-  font-family:'Inter', sans-serif;
-  font-weight:400;
-  color:#1a1a1a;
-  background-color:#f8f9fa;
-  overflow-x:hidden;
+/* Cuadro de búsqueda */
+.cuadro-busqueda {
+  margin: 20px auto;
+  max-width: 520px;
 }
 
-h1, h2, h3{
-  font-family:'Montserrat', sans-serif;
-  font-weight:700;
+.formulario-cuadro-busqueda {
+  display: flex;
 }
 
-. cuadro de búsqueda { margen : 20 px  automático ; ancho máximo : 520 px }
-. formulario de cuadro de búsqueda  { display : flex }
-. cuadro de búsqueda  entrada { flex : 1 ; relleno : 12 px ; borde : ninguno ; radio del borde : 10 px  0  0  10 px }
-.search-box button{padding:12px 18px;border:none;background:var(--mamey);font-weight:bold;border-radius:0 10px 10px 0}
+.cuadro-busqueda input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 10px 0 0 10px;
+}
 
+.search-box button {
+  padding: 12px 18px;
+  border: none;
+  background: var(--mamey);
+  font-weight: bold;
+  border-radius: 0 10px 10px 0;
+}
 
-  .section-title{
-  text-align:center;
-  margin:8px 0;        /* 🔥 elimina el bloque grande */
-  font-size:22px;      /* tamaño profesional */
-  font-weight:700;
-  color:var(--mamey);
+/* Títulos de sección */
+.section-title {
+  text-align: center;
+  margin: 8px 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--mamey);
 }
   
 .grid{
@@ -112,6 +122,7 @@ grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
 width:100%;
 }
+  
 .card{background:#fff;border-radius:18px;padding:26px 15px;text-align:center;text-decoration:none;box-shadow:0 10px 25px rgba(0,0,0,.08);transition:.25s}
 .card:hover{transform:translateY(-6px)}
 .card span{font-size:17px;font-weight:700}
@@ -330,27 +341,28 @@ margin-top:12px;
 .search-box{
   margin:30px auto 0;
   width:95%;
-  max-width:650px;        /* 🔥 más ancho */
+  max-width:650px;
   display:flex;
   border:2px solid #FB923C;
   border-radius:14px;
   overflow:hidden;
   background:#ffffff;
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);  /* 🔥 efecto premium */
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
 
+/* INPUT LIMPIO (sin duplicaciones) */
 .search-box input{
   flex:1;
-  padding:20px 22px;      /* 🔥 más alto */
+  padding:20px 22px;
   border:none;
   outline:none;
-  font-size:18px;         /* 🔥 texto más grande */
+  font-size:18px;
   font-family:'Inter', sans-serif;
 }
 
- .search-box button{
-
-  width:60px;              /* tamaño fijo profesional */
+/* BOTÓN LIMPIO (sin conflictos) */
+.search-box button{
+  width:60px;
   border:none;
   background:#FB923C;
   cursor:pointer;
@@ -359,22 +371,21 @@ margin-top:12px;
   align-items:center;
   justify-content:center;
 
-  padding:0;               /* elimina el padding viejo */
-  font-size:22px;          /* tamaño de la lupa */
+  font-size:22px;
+}
 
-} 
-
-/* efecto focus profesional */
+/* EFECTO FOCUS CONTENEDOR */
 .search-box:focus-within{
   box-shadow:0 0 0 3px rgba(251,146,60,0.25);
 }
 
-/* EFECTO FOCUS PREMIUM */
+/* EFECTO FOCUS INPUT */
 .search-box input:focus{
   box-shadow:0 0 10px rgba(245,158,11,0.5);
 }
 
-/* Botón registrarse */
+/* ================= BOTÓN MAMEY ================= */
+
 .btn-mamey{
   background:#F59E0B;
   color:#fff;
@@ -386,28 +397,12 @@ margin-top:12px;
   cursor:pointer;
 }
 
+/* ================= MENÚ LATERAL ================= */
 
-.search-box input{
-flex:1;       /* 🔥 AGREGA ESTA LÍNEA */
-padding:12px;
-border-radius:10px 0 0 10px;
-border:1px solid #ddd;
-}
-
-.search-box button{
-background:#F59E0B;
-border:none;
-padding:12px 18px;
-border-radius:0 10px 10px 0;
-font-weight:bold;
-cursor:pointer;
-}
-
-/* MENÚ LATERAL */
 .side-menu{
   position:fixed;
   top:0;
-  left:-260px;   /* mismo valor que width */
+  left:-260px;
   width:260px;
   height:100%;
   background:#fff;
@@ -419,36 +414,40 @@ cursor:pointer;
   flex-direction:column;
 }
 
-.side-menu button{
-margin:8px 0;
-padding:10px;
-border:none;
-background:#f3f4f6;
-border-radius:8px;
-cursor:pointer;
-text-align:left;
-font-family:'Montserrat',sans-serif;
-font-weight:600;
+.side-menu.active{
+  left:0;
 }
 
-  .side-menu.active{
-left:0;
+.side-menu button{
+  margin:8px 0;
+  padding:10px;
+  border:none;
+  background:#f3f4f6;
+  border-radius:8px;
+  cursor:pointer;
+  text-align:left;
+  font-family:'Montserrat', sans-serif;
+  font-weight:600;
 }
-  
+
 .side-menu button:hover{
-background:#F59E0B;
-color:#fff;
+  background:#F59E0B;
+  color:#fff;
 }
+
+/* ================= OVERLAY ================= */
 
 .overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.4);
-display:none;
-z-index:1000;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+  display:none;
+  z-index:1000;
 }
 
-
+.overlay.active{
+  display:block;
+}
   /* ================= MODULO 2 TARJETAS ================= */
 .modulo2{
 
@@ -875,54 +874,51 @@ color:#555;
 </head> 
   <body>  
 
-  <!-- 🔵 MODULO 1 -->
+  /* 🔵 MODULO 1 */
 <section class="modulo1">
 
-<div class="topbar">
+  <div class="topbar">
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+  </div>
 
-  <div class="hamburger" onclick="toggleMenu()">☰</div>
+  <!-- LOGO -->
+  <h1 class="logo-text">OfferView</h1>
 
-</div>
+  <!-- 🔎 BUSCADOR OFFERVIEW -->
+  <form class="search-box" onsubmit="buscarOfertas(); return false;">
 
-<!-- Eslogan -->
-<div class="slogan">
-Tu Guía a Las Mejores Ofertas
-</div>
+    <input 
+      type="text" 
+      id="searchInput" 
+      placeholder="Buscar ofertas...">
 
-    <!-- 🔎 BUSCADOR OFFERVIEW -->
-<form class="search-box" onsubmit="buscarOfertas(); return false;">
+    <button type="submit" class="search-btn">
+      <svg xmlns="http://www.w3.org/2000/svg"
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="white"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round">
 
-  <input 
-  type="text" 
-  id="searchInput" 
-  placeholder="Buscar ofertas...">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
 
-  <button type="submit" class="search-btn">
-    <svg xmlns="http://www.w3.org/2000/svg"
-    width="22"
-    height="22"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="white"
-    stroke-width="2.5"
-    stroke-linecap="round"
-    stroke-linejoin="round">
+      </svg>
+    </button>
 
-      <circle cx="11" cy="11" r="8"/>
-      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+  </form>
 
-    </svg>
-  </button>
+  <!-- ESLOGAN (AHORA ABAJO) -->
+  <p class="slogan">Tú Guía a Las Mejores Ofertas</p>
 
-</form>
-
-  <h2>Resultados de ofertas</h2>
-
+  <!-- RESULTADOS (SIN TÍTULO) -->
   <div id="listaResultados"></div>
 
-</section>
+</section>  
 
-</section>
 <!-- ================= MODULO 2 ================= -->
 <!-- 🟣 MODULO 2 - STORES EN TARJETAS -->
 <section class="modulo2">
@@ -984,15 +980,14 @@ Tu Guía a Las Mejores Ofertas
 
 <!-- ================= MODULO 3 ================= -->
    <div class="section-divider"></div>
+<section id="modulo3">
 
-    <section id="modulo3">
+  <h2 id="offersTitle" class="section-title">Ofertas Para Ti</h2>
 
-  <h2 class="section-title">Ofertas Para Ti</h2>
-
- <div id="adCarousel"></div>   
+  <div id="adCarousel"></div>   
 
 </section>
-
+  
   <!-- ================= MODULO 4 ================= -->
 <section class="modulo4">
 
@@ -1146,13 +1141,19 @@ e.preventDefault();
 window.open("https://www.google.com/search?q="+encodeURIComponent(searchInput.value+" ofertas"),"_blank");
 }
 
-/* ================= IDIOMAS ================= */
+ /* ================= IDIOMAS ================= */
+
+// Asegúrate de que este elemento exista en tu HTML
+const offersTitle = document.getElementById("offersTitle");
+
 function setLanguage(l){
-offersTitle.textContent =
-l==="EN" ? "Deals For You" :
-l==="PT" ? "Ofertas Para Você" :
-"Ofertas Para Ti";
-}
+  if(!offersTitle) return; // evita errores si no existe
+
+  offersTitle.textContent =
+    l === "EN" ? "Deals For You" :
+    l === "PT" ? "Ofertas Para Você" :
+    "Ofertas Para Ti"; // español por defecto
+} 
 
 /* ================= MODAL ================= */
 function openOfferModal(){offerModal.style.display="flex";}
