@@ -1501,7 +1501,7 @@ window.addEventListener("load", function(){
   // 🔥 DUPLICAR CONTENIDO (loop infinito real)
   carousel.innerHTML += carousel.innerHTML;
 
-  let speed = 2;
+  let speed = 3; // 🔥 MÁS RÁPIDO
   let isPaused = false;
 
   function autoScroll(){
@@ -1509,7 +1509,7 @@ window.addEventListener("load", function(){
     if(!isPaused){
       carousel.scrollLeft += speed;
 
-      // 🔥 reset invisible
+      // 🔥 loop perfecto
       if(carousel.scrollLeft >= carousel.scrollWidth / 2){
         carousel.scrollLeft = 0;
       }
@@ -1520,24 +1520,33 @@ window.addEventListener("load", function(){
 
   autoScroll();
 
-  // 🧠 PAUSA INTELIGENTE (móvil + desktop)
+  // 🔥 PAUSA AL INTERACTUAR (touch + mouse)
   carousel.addEventListener("touchstart", () => isPaused = true);
   carousel.addEventListener("mouseenter", () => isPaused = true);
 
   carousel.addEventListener("touchend", () => isPaused = false);
   carousel.addEventListener("mouseleave", () => isPaused = false);
 
+  // 🔥 PAUSA CUANDO SE PRESIONA EL BOTÓN "+"
+  document.addEventListener("click", function(e){
+
+    if(e.target.classList.contains("expand-btn")){
+      
+      isPaused = true; // ⛔ detener carrusel
+
+      const card = e.target.closest(".store-card");
+      const hiddenList = card.querySelector(".store-list");
+
+      if(hiddenList){
+        hiddenList.style.display = "block"; // 👇 mostrar tiendas ocultas
+      }
+
+    }
+
+  });
+
 });
 
-
-/* ================= ABRIR / CERRAR MODAL AUTH ================= */
-function abrirAuth(){
-document.getElementById("authModal").style.display="flex";
-}
-
-function cerrarAuth(){
-document.getElementById("authModal").style.display="none";
-}
 
 /* ================= MIS PLATAFORMAS RR ================= */
 
