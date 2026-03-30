@@ -446,15 +446,15 @@ margin-top:12px;
 .overlay.active{
   display:block;
 }
-  /* ================= MODULO 2 TARJETAS ================= */
+ /* ================= MODULO 2 TARJETAS ================= */
 
-  .modulo2{
+.modulo2{
   background:#ffffff;
-  padding:0;
-  margin-top:-20px;   /* 🔥 sube el módulo 2 */
-  min-height:120vh;   /* 🔥 lo hace más alto y tapa el gris */
+  margin-top:-1px;   /* 🔥 elimina la línea gris */
+  padding-top:10px;  /* 🔥 pequeño respiro SIN crear hueco */
 }
-  
+
+/* CARRUSEL */
 .stores-carousel{
   display:flex;
   gap:20px;
@@ -469,60 +469,37 @@ margin-top:12px;
 
 /* TARJETA */
 .store-card{
-
   flex:0 0 300px;
-
   border-radius:20px;
-
   padding:20px;
-
-  color:#111827; /* 🔥 texto oscuro */
-
+  color:#111827;
   font-family:'Montserrat',sans-serif;
-
   transition:0.3s ease;
-
-  box-shadow:0 4px 12px rgba(0,0,0,0.08); /* sombra suave */
-
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
-  
+
 .store-card:hover{
   transform:translateY(-5px);
-  
 }
-  
+
 .store-card h3{
-
   margin:0 0 14px 0;
-
-  font-size:22px;            /* 🔥 más grande */
+  font-size:22px;
   font-weight:700;
-
-  font-family:'Montserrat', sans-serif;
-
-  text-align:center;         /* 🔥 centrado */
-
+  text-align:center;
   color:#111827;
-
 }
-  
+
 .store-card a{
-
   display:block;
-
-  text-align:center;     /* centra nombres */
-
-  font-size:18px;        /* más grandes */
+  text-align:center;
+  font-size:18px;
   font-weight:600;
-
   margin:6px 0;
-
   text-decoration:none;
-
   color:#1D4ED8;
-
 }
-  
+
 .store-list{
   font-family:'Inter',sans-serif;
   font-size:14px;
@@ -545,33 +522,14 @@ margin-top:12px;
 }
 
 /* COLORES POR SECCIÓN */
-
 .topstores{ background:#F59E0B; }
 .gaming{ background:#8B5CF6; }
 .tecnologia{ background:#0EA5E9; }
 .moda{ background:#EC4899; }
 .calzados{ background:#10B981; }
-.hoteles{ background:#EF4444; }
+.hoteles{ background:#EF4444; } 
   
- /* ================= MODULO 3 - TARJETAS UNIFORMES ================= */
-#modulo3{
 
-  position:relative;
-
-  padding:25px 15px;
-
-
-  background:#ffffff; /* fondo blanco limpio */
-
-  padding:0;
-
-  background-size:cover;
-
-  background-position:center;
-
-  background-repeat:no-repeat;
-
-}
   /* DIVISOR OFICIAL OFFERVIEW */
 .offer-card{
 
