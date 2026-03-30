@@ -1491,40 +1491,30 @@ function renderStoreCards(){
 
   
 /* ========= AUTO CARRUSEL STORES ========= */
-
-let storeInterval;
-const storeSpeed = 1;
-
-function startStoreCarousel(){
-  const carousel = document.getElementById("storesCarousel");
-
-  storeInterval = setInterval(()=>{
-    carousel.scrollLeft += storeSpeed;
-
-    if(carousel.scrollLeft >= carousel.scrollWidth / 2){
-      carousel.scrollLeft = 0;
-    }
-
-  },20);
-}
-
-function stopStoreCarousel(){
-  clearInterval(storeInterval);
-}
-
-  window.addEventListener("load", function(){
+  <script>
+window.addEventListener("load", function(){
 
   renderStoreCards();
 
   const carousel = document.getElementById("storesCarousel");
 
-  startStoreCarousel();
+  let speed = 2; // 🔥 puedes subir a 3 si lo quieres más rápido
 
-  carousel.addEventListener("mouseenter", stopStoreCarousel);
+  function autoScroll(){
+    carousel.scrollLeft += speed;
 
-  carousel.addEventListener("mouseleave", startStoreCarousel);
+    // 🔥 loop infinito limpio
+    if(carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth){
+      carousel.scrollLeft = 0;
+    }
+
+    requestAnimationFrame(autoScroll);
+  }
+
+  autoScroll();
 
 });
+</script>
 
 /* ================= ABRIR / CERRAR MODAL AUTH ================= */
 function abrirAuth(){
