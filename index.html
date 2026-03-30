@@ -1498,20 +1498,34 @@ window.addEventListener("load", function(){
 
   const carousel = document.getElementById("storesCarousel");
 
-  let speed = 2; // 🔥 puedes subir a 3 si lo quieres más rápido
+  // 🔥 DUPLICAR CONTENIDO (loop infinito real)
+  carousel.innerHTML += carousel.innerHTML;
+
+  let speed = 2;
+  let isPaused = false;
 
   function autoScroll(){
-    carousel.scrollLeft += speed;
 
-    // 🔥 loop infinito limpio
-    if(carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth){
-      carousel.scrollLeft = 0;
+    if(!isPaused){
+      carousel.scrollLeft += speed;
+
+      // 🔥 reset invisible
+      if(carousel.scrollLeft >= carousel.scrollWidth / 2){
+        carousel.scrollLeft = 0;
+      }
     }
 
     requestAnimationFrame(autoScroll);
   }
 
   autoScroll();
+
+  // 🧠 PAUSA INTELIGENTE (móvil + desktop)
+  carousel.addEventListener("touchstart", () => isPaused = true);
+  carousel.addEventListener("mouseenter", () => isPaused = true);
+
+  carousel.addEventListener("touchend", () => isPaused = false);
+  carousel.addEventListener("mouseleave", () => isPaused = false);
 
 });
 
