@@ -1452,15 +1452,14 @@ function renderStoreCards(){
       more.style.display = "none";
 
       rest.forEach(store=>{
-        more.innerHTML += `
-          <span>
-            <a href="${store[2]}" target="_blank">
-              ${store[0]}
-            </a>
-          </span>
-        `;
-      });
-
+  more.innerHTML += `
+    <span>
+      <a href="${store[2]}" target="_blank">
+        ${store[0]}
+      </a>
+    </span>
+  `;
+});
       card.appendChild(more);
 
       // ➕ Botón expandir
@@ -1503,7 +1502,7 @@ window.addEventListener("load", function(){
 
   let speed = 3; // 🔥 MÁS RÁPIDO
   let isPaused = false;
-
+  
   function autoScroll(){
 
     if(!isPaused){
@@ -1527,26 +1526,7 @@ window.addEventListener("load", function(){
   carousel.addEventListener("touchend", () => isPaused = false);
   carousel.addEventListener("mouseleave", () => isPaused = false);
 
-  // 🔥 PAUSA CUANDO SE PRESIONA EL BOTÓN "+"
-  document.addEventListener("click", function(e){
 
-    if(e.target.classList.contains("expand-btn")){
-      
-      isPaused = true; // ⛔ detener carrusel
-
-      const card = e.target.closest(".store-card");
-      const hiddenList = card.querySelectorAll(".store-list")[1];
-      
-
-      if(hiddenList){
-        hiddenList.style.display = "block"; // 👇 mostrar tiendas ocultas
-      }
-
-    }
-
-  });
-
-});
 
 
 /* ================= MIS PLATAFORMAS RR ================= */
