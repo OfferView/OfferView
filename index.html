@@ -9,7 +9,7 @@
 *,
 *::before,
 *::after{
-  box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 html{
@@ -1535,7 +1535,8 @@ window.addEventListener("load", function(){
       isPaused = true; // ⛔ detener carrusel
 
       const card = e.target.closest(".store-card");
-      const hiddenList = card.querySelector(".store-list");
+      const hiddenList = card.querySelectorAll(".store-list")[1];
+      
 
       if(hiddenList){
         hiddenList.style.display = "block"; // 👇 mostrar tiendas ocultas
