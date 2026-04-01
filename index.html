@@ -455,13 +455,42 @@ margin-top:12px;
 }
 
 /* CARRUSEL */
+/* 🔥 NUEVO DISEÑO MODULO 2 (3x2) */
+
 .stores-carousel{
   display:flex;
-  gap:12px;
   overflow-x:auto;
-  padding:10px 16px;
   scroll-snap-type:x mandatory;
+  gap:12px;
+  padding:10px;
 }
+
+.stores-page{
+  min-width:100%;
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  grid-template-rows:repeat(3, auto);
+  gap:12px;
+  scroll-snap-align:start;
+}
+
+/* 🔥 TARJETAS COMO TU IMAGEN */
+.store-chip{
+  background:#ffffff;
+  padding:18px;
+  border-radius:18px;
+  text-align:center;
+  font-weight:700;
+  font-size:16px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.store-chip:active{
+  transform:scale(0.95);
+}
+  
 
 .stores-carousel::-webkit-scrollbar{
   display:none;
@@ -490,17 +519,6 @@ margin-top:12px;
 
 .stores-carousel::-webkit-scrollbar{
   display:none;
-}
-
-/* TARJETA */
-.store-card{
-  flex:0 0 300px;
-  border-radius:20px;
-  padding:20px;
-  color:#111827;
-  font-family:'Montserrat',sans-serif;
-  transition:0.3s ease;
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
 
 .store-card:hover{
@@ -535,6 +553,10 @@ margin-top:12px;
   display:block;
 }
 
+  .stores-carousel{
+  scroll-behavior:smooth;
+}
+  
 .expand-btn{
   margin-top:12px;
   background:rgba(255,255,255,0.2);
@@ -668,15 +690,7 @@ margin-top:12px;
 .nintendo{ color:#E60012; background:#FFECEC; }
 
 /* ================= ESTILO GENERAL ================= */
-.store-chip{
-  padding:10px 16px;
-  border-radius:20px;
-  font-weight:600;
-  font-size:14px;
-  white-space:nowrap;
-  display:inline-block;
-}
-  
+
  #modulo3{
   background:#ffffff;   /* 🔥 blanco puro */
   padding:20px 0;       /* espacio arriba y abajo */
@@ -1494,22 +1508,33 @@ function renderStoreCards(){
   const carousel = document.getElementById("storesCarousel");
   carousel.innerHTML = "";
 
+  // 🔥 TODAS LAS TIENDAS DE TODOS LOS MÓDULOS
   const allStores = Object.values(SECTIONS).flat();
 
-  allStores.forEach(store => {
+  // 🔥 AGRUPAR DE 6 EN 6
+  for(let i = 0; i < allStores.length; i += 6){
 
-    const card = document.createElement("div");
-    card.className = "store-card " + store[1];
-    card.textContent = store[0];
+    const page = document.createElement("div");
+    page.className = "stores-page";
 
-    card.onclick = () => {
-      window.open(store[2], "_blank");
-    };
+    const group = allStores.slice(i, i + 6);
 
-    carousel.appendChild(card);
+    group.forEach(store => {
 
-  });
+      const item = document.createElement("div");
+      item.className = "store-chip " + store[1];
+      item.textContent = store[0];
 
+      item.onclick = () => {
+        window.open(store[2], "_blank");
+      };
+
+      page.appendChild(item);
+
+    });
+
+    carousel.appendChild(page);
+  }
 }
 
 /* ========= AUTO CARRUSEL STORES ========= */
