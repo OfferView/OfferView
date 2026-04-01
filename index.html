@@ -457,10 +457,35 @@ margin-top:12px;
 /* CARRUSEL */
 .stores-carousel{
   display:flex;
-  gap:20px;
+  gap:12px;
   overflow-x:auto;
-  padding:0 20px;
-  scroll-behavior:smooth;
+  padding:10px 16px;
+  scroll-snap-type:x mandatory;
+}
+
+.stores-carousel::-webkit-scrollbar{
+  display:none;
+}
+
+.store-card{
+  flex:0 0 auto;
+  min-width:140px;
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:16px;
+  background:#ffffff;
+  font-weight:600;
+  font-size:14px;
+  scroll-snap-align:start;
+  box-shadow:0 4px 10px rgba(0,0,0,0.05);
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.store-card:active{
+  transform:scale(0.95);
 }
 
 .stores-carousel::-webkit-scrollbar{
@@ -520,15 +545,6 @@ margin-top:12px;
   cursor:pointer;
   font-weight:600;
 }
-
-/* COLORES POR SECCIÓN */
-.topstores{ background:#F59E0B; }
-.gaming{ background:#8B5CF6; }
-.tecnologia{ background:#0EA5E9; }
-.moda{ background:#EC4899; }
-.calzados{ background:#10B981; }
-.hoteles{ background:#EF4444; } 
-  
 
   /* DIVISOR OFICIAL OFFERVIEW */
 .offer-card{
@@ -591,6 +607,75 @@ margin-top:12px;
   color:#9CA3AF;
 }
 
+  /* ================= MARKETPLACES ================= */
+.amazon{ color:#111; border:1px solid #FF9900; background:#FFF7E6; }
+.mercadolibre{ color:#333; border:1px solid #FFE600; background:#FFFDE7; }
+.temu{ color:#FF3B30; background:#FFF0F0; }
+.aliexpress{ color:#FF4747; background:#FFF1F1; }
+.alibaba{ color:#FF6A00; background:#FFF3E8; }
+.ebay{ color:#0064D2; background:#EAF3FF; }
+.rakuten{ color:#BF0000; background:#FFECEC; }
+.shopee{ color:#EE4D2D; background:#FFF1EC; }
+
+/* ================= RETAIL ================= */
+.walmart{ color:#0071CE; background:#EAF4FF; }
+.target{ color:#CC0000; background:#FFECEC; }
+.costco{ color:#E31837; background:#FFECEF; }
+.bestbuy{ color:#003B64; background:#EAF2F8; }
+.newegg{ color:#FF6A00; background:#FFF3E8; }
+.macys{ color:#E21A2C; background:#FFECEE; }
+
+/* ================= MODA ================= */
+.shein{ color:#000; background:#F5F5F5; }
+.zara{ color:#000; background:#F5F5F5; }
+.hm{ color:#E50010; background:#FFECEC; }
+.nike{ color:#111; background:#F5F5F5; }
+.adidas{ color:#000; background:#F5F5F5; }
+.puma{ color:#000; background:#F5F5F5; }
+.reebok{ color:#003A8F; background:#EAF0FF; }
+
+/* ================= CALZADOS ================= */
+.footlocker{ color:#000; background:#F5F5F5; }
+.jdsports{ color:#000; background:#F5F5F5; }
+.finishline{ color:#000; background:#F5F5F5; }
+
+/* ================= HOGAR / VARIEDADES ================= */
+.ikea{ color:#0058A3; background:#EAF4FF; }
+.miniso{ color:#E60012; background:#FFECEC; }
+.ross{ color:#003A8F; background:#EAF0FF; }
+.marshalls{ color:#C60C30; background:#FFECEE; }
+.burlington{ color:#C41230; background:#FFECEE; }
+
+/* ================= LATAM ================= */
+.coppel{ color:#FFD100; background:#FFFDE7; }
+.falabella{ color:#7AC142; background:#F1FBEA; }
+.linio{ color:#FF6A00; background:#FFF3E8; }
+.magalu{ color:#0086FF; background:#EAF4FF; }
+.americanas{ color:#E60014; background:#FFECEC; }
+
+/* ================= VIAJES ================= */
+.booking{ color:#003580; background:#EAF2FF; }
+.expedia{ color:#FFC72C; background:#FFF8E1; }
+.airbnb{ color:#FF385C; background:#FFF0F3; }
+.trip{ color:#00A1E9; background:#EAF8FF; }
+.despegar{ color:#FF6A00; background:#FFF3E8; }
+
+/* ================= GAMING ================= */
+.steam{ color:#171A21; background:#F0F2F5; }
+.epic{ color:#313131; background:#F5F5F5; }
+.playstation{ color:#003791; background:#EAF0FF; }
+.xbox{ color:#107C10; background:#EAF7EA; }
+.nintendo{ color:#E60012; background:#FFECEC; }
+
+/* ================= ESTILO GENERAL ================= */
+.store-chip{
+  padding:10px 16px;
+  border-radius:20px;
+  font-weight:600;
+  font-size:14px;
+  white-space:nowrap;
+  display:inline-block;
+}
   
  #modulo3{
   background:#ffffff;   /* 🔥 blanco puro */
@@ -1404,89 +1489,22 @@ const SECTION_COLORS = {
 };
 
 /* ================= RENDER STORE CARDS ================= */
-
 function renderStoreCards(){
 
   const carousel = document.getElementById("storesCarousel");
   carousel.innerHTML = "";
 
-  Object.keys(SECTIONS).forEach(section => {
+  const allStores = Object.values(SECTIONS).flat();
 
-    const stores = SECTIONS[section];
+  allStores.forEach(store => {
 
-    // 🔥 CREAR TARJETA PRIMERO
     const card = document.createElement("div");
-    card.className = "store-card";
+    card.className = "store-card " + store[1];
+    card.textContent = store[0];
 
-    // 🎨 Color por sección
-    if(section === "Top Stores") card.classList.add("topstores");
-    if(section === "Gaming Stores") card.classList.add("gaming");
-    if(section === "Tecnología Stores") card.classList.add("tecnologia");
-    if(section === "Moda y Lencería Stores") card.classList.add("moda");
-    if(section === "Calzados Stores") card.classList.add("calzados");
-    if(section === "Hoteles y Vuelos Stores") card.classList.add("hoteles");
-
-    // 🏷 Título
-    const title = document.createElement("h3");
-    title.textContent = section;
-    card.appendChild(title);
-
-    // 🔹 Primeras 5 tiendas
-    const list = document.createElement("div");
-    list.className = "store-list";
-
-    const firstFive = stores.slice(0,5);
-    const rest = stores.slice(5);
-
-    firstFive.forEach(store=>{
-      list.innerHTML += `
-        <span>
-          <a href="${store[2]}" target="_blank">
-            ${store[0]}
-          </a>
-        </span>
-      `;
-    });
-
-    card.appendChild(list);
-
-    // 🔥 Tiendas ocultas
-    if(rest.length > 0){
-
-      const more = document.createElement("div");
-      more.className = "store-list";
-      more.style.display = "none";
-
-      rest.forEach(store=>{
-  more.innerHTML += `
-    <span>
-      <a href="${store[2]}" target="_blank">
-        ${store[0]}
-      </a>
-    </span>
-  `;
-});
-      card.appendChild(more);
-
-      // ➕ Botón expandir
-      const btn = document.createElement("button");
-      btn.className = "expand-btn";
-      btn.textContent = "+";
-
-      btn.onclick = function(){
-
-        if(more.style.display === "none"){
-          more.style.display = "block";
-          btn.textContent = "−";
-        }else{
-          more.style.display = "none";
-          btn.textContent = "+";
-        }
-
-      };
-
-      card.appendChild(btn);
-    }
+    card.onclick = () => {
+      window.open(store[2], "_blank");
+    };
 
     carousel.appendChild(card);
 
@@ -1494,7 +1512,6 @@ function renderStoreCards(){
 
 }
 
-  
 /* ========= AUTO CARRUSEL STORES ========= */
 
 window.addEventListener("load", function(){
@@ -1503,33 +1520,7 @@ window.addEventListener("load", function(){
 
   const carousel = document.getElementById("storesCarousel");
 
-  // 🔥 DUPLICAR CONTENIDO (loop infinito real)
-  carousel.innerHTML += carousel.innerHTML;
-
-  let speed = 3;
-  let isPaused = false;
-
-  function autoScroll(){
-    if(!isPaused){
-      carousel.scrollLeft += speed;
-
-      // 🔥 LOOP PERFECTO
-      if(carousel.scrollLeft >= carousel.scrollWidth / 2){
-        carousel.scrollLeft = 0;
-      }
-    }
-    requestAnimationFrame(autoScroll);
-  }
-
-  autoScroll();
-
-  // 🔥 PAUSA AL INTERACTUAR
-  carousel.addEventListener("touchstart", () => isPaused = true);
-  carousel.addEventListener("mouseenter", () => isPaused = true);
-
-  carousel.addEventListener("touchend", () => isPaused = false);
-  carousel.addEventListener("mouseleave", () => isPaused = false);
-
+  
   // 🔥 BOTÓN + / - FUNCIONAL
   document.addEventListener("click", function(e){
 
