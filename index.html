@@ -1105,8 +1105,12 @@ color:#555;
   Guardar      
 </button>      <div id="listaPlataformas" style="margin-top:15px;text-align:left;"></div>      <button class="btn-secundario" onclick="cerrarFavModal()">      
   Cerrar      
-</button>      </div>      
-</div>  <!-- FIREBASE -->  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>  <script>      /* ================= FIREBASE ================= */
+</button>      </div>    
+
+  /* ================= FIREBASE ================= */
+</div>  <!-- FIREBASE -->  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script> 
+
+ <script>      
 firebase.initializeApp({
 apiKey:"AIzaSyDBb8-HKRm_HZNZhi55DF2XQ-VeWXWsgSE",
 authDomain:"offerview-a0837.firebaseapp.com",
@@ -1117,6 +1121,170 @@ appId:"1:949865345608:web:2f7cd6fc231b9151ffde7d"
 });
 const db=firebase.firestore();
 const auth = firebase.auth();
+
+// ================= CONFIG ADMIN =================
+const ADMIN_EMAIL = "soporte.offerviews01@gmail.com";
+
+// ================= DETECTAR ADMIN =================
+function esAdmin(user){
+  return user && user.email === ADMIN_EMAIL;
+}
+
+// ================= SUBIR OFERTA =================
+async function subirOferta(){
+
+  const user = auth.currentUser;
+
+  if(!user){
+    alert("Debes iniciar sesión");
+    return;
+  }
+
+  const imagen = document.getElementById("imagenInput").value;
+  const link = document.getElementById("linkInput").value;
+  const categoria = document.getElementById("categoriaInput")?.value || "general";
+  const tienda = document.getElementById("tiendaInput")?.value || "otros";
+
+  if(!imagen){
+    alert("Debes subir una imagen");
+    return;
+  }
+
+  try{
+
+    await db.collection("publicidad").add({
+      imagen: imagen,
+      link: link,
+      uid: user.uid,
+      email: user.email,
+      fecha: new Date(),
+      likes: 0,
+      categoria: categoria,
+      tienda: tienda
+    });
+
+    alert("Oferta publicada 🔥");
+
+    cargarOfertas();
+
+  }catch(e){
+    console.error(e);
+    alert("Error al publicar");
+  }
+}
+
+// ================= CARGAR OFERTAS =================
+async function cargarOfertas(){
+
+  const contenedor = document.getElementById("contenedorOfertas");
+  contenedor.innerHTML = "Cargando...";
+
+  const user = auth.currentUser;
+
+  try{
+
+    const snapshot = await db.collection("publicidad")
+      .orderBy("fecha","desc")
+      .get();
+
+    contenedor.innerHTML = "";
+
+    snapshot.forEach(doc => {
+
+      const data = doc.data();
+      const id = doc.id;
+
+      const puedeEliminar = user && (data.uid === user.uid || esAdmin(user));
+
+      const card = `
+        <div class="oferta-card">
+          <img src="${data.imagen}" class="oferta-img">
+
+          ${data.link ? `<a href="${data.link}" target="_blank">Ver oferta</a>` : ""}
+
+          <p>❤️ ${data.likes || 0}</p>
+
+          ${puedeEliminar ? `
+            <button onclick="eliminarOferta('${id}')">🗑️ Eliminar</button>
+          ` : ""}
+
+        </div>
+      `;
+
+      contenedor.innerHTML += card;
+
+    });
+
+  }catch(e){
+    console.error(e);
+    contenedor.innerHTML = "Error cargando ofertas";
+  }
+}
+
+// ================= ELIMINAR OFERTA =================
+async function eliminarOferta(id){
+
+  const user = auth.currentUser;
+
+  if(!user){
+    alert("No autorizado");
+    return;
+  }
+
+  if(!confirm("¿Eliminar esta oferta?")) return;
+
+  try{
+
+    const docRef = db.collection("publicidad").doc(id);
+    const docSnap = await docRef.get();
+
+    if(!docSnap.exists){
+      alert("No existe");
+      return;
+    }
+
+    const data = docSnap.data();
+
+    if(data.uid !== user.uid && !esAdmin(user)){
+      alert("No tienes permiso");
+      return;
+    }
+
+    await docRef.delete();
+
+    alert("Eliminado correctamente");
+
+    cargarOfertas();
+
+  }catch(e){
+    console.error(e);
+    alert("Error al eliminar");
+  }
+}
+
+// ================= LIKE (BASE) =================
+async function darLike(id){
+
+  const ref = db.collection("publicidad").doc(id);
+
+  try{
+    await ref.update({
+      likes: firebase.firestore.FieldValue.increment(1)
+    });
+
+    cargarOfertas();
+
+  }catch(e){
+    console.error(e);
+  }
+}
+
+// ================= AUTO REFRESH =================
+auth.onAuthStateChanged(user=>{
+  cargarOfertas();
+});
+
+</script>
 
  /* ================= CONTADOR DE VISITAS (INVISIBLE) ================= */
 
