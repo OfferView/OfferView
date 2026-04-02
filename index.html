@@ -1105,9 +1105,11 @@ color:#555;
   Guardar      
 </button>      <div id="listaPlataformas" style="margin-top:15px;text-align:left;"></div>      <button class="btn-secundario" onclick="cerrarFavModal()">      
   Cerrar      
-</button>      </div>    
+</button>     
+    
+  </div>
 
-  /* ================= FIREBASE ================= */
+<!-- ================= FIREBASE ================= -->
 </div>  <!-- FIREBASE -->  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script> 
 
  <script>      
@@ -1140,11 +1142,11 @@ async function subirOferta(){
     return;
   }
 
-  const imagen = document.getElementById("imagenInput").value;
-  const link = document.getElementById("linkInput").value;
-  const categoria = document.getElementById("categoriaInput")?.value || "general";
-  const tienda = document.getElementById("tiendaInput")?.value || "otros";
-
+const imagen = document.getElementById("imagenOferta").files[0];
+const link = document.getElementById("linkOferta").value;
+const categoria = document.getElementById("categoriaInput")?.value || "general";
+const tienda = document.getElementById("tiendaInput")?.value || "otros";
+ 
   if(!imagen){
     alert("Debes subir una imagen");
     return;
@@ -1176,7 +1178,7 @@ async function subirOferta(){
 // ================= CARGAR OFERTAS =================
 async function cargarOfertas(){
 
-  const contenedor = document.getElementById("contenedorOfertas");
+const contenedor = document.getElementById("adCarousel");
   contenedor.innerHTML = "Cargando...";
 
   const user = auth.currentUser;
@@ -1284,17 +1286,13 @@ auth.onAuthStateChanged(user=>{
   cargarOfertas();
 });
 
-</script>
-
- /* ================= CONTADOR DE VISITAS (INVISIBLE) ================= */
-
-// Actualiza el contador internamente en Firebase sin mostrarlo en la página
+   /* ================= CONTADOR DE VISITAS (INVISIBLE) ================= */
 db.collection("stats").doc("views").get().then(doc => {
     let v = doc.exists ? doc.data().count : 0;
     v++;
     db.collection("stats").doc("views").set({ count: v });
 });
-  
+
 /* Registro */
 function registrar(){
 const email = authEmail.value;
@@ -1479,9 +1477,10 @@ if(data.link){
 
 }
 
-card.appendChild(imageContainer);
-    if(auth.currentUser && auth.currentUser.uid === data.uid){      
-      const deleteBtn = document.createElement("button");      
+card.appendChild(imageContainer)
+   
+    if(auth.currentUser && (auth.currentUser.uid === data.uid || esAdmin(auth.currentUser))){
+    const deleteBtn = document.createElement("button");      
       deleteBtn.className = "delete-btn";      
       deleteBtn.innerHTML = "✖";      
       deleteBtn.onclick = () => eliminarAd(postId);      
@@ -1499,7 +1498,7 @@ card.appendChild(imageContainer);
     // Contador simple (sin crear múltiples listeners pesados)      
     db.collection("likes")      
       .where("postId","==",postId)      
-      .get()      
+      .onSnapshot()     
       .then(likesSnapshot=>{      
         const likesEl = document.getElementById("likes-"+postId);      
         if(likesEl){      
