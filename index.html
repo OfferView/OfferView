@@ -1073,41 +1073,64 @@ color:#555;
 
 </section>
 
-<!-- MODAL LEGAL -->
+    <!-- MODAL LEGAL -->
 <div id="legalModal" class="legal-modal">
   <div class="legal-content">
     <span class="close-btn" onclick="closeLegal()">×</span>
     <div id="legalText"></div>
   </div>
 </div>
-  
-    <!-- MODAL -->  <div id="offerModal">      
-  <form onsubmit="publicarImagen(event)">      
-    <h3>Publicar Imagen de Oferta</h3>  <!-- Imagen -->      
-<input type="file" id="imagenOferta" accept="image/*" required>      <!-- Link opcional (web, Instagram, WhatsApp, etc.) -->      <input type="url" id="linkOferta" placeholder="Link de la oferta o Instagram (opcional)">      <!-- Acciones -->      <button type="submit">Publicar</button>
-<button type="button" onclick="closeOfferModal()">Cancelar</button>
 
-  </form>      
-</div>    <!-- MODAL AUTH -->  <div id="authModal" class="modal-auth">      
-  <div class="modal-auth-box">      
-    <h3>Acceso OfferView</h3>  <input type="email" id="authEmail" placeholder="Correo electrónico" required>      
-<input type="password" id="authPass" placeholder="Contraseña" required>      <button type="button" class="btn-mamey" onclick="registrar()">      
-  Registrarse      
-</button>      <button type="button" class="btn-mamey" onclick="login()">      
-  Iniciar sesión      
-</button>      <button type="button" class="btn-secundario" onclick="cerrarAuth()">      
-  Cancelar      
-</button>      </div>      
-</div>    <!-- MODAL MIS PLATAFORMAS -->  <div id="favModal" class="modal-auth">      
-  <div class="modal-auth-box">      
-    <h3>Mis Plataformas & Tiendas</h3>  <input type="text" id="nombrePlataforma" placeholder="Nombre (Ej: Amazon)">      
-<input type="url" id="linkPlataforma" placeholder="Link de tu cuenta">      <button class="btn-mamey" onclick="guardarPlataforma()">      
-  Guardar      
-</button>      <div id="listaPlataformas" style="margin-top:15px;text-align:left;"></div>      <button class="btn-secundario" onclick="cerrarFavModal()">      
-  Cerrar      
-</button>     
+
+<!-- MODAL PUBLICAR OFERTA -->
+<div id="offerModal">
+  <form onsubmit="publicarImagen(event)">
+    <h3>Publicar Imagen de Oferta</h3>
+
+    <!-- Imagen -->
+    <input type="file" id="imagenOferta" accept="image/*" required>
+
+    <!-- Link opcional -->
+    <input type="url" id="linkOferta" placeholder="Link de la oferta o Instagram (opcional)">
+
+    <!-- Acciones -->
+    <button type="submit">Publicar</button>
+    <button type="button" onclick="closeOfferModal()">Cancelar</button>
+
+  </form>
+</div>
+
+
+<!-- MODAL AUTH -->
+<div id="authModal" class="modal-auth">
+  <div class="modal-auth-box">
     
+    <h3>Acceso OfferView</h3>
+
+    <!-- USERNAME -->
+    <input type="text" id="authUser" placeholder="Nombre de usuario" required>
+
+    <!-- EMAIL -->
+    <input type="email" id="authEmail" placeholder="Correo electrónico" required>
+
+    <!-- PASSWORD -->
+    <input type="password" id="authPass" placeholder="Contraseña" required>
+
+    <!-- BOTONES -->
+    <button type="button" class="btn-mamey" onclick="registrar()">
+      Registrarse
+    </button>
+
+    <button type="button" class="btn-mamey" onclick="login()">
+      Iniciar sesión
+    </button>
+
+    <button type="button" class="btn-secundario" onclick="cerrarAuth()">
+      Cancelar
+    </button>
+
   </div>
+</div>
 
 <!-- ================= FIREBASE ================= -->
 </div>  <!-- FIREBASE -->  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script> 
@@ -1124,55 +1147,20 @@ appId:"1:949865345608:web:2f7cd6fc231b9151ffde7d"
 const db=firebase.firestore();
 const auth = firebase.auth();
 
+  function abrirAuth(){
+  document.getElementById("authModal").style.display = "flex";
+}
+
+function cerrarAuth(){
+  document.getElementById("authModal").style.display = "none";
+} 
+
 // ================= CONFIG ADMIN =================
 const ADMIN_EMAIL = "soporte.offerviews01@gmail.com";
 
 // ================= DETECTAR ADMIN =================
 function esAdmin(user){
   return user && user.email === ADMIN_EMAIL;
-}
-
-// ================= SUBIR OFERTA =================
-async function subirOferta(){
-
-  const user = auth.currentUser;
-
-  if(!user){
-    alert("Debes iniciar sesión");
-    return;
-  }
-
-const imagen = document.getElementById("imagenOferta").files[0];
-const link = document.getElementById("linkOferta").value;
-const categoria = document.getElementById("categoriaInput")?.value || "general";
-const tienda = document.getElementById("tiendaInput")?.value || "otros";
- 
-  if(!imagen){
-    alert("Debes subir una imagen");
-    return;
-  }
-
-  try{
-
-    await db.collection("publicidad").add({
-      imagen: imagen,
-      link: link,
-      uid: user.uid,
-      email: user.email,
-      fecha: new Date(),
-      likes: 0,
-      categoria: categoria,
-      tienda: tienda
-    });
-
-    alert("Oferta publicada 🔥");
-
-    cargarOfertas();
-
-  }catch(e){
-    console.error(e);
-    alert("Error al publicar");
-  }
 }
 
 // ================= CARGAR OFERTAS =================
@@ -1495,23 +1483,16 @@ card.appendChild(imageContainer)
     card.appendChild(likeBox);      
     adCarousel.appendChild(card);      
   
-    // Contador simple (sin crear múltiples listeners pesados)      
-    db.collection("likes")      
-      .where("postId","==",postId)      
-      .onSnapshot()     
-      .then(likesSnapshot=>{      
-        const likesEl = document.getElementById("likes-"+postId);      
-        if(likesEl){      
-          likesEl.textContent = likesSnapshot.size;      
-        }      
-      });      
-  
-  });      
-  
+    // Contador simple (sin crear múltiples listeners pesados) 
+db.collection("likes")
+.where("postId","==",postId)
+.onSnapshot(likesSnapshot => {
+  const likesEl = document.getElementById("likes-"+postId);
+  if(likesEl){
+    likesEl.textContent = likesSnapshot.size;
+  }
 });
-
-}
-
+    
 loadAds();
 
 /* ================= ELIMINAR PUBLICIDAD ================= */
