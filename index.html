@@ -1427,74 +1427,75 @@ return false;
 /* ================= CARRUSEL RR OPTIMIZADO ================= */
 function loadAds(){
 
-db.collection("publicidad")
-.orderBy("fecha","desc")
-.onSnapshot(snapshot => {
+  db.collection("publicidad")
+  .orderBy("fecha","desc")
+  .onSnapshot(snapshot => {
 
-const adCarousel = document.getElementById("adCarousel");      
-  adCarousel.innerHTML = "";      
-  
-  snapshot.forEach(doc => {      
-  
-    const data = doc.data();      
-    const postId = doc.id;      
-  
-    const card = document.createElement("div");      
-    card.className = "offer-card";      
-  
-  const imageContainer = document.createElement("div");
-imageContainer.className = "offer-image-container";
+    const adCarousel = document.getElementById("adCarousel");
+    adCarousel.innerHTML = "";
 
-const img = document.createElement("img");
-img.className = "offer-image";
-img.src = data.imagen;
-img.loading = "lazy";
+    snapshot.forEach(doc => {
 
-if(data.link){
+      const data = doc.data();
+      const postId = doc.id;
 
-  const link = document.createElement("a");
-  link.href = data.link;
-  link.target = "_blank";
+      const card = document.createElement("div");
+      card.className = "offer-card";
 
-  link.appendChild(img);
-  imageContainer.appendChild(link);
+      const imageContainer = document.createElement("div");
+      imageContainer.className = "offer-image-container";
 
-}else{
+      const img = document.createElement("img");
+      img.className = "offer-image";
+      img.src = data.imagen;
+      img.loading = "lazy";
 
-  imageContainer.appendChild(img);
+      if(data.link){
+        const link = document.createElement("a");
+        link.href = data.link;
+        link.target = "_blank";
+        link.appendChild(img);
+        imageContainer.appendChild(link);
+      }else{
+        imageContainer.appendChild(img);
+      }
+
+      card.appendChild(imageContainer);
+
+      // DELETE
+      if(auth.currentUser && (auth.currentUser.uid === data.uid || esAdmin(auth.currentUser))){
+        const deleteBtn = document.createElement("button");
+        deleteBtn.className = "delete-btn";
+        deleteBtn.innerHTML = "✖";
+        deleteBtn.onclick = () => eliminarAd(postId);
+        card.appendChild(deleteBtn);
+      }
+
+      // LIKE
+      const likeBox = document.createElement("div");
+      likeBox.className = "like-box";
+      likeBox.innerHTML = `❤️ <span id="likes-${postId}">0</span>`;
+      likeBox.onclick = () => toggleLike(postId);
+
+      card.appendChild(likeBox);
+      adCarousel.appendChild(card);
+
+      // contador likes
+      db.collection("likes")
+      .where("postId","==",postId)
+      .onSnapshot(likesSnapshot => {
+        const likesEl = document.getElementById("likes-"+postId);
+        if(likesEl){
+          likesEl.textContent = likesSnapshot.size;
+        }
+      });
+
+    });
+
+  });
 
 }
-
-card.appendChild(imageContainer)
-   
-    if(auth.currentUser && (auth.currentUser.uid === data.uid || esAdmin(auth.currentUser))){
-    const deleteBtn = document.createElement("button");      
-      deleteBtn.className = "delete-btn";      
-      deleteBtn.innerHTML = "✖";      
-      deleteBtn.onclick = () => eliminarAd(postId);      
-      card.appendChild(deleteBtn);      
-    }      
-  
-    const likeBox = document.createElement("div");      
-    likeBox.className = "like-box";      
-    likeBox.innerHTML = `❤️ <span id="likes-${postId}">0</span>`;      
-    likeBox.onclick = () => toggleLike(postId);      
-  
-    card.appendChild(likeBox);      
-    adCarousel.appendChild(card);      
-  
-    // Contador simple (sin crear múltiples listeners pesados) 
-db.collection("likes")
-.where("postId","==",postId)
-.onSnapshot(likesSnapshot => {
-  const likesEl = document.getElementById("likes-"+postId);
-  if(likesEl){
-    likesEl.textContent = likesSnapshot.size;
-  }
-});
     
-loadAds();
-
 /* ================= ELIMINAR PUBLICIDAD ================= */
 function eliminarAd(id){
 if(!confirm("¿Eliminar esta publicación?")) return;
@@ -1720,79 +1721,6 @@ window.addEventListener("load", function(){
   });
 
 }); // ✅ 🔥 ESTE ERA EL ERROR QUE FALTABA
-
-
-/* ================= MIS PLATAFORMAS RR ================= */
-
-function abrirFavModal(){
-document.getElementById("favModal").style.display="flex";
-cargarPlataformas();
-}
-
-function cerrarFavModal(){
-document.getElementById("favModal").style.display="none";
-}
-
-function guardarPlataforma(){
-
-if(!auth.currentUser){
-alert("Debes iniciar sesión");
-return;
-}
-
-const nombre = document.getElementById("nombrePlataforma").value;
-const link = document.getElementById("linkPlataforma").value;
-
-if(!nombre || !link){
-alert("Completa todos los campos");
-return;
-}
-
-db.collection("plataformas").add({
-uid: auth.currentUser.uid,
-nombre: nombre,
-link: link,
-fecha: firebase.firestore.FieldValue.serverTimestamp()
-})
-.then(()=>{
-document.getElementById("nombrePlataforma").value="";
-document.getElementById("linkPlataforma").value="";
-cargarPlataformas();
-});
-}
-
-function cargarPlataformas(){
-
-if(!auth.currentUser) return;
-
-const lista = document.getElementById("listaPlataformas");
-lista.innerHTML="";
-
-db.collection("plataformas")
-.where("uid","==",auth.currentUser.uid)
-.orderBy("fecha","desc")
-.onSnapshot(snapshot=>{
-
-lista.innerHTML="";      
-  
-  snapshot.forEach(doc=>{      
-    const data = doc.data();      
-  
-    lista.innerHTML += `      
-      <div style="margin-bottom:8px;">      
-        <a href="${data.link}" target="_blank">${data.nombre}</a>      
-        <button onclick="eliminarPlataforma('${doc.id}')" style="margin-left:8px;">✖</button>      
-      </div>      
-    `;      
-  });      
-  
-});
-
-}
-
-function eliminarPlataforma(id){
-db.collection("plataformas").doc(id).delete();
-}
 
 /* ================= MENU HAMBURGUESA ================= */
 
