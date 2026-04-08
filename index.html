@@ -809,8 +809,8 @@ margin-top:12px;
 .offer-image{
   width:100%;
   height:100%;
-  object-fit:cover; /* 🔥 clave principal */
-  object-position:center;
+  object-fit:contain; /* 🔥 NO recorta */
+  image-rendering: auto;
 }
 
 /* CONTENIDO */
@@ -1066,7 +1066,7 @@ color:#555;
     </div>
 
     <p class="copyright">
-      © 2026 KeBusca
+      © 2026 KeBusKa
     </p>
 
   </div>
@@ -1447,10 +1447,21 @@ function loadAds(){
       imageContainer.className = "offer-image-container";
 
       const img = document.createElement("img");
-      img.className = "offer-image";
-      img.src = data.imagen;
-      img.loading = "lazy";
+img.className = "offer-image";
 
+// 🔥 Optimización automática desde Cloudinary
+img.src = data.imagen.replace(
+  "/upload/",
+  "/upload/f_auto,q_auto,w_800/"
+);
+
+// 🚀 Mejora de rendimiento
+img.loading = "lazy";
+img.decoding = "async";
+
+// 🧠 Mejora visual extra
+img.style.imageRendering = "auto";
+     
       if(data.link){
         const link = document.createElement("a");
         link.href = data.link;
