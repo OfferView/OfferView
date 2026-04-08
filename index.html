@@ -1,9 +1,9 @@
 <!DOCTYPE html>  <html lang="es">      <head>      
 <meta charset="UTF-8">      
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>OfferView – Tu Guía a las Mejores Ofertas</title>      
-<meta name="description" content="OfferView es una guía global e independiente de ofertas">      
+<meta name="viewport" content="width=device-width, initial-scale=1.0">   <title>KeBusKa – Tu Guía a las Mejores Ofertas</title>    
+<meta name="description" content="KeBusKa es una guía global e independiente de ofertas para encontrar los mejores precios en internet">        
 <meta name="keywords" content="ofertas, Amazon, Temu, Alibaba">      
-<meta name="author" content="OfferView">    <!-- ================= TIPOGRAFÍA OFICIAL OFFERVIEW ================= -->  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">  <style>      
+<meta name="author" content="KeBusKa">  <!-- ================= TIPOGRAFÍA OFICIAL OFFERVIEW ================= -->  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">  <style>      
 
   /* ===== FIX OVERFLOW GLOBAL DEFINITIVO ===== */
 *,
@@ -33,14 +33,14 @@ body{
      
 /* ================= TIPOGRAFÍA GLOBAL OFFERVIEW ================= */
 body {
-  margen : 0 ;
-  font-family : 'Inter' , sans-serif ;
-  peso de fuente : 400 ;
-  color : #1a1a1a;
-  color de fondo : #ffffff; /* 🔥 BLANCO */
-  desbordamiento-x : oculto ;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  color: #1a1a1a;
+  background: #ffffff;
+  overflow-x: hidden;
 }
-
+  
 /* Títulos de secciones */
 h1 , h2 , h3  {
   font-family : 'Montserrat' , sans-serif ;
@@ -1039,16 +1039,16 @@ color:#555;
   <div id="adCarousel"></div>   
 
 </section>
-  
-  <!-- ================= MODULO 4 ================= -->
+ 
+<!-- ================= MODULO 4 ================= -->
 <section class="modulo4">
 
   <div class="footer-container">
 
-    <h3>OfferView</h3>
+    <h3>KeBusKa</h3>
 
     <p class="footer-desc">
-      OfferView es una guía independiente. Algunos enlaces pueden ser de afiliación.
+      KeBusKa es una guía independiente. Algunos enlaces pueden ser de afiliación.
     </p>
 
     <p class="contact">
@@ -1066,14 +1066,15 @@ color:#555;
     </div>
 
     <p class="copyright">
-      © 2026 OfferView
+      © 2026 KeBusca
     </p>
 
   </div>
 
 </section>
 
-    <!-- MODAL LEGAL -->
+
+<!-- MODAL LEGAL -->
 <div id="legalModal" class="legal-modal">
   <div class="legal-content">
     <span class="close-btn" onclick="closeLegal()">×</span>
@@ -1105,7 +1106,7 @@ color:#555;
 <div id="authModal" class="modal-auth">
   <div class="modal-auth-box">
     
-    <h3>Acceso OfferView</h3>
+    <h3>Acceso KeBusKa</h3>
 
     <!-- USERNAME -->
     <input type="text" id="authUser" placeholder="Nombre de usuario" required>
@@ -1334,7 +1335,7 @@ loadAds();
 });
  
 /* ================= PROMPTS ================= */
-const OfferViewPrompts={
+const KeBusKaPrompts = { 
 search:"Analizar intención de búsqueda",
 recommend:"Recomendar tiendas confiables",
 deals:"Priorizar ofertas reales",
@@ -1755,7 +1756,6 @@ function logoutUser() {
   });
 }
 
-
 function openLegal(type){
 
   const modal = document.getElementById("legalModal");
@@ -1766,28 +1766,31 @@ function openLegal(type){
   if(type === "privacy"){
     content = `
       <h2>Política de Privacidad</h2>
-      <p>En OfferView respetamos tu privacidad. No recopilamos información personal sin consentimiento.</p>
+      <p>En KeBusKa respetamos tu privacidad. No recopilamos información personal sin tu consentimiento. 
+      Los datos proporcionados por los usuarios se utilizan únicamente para mejorar la experiencia dentro de la plataforma.</p>
     `;
   }
 
   if(type === "terms"){
     content = `
       <h2>Términos y Condiciones</h2>
-      <p>El uso de OfferView implica la aceptación de nuestros términos.</p>
+      <p>El uso de KeBusKa implica la aceptación de nuestros términos. 
+      La plataforma actúa como intermediario informativo de ofertas y no garantiza la disponibilidad, precios o condiciones de terceros.</p>
     `;
   }
 
   if(type === "cookies"){
     content = `
       <h2>Política de Cookies</h2>
-      <p>Utilizamos cookies para mejorar la experiencia del usuario.</p>
+      <p>KeBusKa utiliza cookies para mejorar la experiencia del usuario, analizar el tráfico y personalizar el contenido mostrado.</p>
     `;
   }
 
   if(type === "affiliate"){
     content = `
       <h2>Divulgación de Afiliados</h2>
-      <p>Algunos enlaces pueden generar comisiones sin costo adicional para el usuario.</p>
+      <p>Algunos enlaces publicados en KeBusKa pueden generar comisiones. 
+      Esto no representa ningún costo adicional para el usuario y nos ayuda a mantener la plataforma.</p>
     `;
   }
 
@@ -1798,7 +1801,6 @@ function openLegal(type){
 function closeLegal(){
   document.getElementById("legalModal").style.display = "none";
 }
-
 
 function buscarOfertas(){
 
