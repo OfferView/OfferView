@@ -1114,6 +1114,8 @@ color:#555;
     <!-- Link opcional -->
     <input type="url" id="linkOferta" placeholder="Link de la oferta o Instagram (opcional)">
 
+    <input type="text" id="descOferta" placeholder="Descripción de la oferta">
+    
     <!-- Acciones -->
     <button type="submit">Publicar</button>
     <button type="button" onclick="closeOfferModal()">Cancelar</button>
@@ -1149,6 +1151,7 @@ color:#555;
     <button type="button" class="btn-secundario" onclick="cerrarAuth()">
       Cancelar
     </button>
+
 
   </div>
 </div>
@@ -1258,6 +1261,55 @@ async function cargarOfertas(){
   }
 }
    
+
+async function abrirMisOfertas(){
+
+  if(!auth.currentUser){
+    alert("Debes iniciar sesión");
+    return;
+  }
+
+  const contenedor = document.getElementById("adCarousel");
+  contenedor.innerHTML = "Cargando tus ofertas...";
+
+  const snapshot = await db.collection("publicidad")
+    .where("uid","==",auth.currentUser.uid)
+    .orderBy("fecha","desc")
+    .get();
+
+  contenedor.innerHTML = "";
+
+  if(snapshot.empty){
+    contenedor.innerHTML = "No has publicado ofertas";
+    return;
+  }
+
+  snapshot.forEach(doc => {
+
+    const data = doc.data();
+    const id = doc.id;
+
+    const card = document.createElement("div");
+    card.className = "offer-card";
+
+    card.innerHTML = `
+      <div class="offer-image-container">
+        <img src="${data.imagen}" class="offer-image">
+      </div>
+
+      <p>${data.descripcion || ""}</p>
+
+      <button onclick="eliminarAd('${id}')">
+        🗑️ Eliminar
+      </button>
+    `;
+
+    contenedor.appendChild(card);
+
+  });
+
+}
+
 // ================= ELIMINAR OFERTA =================
 async function eliminarOferta(id){
 
@@ -1424,7 +1476,8 @@ function publicarImagen(e){
   const fileInput = document.getElementById("imagenOferta");
   const file = fileInput.files[0];
   const linkOferta = document.getElementById("linkOferta").value.trim();
-
+  const descripcion = document.getElementById("descOferta").value.trim();
+  
   if(!file){
     alert("Debes subir una imagen");
     return;
@@ -1473,71 +1526,71 @@ function publicarImagen(e){
     canvas.height = h;
 
     ctx.drawImage(img, 0, 0, w, h);
+    
+// 🔥 CALIDAD DINÁMICA (más peso = más compresión)
+let calidad = 0.85;
+if(file.size > 3 * 1024 * 1024){
+  calidad = 0.75;
+}
 
-    // 🔥 CALIDAD DINÁMICA (más peso = más compresión)
-    let calidad = 0.85;
-    if(file.size > 3 * 1024 * 1024){
-      calidad = 0.75;
+canvas.toBlob(blob => {
+
+  if(!blob){
+    alert("Error procesando la imagen");
+    return;
+  }
+
+  const formData = new FormData();
+
+  // 🔥 NOMBRE ÚNICO (PRO)
+  const fileName = `oferta_${Date.now()}.webp`;
+
+  formData.append("file", blob, fileName);
+  formData.append("upload_preset", "ofertas_publicas");
+
+  console.log("Subiendo imagen... ⏳");
+
+  fetch("https://api.cloudinary.com/v1_1/dveqauvqh/image/upload", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+
+    // ❌ VALIDAR PRIMERO
+    if(!data.secure_url){
+      console.error("Cloudinary error:", data);
+      alert("Error al subir la imagen");
+      return;
     }
 
-    canvas.toBlob(blob => {
+    // 🔥 GUARDAR UNA SOLA VEZ EN FIREBASE
+    return db.collection("publicidad").add({
+      imagen: data.secure_url,
+      link: linkOferta || null,
+      descripcion: descripcion || "",
+      uid: auth.currentUser.uid,
+      fecha: firebase.firestore.FieldValue.serverTimestamp()
+    });
 
-      if(!blob){
-        alert("Error procesando la imagen");
-        return;
-      }
+  })
+  .then(()=>{
+    closeOfferModal();
 
-      const formData = new FormData();
+    alert("Imagen publicada correctamente ✅");
 
-      // 🔥 NOMBRE ÚNICO (PRO)
-      const fileName = `oferta_${Date.now()}.webp`;
+    // 🔥 LIMPIAR CAMPOS
+    fileInput.value = "";
+    document.getElementById("linkOferta").value = "";
+    document.getElementById("descOferta").value = "";
+  })
+  .catch(err=>{
+    console.error("ERROR:", err);
+    alert("Error al subir la imagen");
+  });
 
-      formData.append("file", blob, fileName);
-      formData.append("upload_preset", "ofertas_publicas");
-
-      // 🔥 UX MEJORADO (sin spam de alerts)
-      console.log("Subiendo imagen... ⏳");
-
-      fetch("https://api.cloudinary.com/v1_1/dveqauvqh/image/upload", {
-        method: "POST",
-        body: formData
-      })
-      .then(res => res.json())
-      .then(data => {
-
-        if(!data.secure_url){
-          console.error("Cloudinary error:", data);
-          alert("Error al subir la imagen");
-          return;
-        }
-
-        // 🔥 GUARDAR EN FIREBASE
-        return db.collection("publicidad").add({
-          imagen: data.secure_url,
-          link: linkOferta || null,
-          uid: auth.currentUser.uid,
-          fecha: firebase.firestore.FieldValue.serverTimestamp()
-        });
-
-      })
-      .then(()=>{
-        closeOfferModal();
-
-        alert("Imagen publicada correctamente ✅");
-
-        // 🔥 LIMPIAR CAMPOS
-        fileInput.value = "";
-        document.getElementById("linkOferta").value = "";
-      })
-      .catch(err=>{
-        console.error("ERROR:", err);
-        alert("Error al subir la imagen");
-      });
-
-    }, "image/webp", calidad);
-
-  };
-
+}, "image/webp", calidad);
+  
   img.onerror = function(){
     alert("No se pudo cargar la imagen");
   };
@@ -1546,7 +1599,27 @@ function publicarImagen(e){
 
   return false;
 }
-   
+  
+
+const editBtn = document.createElement("button");
+editBtn.textContent = "✏️ Editar";
+editBtn.onclick = () => editarOferta(postId, data);
+card.appendChild(editBtn);  
+
+
+function editarOferta(id, data){
+
+  const nuevaDesc = prompt("Editar descripción:", data.descripcion || "");
+
+  if(nuevaDesc === null) return;
+
+  db.collection("publicidad").doc(id).update({
+    descripcion: nuevaDesc
+  })
+  .then(()=> alert("Actualizado"))
+  .catch(()=> alert("Error"));
+}
+
 /* ================= CARRUSEL RR OPTIMIZADO ================= */
 function loadAds(){
 
@@ -1595,7 +1668,14 @@ img.style.imageRendering = "auto";
       }
 
       card.appendChild(imageContainer);
-
+      
+      if(data.descripcion){
+  const desc = document.createElement("p");
+  desc.textContent = data.descripcion;
+  desc.style.padding = "8px";
+  desc.style.fontSize = "14px";
+  card.appendChild(desc);
+  }
       // DELETE
       if(auth.currentUser && (auth.currentUser.uid === data.uid || esAdmin(auth.currentUser))){
         const deleteBtn = document.createElement("button");
@@ -1871,16 +1951,13 @@ function toggleMenu() {
     overlay.classList.add("active");
   }
 }
-   
+
 /* Cerrar menú manualmente */
 function closeMenu() {
   document.getElementById("sideMenu").classList.remove("active");
-  document.getElementById("overlay").style.display = "none";
+  document.getElementById("overlay").classList.remove("active");
 }
-
-/* Cerrar menú al tocar fondo oscuro */
-document.getElementById("overlay").addEventListener("click", closeMenu);
-
+   
 /* Logout */
 function logoutUser() {
   auth.signOut().then(() => {
