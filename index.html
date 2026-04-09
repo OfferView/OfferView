@@ -1857,22 +1857,21 @@ window.addEventListener("load", function(){
 }); // ✅ 🔥 ESTE ERA EL ERROR QUE FALTABA
 
 /* ================= MENU HAMBURGUESA ================= */
-
 function toggleMenu() {
   const menu = document.getElementById("sideMenu");
   const overlay = document.getElementById("overlay");
 
-  if (menu.classList.contains("active")) {
-    // Cerrar menú
+  const isOpen = menu.classList.contains("active");
+
+  if (isOpen) {
     menu.classList.remove("active");
-    overlay.style.display = "none";
+    overlay.classList.remove("active");
   } else {
-    // Abrir menú
     menu.classList.add("active");
-    overlay.style.display = "block";
+    overlay.classList.add("active");
   }
 }
-
+   
 /* Cerrar menú manualmente */
 function closeMenu() {
   document.getElementById("sideMenu").classList.remove("active");
