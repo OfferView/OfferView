@@ -1015,7 +1015,7 @@ color:#555;
     <hr>
 
     <button onclick="openOfferModal(); closeMenu();">
-      Subir Imagen de Ofertas
+      Publicar Ofertas e Imagen
     </button>
 
     <button onclick="abrirMisOfertas(); closeMenu();">
@@ -1066,7 +1066,7 @@ color:#555;
     </div>
 
     <p class="copyright">
-      © 2026 KeBusKa
+      © 2025 KeBusKa
     </p>
 
   </div>
@@ -1086,7 +1086,7 @@ color:#555;
 <!-- MODAL PUBLICAR OFERTA -->
 <div id="offerModal">
   <form onsubmit="publicarImagen(event)">
-    <h3>Publicar Imagen de Oferta</h3>
+    <h3>Publicar Oferta e Imagen</h3>
 
     <!-- Imagen -->
     <input type="file" id="imagenOferta" accept="image/*" required>
@@ -1164,10 +1164,10 @@ function esAdmin(user){
   return user && user.email === ADMIN_EMAIL;
 }
 
-// ================= CARGAR OFERTAS =================
+// ================= CARGAR OFERTAS (PRO + OPTIMIZADO) =================
 async function cargarOfertas(){
 
-const contenedor = document.getElementById("adCarousel");
+  const contenedor = document.getElementById("adCarousel");
   contenedor.innerHTML = "Cargando...";
 
   const user = auth.currentUser;
@@ -1180,6 +1180,11 @@ const contenedor = document.getElementById("adCarousel");
 
     contenedor.innerHTML = "";
 
+    if(snapshot.empty){
+      contenedor.innerHTML = "No hay ofertas aún";
+      return;
+    }
+
     snapshot.forEach(doc => {
 
       const data = doc.data();
@@ -1187,16 +1192,37 @@ const contenedor = document.getElementById("adCarousel");
 
       const puedeEliminar = user && (data.uid === user.uid || esAdmin(user));
 
-      const card = `
-        <div class="oferta-card">
-          <img src="${data.imagen}" class="oferta-img">
+      // 🔥 OPTIMIZACIÓN CLOUDINARY (CALIDAD PRO)
+      const imagenOptimizada = data.imagen.replace(
+        "/upload/",
+        "/upload/f_auto,q_auto,w_800/"
+      );
 
-          ${data.link ? `<a href="${data.link}" target="_blank">Ver oferta</a>` : ""}
+      const card = `
+        <div class="offer-card">
+
+          <div class="offer-image-container">
+            <img 
+              src="${imagenOptimizada}" 
+              class="offer-image"
+              loading="lazy"
+              decoding="async"
+              alt="Oferta"
+            >
+          </div>
+
+          ${data.link ? `
+            <a href="${data.link}" target="_blank" rel="noopener noreferrer">
+              Ver oferta
+            </a>
+          ` : ""}
 
           <p>❤️ ${data.likes || 0}</p>
 
           ${puedeEliminar ? `
-            <button onclick="eliminarOferta('${id}')">🗑️ Eliminar</button>
+            <button onclick="eliminarOferta('${id}')">
+              🗑️ Eliminar
+            </button>
           ` : ""}
 
         </div>
@@ -1207,11 +1233,11 @@ const contenedor = document.getElementById("adCarousel");
     });
 
   }catch(e){
-    console.error(e);
+    console.error("Error cargando ofertas:", e);
     contenedor.innerHTML = "Error cargando ofertas";
   }
 }
-
+   
 // ================= ELIMINAR OFERTA =================
 async function eliminarOferta(id){
 
