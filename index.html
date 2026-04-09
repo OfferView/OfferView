@@ -1603,13 +1603,6 @@ canvas.toBlob(blob => {
   return false;
 }
   
-
-const editBtn = document.createElement("button");
-editBtn.textContent = "✏️ Editar";
-editBtn.onclick = () => editarOferta(postId, data);
-card.appendChild(editBtn);  
-
-
 function editarOferta(id, data){
 
   const nuevaDesc = prompt("Editar descripción:", data.descripcion || "");
@@ -1679,15 +1672,25 @@ img.style.imageRendering = "auto";
   desc.style.fontSize = "14px";
   card.appendChild(desc);
   }
-      // DELETE
-      if(auth.currentUser && (auth.currentUser.uid === data.uid || esAdmin(auth.currentUser))){
-        const deleteBtn = document.createElement("button");
-        deleteBtn.className = "delete-btn";
-        deleteBtn.innerHTML = "✖";
-        deleteBtn.onclick = () => eliminarAd(postId);
-        card.appendChild(deleteBtn);
-      }
+     
+// ACCIONES (ELIMINAR + EDITAR)
+if(auth.currentUser && (auth.currentUser.uid === data.uid || esAdmin(auth.currentUser))){
 
+  // 🔥 BOTÓN EDITAR
+  const editBtn = document.createElement("button");
+  editBtn.textContent = "✏️";
+  editBtn.className = "edit-btn";
+  editBtn.onclick = () => editarOferta(postId, data);
+  card.appendChild(editBtn);
+
+  // ❌ BOTÓN ELIMINAR
+  const deleteBtn = document.createElement("button");
+  deleteBtn.className = "delete-btn";
+  deleteBtn.innerHTML = "✖";
+  deleteBtn.onclick = () => eliminarAd(postId);
+  card.appendChild(deleteBtn);
+}
+     
       // LIKE
       const likeBox = document.createElement("div");
       likeBox.className = "like-box";
