@@ -1190,81 +1190,6 @@ function esAdmin(user){
   return user && user.email === ADMIN_EMAIL;
 }
 
-// ================= CARGAR OFERTAS (PRO + OPTIMIZADO) =================
-async function cargarOfertas(){
-
-  const contenedor = document.getElementById("adCarousel");
-  contenedor.innerHTML = "Cargando...";
-
-  const user = auth.currentUser;
-
-  try{
-
-    const snapshot = await db.collection("publicidad")
-      .orderBy("fecha","desc")
-      .get();
-
-    contenedor.innerHTML = "";
-
-    if(snapshot.empty){
-      contenedor.innerHTML = "No hay ofertas aún";
-      return;
-    }
-
-    snapshot.forEach(doc => {
-
-      const data = doc.data();
-      const id = doc.id;
-
-      const puedeEliminar = user && (data.uid === user.uid || esAdmin(user));
-
-      // 🔥 OPTIMIZACIÓN CLOUDINARY (CALIDAD PRO)
-      const imagenOptimizada = data.imagen.replace(
-        "/upload/",
-        "/upload/f_auto,q_auto,w_800/"
-      );
-
-      const card = `
-        <div class="offer-card">
-
-          <div class="offer-image-container">
-            <img 
-              src="${imagenOptimizada}" 
-              class="offer-image"
-              loading="lazy"
-              decoding="async"
-              alt="Oferta"
-            >
-          </div>
-
-          ${data.link ? `
-            <a href="${data.link}" target="_blank" rel="noopener noreferrer">
-              Ver oferta
-            </a>
-          ` : ""}
-
-          <p>❤️ ${data.likes || 0}</p>
-
-          ${puedeEliminar ? `
-            <button onclick="eliminarOferta('${id}')">
-              🗑️ Eliminar
-            </button>
-          ` : ""}
-
-        </div>
-      `;
-
-      contenedor.innerHTML += card;
-
-    });
-
-  }catch(e){
-    console.error("Error cargando ofertas:", e);
-    contenedor.innerHTML = "Error cargando ofertas";
-  }
-}
-   
-
 async function abrirMisOfertas(){
 
   if(!auth.currentUser){
@@ -1275,46 +1200,57 @@ async function abrirMisOfertas(){
   const contenedor = document.getElementById("adCarousel");
   contenedor.innerHTML = "Cargando tus ofertas...";
 
-  const snapshot = await db.collection("publicidad")
-    .where("uid","==",auth.currentUser.uid)
-    .orderBy("fecha","desc")
-    .get();
+  db.collection("publicidad")
+  .where("uid","==",auth.currentUser.uid)
+  .orderBy("fecha","desc")
+  .onSnapshot(snapshot => {
 
-  contenedor.innerHTML = "";
+    contenedor.innerHTML = "";
 
-  if(snapshot.empty){
-    contenedor.innerHTML = "No has publicado ofertas";
-    return;
-  }
+    if(snapshot.empty){
+      contenedor.innerHTML = "No has publicado ofertas";
+      return;
+    }
 
-  snapshot.forEach(doc => {
+    snapshot.forEach(doc => {
 
-    const data = doc.data();
-    const id = doc.id;
+      const data = doc.data();
+      const id = doc.id;
 
-    const card = document.createElement("div");
-    card.className = "offer-card";
+      // 🔥 Optimización Cloudinary
+      const imagenOptimizada = data.imagen.replace(
+        "/upload/",
+        "/upload/f_auto,q_auto,w_800/"
+      );
 
-    card.innerHTML = `
-      <div class="offer-image-container">
-        <img src="${data.imagen}" class="offer-image">
-      </div>
+      const card = document.createElement("div");
+      card.className = "offer-card";
 
-      <p>${data.descripcion || ""}</p>
+      card.innerHTML = `
+        <div class="offer-image-container">
+          <img src="${imagenOptimizada}" class="offer-image">
+        </div>
 
-      <button onclick="eliminarAd('${id}')">
-        🗑️ Eliminar
-      </button>
-    `;
+        ${data.descripcion ? `<p>${data.descripcion}</p>` : ""}
 
-    contenedor.appendChild(card);
+        <button onclick="editarOferta('${id}', ${JSON.stringify(data).replace(/"/g, '&quot;')})">
+          ✏️ Editar
+        </button>
+
+        <button onclick="eliminarOferta('${id}')">
+          🗑️ Eliminar
+        </button>
+      `;
+
+      contenedor.appendChild(card);
+
+    });
 
   });
 
 }
-
 // ================= ELIMINAR OFERTA =================
-async function eliminarOferta(id){
+   async function eliminarOferta(id){
 
   const user = auth.currentUser;
 
@@ -1346,14 +1282,11 @@ async function eliminarOferta(id){
 
     alert("Eliminado correctamente");
 
-    cargarOfertas();
-
   }catch(e){
     console.error(e);
     alert("Error al eliminar");
   }
 }
-
 // ================= LIKE (BASE) =================
 async function darLike(id){
 
@@ -1445,10 +1378,10 @@ ethics:"Guía neutral e independiente"
 
 /* ================= BUSCADOR ================= */
 function buscar(e){
-e.preventDefault();
-window.open("https://www.google.com/search?q="+encodeURIComponent(searchInput.value+" ofertas"),"_blank");
+  e.preventDefault();
+  const input = document.getElementById("searchInput").value;
+  window.open("https://www.google.com/search?q=" + encodeURIComponent(input + " ofertas"), "_blank");
 }
-
  /* ================= IDIOMAS ================= */
 
 // Asegúrate de que este elemento exista en tu HTML
@@ -1716,21 +1649,6 @@ if(auth.currentUser && (auth.currentUser.uid === data.uid || esAdmin(auth.curren
 
 }
     
-/* ================= ELIMINAR PUBLICIDAD ================= */
-function eliminarAd(id){
-if(!confirm("¿Eliminar esta publicación?")) return;
-
-db.collection("publicidad")
-.doc(id)
-.delete()
-.then(() => {
-console.log("Publicidad eliminada correctamente");
-})
-.catch(error => {
-console.error("Error al eliminar:", error);
-alert("No se pudo eliminar la publicidad");
-});
-}
 
 /* ================= LIKE SISTEMA RR ================= */
 function toggleLike(postId){
