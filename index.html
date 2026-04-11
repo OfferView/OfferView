@@ -1340,7 +1340,7 @@ cerrarAuth();
 /* ================= ESTADO DE SESIÓN ================= */
 auth.onAuthStateChanged(user => {
 
-  const authTopBtn = document.getElementById("authTopBtn");
+  <button id="authTopBtn" onclick="abrirAuth()">Login</button>
   const menuUserOptions = document.getElementById("menuUserOptions");
   const menuPublicOptions = document.getElementById("menuPublicOptions");
   
@@ -1376,12 +1376,6 @@ deals:"Priorizar ofertas reales",
 ethics:"Guía neutral e independiente"
 };
 
-/* ================= BUSCADOR ================= */
-function buscar(e){
-  e.preventDefault();
-  const input = document.getElementById("searchInput").value;
-  window.open("https://www.google.com/search?q=" + encodeURIComponent(input + " ofertas"), "_blank");
-}
  /* ================= IDIOMAS ================= */
 
 // Asegúrate de que este elemento exista en tu HTML
@@ -1397,9 +1391,14 @@ function setLanguage(l){
 } 
 
 /* ================= MODAL ================= */
-function openOfferModal(){offerModal.style.display="flex";}
-function closeOfferModal(){offerModal.style.display="none";}
+   function openOfferModal(){
+  document.getElementById("offerModal").style.display = "flex";
+}
 
+function closeOfferModal(){
+  document.getElementById("offerModal").style.display = "none";
+}
+   
 /* ================= PUBLICAR IMAGEN (ULTRA PRO + ESCALABLE) ================= */
 function publicarImagen(e){
   e.preventDefault();
@@ -1620,7 +1619,7 @@ if(auth.currentUser && (auth.currentUser.uid === data.uid || esAdmin(auth.curren
   const deleteBtn = document.createElement("button");
   deleteBtn.className = "delete-btn";
   deleteBtn.innerHTML = "✖";
-  deleteBtn.onclick = () => eliminarAd(postId);
+  deleteBtn.onclick = () => eliminarOferta(postId);
   card.appendChild(deleteBtn);
 }
      
@@ -1835,6 +1834,7 @@ window.addEventListener("load", function(){
 
     if(e.target.classList.contains("expand-btn")){
       
+      let isPaused = false;
       isPaused = true; // ⛔ pausa carrusel
 
       const card = e.target.closest(".store-card");
