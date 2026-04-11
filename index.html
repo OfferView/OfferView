@@ -1425,103 +1425,95 @@ function publicarImagen(e){
 
   img.onload = function(){
 
-    // 🔥 LIBERAR MEMORIA (PRO)
-    URL.revokeObjectURL(img.src);
+  const MAX = 1080;
 
-    const MAX = 1080;
+  let w = img.width;
+  let h = img.height;
 
-    let w = img.width;
-    let h = img.height;
-
-    // 🔥 REDIMENSIONADO INTELIGENTE
-    if(w > h){
-      if(w > MAX){
-        h *= MAX / w;
-        w = MAX;
-      }
-    } else {
-      if(h > MAX){
-        w *= MAX / h;
-        h = MAX;
-      }
+  if(w > h){
+    if(w > MAX){
+      h *= MAX / w;
+      w = MAX;
     }
-
-    canvas.width = w;
-    canvas.height = h;
-
-    ctx.drawImage(img, 0, 0, w, h);
-    
-// 🔥 CALIDAD DINÁMICA (más peso = más compresión)
-let calidad = 0.85;
-if(file.size > 3 * 1024 * 1024){
-  calidad = 0.75;
-}
-
-canvas.toBlob(blob => {
-
-  if(!blob){
-    alert("Error procesando la imagen");
-    return;
+  } else {
+    if(h > MAX){
+      w *= MAX / h;
+      h = MAX;
+    }
   }
 
-  const formData = new FormData();
+  canvas.width = w;
+  canvas.height = h;
 
-  // 🔥 NOMBRE ÚNICO (PRO)
-  const fileName = `oferta_${Date.now()}.webp`;
+  ctx.drawImage(img, 0, 0, w, h);
 
-  formData.append("file", blob, fileName);
-  formData.append("upload_preset", "ofertas_publicas");
+  let calidad = 0.85;
+  if(file.size > 3 * 1024 * 1024){
+    calidad = 0.75;
+  }
 
-  console.log("Subiendo imagen... ⏳");
+  canvas.toBlob(blob => {
 
-  fetch("https://api.cloudinary.com/v1_1/dveqauvqh/image/upload", {
-    method: "POST",
-    body: formData
-  })
-  .then(res => res.json())
-  .then(data => {
-
-    // ❌ VALIDAR PRIMERO
-    if(!data.secure_url){
-      console.error("Cloudinary error:", data);
-      alert("Error al subir la imagen");
+    if(!blob){
+      alert("Error procesando la imagen");
       return;
     }
 
-    // 🔥 GUARDAR UNA SOLA VEZ EN FIREBASE
-    return db.collection("publicidad").add({
-      imagen: data.secure_url,
-      link: linkOferta || null,
-      descripcion: descripcion || "",
-      uid: auth.currentUser.uid,
-      fecha: firebase.firestore.FieldValue.serverTimestamp()
+    const formData = new FormData();
+    const fileName = `oferta_${Date.now()}.webp`;
+
+    formData.append("file", blob, fileName);
+    formData.append("upload_preset", "ofertas_publicas");
+
+    fetch("https://api.cloudinary.com/v1_1/dveqauvqh/image/upload", {
+      method: "POST",
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+
+      if(!data.secure_url){
+        alert("Error al subir la imagen");
+        return;
+      }
+
+      return db.collection("publicidad").add({
+        imagen: data.secure_url,
+        link: linkOferta || null,
+        descripcion: descripcion || "",
+        uid: auth.currentUser.uid,
+        fecha: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+    })
+    .then(()=>{
+      closeOfferModal();
+      alert("Imagen publicada correctamente ✅");
+
+      fileInput.value = "";
+      document.getElementById("linkOferta").value = "";
+      document.getElementById("descOferta").value = "";
+    })
+    .catch(err=>{
+      console.error(err);
+      alert("Error al subir la imagen");
     });
 
-  })
-  .then(()=>{
-    closeOfferModal();
+  }, "image/webp", calidad);
 
-    alert("Imagen publicada correctamente ✅");
+}; // ✅ ESTE CIERRA onload CORRECTAMENTE
 
-    // 🔥 LIMPIAR CAMPOS
-    fileInput.value = "";
-    document.getElementById("linkOferta").value = "";
-    document.getElementById("descOferta").value = "";
-  })
-  .catch(err=>{
-    console.error("ERROR:", err);
-    alert("Error al subir la imagen");
-  });
 
-}, "image/webp", calidad);
-  
-  img.onerror = function(){
-    alert("No se pudo cargar la imagen");
-  };
+// ✅ TODO ESTO VA FUERA
+img.onerror = function(){
+  alert("No se pudo cargar la imagen");
+};
 
-  img.src = URL.createObjectURL(file);
+img.src = URL.createObjectURL(file);
 
-  return false;
+return false;
+
+// ✅ ESTE CIERRA LA FUNCIÓN COMPLETA
 }
   
 function editarOferta(id, data){
@@ -1810,44 +1802,42 @@ function renderStoreCards(){
 }
 
 /* ========= AUTO CARRUSEL STORES ========= */
-
+   
 window.addEventListener("load", function(){
-
 
   const carousel = document.getElementById("storesCarousel");
 
-  
-  // 🔥 BOTÓN + / - FUNCIONAL
   document.addEventListener("click", function(e){
 
-    if(e.target.classList.contains("expand-btn")){
-      
-      let isPaused = false;
-      isPaused = true; // ⛔ pausa carrusel
+    // 🔥 Validar que sea el botón correcto
+    if(!e.target.classList.contains("expand-btn")) return;
 
-      const card = e.target.closest(".store-card");
-      const hiddenList = card.querySelectorAll(".store-list")[1];
-      
+    const card = e.target.closest(".store-card");
 
-      if(hiddenList){
+    // 🔥 Evita error si no encuentra card
+    if(!card) return;
 
-        if(hiddenList.style.display === "block"){
-          hiddenList.style.display = "none";
-          e.target.textContent = "+";
-          isPaused = false; // ▶️ reanuda
-        }else{
-          hiddenList.style.display = "block";
-          e.target.textContent = "-";
-        }
+    const lists = card.querySelectorAll(".store-list");
 
-      }
+    // 🔥 Validar que exista el segundo bloque
+    if(lists.length < 2) return;
 
+    const hiddenList = lists[1];
+
+    // 🔥 Toggle limpio
+    const isVisible = hiddenList.style.display === "block";
+
+    if(isVisible){
+      hiddenList.style.display = "none";
+      e.target.textContent = "+";
+    }else{
+      hiddenList.style.display = "block";
+      e.target.textContent = "-";
     }
 
   });
 
-}); // ✅ 🔥 ESTE ERA EL ERROR QUE FALTABA
-
+});
 /* ================= MENU HAMBURGUESA ================= */
 function toggleMenu() {
   const menu = document.getElementById("sideMenu");
