@@ -1306,9 +1306,8 @@ async function darLike(id){
 
 // ================= AUTO REFRESH =================
 auth.onAuthStateChanged(user=>{
-  cargarOfertas();
+  loadAds();
 });
-
    /* ================= CONTADOR DE VISITAS (INVISIBLE) ================= */
 db.collection("stats").doc("views").get().then(doc => {
     let v = doc.exists ? doc.data().count : 0;
@@ -1340,7 +1339,6 @@ cerrarAuth();
 /* ================= ESTADO DE SESIÓN ================= */
 auth.onAuthStateChanged(user => {
 
-  <button id="authTopBtn" onclick="abrirAuth()">Login</button>
   const menuUserOptions = document.getElementById("menuUserOptions");
   const menuPublicOptions = document.getElementById("menuPublicOptions");
   
