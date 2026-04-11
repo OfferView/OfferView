@@ -1341,29 +1341,20 @@ auth.onAuthStateChanged(user => {
 
   const menuUserOptions = document.getElementById("menuUserOptions");
   const menuPublicOptions = document.getElementById("menuPublicOptions");
-  
 
   if(user){
 
-    // 🔥 Usuario logueado (sin importar verificación)
-
-    if(authTopBtn) authTopBtn.style.display = "none";
-
     if(menuUserOptions) menuUserOptions.style.display = "block";
-
     if(menuPublicOptions) menuPublicOptions.style.display = "none";
-
 
   }else{
 
-    if(authTopBtn) authTopBtn.style.display = "inline-block";
-
     if(menuUserOptions) menuUserOptions.style.display = "none";
-
     if(menuPublicOptions) menuPublicOptions.style.display = "block";
 
   }
-loadAds();
+
+  loadAds();
 });
  
 /* ================= PROMPTS ================= */
@@ -1822,7 +1813,6 @@ function renderStoreCards(){
 
 window.addEventListener("load", function(){
 
-  renderStoreCards();
 
   const carousel = document.getElementById("storesCarousel");
 
@@ -2013,7 +2003,11 @@ window.open(url, "_blank");
 });
 
 }
-  
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderStoreCards();
+});
+   
 </script>  
 </body>
 
