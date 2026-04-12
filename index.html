@@ -1188,105 +1188,8 @@ const ADMIN_EMAIL = "soporte.offerviews01@gmail.com";
 // ================= DETECTAR ADMIN =================
 function esAdmin(user){
   return user && user.email === ADMIN_EMAIL;
-}
-
-async function abrirMisOfertas(){
-
-  if(!auth.currentUser){
-    alert("Debes iniciar sesión");
-    return;
   }
 
-  const contenedor = document.getElementById("adCarousel");
-  contenedor.innerHTML = "Cargando tus ofertas...";
-
-  db.collection("publicidad")
-  .where("uid","==",auth.currentUser.uid)
-  .orderBy("fecha","desc")
-  .onSnapshot(snapshot => {
-
-    contenedor.innerHTML = "";
-
-    if(snapshot.empty){
-      contenedor.innerHTML = "No has publicado ofertas";
-      return;
-    }
-
-    snapshot.forEach(doc => {
-
-      const data = doc.data();
-      const id = doc.id;
-
-      // 🔥 Optimización Cloudinary
-      const imagenOptimizada = data.imagen.replace(
-        "/upload/",
-        "/upload/f_auto,q_auto,w_800/"
-      );
-
-      const card = document.createElement("div");
-      card.className = "offer-card";
-
-      card.innerHTML = `
-        <div class="offer-image-container">
-          <img src="${imagenOptimizada}" class="offer-image">
-        </div>
-
-        ${data.descripcion ? `<p>${data.descripcion}</p>` : ""}
-
-        <button onclick="editarOferta('${id}', ${JSON.stringify(data).replace(/"/g, '&quot;')})">
-          ✏️ Editar
-        </button>
-
-        <button onclick="eliminarOferta('${id}')">
-          🗑️ Eliminar
-        </button>
-      `;
-
-      contenedor.appendChild(card);
-
-    });
-
-  });
-
-}
-// ================= ELIMINAR OFERTA =================
-   async function eliminarOferta(id){
-
-  const user = auth.currentUser;
-
-  if(!user){
-    alert("No autorizado");
-    return;
-  }
-
-  if(!confirm("¿Eliminar esta oferta?")) return;
-
-  try{
-
-    const docRef = db.collection("publicidad").doc(id);
-    const docSnap = await docRef.get();
-
-    if(!docSnap.exists){
-      alert("No existe");
-      return;
-    }
-
-    const data = docSnap.data();
-
-    if(data.uid !== user.uid && !esAdmin(user)){
-      alert("No tienes permiso");
-      return;
-    }
-
-    await docRef.delete();
-
-    alert("Eliminado correctamente");
-
-  }catch(e){
-    console.error(e);
-    alert("Error al eliminar");
-  }
-}
 // ================= LIKE (BASE) =================
 async function darLike(id){
 
@@ -1514,20 +1417,7 @@ img.src = URL.createObjectURL(file);
 return false;
 
 // ✅ ESTE CIERRA LA FUNCIÓN COMPLETA
-}
-  
-function editarOferta(id, data){
-
-  const nuevaDesc = prompt("Editar descripción:", data.descripcion || "");
-
-  if(nuevaDesc === null) return;
-
-  db.collection("publicidad").doc(id).update({
-    descripcion: nuevaDesc
-  })
-  .then(()=> alert("Actualizado"))
-  .catch(()=> alert("Error"));
-}
+  }
 
 /* ================= CARRUSEL RR OPTIMIZADO ================= */
 function loadAds(){
@@ -1997,6 +1887,252 @@ window.open(url, "_blank");
 document.addEventListener("DOMContentLoaded", () => {
   renderStoreCards();
 });
+
+ // ================= MEJORAS PREMIUM "MIS OFERTAS" KEBUSKA =================
+
+// ✅ Evitar duplicar estilos
+if (!document.getElementById("estilos-mis-ofertas")) {
+  const estilosInstagram = document.createElement("style");
+  estilosInstagram.id = "estilos-mis-ofertas";
+  estilosInstagram.innerHTML = `
+    .modal-edicion {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-contenido {
+      background: white;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 90%;
+      padding: 25px;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .mis-ofertas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
+    .mi-oferta-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .mi-oferta-imagen img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .mi-oferta-info {
+      padding: 10px;
+    }
+
+    .acciones-botones {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn-editar-oferta {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 6px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn-eliminar-oferta {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 6px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  `;
+  document.head.appendChild(estilosInstagram);
+}
+
+// ================= ABRIR MIS OFERTAS =================
+async function abrirMisOfertas() {
+  if (!auth.currentUser) {
+    alert("Debes iniciar sesión");
+    return;
+  }
+
+  // ✅ Evitar múltiples modales
+  const modalExistente = document.querySelector(".modal-edicion");
+  if (modalExistente) modalExistente.remove();
+
+  const modal = document.createElement("div");
+  modal.className = "modal-edicion";
+  modal.innerHTML = `
+    <div class="modal-contenido" style="max-width:1000px; width:95%; max-height:90vh; overflow:auto;">
+      <h2>📸 Mis Ofertas</h2>
+      <button onclick="this.closest('.modal-edicion').remove()">❌</button>
+      <div id="misOfertasGrid">Cargando...</div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  const grid = document.getElementById("misOfertasGrid");
+
+  db.collection("publicidad")
+    .where("uid", "==", auth.currentUser.uid)
+    .orderBy("fecha", "desc")
+    .onSnapshot(snapshot => {
+
+      if (snapshot.empty) {
+        grid.innerHTML = "No tienes ofertas";
+        return;
+      }
+
+      grid.innerHTML = "";
+
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const id = doc.id;
+
+        // ✅ Compatible con cualquier imagen
+        const img = data.imagen || "";
+
+        const card = document.createElement("div");
+        card.className = "mi-oferta-card";
+
+        card.innerHTML = `
+          <div class="mi-oferta-imagen">
+            <img src="${img}">
+          </div>
+
+          <div class="mi-oferta-info">
+            <p>${data.descripcion || "Sin descripción"}</p>
+
+            <div>❤️ <span id="likes-${id}">0</span></div>
+
+            <div class="acciones-botones">
+              <button class="btn-editar-oferta" onclick="editarOfertaModal('${id}', \`${data.descripcion || ""}\`)">Editar</button>
+              <button class="btn-eliminar-oferta" onclick="eliminarOfertaConfirmacion('${id}')">Eliminar</button>
+            </div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+
+        // likes en tiempo real
+        db.collection("likes")
+          .where("postId", "==", id)
+          .onSnapshot(likes => {
+            const el = document.getElementById(`likes-${id}`);
+            if (el) el.textContent = likes.size;
+          });
+
+      });
+    });
+}
+
+// ================= EDITAR =================
+function editarOfertaModal(id, desc) {
+
+  const modal = document.createElement("div");
+  modal.className = "modal-edicion";
+
+  modal.innerHTML = `
+    <div class="modal-contenido">
+      <h3>Editar</h3>
+      <textarea id="editDesc">${desc}</textarea>
+      <button onclick="guardarEdicionOferta('${id}')">Guardar</button>
+      <button onclick="this.closest('.modal-edicion').remove()">Cancelar</button>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+}
+
+// ================= GUARDAR =================
+async function guardarEdicionOferta(id) {
+
+  const nueva = document.getElementById("editDesc").value;
+
+  if (!nueva) return alert("Vacío");
+
+  await db.collection("publicidad").doc(id).update({
+    descripcion: nueva
+  });
+
+  document.querySelectorAll(".modal-edicion")[1]?.remove();
+
+  mostrarNotificacion("Editado", "success");
+}
+
+// ================= ELIMINAR =================
+function eliminarOfertaConfirmacion(id) {
+
+  if (!confirm("Eliminar oferta?")) return;
+
+  eliminarOfertaDefinitiva(id);
+}
+
+// ================= ELIMINAR FINAL =================
+async function eliminarOfertaDefinitiva(id) {
+
+  const docRef = db.collection("publicidad").doc(id);
+
+  const likes = await db.collection("likes")
+    .where("postId", "==", id).get();
+
+  const batch = db.batch();
+
+  likes.forEach(l => batch.delete(l.ref));
+
+  batch.delete(docRef);
+
+  await batch.commit();
+
+  mostrarNotificacion("Eliminado", "success");
+}
+
+// ================= NOTIFICACIONES =================
+function mostrarNotificacion(msg) {
+  const n = document.createElement("div");
+
+  n.innerText = msg;
+  n.style = `
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:black;
+    color:white;
+    padding:10px 20px;
+    border-radius:20px;
+    z-index:99999;
+  `;
+
+  document.body.appendChild(n);
+
+  setTimeout(() => n.remove(), 2000);
+}  
    
 </script>  
 </body>
